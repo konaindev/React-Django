@@ -5,47 +5,7 @@ exports[`PropertyOverview renders default 1`] = `
   className="property-overview"
 >
   <div
-    className="property-overview__section property-overview__section--top"
-  >
-    <div
-      className="property-overview__section-text"
-    >
-      Custom property groups are made for each tag.
-    </div>
-    <div
-      className="property-overview__tags"
-    >
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 1
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 2
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 3
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="property-overview__section property-overview__section--top property-overview__info"
+    className="property-overview__section property-overview__info"
   >
     <div
       className="panel panel--default property-overview__tile property-overview__tile--info"
@@ -113,6 +73,510 @@ exports[`PropertyOverview renders default 1`] = `
         }
       }
     />
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Property Tags
+      <svg
+        className="rmb-tooltip-anchor property-overview__tooltip-anchor"
+        fill="none"
+        height="20"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        viewBox="0 0 20 20"
+        width="20"
+      >
+        <circle
+          cx="10"
+          cy="10"
+          fill="#181D23"
+          r="10"
+        />
+        <circle
+          cx="10"
+          cy="10"
+          fill="#2B343D"
+          r="10"
+        />
+        <rect
+          fill="#798796"
+          height="10"
+          width="5"
+          x="8"
+          y="5"
+        />
+        <path
+          d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+          fill="#181D23"
+        />
+      </svg>
+    </div>
+    <div
+      className="property-overview__tags"
+    >
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 1
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 2
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 3
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="property-overview__add-tag"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          color="inherit"
+          fill="none"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="1em"
+        >
+          <circle
+            cx="8"
+            cy="7.99927"
+            fill="#F5FAF7"
+            r="8"
+          />
+          <path
+            d="M10.7217 8.34004H8.34077V10.721C8.34077 10.9843 8.12744 11.1972 7.86458 11.1972C7.60173 11.1972 7.38839 10.9843 7.38839 10.721V8.34004H5.00744C4.74458 8.34004 4.53125 8.12718 4.53125 7.86385C4.53125 7.60052 4.74458 7.38766 5.00744 7.38766H7.38839V5.00671C7.38839 4.74337 7.60173 4.53052 7.86458 4.53052C8.12744 4.53052 8.34077 4.74337 8.34077 5.00671V7.38766H10.7217C10.9846 7.38766 11.1979 7.60052 11.1979 7.86385C11.1979 8.12718 10.9846 8.34004 10.7217 8.34004Z"
+            fill="#20272E"
+          />
+        </svg>
+        <div
+          className="property-overview__add-tag-text"
+        >
+          Add Tag
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Characteristics
+    </div>
+    <div
+      className="property-overview__tiles property-overview__tiles--3-cols"
+    >
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          class
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          A
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          year built
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          2012
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          year renovated
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          2015
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          number of units
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          156
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          type
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Multifamily - Standard
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          style
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Garden
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Stakeholders
+    </div>
+    <div
+      className="property-overview__tiles property-overview__tiles--2-cols"
+    >
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          owner
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Pennybacker Capital
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          asset manager
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Pennybacker Capital
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          property manager
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Investor Property Services
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tile"
+      >
+        <div
+          className="property-overview__tile-name"
+        >
+          developer
+        </div>
+        <div
+          className="property-overview__tile-value"
+        >
+          Developer
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PropertyOverview renders is member 1`] = `
+<div
+  className="property-overview"
+>
+  <div
+    className="property-overview__section property-overview__info"
+  >
+    <div
+      className="panel panel--default property-overview__tile property-overview__tile--info"
+    >
+      <div
+        className="property-overview__section-header"
+      >
+        El Cortez
+      </div>
+      <div
+        className="property-overview__address"
+      >
+        3130 N 7th Ave, Phoenix, AZ 85013, USA
+      </div>
+      <div
+        className="property-overview__site"
+      >
+        <a
+          className="button-link property-overview__site-link"
+          href="https://www.liveatelcortez.com/"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="button-link__icon"
+            color="inherit"
+            fill="none"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 20 20"
+            width="1em"
+          >
+            <path
+              d="M9.99935 18.3327C14.6017 18.3327 18.3327 14.6017 18.3327 9.99935C18.3327 5.39698 14.6017 1.66602 9.99935 1.66602C5.39698 1.66602 1.66602 5.39698 1.66602 9.99935C1.66602 14.6017 5.39698 18.3327 9.99935 18.3327Z"
+              stroke="#798796"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M1.66602 10H18.3327"
+              stroke="#798796"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M9.99935 1.66602C12.0837 3.94798 13.2683 6.90938 13.3327 9.99935C13.2683 13.0893 12.0837 16.0507 9.99935 18.3327C7.91495 16.0507 6.73039 13.0893 6.66602 9.99935C6.73039 6.90938 7.91495 3.94798 9.99935 1.66602V1.66602Z"
+              stroke="#798796"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </svg>
+          liveatelcortez.com
+        </a>
+      </div>
+    </div>
+    <div
+      className="property-overview__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Property Tags
+      <svg
+        className="rmb-tooltip-anchor property-overview__tooltip-anchor"
+        fill="none"
+        height="20"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        viewBox="0 0 20 20"
+        width="20"
+      >
+        <circle
+          cx="10"
+          cy="10"
+          fill="#181D23"
+          r="10"
+        />
+        <circle
+          cx="10"
+          cy="10"
+          fill="#2B343D"
+          r="10"
+        />
+        <rect
+          fill="#798796"
+          height="10"
+          width="5"
+          x="8"
+          y="5"
+        />
+        <path
+          d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+          fill="#181D23"
+        />
+      </svg>
+    </div>
+    <div
+      className="property-overview__tags"
+    >
+      <div
+        className="panel panel--default property-overview__tag"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 1
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 2
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 3
+        </div>
+      </div>
+    </div>
   </div>
   <div
     className="property-overview__section"
@@ -288,47 +752,7 @@ exports[`PropertyOverview renders with partial characteristics 1`] = `
   className="property-overview"
 >
   <div
-    className="property-overview__section property-overview__section--top"
-  >
-    <div
-      className="property-overview__section-text"
-    >
-      Custom property groups are made for each tag.
-    </div>
-    <div
-      className="property-overview__tags"
-    >
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 1
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 2
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 3
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="property-overview__section property-overview__section--top property-overview__info"
+    className="property-overview__section property-overview__info"
   >
     <div
       className="panel panel--default property-overview__tile property-overview__tile--info"
@@ -396,6 +820,194 @@ exports[`PropertyOverview renders with partial characteristics 1`] = `
         }
       }
     />
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Property Tags
+      <svg
+        className="rmb-tooltip-anchor property-overview__tooltip-anchor"
+        fill="none"
+        height="20"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        viewBox="0 0 20 20"
+        width="20"
+      >
+        <circle
+          cx="10"
+          cy="10"
+          fill="#181D23"
+          r="10"
+        />
+        <circle
+          cx="10"
+          cy="10"
+          fill="#2B343D"
+          r="10"
+        />
+        <rect
+          fill="#798796"
+          height="10"
+          width="5"
+          x="8"
+          y="5"
+        />
+        <path
+          d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+          fill="#181D23"
+        />
+      </svg>
+    </div>
+    <div
+      className="property-overview__tags"
+    >
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 1
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 2
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 3
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="property-overview__add-tag"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          color="inherit"
+          fill="none"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="1em"
+        >
+          <circle
+            cx="8"
+            cy="7.99927"
+            fill="#F5FAF7"
+            r="8"
+          />
+          <path
+            d="M10.7217 8.34004H8.34077V10.721C8.34077 10.9843 8.12744 11.1972 7.86458 11.1972C7.60173 11.1972 7.38839 10.9843 7.38839 10.721V8.34004H5.00744C4.74458 8.34004 4.53125 8.12718 4.53125 7.86385C4.53125 7.60052 4.74458 7.38766 5.00744 7.38766H7.38839V5.00671C7.38839 4.74337 7.60173 4.53052 7.86458 4.53052C8.12744 4.53052 8.34077 4.74337 8.34077 5.00671V7.38766H10.7217C10.9846 7.38766 11.1979 7.60052 11.1979 7.86385C11.1979 8.12718 10.9846 8.34004 10.7217 8.34004Z"
+            fill="#20272E"
+          />
+        </svg>
+        <div
+          className="property-overview__add-tag-text"
+        >
+          Add Tag
+        </div>
+      </div>
+    </div>
   </div>
   <div
     className="property-overview__section"
@@ -515,47 +1127,7 @@ exports[`PropertyOverview renders without site and image 1`] = `
   className="property-overview"
 >
   <div
-    className="property-overview__section property-overview__section--top"
-  >
-    <div
-      className="property-overview__section-text"
-    >
-      Custom property groups are made for each tag.
-    </div>
-    <div
-      className="property-overview__tags"
-    >
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 1
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 2
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 3
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="property-overview__section property-overview__section--top property-overview__info"
+    className="property-overview__section property-overview__info"
   >
     <div
       className="panel panel--default property-overview__tile property-overview__tile--info"
@@ -584,6 +1156,194 @@ exports[`PropertyOverview renders without site and image 1`] = `
       className="property-overview__image property-overview__image--default"
       style={Object {}}
     />
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
+      Property Tags
+      <svg
+        className="rmb-tooltip-anchor property-overview__tooltip-anchor"
+        fill="none"
+        height="20"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        viewBox="0 0 20 20"
+        width="20"
+      >
+        <circle
+          cx="10"
+          cy="10"
+          fill="#181D23"
+          r="10"
+        />
+        <circle
+          cx="10"
+          cy="10"
+          fill="#2B343D"
+          r="10"
+        />
+        <rect
+          fill="#798796"
+          height="10"
+          width="5"
+          x="8"
+          y="5"
+        />
+        <path
+          d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+          fill="#181D23"
+        />
+      </svg>
+    </div>
+    <div
+      className="property-overview__tags"
+    >
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 1
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 2
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 3
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="property-overview__add-tag"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          color="inherit"
+          fill="none"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="1em"
+        >
+          <circle
+            cx="8"
+            cy="7.99927"
+            fill="#F5FAF7"
+            r="8"
+          />
+          <path
+            d="M10.7217 8.34004H8.34077V10.721C8.34077 10.9843 8.12744 11.1972 7.86458 11.1972C7.60173 11.1972 7.38839 10.9843 7.38839 10.721V8.34004H5.00744C4.74458 8.34004 4.53125 8.12718 4.53125 7.86385C4.53125 7.60052 4.74458 7.38766 5.00744 7.38766H7.38839V5.00671C7.38839 4.74337 7.60173 4.53052 7.86458 4.53052C8.12744 4.53052 8.34077 4.74337 8.34077 5.00671V7.38766H10.7217C10.9846 7.38766 11.1979 7.60052 11.1979 7.86385C11.1979 8.12718 10.9846 8.34004 10.7217 8.34004Z"
+            fill="#20272E"
+          />
+        </svg>
+        <div
+          className="property-overview__add-tag-text"
+        >
+          Add Tag
+        </div>
+      </div>
+    </div>
   </div>
   <div
     className="property-overview__section"
@@ -759,47 +1519,7 @@ exports[`PropertyOverview renders without stakeholders and characteristics 1`] =
   className="property-overview"
 >
   <div
-    className="property-overview__section property-overview__section--top"
-  >
-    <div
-      className="property-overview__section-text"
-    >
-      Custom property groups are made for each tag.
-    </div>
-    <div
-      className="property-overview__tags"
-    >
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 1
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 2
-        </div>
-      </div>
-      <div
-        className="panel panel--default property-overview__tag"
-      >
-        <div
-          className="property-overview__tag-name"
-        >
-          Tag 3
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="property-overview__section property-overview__section--top property-overview__info"
+    className="property-overview__section property-overview__info"
   >
     <div
       className="panel panel--default property-overview__tile property-overview__tile--info"
@@ -874,6 +1594,194 @@ exports[`PropertyOverview renders without stakeholders and characteristics 1`] =
     <div
       className="property-overview__section-header"
     >
+      Property Tags
+      <svg
+        className="rmb-tooltip-anchor property-overview__tooltip-anchor"
+        fill="none"
+        height="20"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        viewBox="0 0 20 20"
+        width="20"
+      >
+        <circle
+          cx="10"
+          cy="10"
+          fill="#181D23"
+          r="10"
+        />
+        <circle
+          cx="10"
+          cy="10"
+          fill="#2B343D"
+          r="10"
+        />
+        <rect
+          fill="#798796"
+          height="10"
+          width="5"
+          x="8"
+          y="5"
+        />
+        <path
+          d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+          fill="#181D23"
+        />
+      </svg>
+    </div>
+    <div
+      className="property-overview__tags"
+    >
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 1
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 2
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="panel panel--default property-overview__tag property-overview__tag--admin"
+      >
+        <div
+          className="property-overview__tag-name"
+        >
+          Tag 3
+        </div>
+        <div
+          className="property-overview__tag-remove"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="property-overview__tag-remove-icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="property-overview__add-tag"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          color="inherit"
+          fill="none"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 16 16"
+          width="1em"
+        >
+          <circle
+            cx="8"
+            cy="7.99927"
+            fill="#F5FAF7"
+            r="8"
+          />
+          <path
+            d="M10.7217 8.34004H8.34077V10.721C8.34077 10.9843 8.12744 11.1972 7.86458 11.1972C7.60173 11.1972 7.38839 10.9843 7.38839 10.721V8.34004H5.00744C4.74458 8.34004 4.53125 8.12718 4.53125 7.86385C4.53125 7.60052 4.74458 7.38766 5.00744 7.38766H7.38839V5.00671C7.38839 4.74337 7.60173 4.53052 7.86458 4.53052C8.12744 4.53052 8.34077 4.74337 8.34077 5.00671V7.38766H10.7217C10.9846 7.38766 11.1979 7.60052 11.1979 7.86385C11.1979 8.12718 10.9846 8.34004 10.7217 8.34004Z"
+            fill="#20272E"
+          />
+        </svg>
+        <div
+          className="property-overview__add-tag-text"
+        >
+          Add Tag
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-overview__section"
+  >
+    <div
+      className="property-overview__section-header"
+    >
       Characteristics
     </div>
     <div
@@ -904,7 +1812,7 @@ exports[`PropertyOverview renders without tags 1`] = `
   className="property-overview"
 >
   <div
-    className="property-overview__section property-overview__section--top property-overview__info"
+    className="property-overview__section property-overview__info"
   >
     <div
       className="panel panel--default property-overview__tile property-overview__tile--info"

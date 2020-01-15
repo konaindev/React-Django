@@ -24,3 +24,5 @@ export const COUNTRY_FIELDS = {
 };
 
 export const COUNTRY_CODE_REGEX = /^[0-9]{1,4}$/;
+
+export const TYPING_TIMEOUT = 300;

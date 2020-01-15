@@ -22,6 +22,7 @@ import {
   refreshToken,
   login
 } from "./middleware";
+import segmentMiddleware from "./middleware/segment-middleware";
 import rootSaga from "./sagas";
 
 const cfg = {
@@ -42,6 +43,7 @@ export default () => {
     presistedReducer,
     composeEnhancers(
       applyMiddleware(
+        segmentMiddleware,
         fetchCreatePassword,
         fetchCompany,
         fetchCompleteAccount,

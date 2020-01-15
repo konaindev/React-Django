@@ -8,7 +8,14 @@ import { formatPhone } from "../../utils/formatters";
 import { default as Input, FormInput } from "./index";
 
 storiesOf("Input", module)
+  .add("simple", () => (
+    <Input placeholder="Type text here" type="text" theme="simple" />
+  ))
   .add("text", () => <Input placeholder="text" type="text" />)
+  .add("highlight", () => (
+    <Input placeholder="text" type="text" theme="highlight" />
+  ))
+  .add("gray", () => <Input placeholder="text" type="text" theme="gray" />)
   .add("form input", () => (
     <Formik>
       <FormInput placeholder="text" type="text" />

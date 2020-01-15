@@ -133,12 +133,15 @@ const nav = (state = {}, action) => {
   return newState;
 };
 
-const user = (state = {}, action) => {
+const user = (state = { error: false }, action) => {
   let newState = undefined;
 
   switch (action.type) {
     case "UPDATE_USER":
       newState = { ...action.x };
+      break;
+    case "LOGIN_ERROR":
+      newState = { ...state, error: true };
       break;
     default:
       newState = state;

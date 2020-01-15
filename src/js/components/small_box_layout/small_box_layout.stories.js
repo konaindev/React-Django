@@ -7,6 +7,12 @@ import { linkTo } from "@storybook/addon-links";
 import { SmallBoxLayout } from "./index";
 import props from "./props";
 
-storiesOf("SmallBoxLayout", module).add("default", () => (
-  <SmallBoxLayout {...props} />
-));
+const ctaProps = { ...props, ctaCallback: () => alert("cta fired") };
+const healthProps = { ...props, performanceRating: 1 };
+const bothProps = { ...ctaProps, ...healthProps };
+
+storiesOf("SmallBoxLayout", module)
+  .add("default", () => <SmallBoxLayout {...props} />)
+  .add("cta", () => <SmallBoxLayout {...ctaProps} />)
+  .add("health", () => <SmallBoxLayout {...healthProps} />)
+  .add("both", () => <SmallBoxLayout {...bothProps} />);

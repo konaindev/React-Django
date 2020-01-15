@@ -21,7 +21,7 @@ from remark.email_app.invites.added_to_property import (
     get_template_vars,
 )
 
-from .models import Building, Fund, LeaseStage, Period, Project, Property, TargetPeriod
+from .models import Building, Fund, LeaseStage, Period, Project, Property, Tag, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
@@ -1462,3 +1462,107 @@ class PropertyStyleTestCase(TestCase):
         build_2.save()
 
         self.assertEqual("Garden", self.property.calculated_property_style)
+
+
+class BaseTagsTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="admin@remarkably.io", password="password")
+        tags = [
+            Tag.objects.create(word="Tag 1"),
+            Tag.objects.create(word="Tag 2"),
+            Tag.objects.create(word="Tag 3"),
+        ]
+        project, _ = create_project()
+        project.custom_tags.set(tags)
+        admin_group = Group.objects.create(name="project 1 admin group")
+        admin_group.user_set.add(user)
+        project.admin_group = admin_group
+        project.save()
+        token_url = reverse("token_obtain_pair")
+        data = {
+            "email": "admin@remarkably.io",
+            "password": "password",
+        }
+        token = self.client.post(token_url, json.dumps(data), "application/json").json()
+        self.auth = f"Bearer {token['access']}"
+        self.project = project
+        self.user = user
+
+
+class CreateTagTestCase(BaseTagsTestCase):
+    def setUp(self):
+        super(CreateTagTestCase, self).setUp()
+        self.url = reverse(
+            "v1_projects:project_create_tag",
+            kwargs={"public_id": self.project.public_id})
+
+    def test_add_tag(self):
+        data = {"word": "Test Tag"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_result = ["Tag 1", "Tag 2", "Tag 3", "Test Tag"]
+        self.assertEqual(tags_result, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        expect = [str(t) for t in Tag.objects.all()]
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(expect, result)
+
+    def test_add_existing_tag(self):
+        data = {"word": "Tag 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_expect = ["Tag 1", "Tag 2", "Tag 3"]
+        self.assertEqual(tags_expect, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        expect = [str(t) for t in Tag.objects.all()]
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(expect, result)
+
+
+class RemoveTagTestCase(BaseTagsTestCase):
+    def setUp(self):
+        super(RemoveTagTestCase, self).setUp()
+        self.url = reverse(
+            "v1_projects:project_remove_tag",
+            kwargs={"public_id": self.project.public_id})
+
+    def test_remove_tag(self):
+        data = {"word": "Tag 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_expect = ["Tag 2", "Tag 3"]
+        self.assertEqual(tags_expect, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(tags_expect, result)
+        # Check that all tags are saved
+        tags = [str(t) for t in Tag.objects.all()]
+        self.assertEqual(["Tag 1", "Tag 2", "Tag 3"], tags)
+
+    def test_remove_not_existing_tag(self):
+        data = {"word": "Test 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 500)

@@ -2,7 +2,9 @@ const initialState = {
   fetchingProject: true,
   fetchingReports: true,
   project: false,
-  reports: false
+  reports: false,
+  isAddTagInput: false,
+  suggestedTags: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,10 +52,26 @@ const reducer = (state = initialState, action) => {
       const { members } = action.data;
       project = { ...state.project, members };
       return { ...state, project };
-    case "AJAX_POST_REMOVE_TAG_FROM_PROJECT_SUCCESS":
+    case "AJAX_GET_SEARCH_PROJECT_TAGS_SUCCESS": {
+      const { tags } = action.payload;
+      return { ...state, suggestedTags: tags };
+    }
+    case "AJAX_POST_CREATE_TAG_SUCCESS": {
+      const { custom_tags } = action.payload;
+      project = { ...state.project, custom_tags };
+      return { ...state, project, isAddTagInput: false };
+    }
+    case "AJAX_POST_REMOVE_TAG_FROM_PROJECT_SUCCESS": {
       const { custom_tags } = action.payload;
       project = { ...state.project, custom_tags };
       return { ...state, project };
+    }
+    case "SHOW_TAG_INPUT_ON_PROJECT": {
+      return { ...state, isAddTagInput: true };
+    }
+    case "HIDE_TAG_INPUT_ON_PROJECT": {
+      return { ...state, isAddTagInput: false };
+    }
     default:
       return state;
   }
