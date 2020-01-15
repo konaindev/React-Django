@@ -214,6 +214,13 @@ jobs:
       - gcp-cli/initialize
       - gcp-cli/install
       - run:
+          name: Set Composer BUCKET
+          command:    |
+            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+            --location us-central1 \
+            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run:
           command:    |
               set -e
               echo "Syncing dags folder..."
@@ -369,31 +376,31 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
-      - airflow-setup:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
-      - airflow-testing:
-          requires:
-            - airflow-setup
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
+#      - airflow-setup:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
+#      - airflow-testing:
+#          requires:
+#            - airflow-setup
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
       - airflow-deploy:
-          requires:
-            - airflow-testing
+#          requires:
+#            - airflow-testing
           filters:
             branches:
               ignore:
