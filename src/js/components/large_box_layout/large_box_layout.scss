@@ -31,6 +31,7 @@
     position: relative;
     border-width: 1px;
     border-color: #2b343d;
+    transition: $transition-1;
 
     &__top-line {
         color: $title-small-color;
