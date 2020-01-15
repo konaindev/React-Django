@@ -185,15 +185,16 @@ jobs:
           name: Check DAG validity
           command:  |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
-      - run:
-          name: Check for task errors only if not master branch
-          command:  |
-            if [ "$CIRCLE_BRANCH" != "master" ]; then
-              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
-            else
-              echo "do NOT run task check for master branch"
-            fi
-          no_output_timeout: 30m
+      # TODO: Under review for alternative. How is context being passed?
+#      - run:
+#          name: Check for task errors only if not master branch
+#          command:  |
+#            if [ "$CIRCLE_BRANCH" != "master" ]; then
+#              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
+#            else
+#              echo "do NOT run task check for master branch"
+#            fi
+#          no_output_timeout: 30m
       - run:
           name: Delete all items in test folder
           command:  |
