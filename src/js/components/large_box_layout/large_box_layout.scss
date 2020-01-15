@@ -22,6 +22,9 @@
         .large-box__cta{
             opacity: 1;
         }
+        .large-box__cta-static{
+            opacity: 1;
+        }
     }
     display: flex;
     flex-direction: column;
@@ -157,6 +160,28 @@
     transition: $transition-1;
 }
 
+.large-box__cta-static{
+    color: black;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    z-index: 99;
+    // height: 32px;
+    right: 0px;
+    min-width: 116px;
+    background: white;
+    padding-top: 3px;
+    height: 32px;
+    padding-bottom: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 0px 5px 0px 6px;
+    transition: $transition-1;
+}
+
 .large-box__title-container {
     :hover {
         background-color: #2b343d;
@@ -192,8 +217,8 @@
 
 #large-box__wrapper-static > {
     :hover {
+        border-color: white;
         background-color: #2b343d;
         box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
-        // visibility: visible;
     }
 }

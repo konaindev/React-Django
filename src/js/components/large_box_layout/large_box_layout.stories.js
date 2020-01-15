@@ -38,6 +38,11 @@ storiesOf("LargeBoxLayout", module)
       <LargeBoxLayout {...propsWithCTA} />
     </div>
   ))
+  .add("with CTA (static data)", () => (
+    <div style={{ width: WIDTH }}>
+      <LargeBoxLayout {...propsWithCTA} staticData={true} />
+    </div>
+  ))
   .add("with health badge and CTA", () => (
     <div style={{ width: WIDTH }}>
       <LargeBoxLayout {...propsWithBoth} />

@@ -58,10 +58,11 @@ export class LargeBoxLayout extends Component {
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
-    console.log("------->>>>", detail);
     const wrapperId = staticData
       ? "large-box__wrapper-static"
       : "large-box__wrapper";
+    const ctaId = staticData ? "large-box__cta-static" : "large-box__cta";
+
     return (
       <div id={wrapperId} onClick={x => ctaCallback(x)}>
         <Panel className="large-box">
@@ -69,7 +70,7 @@ export class LargeBoxLayout extends Component {
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
 
-          {ctaCallback && <div className="large-box__cta">View Details →</div>}
+          {ctaCallback && <div className={ctaId}>View Details →</div>}
 
           <PropertyStatus
             className="large-box__health-badge"
