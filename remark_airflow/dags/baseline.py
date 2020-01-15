@@ -6,7 +6,7 @@ from django_dag import DjangoDAG
 default_args = {"owner": "Airflow", "start_date": datetime(2019, 12, 22, 00, 00)}
 
 with DjangoDAG(
-    "baseline_insights", default_args=default_args, schedule_interval=None
+    dag_id="baseline", default_args=default_args, schedule_interval=None
 ) as dag:
 
     from insights.impl.projects.projects import get_project_facts, get_project_insights
