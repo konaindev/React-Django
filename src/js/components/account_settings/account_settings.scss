@@ -23,8 +23,6 @@ $button-line-height: 1.25rem;
 $message-line-height: 1.625rem;
 $error-color: $orange-6;
 $info-line-height: 1.75rem;
-$edit-button-color: $gray-4;
-$edit-button-border: 1px solid $gray-9;
 
 .account-settings {
     width: $page-width;
@@ -270,16 +268,6 @@ $edit-button-border: 1px solid $gray-9;
 .account-settings__edit-button {
     margin-left: auto;
     padding: 8px 10px;
-    background: $edit-button-color;
-    border: $edit-button-border;
-    border-radius: 4px;
-
-    &:hover, &:focus {
-        background-color: lighten($edit-button-color, 3%);
-    }
-    &:active {
-        background-color: darken($edit-button-color, 2%);
-    }
 }
 
 .account-settings__edit-button-text {

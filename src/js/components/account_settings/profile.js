@@ -616,6 +616,7 @@ export default class Profile extends React.PureComponent {
                   Company Info
                   <Button
                     className="account-settings__edit-button"
+                    color="secondary-gray"
                     onClick={this.openCompanyModal}
                   >
                     <div className="account-settings__edit-button-text">
@@ -648,6 +649,7 @@ export default class Profile extends React.PureComponent {
                   Office Info
                   <Button
                     className="account-settings__edit-button"
+                    color="secondary-gray"
                     onClick={() => {}}
                   >
                     <div className="account-settings__edit-button-text">

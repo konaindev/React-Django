@@ -16,6 +16,7 @@ export default class Button extends Component {
       "default",
       "primary",
       "secondary",
+      "secondary-gray",
       "outline",
       "disabled",
       "disabled-light",
