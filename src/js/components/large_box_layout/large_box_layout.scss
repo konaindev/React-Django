@@ -37,14 +37,14 @@
     transition: $transition-1;
     &__top-line {
         color: $title-small-color;
-        font-size: $text-base;
-        font-weight: $weight-bold;
-        line-height: 20px;
-        height: 40px;
+        font-size: $text-base;                
         display: flex;
         align-items: flex-end;
         max-width: 230px;
         margin-top: 20px;
+        font-weight: normal;
+        line-height: 28px;
+        max-width: 260px;
     }
 
     &__bottom-line {
@@ -76,11 +76,11 @@
         :hover {
             background-color: #2b343d;
             box-shadow: none;
+            font-weight: 400;
         }
         color: $hero-text-color;
         font-size: $text-6xl;
         font-weight: $weight-light;
-        letter-spacing: -2px;
         line-height: 72px;
     }
 
