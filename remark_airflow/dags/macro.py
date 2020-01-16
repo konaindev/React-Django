@@ -13,6 +13,7 @@ with DjangoDAG(
         get_and_save_project_facts,
     )
     from remark_airflow.dags.insights.impl.projects.insights import (
+        lease_rate_against_target,
         change_health_status,
         usv_exe_off_track,
         usv_exe_at_risk,
@@ -23,6 +24,7 @@ with DjangoDAG(
     from remark.insights.models import PerformanceInsights
 
     performance_insights = [
+        lease_rate_against_target,
         change_health_status,
         usv_exe_off_track,
         usv_exe_at_risk,
