@@ -13,7 +13,7 @@ exports[`InsightsReport render default 1`] = `
       <p
         className="section-header__title"
       >
-        <div
+        <span
           className="insights-report__title"
         >
           <svg
@@ -34,7 +34,7 @@ exports[`InsightsReport render default 1`] = `
             />
           </svg>
           Insights
-        </div>
+        </span>
       </p>
       <div
         className="section-header__extra"
@@ -156,7 +156,7 @@ exports[`InsightsReport render no_insights 1`] = `
       <p
         className="section-header__title"
       >
-        <div
+        <span
           className="insights-report__title"
         >
           <svg
@@ -177,7 +177,7 @@ exports[`InsightsReport render no_insights 1`] = `
             />
           </svg>
           Insights
-        </div>
+        </span>
       </p>
     </div>
     <div
