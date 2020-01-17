@@ -32,7 +32,7 @@ exports[`InvestmentAllocation renders <InvestmentAllocation.InvestmentAllocation
       <div className=\\"investment-allocation__expenses\\">
         <ExpenseRow title=\\"Reputation Building\\" value={20400} infoTooltip=\\"acquisition_reputation_building\\" />
         <ExpenseRow title=\\"Demand Creation\\" value={48000} infoTooltip=\\"acquisition_demand_creation\\" />
-        <ExpenseRow title=\\"Leasing Enablement\\" value={1000} infoTooltip=\\"acquisition_leasing_enablement\\" />
+        <ExpenseRow title=\\"Leasing Enablement\\" value={0} infoTooltip=\\"acquisition_leasing_enablement\\" />
         <ExpenseRow title=\\"Market Intelligence\\" value={0} infoTooltip=\\"acquisition_market_intelligence\\" />
       </div>
     </div>
