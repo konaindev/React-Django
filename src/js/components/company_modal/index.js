@@ -16,9 +16,11 @@ import "./company_modal.scss";
 class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
+    isAccountAdmin: PropTypes.bool,
     data: PropTypes.shape({
       company: PropTypes.string,
-      company_roles: PropTypes.string
+      company_roles: PropTypes.string,
+      company_roles_locked: PropTypes.bool
     }),
     companyRolesOptions: PropTypes.array,
     onSave: PropTypes.func,
@@ -27,7 +29,8 @@ class CompanyModal extends React.PureComponent {
     onClose: PropTypes.func
   };
   static defaultProps = {
-    companyRolesOptions: []
+    companyRolesOptions: [],
+    isAccountAdmin: false
   };
 
   setFormik = formik => {
@@ -70,6 +73,12 @@ class CompanyModal extends React.PureComponent {
     return cn("account-settings-field", classes, error_dict);
   };
 
+  changeCompanyLock = e => {
+    e.preventDefault();
+    const v = this.formik.state.values.company_roles_locked;
+    this.formik.setFieldValue("company_roles_locked", !v);
+  };
+
   render() {
     const { isOpen, data } = this.props;
     return (
@@ -90,7 +99,7 @@ class CompanyModal extends React.PureComponent {
             validateOnChange={true}
             onSubmit={this.props.onSave}
           >
-            {({ errors, touched, values, setFieldTouched }) => (
+            {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
               <Form method="post" autoComplete="off">
                 <div className="company-modal__content">
                   <AccountSettingsField
@@ -117,35 +126,42 @@ class CompanyModal extends React.PureComponent {
                     className={this.getFieldClasses(
                       "company_roles",
                       errors,
-                      touched
+                      touched,
+                      values.company_roles_locked ? ["disabled"] : []
                     )}
                     label="Company Role"
                     errorKey="company_roles"
                   >
-                    <MultiSelect
-                      className="account-settings-field__input company-modal__company-roles"
-                      name="company_roles"
-                      theme="gray"
-                      isShowControls={false}
-                      isShowAllOption={false}
-                      options={this.props.companyRolesOptions}
-                      value={values.company_roles}
-                      label={values.company_roles?.map(v => v.label).join(", ")}
-                      onBlur={() => {
-                        this.unsetMessage();
-                        setFieldTouched("company_roles", true);
-                      }}
-                      onChange={values => {
-                        this.unsetMessage();
-                        setFieldValue("company_roles", values);
-                      }}
-                    />
-                    <Button
-                      className="company-modal__lock"
-                      color="secondary-gray"
-                    >
-                      Unlock
-                    </Button>
+                    <div className="company-modal__inputs-wrap">
+                      <MultiSelect
+                        className="account-settings-field__input company-modal__company-roles"
+                        name="company_roles"
+                        theme="gray"
+                        isShowControls={false}
+                        isShowAllOption={false}
+                        isDisabled={values.company_roles_locked}
+                        options={this.props.companyRolesOptions}
+                        value={values.company_roles}
+                        label={values.company_roles
+                          ?.map(v => v.label)
+                          .join(", ")}
+                        onBlur={() => {
+                          setFieldTouched("company_roles", true);
+                        }}
+                        onChange={values => {
+                          setFieldValue("company_roles", values);
+                        }}
+                      />
+                      {this.props.isAccountAdmin ? (
+                        <Button
+                          className="company-modal__lock"
+                          color="secondary-gray"
+                          onClick={this.changeCompanyLock}
+                        >
+                          {values.company_roles_locked ? "Unlock" : "Lock"}
+                        </Button>
+                      ) : null}
+                    </div>
                   </AccountSettingsField>
                 </div>
                 <div className="company-modal__controls">

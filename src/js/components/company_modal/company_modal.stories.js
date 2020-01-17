@@ -8,6 +8,7 @@ import { companyData, companyRolesOptions } from "./props";
 storiesOf("CompanyModal", module).add("default", () => (
   <CompanyModal
     isOpen={true}
+    isAccountAdmin={true}
     data={companyData}
     companyRolesOptions={companyRolesOptions}
   />

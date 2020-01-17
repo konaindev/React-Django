@@ -33,10 +33,10 @@ export default class Button extends Component {
     onClick: () => {}
   };
 
-  handleClick = () => {
+  handleClick = e => {
     const { disabled, onClick } = this.props;
     if (!disabled) {
-      onClick();
+      onClick(e);
     }
   };
 

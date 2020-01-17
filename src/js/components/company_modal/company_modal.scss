@@ -57,14 +57,22 @@ $button-line-height: 1.25rem;
 .company-modal__company-roles {
     display: inline-flex;
     flex-grow: 1;
+
+    .select__control {
+        width: 100%;
+    }
 }
 
 .company-modal__lock {
     display: inline-flex;
+    margin-left: $modal-spacing;
     flex-grow: 0;
-    margin-left: auto;
 }
 
 .company-modal__lock.button {
-    padding: 12px 30px;
+    padding: 11px 30px;
+}
+
+.company-modal__inputs-wrap {
+    display: flex;
 }

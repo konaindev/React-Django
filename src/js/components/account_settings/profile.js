@@ -35,6 +35,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.PropTypes.object,
       company_roles: PropTypes.arrayOf(PropTypes.string),
+      company_roles_locked: PropTypes.bool,
       office_country: PropTypes.object,
       office_street: PropTypes.string,
       office_city: PropTypes.string,
@@ -60,6 +61,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: undefined,
       company_roles: [],
+      company_roles_locked: true,
       office_country: {
         label: COUNTRY_FIELDS.USA.full_name,
         value: COUNTRY_FIELDS.USA.short_name
@@ -269,7 +271,8 @@ export default class Profile extends React.PureComponent {
     const p = this.getProfileValues(this.props.profile);
     return {
       company: p.company,
-      company_roles: p.company_roles
+      company_roles: p.company_roles,
+      company_roles_locked: p.company_roles_locked
     };
   };
 
