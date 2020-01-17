@@ -139,6 +139,7 @@ export class ProjectReportPage extends Component {
           <CommonReport
             type="baseline"
             report={report}
+            reportType="baseline"
             dateSpan={<ReportDateSpan name="Baseline" dates={report.dates} />}
           />
         );
