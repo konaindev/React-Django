@@ -49,7 +49,8 @@ export class ModelingView extends Component {
         value: "compare"
       }
     ];
-
+    const _activeReport = this.getActiveReport();
+    console.log("------!!!!!_____----->>>>", _activeReport);
     return (
       <div className="page modeling-view">
         <Container>

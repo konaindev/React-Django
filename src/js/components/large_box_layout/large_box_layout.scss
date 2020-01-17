@@ -1,32 +1,62 @@
 @import "css/base.scss";
 
+#large-box__wrapper > {
+    :hover {
+        border-color: $blue-7;
+        background-color: #2b343d;
+        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
+        // visibility: visible;
+    }
+}
 .large-box {
+    &:hover{
+        cursor: pointer;
+        &:before{
+            border: 1px solid $blue-7;
+            border-radius: 6px / 4px; // match scaling radii of corners
+            transform: translateY(-23px) scaleY(1.5333);
+            transform-origin: 0 50% 0;
+            background: $gray-4;
+            box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
+        }
+        .large-box__cta{
+            opacity: 1;
+        }
+        .large-box__cta-static{
+            opacity: 1;
+        }
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 244px;
-    padding: 30px 24px 20px 24px;
+    height: 252px;
+    // padding: 30px 24px 20px 24px;
     position: relative;
-
+    border-width: 1px;
+    border-color: #2b343d;
+    transition: $transition-1;
     &__top-line {
         color: $title-small-color;
-        font-size: 12px;
-        font-weight: $weight-bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        line-height: 20px;
-        height: 40px;
-        text-align: center;
+        font-size: $text-base;                
         display: flex;
         align-items: flex-end;
+        margin-top: 20px;
+        font-weight: normal;
+        line-height: 28px;
+        max-width: 260px;
     }
 
     &__bottom-line {
+        pointer-events: none;
+        :hover {
+            background-color: #2b343d;
+            box-shadow: none;
+        }
         color: $content-text-secondary-color;
         font-weight: $weight-normal;
         font-size: 14px;
         line-height: 22px;
-        text-align: center;
+        text-align: start;
 
         & > span {
             display: block;
@@ -34,23 +64,33 @@
     }
 
     &__content {
-        text-align: center;
-        position: relative;
+        :hover {
+            box-shadow: none;
+        }
+        text-align: start;
         margin: 8px 0 8px 0;
     }
 
     &__content-value {
+        :hover {
+            background-color: #2b343d;
+            box-shadow: none;
+            font-weight: 400;
+        }
         color: $hero-text-color;
         font-size: $text-6xl;
         font-weight: $weight-light;
-        letter-spacing: -2px;
         line-height: 72px;
     }
 
     &__content-extra {
+        :hover {
+            background-color: #2b343d;
+            box-shadow: none;
+        }
         position: absolute;
-        bottom: 0.5rem;
-        left: 100%;
+        bottom: 0px;
+        right: 0px;
         width: 4rem;
         margin-left: 1.5rem;
     }
@@ -61,14 +101,121 @@
     }
 
     &__content-delta {
-        margin-top: 0.25rem;
+        // margin-top: 0.25rem;
+        margin-top: 10px;
         font-size: 0.75rem;
         text-align: center;
     }
 
     .rmb-tooltip-anchor {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        position: relative;
+        margin-left: 10px;
+        margin-bottom: -6px;
+    }
+}
+
+.large-box__inner-container {
+    transition: $transition-1;
+    position: absolute;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.large-box__extra-container {
+    pointer-events: none;
+    :hover {
+        box-shadow: none;
+    }
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.large-box__cta{
+    color: white;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    z-index: 99;
+    // height: 32px;
+    right: 0px;
+    min-width: 116px;
+    background: $blue-7;
+    padding-top: 3px;
+    height: 32px;
+    padding-bottom: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 0px 5px 0px 6px;
+    transition: $transition-1;
+}
+
+.large-box__cta-static{
+    color: black;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    z-index: 99;
+    // height: 32px;
+    right: 0px;
+    min-width: 116px;
+    background: white;
+    padding-top: 3px;
+    height: 32px;
+    padding-bottom: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 0px 5px 0px 6px;
+    transition: $transition-1;
+}
+
+.large-box__title-container {
+    :hover {
+        background-color: #2b343d;
+        box-shadow: none;
+    }
+    position: absolute;
+    left: 0px;
+    padding-left: 30px;
+    // note: this was copied/pasted from Figma
+    // TODO: move to scss vars i think 
+    // font-family: Formular;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.large-box__health-badge {
+    :hover {
+        background-color: #2b343d;
+        box-shadow: none;
+    }
+    position: absolute;
+    left: 0px;
+    margin-top: 30px;
+    margin-left: 30px;
+    z-index: 99;
+}
+
+.tooltip-wrapper {
+    all: initial;
+}
+
+#large-box__wrapper-static > {
+    :hover {
+        border-color: white;
+        background-color: #2b343d;
+        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
     }
 }
