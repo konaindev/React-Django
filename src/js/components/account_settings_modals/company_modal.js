@@ -11,7 +11,7 @@ import { SelectSearch } from "../select";
 
 import { companySchema } from "./validators";
 
-import "./company_modal.scss";
+import "./account_settings_modals.scss";
 
 class CompanyModal extends React.PureComponent {
   static propTypes = {
@@ -66,10 +66,6 @@ class CompanyModal extends React.PureComponent {
     let error_dict = {
       "account-settings-field--error": errors[name] && touched[name]
     };
-    if (name === "phone") {
-      error_dict["account-settings-field--error-country-code"] =
-        errors["phone_country_code"] && touched["phone_country_code"];
-    }
     return cn("account-settings-field", classes, error_dict);
   };
 
@@ -83,11 +79,11 @@ class CompanyModal extends React.PureComponent {
     const { isOpen, data } = this.props;
     return (
       <ModalWindow
-        className="company-modal"
+        className="form-modal"
         open={isOpen}
         onClose={this.props.onClose}
       >
-        <ModalWindow.Head className="company-modal__title">
+        <ModalWindow.Head className="form-modal__title">
           Company Info
         </ModalWindow.Head>
         <ModalWindow.Body>
@@ -101,7 +97,7 @@ class CompanyModal extends React.PureComponent {
           >
             {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
               <Form method="post" autoComplete="off">
-                <div className="company-modal__content">
+                <div className="form-modal__content">
                   <AccountSettingsField
                     className={this.getFieldClasses("company", errors, touched)}
                     label="Company"

@@ -5,13 +5,13 @@ $modal-spacing: 1.25rem;
 $close-size: 1.25rem;
 $button-line-height: 1.25rem;
 
-.company-modal {
+.form-modal {
     min-width: 560px;
     padding: 0;
     border-radius: 4px;
 }
 
-.company-modal.modal-window {
+.form-modal.modal-window {
     .modal-window__close {
         width: $close-size;
         height: $close-size;
@@ -20,7 +20,7 @@ $button-line-height: 1.25rem;
     }
 }
 
-.company-modal__title {
+.form-modal__title {
     height: auto;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ $button-line-height: 1.25rem;
     font-size: $text-base;
 }
 
-.company-modal__content {
+.form-modal__content {
     padding: $modal-spacing;
     padding-bottom: 0;
     border-top: $body-border;

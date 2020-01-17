@@ -2,25 +2,18 @@ import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
-import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
-import AddressModal from "../address_modal";
 import { COUNTRY_FIELDS } from "../../constants";
 
+import { CompanyModal, OfficeModal } from "../account_settings_modals";
 import { Tick, Upload } from "../../icons";
-import {
-  accountSettings as actions,
-  addressModal
-} from "../../redux_base/actions";
+import { accountSettings as actions } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
-import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
-import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
-import Select, { SelectSearch } from "../select";
-import GoogleAddress from "../google_address";
+import Select from "../select";
 import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
@@ -392,8 +385,16 @@ export default class Profile extends React.PureComponent {
     this.setState({ isCompanyOpen: false });
   };
 
+  openOfficeModal = () => {
+    this.setState({ isOfficeOpen: true });
+  };
+
+  closeOfficeModal = () => {
+    this.setState({ isOfficeOpen: false });
+  };
+
   render() {
-    const { companyAddresses, profile } = this.props;
+    const { profile } = this.props;
     return (
       <div className="account-settings__tab">
         <Formik
@@ -653,12 +654,16 @@ export default class Profile extends React.PureComponent {
                   <Button
                     className="account-settings__edit-button"
                     color="secondary-gray"
-                    onClick={() => {}}
+                    onClick={this.openOfficeModal}
                   >
                     <div className="account-settings__edit-button-text">
                       Edit Office Info
                     </div>
                   </Button>
+                  <OfficeModal
+                    isOpen={this.state.isOfficeOpen}
+                    onClose={this.closeCompanyModal}
+                  />
                 </div>
                 <div className="account-settings__value-field">
                   <div className="account-settings__label">Country</div>
