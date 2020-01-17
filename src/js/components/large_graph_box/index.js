@@ -29,7 +29,6 @@ export class LargeGraphBox extends Component {
     formatTarget: PropTypes.func.isRequired
   };
   render() {
-    console.log("----->>>>> large box graph", this.props?.type);
     const {
       name,
       infoTooltip,
