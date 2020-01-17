@@ -20,6 +20,8 @@ class AnalyticsProvider(models.Model):
 
     identifier = models.CharField(max_length=255)
 
+    objects = AnalyticsProviderManager()
+
     def __str__(self):
         return f"{self.ANALYTICS_PROVIDER_DICT[self.provider]} ({self.identifier})"
 

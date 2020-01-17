@@ -16,10 +16,7 @@ from remark.portfolio.api.strategy import (
 from remark.projects.constants import HEALTH_STATUS
 from remark.projects.models import Period, TargetPeriod, Project
 
-try:
-    from insights.impl.utils import health_standard, cop
-except ModuleNotFoundError:
-    from remark_airflow.dags.insights.impl.utils import health_standard, cop
+from remark_airflow.insights.impl.utils import health_standard, cop
 
 
 def var_project(project_id):

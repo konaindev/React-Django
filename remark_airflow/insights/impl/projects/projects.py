@@ -1,9 +1,6 @@
 from graphkit import compose
 
-try:
-    from insights.impl.vars import var_project
-except ModuleNotFoundError:
-    from remark_airflow.dags.insights.impl.vars import var_project
+from remark_airflow.insights.impl.vars import var_project
 
 
 def get_project_facts(project_insights, project_id, start, end):

@@ -6,11 +6,11 @@ default_args = {"start_date": datetime(2019, 12, 22, 00, 00)}
 
 with DjangoDAG(dag_id="weekly_insights", default_args=default_args, schedule_interval="0 0 * * 0") as dag:
 
-    from insights.impl.projects.projects import (
+    from remark_airflow.insights.impl.projects.projects import (
         get_project_facts,
         get_project_insights,
     )
-    from insights.impl.projects.insights import (
+    from remark_airflow.insights.impl.projects.insights import (
         change_health_status,
         lease_rate_against_target,
         usv_exe_off_track,
