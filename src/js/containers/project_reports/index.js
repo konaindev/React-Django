@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import ProjectReportPage from "../../components/project_report_page";
 import { projectReports as actions } from "../../redux_base/actions";
+import { insights as insightsAction } from "../../redux_base/actions";
 import renderWrapper from "../shared/base_container";
 
 class ProjectReportsContainer extends PureComponent {
@@ -53,6 +54,12 @@ class ProjectReportsContainer extends PureComponent {
       return newState;
     }
 
+    if (reportType === "performance" && !nextProps.performanceInsightsLoaded) {
+      nextProps.dispatch(
+        insightsAction.requestPerformanceInsights({ projectId })
+      );
+    }
+
     return null;
   }
 
@@ -71,6 +78,7 @@ class ProjectReportsContainer extends PureComponent {
         isAddTagInput={this.props.isAddTagInput}
         suggestedTags={this.props.suggestedTags}
         dispatch={this.props.dispatch}
+        insights={this.props.performanceInsights}
       />
     );
   }
@@ -82,7 +90,9 @@ const mapState = state => ({
   // fetchingProject: state.projectReports.fetchingProject,
   fetchingReports: state.projectReports.fetchingReports,
   isAddTagInput: state.projectReports.isAddTagInput,
-  suggestedTags: state.projectReports.suggestedTags
+  suggestedTags: state.projectReports.suggestedTags,
+  performanceInsights: state.insights.performanceInsights,
+  performanceInsightsLoaded: state.insights.performanceInsightsLoaded
 });
 
 export default withRouter(connect(mapState)(ProjectReportsContainer));

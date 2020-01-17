@@ -27,17 +27,11 @@ class PerformanceInsightsView(APIView):
     permission_classes = [ProjectCustomPermission]
 
     def get(self, request, public_id):
-        start = request.GET.get("start_date")
-        end = request.GET.get("end_date")
-        performance_query = PerformanceInsights.objects.filter(project_id=public_id)
-
-        if start and end:
-            performance_query = performance_query.filter(
-                (Q(start__gte=start) & Q(start__lte=end))
-                | (Q(end__gte=start) & Q(end__lte=end))
-            )
-
-        performance_insights = performance_query.order_by("-start").first()
+        performance_insights = (
+            PerformanceInsights.objects.filter(project_id=public_id)
+            .order_by("-start")
+            .first()
+        )
 
         if performance_insights:
             insights = [
