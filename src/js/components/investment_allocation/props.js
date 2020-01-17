@@ -258,7 +258,7 @@ export const props = {
     expenses: {
       reputation_building: "20400.00",
       demand_creation: "48000.00",
-      leasing_enablement: "0.00",
+      leasing_enablement: "1000.00",
       market_intelligence: "0.00"
     },
     total: "68400.00"
