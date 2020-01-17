@@ -96,7 +96,7 @@ def generate_campaign_goal_chart_url(project, this_week):
     current = formatter(selector(this_week))
 
     return (
-        "https://app.remarkably.io/charts/donut"
+        "https://internal.remarkably.io/charts/donut"
         + f"?goal={goal}"
         + f"&goal_date={goal_date}"
         + f"&current={current}"
