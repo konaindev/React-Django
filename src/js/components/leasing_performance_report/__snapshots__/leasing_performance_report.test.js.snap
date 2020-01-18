@@ -2,16 +2,16 @@
 
 exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
 "<ReportSection name=\\"Leasing Performance\\" sectionItems={[undefined]} smallMarginTop={true}>
-  <Component report={{...}} />
+  <Component type={[undefined]} report={{...}} />
   <Component report={{...}} />
 </ReportSection>"
 `;
 
 exports[`LeasingPerformanceReport renders baseline report correctly 2`] = `
 "<BoxRow spacing=\\"normal\\">
-  <PercentageGraphBox name=\\"Leased\\" infoTooltip=\\"leased_rate\\" value={0.74} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent={{...}} />
-  <PercentageGraphBox name=\\"Retention\\" infoTooltip=\\"retention_rate\\" value={0.71} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent=\\"94 Notices to Renew (Out of 132 Resident Decisions)\\" />
-  <PercentageGraphBox name=\\"Occupied\\" infoTooltip=\\"occupied_rate\\" value={0.71} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent={{...}} />
+  <PercentageGraphBox type={[undefined]} name=\\"Leased\\" infoTooltip=\\"leased_rate\\" value={0.74} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent={{...}} />
+  <PercentageGraphBox type={[undefined]} name=\\"Retention\\" infoTooltip=\\"retention_rate\\" value={0.71} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent=\\"94 Notices to Renew (Out of 132)\\" />
+  <PercentageGraphBox type={[undefined]} name=\\"Occupied\\" infoTooltip=\\"occupied_rate\\" value={0.71} delta={[undefined]} series={[undefined]} target={[undefined]} extraContent={{...}} />
 </BoxRow>"
 `;
 
@@ -36,16 +36,16 @@ exports[`LeasingPerformanceReport renders baseline report correctly 3`] = `
 
 exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
 "<ReportSection name=\\"Leasing Performance\\" sectionItems={[undefined]} smallMarginTop={true}>
-  <Component report={{...}} />
+  <Component type={[undefined]} report={{...}} />
   <Component report={{...}} />
 </ReportSection>"
 `;
 
 exports[`LeasingPerformanceReport renders performance report correctly 2`] = `
 "<BoxRow spacing=\\"normal\\">
-  <PercentageGraphBox name=\\"Leased\\" infoTooltip=\\"leased_rate\\" value={0.87} delta={0.02} series={{...}} target={0.95} extraContent={{...}} />
-  <PercentageGraphBox name=\\"Retention\\" infoTooltip=\\"retention_rate\\" value={0.6} delta={[undefined]} series={{...}} target={0.63} extraContent=\\"7 Notices to Renew (Out of 11 Resident Decisions)\\" />
-  <PercentageGraphBox name=\\"Occupied\\" infoTooltip=\\"occupied_rate\\" value={0.85} delta={0.04} series={{...}} target={0.93} extraContent={{...}} />
+  <PercentageGraphBox type={[undefined]} name=\\"Leased\\" infoTooltip=\\"leased_rate\\" value={0.87} delta={0.02} series={{...}} target={0.95} extraContent={{...}} />
+  <PercentageGraphBox type={[undefined]} name=\\"Retention\\" infoTooltip=\\"retention_rate\\" value={0.6} delta={[undefined]} series={{...}} target={0.63} extraContent=\\"7 Notices to Renew (Out of 11)\\" />
+  <PercentageGraphBox type={[undefined]} name=\\"Occupied\\" infoTooltip=\\"occupied_rate\\" value={0.85} delta={0.04} series={{...}} target={0.93} extraContent={{...}} />
 </BoxRow>"
 `;
 
@@ -70,7 +70,7 @@ exports[`LeasingPerformanceReport renders performance report correctly 3`] = `
 
 exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
 "<ReportSection name=\\"Leasing Performance\\" sectionItems={{...}} smallMarginTop={true}>
-  <Component report={{...}} />
+  <Component type={[undefined]} report={{...}} />
   <Component report={{...}} />
 </ReportSection>"
 `;
