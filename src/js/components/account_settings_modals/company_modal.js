@@ -97,7 +97,7 @@ class CompanyModal extends React.PureComponent {
                   >
                     <SelectSearch
                       name="company"
-                      theme="default"
+                      theme="gray"
                       placeholder=""
                       components={{ DropdownIndicator: () => null }}
                       className="account-settings-field__input"

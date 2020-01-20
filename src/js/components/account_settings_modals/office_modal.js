@@ -195,7 +195,7 @@ class OfficeModal extends React.PureComponent {
                       loadOptions={loadAddress}
                       cacheOptions={false}
                       companyAddresses={companyAddresses}
-                      theme=""
+                      theme="gray"
                       labelCompany=""
                       labelGoogle=""
                       display="full"
