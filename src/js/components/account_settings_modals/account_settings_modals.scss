@@ -6,7 +6,7 @@ $close-size: 1.25rem;
 $button-line-height: 1.25rem;
 
 .form-modal {
-    min-width: 560px;
+    width: 560px;
     padding: 0;
     border-radius: 4px;
 }
@@ -39,13 +39,13 @@ $button-line-height: 1.25rem;
     border-bottom: $body-border;
 }
 
-.company-modal__controls {
+.settings-modal__controls {
     display: flex;
     justify-content: flex-end;
     padding: $modal-spacing;
 }
 
-.company-modal__save {
+.settings-modal__save {
     padding: 12px 32px;
     font-size: $text-xs;
     font-weight: $weight-semibold;

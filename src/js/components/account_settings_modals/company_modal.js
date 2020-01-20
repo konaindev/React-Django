@@ -23,6 +23,8 @@ class CompanyModal extends React.PureComponent {
       company_roles_locked: PropTypes.bool
     }),
     companyRolesOptions: PropTypes.array,
+    loadCompany: PropTypes.func,
+    onChangeCompany: PropTypes.func,
     onSave: PropTypes.func,
     onFinish: PropTypes.func,
     onError: PropTypes.func,
@@ -30,22 +32,14 @@ class CompanyModal extends React.PureComponent {
   };
   static defaultProps = {
     companyRolesOptions: [],
-    isAccountAdmin: false
+    isAccountAdmin: false,
+    loadCompany() {},
+    onChangeCompany() {},
+    onSave() {}
   };
 
   setFormik = formik => {
     this.formik = formik;
-  };
-
-  loadCompany = (inputValue, callback) => {
-    // clearTimeout(this.loadCompanyTimeOut);
-    // this.loadCompanyTimeOut = setTimeout(() => {
-    //   this.props.dispatch({
-    //     type: "API_COMPANY_SEARCH",
-    //     data: { company: inputValue },
-    //     callback
-    //   });
-    // }, 300);
   };
 
   onCreateCompany = value => {
@@ -55,10 +49,7 @@ class CompanyModal extends React.PureComponent {
 
   onChangeCompany = company => {
     this.formik.setFieldValue("company", company);
-  };
-
-  onBlur = v => {
-    this.formik.handleBlur(v);
+    this.props.onChangeCompany(company);
   };
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
@@ -67,12 +58,6 @@ class CompanyModal extends React.PureComponent {
       "account-settings-field--error": errors[name] && touched[name]
     };
     return cn("account-settings-field", classes, error_dict);
-  };
-
-  changeCompanyLock = e => {
-    e.preventDefault();
-    const v = this.formik.state.values.company_roles_locked;
-    this.formik.setFieldValue("company_roles_locked", !v);
   };
 
   render() {
@@ -95,7 +80,14 @@ class CompanyModal extends React.PureComponent {
             validateOnChange={true}
             onSubmit={this.props.onSave}
           >
-            {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
+            {({
+              errors,
+              touched,
+              values,
+              handleBlur,
+              setFieldTouched,
+              setFieldValue
+            }) => (
               <Form method="post" autoComplete="off">
                 <div className="form-modal__content">
                   <AccountSettingsField
@@ -109,13 +101,13 @@ class CompanyModal extends React.PureComponent {
                       placeholder=""
                       components={{ DropdownIndicator: () => null }}
                       className="account-settings-field__input"
-                      loadOptions={this.loadCompany}
+                      loadOptions={this.props.loadCompany}
                       defaultOptions={[]}
                       isCreatable={true}
                       value={values.company}
                       onCreateOption={this.onCreateCompany}
                       onChange={this.onChangeCompany}
-                      onBlur={this.onBlur}
+                      onBlur={handleBlur}
                     />
                   </AccountSettingsField>
                   <AccountSettingsField
@@ -148,21 +140,12 @@ class CompanyModal extends React.PureComponent {
                           setFieldValue("company_roles", values);
                         }}
                       />
-                      {this.props.isAccountAdmin ? (
-                        <Button
-                          className="company-modal__lock"
-                          color="secondary-gray"
-                          onClick={this.changeCompanyLock}
-                        >
-                          {values.company_roles_locked ? "Unlock" : "Lock"}
-                        </Button>
-                      ) : null}
                     </div>
                   </AccountSettingsField>
                 </div>
-                <div className="company-modal__controls">
+                <div className="settings-modal__controls">
                   <Button
-                    className="company-modal__save"
+                    className="settings-modal__save"
                     color="primary"
                     type="submit"
                   >

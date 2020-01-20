@@ -6,7 +6,7 @@ import {
   invalidPostMessage,
   streetRegex,
   invalidStreetMessage
-} from "../account_settings/validators";
+} from "../account_settings_modals/validators";
 
 export const propertySchema = Yup.object().shape({
   first_name: Yup.string()

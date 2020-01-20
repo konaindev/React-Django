@@ -131,6 +131,13 @@ export default class Profile extends React.PureComponent {
     p.office_type = this.props.office_options.filter(
       i => i.value === p.office_type
     )[0];
+    if (!p.office_country) {
+      p.office_country = {
+        label: COUNTRY_FIELDS.USA.full_name,
+        value: COUNTRY_FIELDS.USA.short_name
+      };
+    }
+
     return p;
   };
 
@@ -185,16 +192,11 @@ export default class Profile extends React.PureComponent {
     DropdownIndicator: () => null
   };
 
-  onCreateCompany = value => {
-    const option = { label: value, value };
-    this.formik.setFieldValue("company", option);
-  };
-
   loadAddress = (inputValue, callback) => {
     const data = { address: inputValue };
-    const context = this.formik?.getFormikContext();
-    const businessId = context?.values?.company?.value;
-    const businessName = context?.values?.company?.label;
+    const { profile } = this.props;
+    const businessId = profile.company?.value;
+    const businessName = profile.company?.label;
     if (businessId !== businessName) {
       data["business_id"] = businessId;
     }
@@ -208,52 +210,7 @@ export default class Profile extends React.PureComponent {
     }, 300);
   };
 
-  onChangeOfficeAddress = value => {
-    if (value.street) {
-      this.formik.setFieldValue("office_street", value.street);
-      this.formik.setFieldValue("office_city", value.city);
-      this.formik.setFieldValue("office_state", {
-        label: value.state,
-        value: value.state
-      });
-      this.formik.setFieldValue("office_zip", value.zip);
-      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
-        this.formik.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.GBR.full_name,
-          value: COUNTRY_FIELDS.GBR.short_name
-        });
-      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
-        this.formik.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.USA.full_name,
-          value: COUNTRY_FIELDS.USA.short_name
-        });
-      }
-    } else {
-      this.formik.setFieldValue("office_street", value.value);
-    }
-  };
-
-  onBlurOfficeAddress = () => {
-    this.formik.setFieldTouched("office_street");
-    const formikContext = this.formik.getFormikContext();
-    if (formikContext.values.office_street) {
-      this.formik.setFieldTouched("office_street");
-    }
-    if (formikContext.values.office_city) {
-      this.formik.setFieldTouched("office_city");
-    }
-    if (formikContext.values.office_state) {
-      this.formik.setFieldTouched("office_state");
-    }
-    if (formikContext.values.office_zip) {
-      this.formik.setFieldTouched("office_zip");
-    }
-  };
-
   onChangeCompany = company => {
-    this.formik.setFieldValue("company", company);
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
       data: { address: "", business_id: company.label }
@@ -266,6 +223,19 @@ export default class Profile extends React.PureComponent {
       company: p.company,
       company_roles: p.company_roles,
       company_roles_locked: p.company_roles_locked
+    };
+  };
+
+  getOfficeValues = () => {
+    const p = this.getProfileValues(this.props.profile);
+    return {
+      office_country: p.office_country,
+      office_street: p.office_street,
+      office_city: p.office_city,
+      office_state: p.office_state,
+      office_zip: p.office_zip,
+      office_name: p.office_name,
+      office_type: p.office_type
     };
   };
 
@@ -365,16 +335,6 @@ export default class Profile extends React.PureComponent {
   onBlur = v => {
     this.unsetMessage();
     this.formik.handleBlur(v);
-  };
-
-  onChangeCountry = value => {
-    this.selectedCountry = value.value;
-    this.formik.setFieldValue("office_country", value);
-    this.formik.setFieldValue("office_state", {
-      label: "",
-      value: ""
-    });
-    this.formik.setFieldTouched("office_state");
   };
 
   openCompanyModal = () => {
@@ -505,35 +465,6 @@ export default class Profile extends React.PureComponent {
                       </div>
                     </div>
                     <div
-                      className={this.getFieldClasses(
-                        "office_country",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        Office Country
-                      </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_country"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        value={values.office_country}
-                        options={this.props.office_countries}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_country", true);
-                        }}
-                        onChange={this.onChangeCountry}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_country" />
-                      </div>
-                    </div>
-                    <div
                       className={this.getFieldClasses("phone", errors, touched)}
                     >
                       <div className="account-settings__label">
@@ -630,6 +561,7 @@ export default class Profile extends React.PureComponent {
                   <CompanyModal
                     isOpen={this.state.isCompanyOpen}
                     data={this.getCompanyValues()}
+                    loadCompany={this.loadCompany}
                     onClose={this.closeCompanyModal}
                   />
                 </div>
@@ -662,7 +594,13 @@ export default class Profile extends React.PureComponent {
                   </Button>
                   <OfficeModal
                     isOpen={this.state.isOfficeOpen}
-                    onClose={this.closeCompanyModal}
+                    data={this.getOfficeValues()}
+                    office_options={this.props.office_options}
+                    office_countries={this.props.office_countries}
+                    us_state_list={this.props.us_state_list}
+                    gb_county_list={this.props.gb_county_list}
+                    loadAddress={this.loadAddress}
+                    onClose={this.closeOfficeModal}
                   />
                 </div>
                 <div className="account-settings__value-field">
