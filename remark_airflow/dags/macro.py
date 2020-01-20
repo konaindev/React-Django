@@ -8,11 +8,11 @@ with DjangoDAG(
     dag_id="macro", default_args=default_args, schedule_interval=None
 ) as dag:
 
-    from remark_airflow.dags.insights.impl.projects.projects import (
-        operators_generator,
+    from remark_airflow.insights.impl.projects.dag import operators_generator
+    from remark_airflow.insights.impl.projects.projects import (
         get_and_save_project_facts,
     )
-    from remark_airflow.dags.insights.impl.projects.insights import (
+    from remark_airflow.insights.impl.projects.insights import (
         lease_rate_against_target,
         change_health_status,
         usv_exe_off_track,

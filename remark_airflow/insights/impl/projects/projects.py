@@ -1,4 +1,3 @@
-from airflow.operators.python_operator import PythonOperator
 from graphkit import compose
 
 from remark_airflow.insights.impl.vars import var_project
@@ -27,21 +26,6 @@ def get_project_insights(project_facts, project_insights):
             final_insights[name] = text
 
     return final_insights
-
-
-def operators_generator(dag_name, insights_func, dag):
-    projects = Project.objects.all()
-    for p in projects:
-        public_id = p.public_id
-        task_id = f"{dag_name}_{public_id}"
-        op_kwargs = {"project_id": public_id, "task_id": task_id}
-        PythonOperator(
-            task_id=task_id,
-            provide_context=True,
-            python_callable=insights_func,
-            op_kwargs=op_kwargs,
-            dag=dag,
-        )
 
 
 def get_and_save_project_facts(
