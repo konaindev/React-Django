@@ -1,12 +1,12 @@
 import Yup from "../../yup";
 import {
-  zipRegex,
-  postRegex,
-  invalidZipMessage,
   invalidPostMessage,
+  invalidStreetMessage,
+  invalidZipMessage,
+  postRegex,
   streetRegex,
-  invalidStreetMessage
-} from "../account_settings_modals/validators";
+  zipRegex
+} from "../office_modal/validators";
 
 export const propertySchema = Yup.object().shape({
   first_name: Yup.string()

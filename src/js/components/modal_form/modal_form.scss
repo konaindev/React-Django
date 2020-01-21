@@ -5,13 +5,13 @@ $modal-spacing: 1.25rem;
 $close-size: 1.25rem;
 $button-line-height: 1.25rem;
 
-.form-modal {
+.modal-form {
     width: 560px;
     padding: 0;
     border-radius: 4px;
 }
 
-.form-modal.modal-window {
+.modal-form.modal-window {
     .modal-window__close {
         width: $close-size;
         height: $close-size;
@@ -20,7 +20,7 @@ $button-line-height: 1.25rem;
     }
 }
 
-.form-modal__title {
+.modal-form__title {
     height: auto;
     display: flex;
     align-items: center;
@@ -32,20 +32,20 @@ $button-line-height: 1.25rem;
     font-size: $text-base;
 }
 
-.form-modal__content {
+.modal-form__content {
     padding: $modal-spacing;
     padding-bottom: 0;
     border-top: $body-border;
     border-bottom: $body-border;
 }
 
-.settings-modal__controls {
+.modal-form__controls {
     display: flex;
     justify-content: flex-end;
     padding: $modal-spacing;
 }
 
-.settings-modal__save {
+.modal-form__save {
     padding: 12px 32px;
     font-size: $text-xs;
     font-weight: $weight-semibold;
@@ -54,25 +54,16 @@ $button-line-height: 1.25rem;
     line-height: $button-line-height;
 }
 
-.company-modal__company-roles {
-    display: inline-flex;
-    flex-grow: 1;
-
-    .select__control {
-        width: 100%;
-    }
-}
-
-.company-modal__lock {
-    display: inline-flex;
-    margin-left: $modal-spacing;
-    flex-grow: 0;
-}
-
-.company-modal__lock.button {
-    padding: 11px 30px;
-}
-
-.company-modal__inputs-wrap {
+.modal-form__inputs-wrap {
     display: flex;
+}
+
+.modal-form__grid {
+    display: grid;
+    grid-column-gap: $modal-spacing;
+    grid-row-gap: $modal-spacing;
+    grid-template-columns: 1fr 1fr;
+    &--col-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }

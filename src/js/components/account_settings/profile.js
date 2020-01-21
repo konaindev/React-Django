@@ -6,13 +6,14 @@ import PropTypes from "prop-types";
 import React from "react";
 import { COUNTRY_FIELDS } from "../../constants";
 
-import { CompanyModal, OfficeModal } from "../account_settings_modals";
 import { Tick, Upload } from "../../icons";
 import { accountSettings as actions } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
+import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
+import OfficeModal from "../office_modal";
 import Select from "../select";
 import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 

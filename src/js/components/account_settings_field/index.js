@@ -14,9 +14,11 @@ const AccountSettingsField = ({
   <div className={cn("account-settings-field", className)} {...props}>
     <div className="account-settings-field__label">{label}</div>
     {children}
-    <div className="account-settings-field__error">
-      <ErrorMessage name={errorKey} />
-    </div>
+    {errorKey ? (
+      <div className="account-settings-field__error">
+        <ErrorMessage name={errorKey} />
+      </div>
+    ) : null}
   </div>
 );
 AccountSettingsField.propTypes = {};

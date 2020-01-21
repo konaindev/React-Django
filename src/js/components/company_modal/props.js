@@ -1,7 +1,6 @@
 const companyData = {
   company: {},
-  company_roles: [],
-  company_roles_locked: true
+  company_roles: []
 };
 
 const companyRolesOptions = [

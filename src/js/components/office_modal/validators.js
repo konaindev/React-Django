@@ -4,21 +4,8 @@ export const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
 export const postRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
 export const invalidZipMessage = "Please enter a valid zip code";
 export const invalidPostMessage = "Please enter a valid post code";
-
 export const streetRegex = /^\s*\S+(?:\s+\S+){2}/;
 export const invalidStreetMessage = "Please enter a valid street address";
-
-export const companySchema = Yup.object().shape({
-  company: Yup.object({
-    value: Yup.string()
-      .max(255, "is too much length")
-      .required()
-      .label("Company")
-  }).label("Company"),
-  company_roles: Yup.array()
-    .required()
-    .label("Company role")
-});
 
 export const officeSchema = Yup.object().shape({
   office_street: Yup.string()
