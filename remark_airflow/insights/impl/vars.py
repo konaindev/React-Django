@@ -315,19 +315,20 @@ def var_top_usv_referral(project, start, end):
 
 
 def var_kpi_for_benchmark(computed_kpis):
-    if computed_kpis is None:
+    if not computed_kpis:
         return None
-    return {
-        "usvs": computed_kpis["usv_cost"],  # "Volume of USV"
-        "usv_inq": computed_kpis["usv_inq"],  # "USV>INQ"
-        "inqs": computed_kpis["inq_cost"],  # "INQ"
-        "inq_tou": computed_kpis["inq_tou"],  # "INQ>TOU"
-        "tous": computed_kpis["tou_cost"],  # "TOU"
-        "tou_app": computed_kpis["tou_app"],  # "TOU>APP"
-        "apps": computed_kpis["app_cost"],  # "APP"
-        "cd_rate": computed_kpis["lease_cd_rate"],  # "C&D Rate"
-        "exes": computed_kpis["exe_cost"],  # "EXE"
+    kpis = {
+        "usvs": computed_kpis.get("usv_cost"),  # "Volume of USV"
+        "usv_inq": computed_kpis.get("usv_inq"),  # "USV>INQ"
+        "inqs": computed_kpis.get("inq_cost"),  # "INQ"
+        "inq_tou": computed_kpis.get("inq_tou"),  # "INQ>TOU"
+        "tous": computed_kpis.get("tou_cost"),  # "TOU"
+        "tou_app": computed_kpis.get("tou_app"),  # "TOU>APP"
+        "apps": computed_kpis.get("app_cost"),  # "APP"
+        "cd_rate": computed_kpis.get("lease_cd_rate"),  # "C&D Rate"
+        "exes": computed_kpis.get("exe_cost"),  # "EXE"
     }
+    return {k: v for k, v in kpis.items() if v is not None}
 
 
 def var_benchmark_kpis(kpis, project, start, end):

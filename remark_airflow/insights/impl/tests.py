@@ -8,7 +8,11 @@ from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
-from remark_airflow.insights.impl.vars import var_prev_health_status, var_benchmark_kpis
+from remark_airflow.insights.impl.vars import (
+    var_prev_health_status,
+    var_benchmark_kpis,
+    var_kpi_for_benchmark,
+)
 
 
 class VarPrevHealthStatusTestCase(TestCase):
@@ -107,3 +111,67 @@ class VarBenchmarkKPIsTestCase(TestCase):
         end = datetime.date(year=2019, month=10, day=28)
         benchmark_kpis = var_benchmark_kpis(kpis, self.project, start, end)
         self.assertListEqual(benchmark_kpis, [])
+
+
+class KPIForBenchmarkTestCase(TestCase):
+    def test_normal(self):
+        expected = {
+            "usvs": 1,
+            "usv_inq": 2,
+            "inqs": 3,
+            "inq_tou": 4,
+            "tous": 5,
+            "tou_app": 6,
+            "apps": 7,
+            "cd_rate": 8,
+            "exes": 9,
+        }
+        computed_kpis = {
+            "usv_cost": 1,
+            "usv_inq": 2,
+            "inq_cost": 3,
+            "inq_tou": 4,
+            "tou_cost": 5,
+            "tou_app": 6,
+            "app_cost": 7,
+            "lease_cd_rate": 8,
+            "exe_cost": 9,
+            "usv_exe": 10,
+            "app_exe": 11,
+        }
+        result = var_kpi_for_benchmark(computed_kpis)
+        self.assertDictEqual(result, expected)
+
+    def test_kpi_not_full(self):
+        expected = {
+            "usvs": 1,
+            "usv_inq": 2,
+            "inqs": 3,
+            "inq_tou": 4,
+            "tous": 5,
+            "apps": 7,
+            "cd_rate": 8,
+            "exes": 9,
+        }
+        computed_kpis = {
+            "usv_cost": 1,
+            "usv_inq": 2,
+            "inq_cost": 3,
+            "inq_tou": 4,
+            "tou_cost": 5,
+            "app_cost": 7,
+            "lease_cd_rate": 8,
+            "exe_cost": 9,
+            "usv_exe": 10,
+            "app_exe": 11,
+        }
+        result = var_kpi_for_benchmark(computed_kpis)
+        self.assertDictEqual(result, expected)
+
+    def test_no_kpi(self):
+        result = var_kpi_for_benchmark({})
+        self.assertIsNone(result)
+
+    def test_kpi_none(self):
+        result = var_kpi_for_benchmark(None)
+        self.assertIsNone(result)
