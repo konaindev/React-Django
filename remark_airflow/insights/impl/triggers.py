@@ -36,3 +36,7 @@ def trigger_retention_rate_health(health_status):
 
 def trigger_has_data_google_analytics(usv_source):
     return usv_source is not None
+
+
+def trigger_have_benchmark_kpis(benchmark_kpis):
+    return benchmark_kpis is not None and len(benchmark_kpis) != 0

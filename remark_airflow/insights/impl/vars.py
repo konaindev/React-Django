@@ -1,8 +1,10 @@
 from datetime import timedelta
 
+from django.db.models import Q
 from graphkit import compose
 
 from remark.analytics.google_analytics import get_project_usv_sources
+from remark.geo.models import Country
 from remark.lib.stats import health_check
 from remark.lib.time_series.computed import (
     leased_rate_graph,
@@ -14,7 +16,7 @@ from remark.portfolio.api.strategy import (
     get_targets_for_project,
 )
 from remark.projects.constants import HEALTH_STATUS
-from remark.projects.models import Period, TargetPeriod, Project
+from remark.projects.models import Period, TargetPeriod, Project, CountryBenchmark
 
 from remark_airflow.insights.impl.utils import health_standard, cop
 
@@ -310,3 +312,54 @@ def var_top_usv_referral(project, start, end):
             return "Direct transitions"
         return source
     return None
+
+
+def var_kpi_for_benchmark(computed_kpis):
+    if computed_kpis is None:
+        return None
+    return {
+        "usvs": computed_kpis["usv_cost"],  # "Volume of USV"
+        "usv_inq": computed_kpis["usv_inq"],  # "USV>INQ"
+        "inqs": computed_kpis["inq_cost"],  # "INQ"
+        "inq_tou": computed_kpis["inq_tou"],  # "INQ>TOU"
+        "tous": computed_kpis["tou_cost"],  # "TOU"
+        "tou_app": computed_kpis["tou_app"],  # "TOU>APP"
+        "apps": computed_kpis["app_cost"],  # "APP"
+        "cd_rate": computed_kpis["lease_cd_rate"],  # "C&D Rate"
+        "exes": computed_kpis["exe_cost"],  # "EXE"
+    }
+
+
+def var_benchmark_kpis(kpis, project, start, end):
+    if kpis is None:
+        return []
+
+    country_code = project.property.geo_address.country
+    country = Country.objects.get(code=country_code)
+
+    benchmark_kpis = (
+        CountryBenchmark.objects.filter(
+            Q(
+                (Q(start__gte=start) & Q(start__lte=end)),
+                (Q(end__gte=start) & Q(end__lte=end)),
+            ),
+            country_id=country.id,
+            kpi__in=kpis.keys(),
+        )
+        .order_by("kpi", "-start")
+        .distinct("kpi")
+    )
+
+    if not benchmark_kpis:
+        return []
+
+    benchmark_list = []
+    for b_kpi in benchmark_kpis:
+        if kpis[b_kpi.kpi] <= b_kpi.threshold_0:
+            benchmark_list.append({"name": b_kpi.kpi, "value": b_kpi.threshold_0})
+    return benchmark_list
+
+
+def var_low_benchmark_kpi(benchmark_kpi):
+    min_kpi = min(benchmark_kpi, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]

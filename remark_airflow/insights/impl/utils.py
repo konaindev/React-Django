@@ -2,6 +2,8 @@ import functools
 
 from graphkit import operation
 
+from remark.projects.constants import BENCHMARK_KPIS
+
 
 def to_percentage(value):
     percentage = value * 100
@@ -17,6 +19,10 @@ def format_percent(value):
     if value is None:
         return "-"
     return f"{value:.0%}"
+
+
+def benchmark_kpi_humanize(kpi_key):
+    return BENCHMARK_KPIS[kpi_key]
 
 
 def hash_dict(func):
