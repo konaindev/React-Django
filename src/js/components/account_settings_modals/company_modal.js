@@ -16,27 +16,28 @@ import "./account_settings_modals.scss";
 class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
-    isAccountAdmin: PropTypes.bool,
     data: PropTypes.shape({
       company: PropTypes.string,
-      company_roles: PropTypes.string,
-      company_roles_locked: PropTypes.bool
+      company_roles: PropTypes.array
     }),
     companyRolesOptions: PropTypes.array,
     loadCompany: PropTypes.func,
     onChangeCompany: PropTypes.func,
     onSave: PropTypes.func,
-    onFinish: PropTypes.func,
-    onError: PropTypes.func,
     onClose: PropTypes.func
   };
+
   static defaultProps = {
     companyRolesOptions: [],
-    isAccountAdmin: false,
     loadCompany() {},
     onChangeCompany() {},
     onSave() {}
   };
+
+  constructor(props) {
+    super(props);
+    this.rolesLocked = !!props.data.company_roles.length;
+  }
 
   setFormik = formik => {
     this.formik = formik;
@@ -61,11 +62,10 @@ class CompanyModal extends React.PureComponent {
   };
 
   render() {
-    const { isOpen, data } = this.props;
     return (
       <ModalWindow
         className="form-modal"
-        open={isOpen}
+        open={this.props.isOpen}
         onClose={this.props.onClose}
       >
         <ModalWindow.Head className="form-modal__title">
@@ -75,7 +75,7 @@ class CompanyModal extends React.PureComponent {
           <Formik
             ref={this.setFormik}
             validationSchema={companySchema}
-            initialValues={data}
+            initialValues={this.props.data}
             validateOnBlur={true}
             validateOnChange={true}
             onSubmit={this.props.onSave}
@@ -115,7 +115,7 @@ class CompanyModal extends React.PureComponent {
                       "company_roles",
                       errors,
                       touched,
-                      values.company_roles_locked ? ["disabled"] : []
+                      this.rolesLocked ? ["disabled"] : []
                     )}
                     label="Company Role"
                     errorKey="company_roles"
@@ -127,7 +127,7 @@ class CompanyModal extends React.PureComponent {
                         theme="gray"
                         isShowControls={false}
                         isShowAllOption={false}
-                        isDisabled={values.company_roles_locked}
+                        isDisabled={this.rolesLocked}
                         options={this.props.companyRolesOptions}
                         value={values.company_roles}
                         label={values.company_roles

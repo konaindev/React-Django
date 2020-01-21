@@ -561,7 +561,9 @@ export default class Profile extends React.PureComponent {
                   <CompanyModal
                     isOpen={this.state.isCompanyOpen}
                     data={this.getCompanyValues()}
+                    companyRolesOptions={this.props.company_roles}
                     loadCompany={this.loadCompany}
+                    onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
                   />
                 </div>
