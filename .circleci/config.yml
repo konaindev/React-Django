@@ -198,7 +198,7 @@ jobs:
       - run:
           name: Delete all items in test folder
           command:  |
-            if [ "$(gsutil ls gs://'$BUCKET'/data/test)" ]; then
+            if [ "$(gsutil ls gs://$BUCKET/data/test)" ]; then
               gsutil rm gs://"$BUCKET"/data/test/**
             else
               echo "Empty test folder"
@@ -383,18 +383,18 @@ workflows:
 #              ignore:
 #                - staging
 #                - master
-      - airflow-setup:
+#      - airflow-setup:
 #          requires:
 #            - build
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
 #              only: l2-staging
       - airflow-testing:
-          requires:
-            - airflow-setup
+#          requires:
+#            - airflow-setup
           filters:
             branches:
               ignore:
