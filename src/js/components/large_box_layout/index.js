@@ -15,7 +15,8 @@ import {
   formatDate
 } from "../../utils/formatters";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
-
+import cn from "classnames";
+import PropertyStatus from "../property_status";
 import "./large_box_layout.scss";
 
 /**
@@ -35,7 +36,9 @@ export class LargeBoxLayout extends Component {
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     innerBox: PropTypes.element,
-    tooltip: PropTypes.node
+    tooltip: PropTypes.node,
+    ctaCallback: PropTypes.func,
+    ctaText: PropTypes.string
   };
 
   render() {
@@ -46,34 +49,64 @@ export class LargeBoxLayout extends Component {
       detail,
       detail2,
       tooltip,
-      infoTooltip
+      infoTooltip,
+      ctaCallback,
+      performanceRating,
+      staticData
     } = this.props;
+
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
+    const wrapperId = staticData
+      ? "large-box__wrapper-static"
+      : "large-box__wrapper";
+    const ctaId = staticData ? "large-box__cta-static" : "large-box__cta";
 
     return (
-      <Panel className="large-box">
-        {/* Container for the content itself.
+      <div id={wrapperId} onClick={x => ctaCallback(x)}>
+        <Panel className="large-box">
+          {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
-        <span className="large-box__top-line">{name}</span>
-        <div className="large-box__content">
-          {tooltip ? (
-            <Tooltip placement="top" overlay={tooltip}>
-              {contentValue}
-            </Tooltip>
-          ) : (
-            contentValue
-          )}
-          {innerBox && (
-            <div className="large-box__content-extra">{innerBox}</div>
-          )}
-        </div>
-        <p className="large-box__bottom-line">{detail}</p>
-        <p className="large-box__bottom-line">{detail2}</p>
-        <InfoTooltip transKey={infoTooltip} />
-      </Panel>
+
+          {ctaCallback && <div className={ctaId}>View Details →</div>}
+
+          <PropertyStatus
+            className="large-box__health-badge"
+            performance_rating={performanceRating}
+          />
+          <div className="large-box__content">
+            <div className="large-box__inner-container">
+              <span className="large-box__top-line">
+                <span className="test">
+                  {name}
+                  <InfoTooltip
+                    className="tooltip-wrapper"
+                    transKey={infoTooltip}
+                  />
+                </span>
+              </span>
+              {tooltip ? (
+                <Tooltip placement="top" overlay={tooltip}>
+                  {contentValue}
+                </Tooltip>
+              ) : (
+                contentValue
+              )}
+              <div className="large-box__detail-wrapper">
+                <p className="large-box__bottom-line">{detail}</p>
+                <p className="large-box__bottom-line">{detail2}</p>
+              </div>
+            </div>
+            <div className="large-box__extra-container">
+              {innerBox && (
+                <div className="large-box__content-extra">{innerBox}</div>
+              )}
+            </div>
+          </div>
+        </Panel>
+      </div>
     );
   }
 }

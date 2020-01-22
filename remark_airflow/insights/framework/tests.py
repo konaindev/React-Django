@@ -10,7 +10,6 @@ class InsightTestCase(TestCase):
             "to %(health_status)s during this period." % data
         )
 
-
     def test_insight(self):
         project_facts = {
             "health_status": "On Track",

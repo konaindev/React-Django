@@ -1,6 +1,7 @@
 @import "css/base.scss";
 
 .box-column__child-wrapper {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    display: block; // removed flex due to spacing inconsistencies with small-box 33% and 50%
 }

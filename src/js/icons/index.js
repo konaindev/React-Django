@@ -28,3 +28,4 @@ export { default as Add } from "./add";
 export { default as AddWhite } from "./add_white";
 export { default as Center } from "./center";
 export { default as Web } from "./web";
+export { default as Lightning } from "./lightning";

@@ -17,6 +17,9 @@ import django_heroku
 import sentry_sdk
 from sentry_sdk import configure_scope
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
 from dotenv import load_dotenv
 
 
@@ -40,6 +43,11 @@ DEV = "development"
 STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
+DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
+PATH_REF = "."
+if os.getenv("COMPOSER_AIRFLOW_ENV", False):
+    PATH_REF = "/home/airflow/gcs/dags"
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -212,7 +220,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Allow all host headers
 CSRF_TRUSTED_ORIGINS = ["staging.remarkably.io", "app.remarkably.io"]
+
 ALLOWED_HOSTS = ["app.remarkably.io", "staging.remarkably.io", "localhost"]
+if DOCKER_COMPOSE:
+    ALLOWED_HOSTS = ["*"]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Use our custom User class
@@ -227,8 +238,8 @@ LOGOUT_REDIRECT_URL = "/"
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = []
 
 #
 # Storages for all other files
@@ -290,7 +301,7 @@ CACHES = {
 #
 
 GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
-GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
+# GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
 
 #
 # Analytics (hey, we might want these down the road).
@@ -322,11 +333,21 @@ ssl_require = ENV == PROD
 locals()['DATABASES']['default'] = dj_database_url.config(
     conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
+if DOCKER_COMPOSE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
 # Configure Sentry -jc 11-jul-19
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN", ""),
-    integrations=[DjangoIntegration()]
+    integrations=[DjangoIntegration(), CeleryIntegration(), RedisIntegration()]
 )
 
 with configure_scope() as scope:

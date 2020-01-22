@@ -4,6 +4,8 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import Tooltip from "../../components/rmb_tooltip";
+import TooltipAnchor from "../../components/rmb_tooltip/rmb_tooltip_anchor";
 import AddTagField from "../../containers/add_tag_field";
 
 import Tag from "./tag";
@@ -91,8 +93,13 @@ export default class PropertyOverview extends React.PureComponent {
       );
     }
     return (
-      <div className="property-overview__section property-overview__section--top">
-        <div className="property-overview__section-text">{message}</div>
+      <div className="property-overview__section">
+        <div className="property-overview__section-header">
+          Property Tags
+          <Tooltip placement="top" theme="information" text={message}>
+            <TooltipAnchor className="property-overview__tooltip-anchor" />
+          </Tooltip>
+        </div>
         <div className="property-overview__tags">{tags}</div>
       </div>
     );
@@ -139,8 +146,7 @@ export default class PropertyOverview extends React.PureComponent {
     });
     return (
       <div className="property-overview">
-        {this.renderTags()}
-        <div className="property-overview__section property-overview__section--top property-overview__info">
+        <div className="property-overview__section property-overview__info">
           <Panel className="property-overview__tile property-overview__tile--info">
             <div className="property-overview__section-header">
               {project.name}
@@ -154,6 +160,7 @@ export default class PropertyOverview extends React.PureComponent {
           </Panel>
           <div className={imageClass} style={imageStyle} />
         </div>
+        {this.renderTags()}
         <div className="property-overview__section">
           <div className="property-overview__section-header">
             Characteristics

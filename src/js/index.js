@@ -104,7 +104,7 @@ const ready = cb => {
 /* Run our page. */
 ready(() => {
   Sentry.init({
-    dsn: process.env.SENTRY_URL
+    dsn: process.env.SENTRY_DSN
   });
   // detect what environment we are running in
 

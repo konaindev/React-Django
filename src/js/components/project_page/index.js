@@ -59,7 +59,11 @@ export class ProjectPage extends Component {
       </React.Fragment>
     );
   }
-
+  componentDidMount() {
+    const { name, public_id } = this.props;
+    // send a page render event to segment when this mounts
+    window.analytics.page("/project", {}, { name, public_id });
+  }
   render() {
     return (
       <PageChrome project={this.props.project} user={this.props.user}>

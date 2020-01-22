@@ -11,6 +11,10 @@ window.enable_submit_warning = function(message) {
   window._submit_warning = message;
 };
 
+window.remove_submit_warning = function() {
+  window._submit_warning = null;
+};
+
 /** Put a submit event handler on all inputs of type=submit */
 function instrumentSubmitElements() {
   /** Pop up a confirmation dialog during submit, if requested. */

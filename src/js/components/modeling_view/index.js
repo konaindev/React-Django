@@ -11,7 +11,8 @@ import "./modeling_view.scss";
 export class ModelingView extends Component {
   static propTypes = {
     property_name: PropTypes.string,
-    options: PropTypes.array
+    options: PropTypes.array,
+    reportType: PropTypes.string
   };
 
   constructor(props) {
@@ -49,7 +50,8 @@ export class ModelingView extends Component {
         value: "compare"
       }
     ];
-
+    const _activeReport = this.getActiveReport();
+    console.log("------!!!!!_____----->>>>", _activeReport);
     return (
       <div className="page modeling-view">
         <Container>

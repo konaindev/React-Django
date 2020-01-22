@@ -4,6 +4,7 @@ from django.test import TestCase
 
 from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
+
 from remark_airflow.insights.impl.vars import var_prev_health_status
 
 

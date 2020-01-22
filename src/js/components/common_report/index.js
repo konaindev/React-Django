@@ -26,13 +26,17 @@ export default class CommonReport extends Component {
   };
 
   render() {
-    const { dateSpan, report, type } = this.props;
+    const { dateSpan, report, type, reportType } = this.props;
     return (
       <Container className="common-report">
-        <LeasingPerformanceReport report={report} sectionItems={dateSpan} />
+        <LeasingPerformanceReport
+          report={report}
+          sectionItems={dateSpan}
+          type={type}
+        />
         <CampaignInvestmentReport report={report} />
         <AcquisitionFunnelReport report={report} type={type} />
-        <FunnelPerformanceAnalysis {...report} />
+        {reportType === "baseline" && <FunnelPerformanceAnalysis {...report} />}
         {type === "baseline" && !!report?.competitors?.length && (
           <BaselineComparisonMatrix report={report} />
         )}
