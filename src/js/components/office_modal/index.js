@@ -56,14 +56,6 @@ class OfficeModal extends React.PureComponent {
     this.formik = formik;
   };
 
-  getFieldClasses = (name, errors, touched, modifiers = []) => {
-    const classes = modifiers.map(m => `account-settings-field--${m}`);
-    let error_dict = {
-      "account-settings-field--error": errors[name] && touched[name]
-    };
-    return cn("account-settings-field", classes, error_dict);
-  };
-
   onChangeCountry = value => {
     this.formik.setFieldValue("office_street", "");
     this.formik.setFieldValue("office_country", value);
@@ -150,13 +142,10 @@ class OfficeModal extends React.PureComponent {
         }) => (
           <>
             <AccountSettingsField
-              className={this.getFieldClasses(
-                "office_country",
-                errors,
-                touched
-              )}
               label="Country"
+              name="office_country"
               errorKey="office_country"
+              {...{ errors, touched }}
             >
               <Select
                 className="account-settings-field__input"
@@ -173,9 +162,10 @@ class OfficeModal extends React.PureComponent {
               />
             </AccountSettingsField>
             <AccountSettingsField
-              className={this.getFieldClasses("office_street", errors, touched)}
               label="Address"
+              name="office_street"
               errorKey="office_street"
+              {...{ errors, touched }}
             >
               <GoogleAddress
                 name="office_street"
@@ -194,17 +184,14 @@ class OfficeModal extends React.PureComponent {
             </AccountSettingsField>
             <div className="modal-form__grid modal-form__grid--col-3">
               <AccountSettingsField
-                className={this.getFieldClasses(
-                  "office_city",
-                  errors,
-                  touched,
-                  ["max-width"]
-                )}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .city
                 }
+                name="office_city"
                 errorKey="office_city"
+                modifiers={["max-width"]}
+                {...{ errors, touched }}
               >
                 <Input
                   className="account-settings-field__input"
@@ -216,16 +203,13 @@ class OfficeModal extends React.PureComponent {
                 />
               </AccountSettingsField>
               <AccountSettingsField
-                className={this.getFieldClasses(
-                  "office_state",
-                  errors,
-                  touched
-                )}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .state
                 }
+                name="office_state"
                 errorKey="office_state"
+                {...{ errors, touched }}
               >
                 <Select
                   className="account-settings-field__input"
@@ -248,12 +232,13 @@ class OfficeModal extends React.PureComponent {
                 />
               </AccountSettingsField>
               <AccountSettingsField
-                className={this.getFieldClasses("office_zip", errors, touched)}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .zip
                 }
+                name="office_zip"
                 errorKey="office_zip"
+                {...{ errors, touched }}
               >
                 <Input
                   className="account-settings-field__input"
@@ -267,9 +252,10 @@ class OfficeModal extends React.PureComponent {
             </div>
             <div className="modal-form__grid">
               <AccountSettingsField
-                className={this.getFieldClasses("office_type", errors, touched)}
                 label="Type"
+                name="office_type"
                 errorKey="office_type"
+                {...{ errors, touched }}
               >
                 <Select
                   className="account-settings-field__input"
@@ -286,14 +272,11 @@ class OfficeModal extends React.PureComponent {
                 />
               </AccountSettingsField>
               <AccountSettingsField
-                className={this.getFieldClasses(
-                  "office_name",
-                  errors,
-                  touched,
-                  ["max-width"]
-                )}
                 label="Name"
+                name="office_name"
                 errorKey="office_name"
+                modifiers={["max-width"]}
+                {...{ errors, touched }}
               >
                 <Input
                   className="account-settings-field__input"

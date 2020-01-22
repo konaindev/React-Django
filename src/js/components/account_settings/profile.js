@@ -1,11 +1,12 @@
 import cn from "classnames";
-import { ErrorMessage, Formik, Form } from "formik";
+import { Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 import { COUNTRY_FIELDS } from "../../constants";
 
+import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
 import { accountSettings as actions } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
@@ -158,18 +159,6 @@ export default class Profile extends React.PureComponent {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  getFieldClasses = (name, errors, touched, modifiers = []) => {
-    const classes = modifiers.map(m => `account-settings__field--${m}`);
-    let error_dict = {
-      "account-settings__field--error": errors[name] && touched[name]
-    };
-    if (name == "phone") {
-      error_dict["account-settings__field--error-country-code"] =
-        errors["phone_country_code"] && touched["phone_country_code"];
-    }
-    return cn("account-settings__field", classes, error_dict);
   };
 
   getHelpTextClasses = (name, errors, touched) => {
@@ -407,52 +396,42 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                   <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "first_name",
-                        errors,
-                        touched
-                      )}
+                    <AccountSettingsField
+                      label="First Name"
+                      name="first_name"
+                      errorKey="first_name"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">First Name</div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="first_name"
                         theme="gray"
                         value={values.first_name}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="first_name" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "last_name",
-                        errors,
-                        touched
-                      )}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Last Name"
+                      name="last_name"
+                      errorKey="last_name"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">Last Name</div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="last_name"
                         theme="gray"
                         value={values.last_name}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="last_name" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses("title", errors, touched)}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Title (Optional)"
+                      name="title"
+                      errorKey="title"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Title (Optional)
-                      </div>
                       <Input
                         className="account-settings__input"
                         name="title"
@@ -461,68 +440,55 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="title" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses("phone", errors, touched)}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Phone Number (Optional)"
+                      name="phone"
+                      errorKey="phone"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Phone Number (Optional)
-                      </div>
-                      <div className="account-settings__plus-tag">+</div>
-                      <div className="account-settings__phone-input">
-                        <Input
-                          className="account-settings__country-code"
-                          name="phone_country_code"
-                          theme="gray"
-                          type="tel"
-                          placeholder={
-                            COUNTRY_FIELDS[this.selectedCountry].phone_code
-                          }
-                          value={values.phone_country_code}
-                          onBlur={this.onBlur}
-                          onChange={this.onChange}
-                        />
-                        <Input
-                          className="account-settings__input"
-                          name="phone"
-                          theme="gray"
-                          type="tel"
-                          value={values.phone}
-                          onBlur={this.onBlur}
-                          onChange={this.onChange}
-                          valueFormatter={
-                            values.phone_country_code == "1" ||
-                            (this.selectedCountry == "USA" &&
-                              !values.phone_country_code)
-                              ? formatPhone
-                              : undefined
-                          }
-                        />
-                      </div>
-                      {errors["phone_country_code"] && (
-                        <div className="account-settings__error">
-                          <ErrorMessage name="phone_country_code" />
+                      <>
+                        <div className="account-settings__plus-tag">+</div>
+                        <div className="account-settings__phone-input">
+                          <Input
+                            className="account-settings-field__country-code"
+                            name="phone_country_code"
+                            theme="gray"
+                            type="tel"
+                            placeholder={
+                              COUNTRY_FIELDS[this.selectedCountry].phone_code
+                            }
+                            value={values.phone_country_code}
+                            onBlur={this.onBlur}
+                            onChange={this.onChange}
+                          />
+                          <Input
+                            className="account-settings-field__input"
+                            name="phone"
+                            theme="gray"
+                            type="tel"
+                            value={values.phone}
+                            onBlur={this.onBlur}
+                            onChange={this.onChange}
+                            valueFormatter={
+                              values.phone_country_code == "1" ||
+                              (this.selectedCountry == "USA" &&
+                                !values.phone_country_code)
+                                ? formatPhone
+                                : undefined
+                            }
+                          />
                         </div>
-                      )}
-                      <div className="account-settings__error">
-                        <ErrorMessage name="phone" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "phone_ext",
-                        errors,
-                        touched
-                      )}
+                      </>
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Phone Extension (Optional)"
+                      name="phone_ext"
+                      errorKey="phone_ext"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Phone Extension (Optional)
-                      </div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="phone_ext"
                         theme="gray"
                         type="tel"
@@ -530,10 +496,7 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="phone_ext" />
-                      </div>
-                    </div>
+                    </AccountSettingsField>
                   </div>
                 </div>
                 <div className="account-settings__controls account-settings__controls--noborder">

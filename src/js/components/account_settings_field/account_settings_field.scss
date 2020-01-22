@@ -74,3 +74,8 @@ $input-label-line-height: 1.25rem;
     color: $error-color;
     font-size: $text-xs;
 }
+
+.account-settings-field__country-code {
+    width: 25% !important;
+    text-align: right;
+}

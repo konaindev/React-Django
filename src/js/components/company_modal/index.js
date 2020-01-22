@@ -1,4 +1,3 @@
-import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -34,7 +33,7 @@ class CompanyModal extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.rolesLocked = !!props.data.company_roles.length;
+    this.rolesLocked = !!props.data.company_roles?.length;
   }
 
   setFormik = formik => {
@@ -49,14 +48,6 @@ class CompanyModal extends React.PureComponent {
   onChangeCompany = company => {
     this.formik.setFieldValue("company", company);
     this.props.onChangeCompany(company);
-  };
-
-  getFieldClasses = (name, errors, touched, modifiers = []) => {
-    const classes = modifiers.map(m => `account-settings-field--${m}`);
-    let error_dict = {
-      "account-settings-field--error": errors[name] && touched[name]
-    };
-    return cn("account-settings-field", classes, error_dict);
   };
 
   render() {
@@ -78,9 +69,11 @@ class CompanyModal extends React.PureComponent {
         }) => (
           <>
             <AccountSettingsField
-              className={this.getFieldClasses("company", errors, touched)}
+              name="company"
               label="Company"
               errorKey="company.value"
+              errors={errors}
+              touched={touched}
             >
               <SelectSearch
                 name="company"
@@ -94,18 +87,16 @@ class CompanyModal extends React.PureComponent {
                 value={values.company}
                 onCreateOption={this.onCreateCompany}
                 onChange={this.onChangeCompany}
-                onBlur={handleBlur}
+                onBlur={() => setFieldTouched("company", true)}
               />
             </AccountSettingsField>
             <AccountSettingsField
-              className={this.getFieldClasses(
-                "company_roles",
-                errors,
-                touched,
-                this.rolesLocked ? ["disabled"] : []
-              )}
+              name="company_roles"
               label="Company Role"
               errorKey="company_roles"
+              errors={errors}
+              touched={touched}
+              modifiers={this.rolesLocked ? ["disabled"] : []}
             >
               <div className="modal-form__inputs-wrap">
                 <MultiSelect

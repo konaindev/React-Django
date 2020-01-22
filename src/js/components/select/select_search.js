@@ -14,7 +14,7 @@ export class SelectSearch extends React.PureComponent {
     loadOptions: PropTypes.func.isRequired,
     className: PropTypes.string,
     name: PropTypes.string,
-    theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
+    theme: PropTypes.oneOf(["", "default", "highlight", "transparent", "gray"]),
     isMulti: PropTypes.bool,
     components: PropTypes.object,
     styles: PropTypes.object,
