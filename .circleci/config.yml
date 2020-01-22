@@ -384,8 +384,8 @@ workflows:
 #                - staging
 #                - master
       - airflow-setup:
-          requires:
-            - build
+#          requires:
+#            - build
           filters:
             branches:
               ignore:
