@@ -38,5 +38,5 @@ def trigger_has_data_google_analytics(usv_source):
     return usv_source is not None
 
 
-def trigger_have_benchmark_kpis(benchmark_kpis):
-    return benchmark_kpis is not None and len(benchmark_kpis) != 0
+def trigger_have_benchmark_kpis(low_kpi):
+    return bool(low_kpi)

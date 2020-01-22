@@ -203,6 +203,6 @@ low_performing = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_low_benchmark_kpi, var_benchmark_kpis),
-        cop(trigger_have_benchmark_kpis, var_benchmark_kpis),
+        cop(trigger_have_benchmark_kpis, var_low_benchmark_kpi),
     ],
 )
