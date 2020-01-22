@@ -13,7 +13,7 @@ const data = {
 };
 
 storiesOf("ModalForm", module).add("default", () => (
-  <ModalForm isOpen={true} title="Test Modal" data={data}>
+  <ModalForm isOpen={true} title="Test Modal" initialData={data}>
     {() => [
       <>
         <AccountSettingsField label="First Input" errorKey="first">

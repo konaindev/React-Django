@@ -8,6 +8,9 @@ export const updateSecurityData = data =>
 export const updateUserProfileData = data =>
   axiosPost(`${API_URL_PREFIX}/account-user`, data);
 
+export const updateCompanyData = data =>
+  axiosPost(`${API_URL_PREFIX}/account-company`, data);
+
 export const updateReportsSettingsData = data =>
   axiosPost(`${API_URL_PREFIX}/account-reports`, data);
 

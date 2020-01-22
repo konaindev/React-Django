@@ -115,9 +115,11 @@ export default class Profile extends React.PureComponent {
   }
 
   unsetMessage() {
-    if (this.state.message) {
-      this.setState({ message: null });
-    }
+    this.setState({
+      userMessage: null,
+      companyMessage: null,
+      officeMessage: null
+    });
   }
 
   getProfileValues = profile => {
@@ -263,10 +265,27 @@ export default class Profile extends React.PureComponent {
     }
   };
 
-  setSuccessMessage = () => {
+  setUserDataSuccess = () => {
     this.formik.setSubmitting(false);
-    const message = "General info has been saved.";
-    this.setState({ message });
+    this.setState({ userMessage: "General info has been saved." });
+    this.props.dispatch(actions.requestSettings());
+  };
+
+  setCompanySuccess = () => {
+    this.formik.setSubmitting(false);
+    this.setState({
+      companyMessage: "Company info has been saved.",
+      isCompanyOpen: false
+    });
+    this.props.dispatch(actions.requestSettings());
+  };
+
+  setOfficeSuccess = () => {
+    this.formik.setSubmitting(false);
+    this.setState({
+      officeMessage: "Office info has been saved.",
+      isOfficeOpen: false
+    });
     this.props.dispatch(actions.requestSettings());
   };
 
@@ -287,34 +306,6 @@ export default class Profile extends React.PureComponent {
       formikErrors[k] = errors[k][0].message;
     }
     this.formik.setErrors(formikErrors);
-  };
-
-  onSubmit = values => {
-    this.unsetMessage();
-    const dataValues = { ...values };
-    const data = new FormData();
-    for (const k of Object.keys(dataValues)) {
-      if (Profile.fieldsSubmit.includes(k)) {
-        if (
-          k === "phone_country_code" &&
-          dataValues["phone"] &&
-          !dataValues["phone_country_code"]
-        ) {
-          data.append(
-            "phone_country_code",
-            COUNTRY_FIELDS[this.selectedCountry].phone_code
-          );
-        } else {
-          data.append(k, dataValues[k]);
-        }
-      }
-    }
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE_USER",
-      callback: this.setSuccessMessage,
-      onError: this.setErrorMessages,
-      data
-    });
   };
 
   onChange = v => {
@@ -343,6 +334,50 @@ export default class Profile extends React.PureComponent {
     this.setState({ isOfficeOpen: false });
   };
 
+  onSaveUser = values => {
+    this.unsetMessage();
+    const dataValues = { ...values };
+    const data = new FormData();
+    for (const k of Object.keys(dataValues)) {
+      if (Profile.fieldsSubmit.includes(k)) {
+        if (
+          k === "phone_country_code" &&
+          dataValues["phone"] &&
+          !dataValues["phone_country_code"]
+        ) {
+          data.append(
+            "phone_country_code",
+            COUNTRY_FIELDS[this.selectedCountry].phone_code
+          );
+        } else {
+          data.append(k, dataValues[k]);
+        }
+      }
+    }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE_USER",
+      callback: this.setUserDataSuccess,
+      onError: this.setErrorMessages,
+      data
+    });
+  };
+
+  onSaveCompany = (onSuccess, onError) => values => {
+    this.unsetMessage();
+    const dataValues = { ...values };
+    const data = new FormData();
+    data.append("company", dataValues.company.label);
+    for (const i of dataValues.company_roles) {
+      data.append("company_roles[]", i.value);
+    }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE_COMPANY",
+      callback: onSuccess,
+      onError: onError,
+      data
+    });
+  };
+
   render() {
     const { profile } = this.props;
     return (
@@ -353,9 +388,9 @@ export default class Profile extends React.PureComponent {
           validationSchema={userSchema}
           validateOnBlur={true}
           validateOnChange={true}
-          onSubmit={this.onSubmit}
+          onSubmit={this.onSaveUser}
         >
-          {({ errors, touched, values, setFieldTouched }) => (
+          {({ errors, touched, values }) => (
             <div className="account-settings__tab-content">
               <Form method="post" autoComplete="off">
                 <div className="account-settings__tab-section">
@@ -529,6 +564,8 @@ export default class Profile extends React.PureComponent {
                     loadCompany={this.loadCompany}
                     onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
+                    onSuccess={this.setCompanySuccess}
+                    onSave={this.onSaveCompany}
                   />
                 </div>
                 <div className="account-settings__field-grid  account-settings__field-grid--col-3">

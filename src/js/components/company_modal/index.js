@@ -20,8 +20,10 @@ class CompanyModal extends React.PureComponent {
     companyRolesOptions: PropTypes.array,
     loadCompany: PropTypes.func,
     onChangeCompany: PropTypes.func,
-    onSave: PropTypes.func,
-    onClose: PropTypes.func
+    onClose: PropTypes.func,
+    onSuccess: PropTypes.func,
+    onError: PropTypes.func,
+    onSave: PropTypes.func
   };
 
   static defaultProps = {
@@ -54,10 +56,14 @@ class CompanyModal extends React.PureComponent {
     return (
       <ModalForm
         title="Company Info"
+        initialData={this.props.data}
         validationSchema={companySchema}
         setFormik={this.setFormik}
         isOpen={this.props.isOpen}
         onClose={this.props.onClose}
+        onSuccess={this.props.onSuccess}
+        onError={this.props.onError}
+        onSave={this.props.onSave}
       >
         {({
           errors,

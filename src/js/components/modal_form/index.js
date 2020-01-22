@@ -11,17 +11,19 @@ class ModalForm extends React.PureComponent {
   static propTypes = {
     children: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    data: PropTypes.object,
+    initialData: PropTypes.object,
     validationSchema: PropTypes.object,
     isOpen: PropTypes.bool,
     setFormik: PropTypes.func,
     onClose: PropTypes.func,
+    onSuccess: PropTypes.func,
+    onError: PropTypes.func,
     onSave: PropTypes.func
   };
 
   static defaultProps = {
     isOpen: false,
-    data: {},
+    initialData: {},
     setFormik() {},
     onClose() {},
     onSave() {}
@@ -30,6 +32,21 @@ class ModalForm extends React.PureComponent {
   setFormik = formik => {
     this.formik = formik;
     this.props.setFormik(formik);
+  };
+
+  onError = errors => {
+    this.formik.setSubmitting(false);
+    const formikErrors = {};
+    for (let k of Object.keys(errors)) {
+      formikErrors[k] = errors[k][0].message;
+    }
+    this.formik.setErrors(formikErrors);
+  };
+
+  onSave = values => {
+    const onSuccess = this.props.onSuccess;
+    const onError = this.props.onError || this.onError;
+    this.props.onSave(onSuccess, onError)(values);
   };
 
   render() {
@@ -46,10 +63,10 @@ class ModalForm extends React.PureComponent {
           <Formik
             ref={this.setFormik}
             validationSchema={this.props.validationSchema}
-            initialValues={this.props.data}
+            initialValues={this.props.initialData}
             validateOnBlur={true}
             validateOnChange={true}
-            onSubmit={this.props.onSave}
+            onSubmit={this.onSave}
           >
             {({
               errors,

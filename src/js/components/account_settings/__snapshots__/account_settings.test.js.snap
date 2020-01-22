@@ -73,7 +73,7 @@ exports[`AccountSettings account security tab 1`] = `
             autoComplete="off"
             method="post"
             onReset={[Function]}
-            onSubmit={[Function]}
+            onSaveUser={[Function]}
           >
             <div
               className="account-settings__tab-content"

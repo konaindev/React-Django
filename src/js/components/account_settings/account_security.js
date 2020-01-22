@@ -132,7 +132,7 @@ export default class AccountSecurity extends React.PureComponent {
     });
   };
 
-  onSubmit = data => {
+  onSaveUser = data => {
     this.unsetMessage();
     this.props.dispatch({
       type: "API_SECURITY_ACCOUNT",

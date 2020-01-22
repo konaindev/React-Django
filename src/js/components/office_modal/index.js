@@ -125,7 +125,7 @@ class OfficeModal extends React.PureComponent {
       <ModalForm
         title="Office Info"
         isOpen={isOpen}
-        data={data}
+        initialData={data}
         validationSchema={officeSchema}
         onSave={onSave}
         onClose={onClose}
