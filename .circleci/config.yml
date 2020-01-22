@@ -377,24 +377,30 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
       - airflow-setup:
           requires:
             - build
           filters:
             branches:
-              only: l2-staging
+              ignore:
+                - staging
+                - master
+#              only: l2-staging
       - airflow-testing:
           requires:
             - airflow-setup
           filters:
             branches:
-              only: l2-staging
+              ignore:
+                - staging
+                - master
+#              only: l2-staging
       - airflow-deploy:
           requires:
             - airflow-testing
