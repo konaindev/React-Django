@@ -12,6 +12,7 @@ from remark_airflow.insights.impl.vars import (
     var_prev_health_status,
     var_benchmark_kpis,
     var_kpi_for_benchmark,
+    var_low_benchmark_kpi,
 )
 
 
@@ -175,3 +176,22 @@ class KPIForBenchmarkTestCase(TestCase):
     def test_kpi_none(self):
         result = var_kpi_for_benchmark(None)
         self.assertIsNone(result)
+
+
+class LowBenchmarkKPITestCase(TestCase):
+    def test_have_kpi(self):
+        kpi = [
+            {"name": "usvs", "value": 1},
+            {"name": "usv_inq", "value": 2},
+            {"name": "inqs", "value": 3},
+        ]
+        result = var_low_benchmark_kpi(kpi)
+        self.assertEqual(result, "usvs")
+
+    def test_no_kpi(self):
+        result = var_low_benchmark_kpi([])
+        self.assertEqual(result, None)
+
+    def test_is_none(self):
+        result = var_low_benchmark_kpi(None)
+        self.assertEqual(result, None)

@@ -362,5 +362,7 @@ def var_benchmark_kpis(kpis, project, start, end):
 
 
 def var_low_benchmark_kpi(benchmark_kpi):
+    if not benchmark_kpi:
+        return None
     min_kpi = min(benchmark_kpi, key=lambda kpi: kpi["value"])
     return min_kpi["name"]
