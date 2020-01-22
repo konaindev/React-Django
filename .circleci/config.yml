@@ -185,7 +185,7 @@ jobs:
           name: Check DAG validity
           command:  |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
-      # TODO: Under review for alternative. How is context being passed?
+      # TODO: Under review for alternative. Steps for how context being passed in cicd_airflow_task_testing branch
 #      - run:
 #          name: Check for task errors only if not master branch
 #          command:  |
@@ -198,8 +198,8 @@ jobs:
       - run:
           name: Delete all items in test folder
           command:  |
-            if [ "$(gsutil ls gs://'$BUCKET'/data/test)" ]; then
-              gsutil rm gs://"$BUCKET"/data/test/**
+            if [ "$(gsutil ls gs://$BUCKET/data/test)" ]; then
+              gsutil -m rm gs://"$BUCKET"/data/test/**
             else
               echo "Empty test folder"
             fi
