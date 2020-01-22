@@ -185,7 +185,7 @@ jobs:
           name: Check DAG validity
           command:  |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
-      # TODO: Under review for alternative. How is context being passed?
+      # TODO: Under review for alternative. Steps for how context being passed in cicd_airflow_task_testing branch
 #      - run:
 #          name: Check for task errors only if not master branch
 #          command:  |
@@ -457,15 +457,21 @@ workflows:
           type: approval
           requires:
             - build
-      - airflow-setup:
+      - deploy-production:
           context: deploy-production
           requires:
             - hold
           filters:
             branches:
               only: master
-      - deploy-production:
+      - airflow-setup:
           context: deploy-production
+          requires:
+            - deploy-production
+          filters:
+            branches:
+              only: master
+      - airflow-deploy:
           requires:
             - airflow-setup
           filters:
