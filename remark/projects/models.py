@@ -24,6 +24,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
+from remark.lib.geo import load_country_choices_from_json
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
@@ -33,9 +34,13 @@ from remark.projects.constants import (
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
+    BENCHMARK_CATEGORIES,
+    BENCHMARK_KPIS,
     SIZE_PROPERTY_HOME,
     SIZE_DASHBOARD,
-    PROPERTY_STYLE_AUTO)
+    PROPERTY_STYLE_AUTO
+)
+
 from remark.users.constants import PROJECT_ROLES
 
 
@@ -67,6 +72,9 @@ def building_public_id():
 
 def public_property_id():
     return public_id("property")
+
+def benchmark_public_id():
+    return public_id("benchmark")
 
 
 def building_logo_media_path(property, filename):
@@ -152,6 +160,10 @@ class Project(models.Model):
     def customer_name(self):
         return self.account.company_name
 
+    @property
+    def is_subscription_changed(self):
+        return self._email_distribution_list != self.email_distribution_list
+
     property = models.OneToOneField("projects.Property", on_delete=models.CASCADE, blank=False)
 
     account = models.ForeignKey(
@@ -202,7 +214,7 @@ class Project(models.Model):
         verbose_name="Include in aggregate averages?", default=True
     )
 
-    custom_tags = models.ManyToManyField(Tag, blank=True)
+    custom_tags = models.ManyToManyField(Tag, blank=True, related_name="projects")
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
@@ -296,6 +308,7 @@ class Project(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._cache_subscription_fields()
 
     def _target_periods(self, qs, start, end):
         """
@@ -558,6 +571,19 @@ class Project(models.Model):
         return (self.admin_group is not None) and user.groups.filter(
             pk=self.admin_group.pk
         ).exists()
+
+    def get_subscribed_emails(self):
+        emails_str = self.email_distribution_list
+        distribution_list = [email.strip() for email in emails_str.split(",") if email]
+        members = self.view_group.user_set.all() if self.view_group else []
+        members_emails = [user.email for user in members if user.is_active]
+        admins = self.admin_group.user_set.all() if self.admin_group else []
+        admins_emails = [user.email for user in admins if user.is_active]
+        unsubscribed_emails = [u.email for u in self.unsubscribed_users.all()]
+        return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
+
+    def _cache_subscription_fields(self):
+        self._email_distribution_list = self.email_distribution_list
 
     def __assign_blank_groups(self):
         """
@@ -1462,3 +1488,60 @@ class Building(models.Model):
     )
 
     objects = BuildingManager()
+
+
+class CountryBenchmarkManager(models.Manager):
+    pass
+
+
+class CountryBenchmark(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=benchmark_public_id,
+        help_text="National Benchmark ID",
+        max_length=50,
+        editable=False,
+    )
+
+    start = models.DateField(help_text="Start Date")
+    end = models.DateField(help_text="End Date")
+
+    country_id = models.IntegerField(choices=load_country_choices_from_json(), default=233)
+    category = models.IntegerField(choices=BENCHMARK_CATEGORIES)
+    kpi = models.CharField(choices=BENCHMARK_KPIS, max_length=50)
+
+    threshold_0 = models.FloatField(
+        help_text="Threshold between Low Performing and Below Average"
+    )
+    threshold_1 = models.FloatField(
+        help_text="Threshold between Below Average and Average"
+    )
+    threshold_2 = models.FloatField(
+        help_text="Threshold between Average and Above Average"
+    )
+    threshold_3 = models.FloatField(
+        help_text="Threshold between Above Average and High Performing"
+    )
+
+    property_count_0 = models.IntegerField(
+        help_text="Property Count for Low Performing"
+    )
+    property_count_1 = models.IntegerField(
+        help_text="Property Count for Below Average Performing"
+    )
+    property_count_2 = models.IntegerField(
+        help_text="Property Count for Average Performing"
+    )
+    property_count_3 = models.IntegerField(
+        help_text="Property Count for Above Average Performing"
+    )
+    property_count_4 = models.IntegerField(
+        help_text="Property Count for High Performing"
+    )
+    total_property_count = models.IntegerField(
+        help_text="All the properties in this category"
+    )
+
+    last_updated = models.DateTimeField(auto_now=True)
+
+    objects = CountryBenchmarkManager()

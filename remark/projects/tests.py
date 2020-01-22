@@ -21,7 +21,7 @@ from remark.email_app.invites.added_to_property import (
     get_template_vars,
 )
 
-from .models import Building, Fund, LeaseStage, Period, Project, Property, TargetPeriod
+from .models import Building, Fund, LeaseStage, Period, Project, Property, Tag, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
@@ -56,6 +56,7 @@ def create_project(project_name="project 1"):
         geo_address=address,
     )
     group = Group.objects.create(name=f"{project_name} view group")
+    admin_group = Group.objects.create(name=f"{project_name} admin group")
     project = Project.objects.create(
         name=project_name,
         baseline_start=datetime.date(year=2018, month=11, day=19),
@@ -67,6 +68,7 @@ def create_project(project_name="project 1"):
         fund=fund,
         property=property,
         view_group=group,
+        admin_group=admin_group
     )
     return project, group
 
@@ -74,6 +76,7 @@ def create_project(project_name="project 1"):
 def add_user_to_group(group, email="test@remarkably.io"):
     user, _ = User.objects.get_or_create(email=email)
     group.user_set.add(user)
+    return user
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -1462,3 +1465,155 @@ class PropertyStyleTestCase(TestCase):
         build_2.save()
 
         self.assertEqual("Garden", self.property.calculated_property_style)
+
+
+class BaseTagsTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="admin@remarkably.io", password="password")
+        tags = [
+            Tag.objects.create(word="Tag 1"),
+            Tag.objects.create(word="Tag 2"),
+            Tag.objects.create(word="Tag 3"),
+        ]
+        project, _ = create_project()
+        project.custom_tags.set(tags)
+        admin_group = project.admin_group
+        admin_group.user_set.add(user)
+        project.save()
+        token_url = reverse("token_obtain_pair")
+        data = {
+            "email": "admin@remarkably.io",
+            "password": "password",
+        }
+        token = self.client.post(token_url, json.dumps(data), "application/json").json()
+        self.auth = f"Bearer {token['access']}"
+        self.project = project
+        self.user = user
+
+
+class CreateTagTestCase(BaseTagsTestCase):
+    def setUp(self):
+        super(CreateTagTestCase, self).setUp()
+        self.url = reverse(
+            "v1_projects:project_create_tag",
+            kwargs={"public_id": self.project.public_id})
+
+    def test_add_tag(self):
+        data = {"word": "Test Tag"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_result = ["Tag 1", "Tag 2", "Tag 3", "Test Tag"]
+        self.assertEqual(tags_result, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        expect = [str(t) for t in Tag.objects.all()]
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(expect, result)
+
+    def test_add_existing_tag(self):
+        data = {"word": "Tag 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_expect = ["Tag 1", "Tag 2", "Tag 3"]
+        self.assertEqual(tags_expect, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        expect = [str(t) for t in Tag.objects.all()]
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(expect, result)
+
+
+class RemoveTagTestCase(BaseTagsTestCase):
+    def setUp(self):
+        super(RemoveTagTestCase, self).setUp()
+        self.url = reverse(
+            "v1_projects:project_remove_tag",
+            kwargs={"public_id": self.project.public_id})
+
+    def test_remove_tag(self):
+        data = {"word": "Tag 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 200)
+        data = resp.json()
+        tags_expect = ["Tag 2", "Tag 3"]
+        self.assertEqual(tags_expect, data["custom_tags"])
+        project = Project.objects.get(public_id=self.project.public_id)
+        result = [str(t) for t in project.custom_tags.all()]
+        self.assertEqual(tags_expect, result)
+        # Check that all tags are saved
+        tags = [str(t) for t in Tag.objects.all()]
+        self.assertEqual(["Tag 1", "Tag 2", "Tag 3"], tags)
+
+    def test_remove_not_existing_tag(self):
+        data = {"word": "Test 1"}
+        resp = self.client.post(
+            self.url,
+            json.dumps(data),
+            "application/json",
+            HTTP_AUTHORIZATION=self.auth,
+        )
+        self.assertEqual(resp.status_code, 500)
+
+
+class SubscribedEmailsTestCase(TestCase):
+    def setUp(self):
+        self.project, _ = create_project()
+
+    def test_empty_list(self):
+        self.assertEqual(set(), self.project.get_subscribed_emails())
+
+    def test_from_email_distribution_list(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        self.assertEqual({"test1@example.com", "test2@example.com"}, project.get_subscribed_emails())
+
+    def test_from_members_and_admins(self):
+        project = self.project
+        view_group = project.view_group
+        add_user_to_group(view_group, "view1@test.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        self.assertEqual(
+            {"view1@test.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())
+
+    def test_distribution_and_members(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        view_group = project.view_group
+        add_user_to_group(view_group, "view1@test.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        self.assertEqual(
+            {"test1@example.com", "test2@example.com", "view1@test.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())
+
+    def test_with_unsubscribed_users(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        view_group = project.view_group
+        test_user = add_user_to_group(view_group, "test1@example.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        test_user.unsubscribed_projects.add(project)
+        self.assertEqual(
+            {"test2@example.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())

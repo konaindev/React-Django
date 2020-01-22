@@ -17,6 +17,9 @@ import django_heroku
 import sentry_sdk
 from sentry_sdk import configure_scope
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
 from dotenv import load_dotenv
 
 
@@ -108,6 +111,7 @@ INSTALLED_APPS = [
     "remark",
     "django_extensions",
     "corsheaders",
+    "remark.insights",
 ]
 
 THUMBNAIL_PROCESSORS = (
@@ -226,8 +230,8 @@ LOGOUT_REDIRECT_URL = "/"
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = []
 
 #
 # Storages for all other files
@@ -289,7 +293,7 @@ CACHES = {
 #
 
 GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
-GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
+GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
 
 #
 # Analytics (hey, we might want these down the road).
@@ -325,7 +329,7 @@ locals()['DATABASES']['default'] = dj_database_url.config(
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN", ""),
-    integrations=[DjangoIntegration()]
+    integrations=[DjangoIntegration(), CeleryIntegration(), RedisIntegration()]
 )
 
 with configure_scope() as scope:

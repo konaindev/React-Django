@@ -68,6 +68,8 @@ class ProjectReportsContainer extends PureComponent {
         reportSpan={reportSpan}
         fetchingReports={fetchingReports}
         historyPush={this.props.history.push}
+        isAddTagInput={this.props.isAddTagInput}
+        suggestedTags={this.props.suggestedTags}
         dispatch={this.props.dispatch}
       />
     );
@@ -78,7 +80,9 @@ const mapState = state => ({
   project: state.projectReports.project,
   report: state.projectReports.reports,
   // fetchingProject: state.projectReports.fetchingProject,
-  fetchingReports: state.projectReports.fetchingReports
+  fetchingReports: state.projectReports.fetchingReports,
+  isAddTagInput: state.projectReports.isAddTagInput,
+  suggestedTags: state.projectReports.suggestedTags
 });
 
 export default withRouter(connect(mapState)(ProjectReportsContainer));

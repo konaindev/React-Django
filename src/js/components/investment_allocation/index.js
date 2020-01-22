@@ -14,6 +14,18 @@ import {
 } from "../../utils/formatters";
 import scssVars from "./investment_allocation.scss";
 
+const MAGIC = 0.449;
+
+const labelFunc = numberOfValues => x => {
+  let labelRadius = 40;
+  if (numberOfValues === 1) {
+    labelRadius = -5;
+  } else if (x.endAngle - x.startAngle < MAGIC) {
+    labelRadius = 70;
+  }
+  return labelRadius;
+};
+
 export const InvestmentAllocationChart = ({ name, expenses, total }) => {
   const ExpenseRow = ({ title, value, infoTooltip }) => (
     <div className={cx("expense-row", { "expense-row--empty": !value })}>
@@ -24,7 +36,7 @@ export const InvestmentAllocationChart = ({ name, expenses, total }) => {
   );
 
   const getPieSliceLabel = d => {
-    if (d.y === 0 || d.total === 0) {
+    if (d.y === 0 || d.total === 0 || d.y / d.total < 0.05) {
       return "";
     }
     return formatPercent(d.y / d.total);
@@ -54,10 +66,7 @@ export const InvestmentAllocationChart = ({ name, expenses, total }) => {
     marketIntelligence
   ].filter(x => x).length;
 
-  let labelRadius = 40;
-  if (numberOfValues === 1) {
-    labelRadius = -5;
-  }
+  let labelRadius = labelFunc(numberOfValues);
 
   if (numberOfValues === 0) {
     pieStyle.parent = {

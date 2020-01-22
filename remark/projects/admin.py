@@ -28,6 +28,7 @@ from .models import (
     TAMExportLog,
     Tag,
     LeaseStage,
+    CountryBenchmark,
 )
 from .export import export_periods_to_csv, export_periods_to_excel
 from .views import TAMExportView
@@ -472,7 +473,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         super().save_formset(request, form, formset, change=change)
 
     class Media:
-        js = ("js/project_admin.js",)
+        js = ("js/project_admin.js", "js/change_email_distribution_list.js")
 
 
 @admin.register(Tag, site=admin_site)
@@ -507,3 +508,26 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
+
+
+@admin.register(CountryBenchmark, site=admin_site)
+class CountryBenchmarkAdmin(admin.ModelAdmin):
+    list_display = [
+        "public_id",
+        "start",
+        "end",
+        "country_id",
+        "category",
+        "kpi",
+        "threshold_0",
+        "threshold_1",
+        "threshold_2",
+        "threshold_3",
+        "property_count_0",
+        "property_count_1",
+        "property_count_2",
+        "property_count_3",
+        "property_count_4",
+        "total_property_count",
+        "last_updated",
+    ]

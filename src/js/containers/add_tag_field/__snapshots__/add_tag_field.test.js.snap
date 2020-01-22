@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTagField renders button 1`] = `
+<div
+  className="property-overview__add-tag"
+  onClick={[Function]}
+>
+  <svg
+    aria-hidden="true"
+    color="inherit"
+    fill="none"
+    focusable="false"
+    height="1em"
+    role="presentation"
+    viewBox="0 0 16 16"
+    width="1em"
+  >
+    <circle
+      cx="8"
+      cy="7.99927"
+      fill="#F5FAF7"
+      r="8"
+    />
+    <path
+      d="M10.7217 8.34004H8.34077V10.721C8.34077 10.9843 8.12744 11.1972 7.86458 11.1972C7.60173 11.1972 7.38839 10.9843 7.38839 10.721V8.34004H5.00744C4.74458 8.34004 4.53125 8.12718 4.53125 7.86385C4.53125 7.60052 4.74458 7.38766 5.00744 7.38766H7.38839V5.00671C7.38839 4.74337 7.60173 4.53052 7.86458 4.53052C8.12744 4.53052 8.34077 4.74337 8.34077 5.00671V7.38766H10.7217C10.9846 7.38766 11.1979 7.60052 11.1979 7.86385C11.1979 8.12718 10.9846 8.34004 10.7217 8.34004Z"
+      fill="#20272E"
+    />
+  </svg>
+  <div
+    className="property-overview__add-tag-text"
+  >
+    Add Tag
+  </div>
+</div>
+`;
+
+exports[`AddTagField renders input field 1`] = `
+<div
+  className="add-tag-field"
+>
+  <input
+    className="input add-tag-field__input input--simple"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    placeholder="e.g. Southwestern, 2020 Fund"
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`AddTagField renders input with suggestions 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Connect(AddTagField)>
+    <AddTagField
+      dispatch={[Function]}
+      isAddTagInput={true}
+      project={
+        Object {
+          "building_image": Array [
+            "https://i.imgur.com/UEH4gfU.jpg",
+            "https://i.imgur.com/UEH4gfU.jpg",
+            "https://i.imgur.com/UEH4gfU.jpg",
+          ],
+          "health": 2,
+          "name": "Portland Multi Family",
+          "public_id": "pro_example",
+          "update_endpoint": "/projects/pro_example/update/",
+        }
+      }
+      suggestedTags={
+        Array [
+          Object {
+            "count": 5,
+            "word": "Tag 1",
+          },
+          Object {
+            "count": 3,
+            "word": "Test Tag 2",
+          },
+          Object {
+            "count": 2,
+            "word": "Lake Highland Properties 3",
+          },
+          Object {
+            "count": 1,
+            "word": "New Tag",
+          },
+        ]
+      }
+    >
+      <AddTagInput
+        onBlur={[Function]}
+        onChange={[Function]}
+        onCreateTag={[Function]}
+        suggestedTags={
+          Array [
+            Object {
+              "count": 5,
+              "word": "Tag 1",
+            },
+            Object {
+              "count": 3,
+              "word": "Test Tag 2",
+            },
+            Object {
+              "count": 2,
+              "word": "Lake Highland Properties 3",
+            },
+            Object {
+              "count": 1,
+              "word": "New Tag",
+            },
+          ]
+        }
+      >
+        <div
+          className="add-tag-field"
+        >
+          <Input
+            className="add-tag-field__input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyUp={[Function]}
+            placeholder="e.g. Southwestern, 2020 Fund"
+            theme="simple"
+            type="text"
+            value="Test"
+            valueFormatter={[Function]}
+          >
+            <input
+              className="input add-tag-field__input input--simple"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyUp={[Function]}
+              placeholder="e.g. Southwestern, 2020 Fund"
+              type="text"
+              value="Test"
+            />
+          </Input>
+          <Panel
+            className="add-tag-field__suggestion"
+            component="div"
+            size="default"
+          >
+            <div
+              className="panel panel--default add-tag-field__suggestion"
+            >
+              <div
+                className="add-tag-field__suggestion-content"
+              >
+                <div
+                  className="add-tag-field__suggestion-text"
+                >
+                  Suggested Tags
+                </div>
+              </div>
+              <div
+                className="add-tag-field__suggestion-tags"
+              >
+                <div
+                  className="add-tag-field__suggestion-tag"
+                  key="Tag 1"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="add-tag-field__suggestion-tag-name"
+                  >
+                    Tag 1
+                  </div>
+                  <div
+                    className="add-tag-field__suggestion-tag-count"
+                  >
+                    5
+                  </div>
+                </div>
+                <div
+                  className="add-tag-field__suggestion-tag"
+                  key="Test Tag 2"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="add-tag-field__suggestion-tag-name"
+                  >
+                    <span
+                      className="add-tag-field__suggestion-tag-name-word"
+                    >
+                      Test
+                    </span>
+                     Tag 2
+                  </div>
+                  <div
+                    className="add-tag-field__suggestion-tag-count"
+                  >
+                    3
+                  </div>
+                </div>
+                <div
+                  className="add-tag-field__suggestion-tag"
+                  key="Lake Highland Properties 3"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="add-tag-field__suggestion-tag-name"
+                  >
+                    Lake Highland Properties 3
+                  </div>
+                  <div
+                    className="add-tag-field__suggestion-tag-count"
+                  >
+                    2
+                  </div>
+                </div>
+                <div
+                  className="add-tag-field__suggestion-tag"
+                  key="New Tag"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="add-tag-field__suggestion-tag-name"
+                  >
+                    New Tag
+                  </div>
+                  <div
+                    className="add-tag-field__suggestion-tag-count"
+                  >
+                    1
+                  </div>
+                </div>
+              </div>
+              <div
+                className="add-tag-field__suggestion-controls"
+              >
+                <Button
+                  color="primary"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <button
+                    className="button button--primary"
+                    onClick={[Function]}
+                  >
+                    Create new tag +
+                  </button>
+                </Button>
+              </div>
+            </div>
+          </Panel>
+        </div>
+      </AddTagInput>
+    </AddTagField>
+  </Connect(AddTagField)>
+</Provider>
+`;

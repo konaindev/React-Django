@@ -58,6 +58,9 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
 parameterized = "*"
+xmlschema = "*"
+defusedxml = "*"
+jinja2 = "*"
 
 [requires]
 python_version = "3.7"

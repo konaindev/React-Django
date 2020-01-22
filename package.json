@@ -5,7 +5,7 @@
   "license": "copyright",
   "scripts": {
     "build": "webpack --progress --colors --hide-modules --config=webpack.dev.js",
-    "build:prod": "webpack --progress --colors --hide-modules --config=webpack.prod.js",
+    "build:prod": "SEGMENT_KEY=${SEGMENT_PROD} webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
     "storybook": "start-storybook -p 6006 --ci",
     "storybook-smoke": "start-storybook -p 6006 --ci --smoke-test",
@@ -22,8 +22,8 @@
     "deploy-frontend-staging": "aws s3 sync dist/ s3://app-staging.remarkably.io",
     "deploy-frontend-production": "aws s3 sync dist/ s3://app.remarkably.io",
     "run-build-ui": "yarn build && ./node_modules/.bin/webpack-dev-server --open --mode development --config webpack.dev.js --history-api-fallback",
-    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths /*",
-    "invalidate-cdn-production": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_PRODUCTION} --paths /*"
+    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --invalidation-batch file://inv-batch.json",
+    "invalidate-cdn-production": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_PRODUCTION} --invalidation-batch file://inv-batch.json"
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",
@@ -89,7 +89,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.9",
-    "@sentry/browser": "^5.5.0",
+    "@sentry/browser": "^5.11.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "core-js": "2",
@@ -124,5 +124,7 @@
     "victory": "^31.1.0",
     "yup": "^0.27.0"
   },
-  "engines" : { "node" : ">=10.15.3" }
+  "engines": {
+    "node": ">=10.15.3"
+  }
 }
