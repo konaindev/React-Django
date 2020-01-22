@@ -457,21 +457,15 @@ workflows:
           type: approval
           requires:
             - build
-      - deploy-production:
+      - airflow-setup:
           context: deploy-production
           requires:
             - hold
           filters:
             branches:
               only: master
-      - airflow-setup:
+      - deploy-production:
           context: deploy-production
-          requires:
-            - deploy-production
-          filters:
-            branches:
-              only: master
-      - airflow-deploy:
           requires:
             - airflow-setup
           filters:
