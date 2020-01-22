@@ -320,13 +320,13 @@ def var_kpi_for_benchmark(computed_kpis):
     kpis = {
         "usvs": computed_kpis.get("usv_cost"),  # "Volume of USV"
         "usv_inq": computed_kpis.get("usv_inq"),  # "USV>INQ"
-        "inqs": computed_kpis.get("inq_cost"),  # "INQ"
+        "inqs": computed_kpis.get("inq_cost"),  # "Volume of INQ"
         "inq_tou": computed_kpis.get("inq_tou"),  # "INQ>TOU"
-        "tous": computed_kpis.get("tou_cost"),  # "TOU"
+        "tous": computed_kpis.get("tou_cost"),  # "Volume of TOU"
         "tou_app": computed_kpis.get("tou_app"),  # "TOU>APP"
-        "apps": computed_kpis.get("app_cost"),  # "APP"
-        "cd_rate": computed_kpis.get("lease_cd_rate"),  # "C&D Rate"
-        "exes": computed_kpis.get("exe_cost"),  # "EXE"
+        "apps": computed_kpis.get("app_cost"),  # "Volume of APP"
+        "app_exe": computed_kpis.get("app_exe"),  # "APP > EXE"
+        "retention_rate": computed_kpis.get("renewal_rate"),  # "Retention Rate"
     }
     return {k: v for k, v in kpis.items() if v is not None}
 

@@ -124,8 +124,8 @@ class KPIForBenchmarkTestCase(TestCase):
             "tous": 5,
             "tou_app": 6,
             "apps": 7,
-            "cd_rate": 8,
-            "exes": 9,
+            "app_exe": 8,
+            "retention_rate": 9,
         }
         computed_kpis = {
             "usv_cost": 1,
@@ -135,10 +135,10 @@ class KPIForBenchmarkTestCase(TestCase):
             "tou_cost": 5,
             "tou_app": 6,
             "app_cost": 7,
-            "lease_cd_rate": 8,
-            "exe_cost": 9,
-            "usv_exe": 10,
-            "app_exe": 11,
+            "app_exe": 8,
+            "renewal_rate": 9,
+            "exe_cost": 10,
+            "usv_exe": 11,
         }
         result = var_kpi_for_benchmark(computed_kpis)
         self.assertDictEqual(result, expected)
@@ -151,8 +151,8 @@ class KPIForBenchmarkTestCase(TestCase):
             "inq_tou": 4,
             "tous": 5,
             "apps": 7,
-            "cd_rate": 8,
-            "exes": 9,
+            "app_exe": 8,
+            "retention_rate": 9,
         }
         computed_kpis = {
             "usv_cost": 1,
@@ -161,10 +161,10 @@ class KPIForBenchmarkTestCase(TestCase):
             "inq_tou": 4,
             "tou_cost": 5,
             "app_cost": 7,
-            "lease_cd_rate": 8,
-            "exe_cost": 9,
-            "usv_exe": 10,
-            "app_exe": 11,
+            "app_exe": 8,
+            "renewal_rate": 9,
+            "exe_cost": 10,
+            "usv_exe": 11,
         }
         result = var_kpi_for_benchmark(computed_kpis)
         self.assertDictEqual(result, expected)
