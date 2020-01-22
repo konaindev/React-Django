@@ -36,7 +36,7 @@ export const InvestmentAllocationChart = ({ name, expenses, total }) => {
   );
 
   const getPieSliceLabel = d => {
-    if (d.y === 0 || d.total === 0) {
+    if (d.y === 0 || d.total === 0 || d.y / d.total < 0.05) {
       return "";
     }
     return formatPercent(d.y / d.total);

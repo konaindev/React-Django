@@ -56,6 +56,7 @@ def create_project(project_name="project 1"):
         geo_address=address,
     )
     group = Group.objects.create(name=f"{project_name} view group")
+    admin_group = Group.objects.create(name=f"{project_name} admin group")
     project = Project.objects.create(
         name=project_name,
         baseline_start=datetime.date(year=2018, month=11, day=19),
@@ -67,6 +68,7 @@ def create_project(project_name="project 1"):
         fund=fund,
         property=property,
         view_group=group,
+        admin_group=admin_group
     )
     return project, group
 
@@ -74,6 +76,7 @@ def create_project(project_name="project 1"):
 def add_user_to_group(group, email="test@remarkably.io"):
     user, _ = User.objects.get_or_create(email=email)
     group.user_set.add(user)
+    return user
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -1474,9 +1477,8 @@ class BaseTagsTestCase(TestCase):
         ]
         project, _ = create_project()
         project.custom_tags.set(tags)
-        admin_group = Group.objects.create(name="project 1 admin group")
+        admin_group = project.admin_group
         admin_group.user_set.add(user)
-        project.admin_group = admin_group
         project.save()
         token_url = reverse("token_obtain_pair")
         data = {
@@ -1566,3 +1568,52 @@ class RemoveTagTestCase(BaseTagsTestCase):
             HTTP_AUTHORIZATION=self.auth,
         )
         self.assertEqual(resp.status_code, 500)
+
+
+class SubscribedEmailsTestCase(TestCase):
+    def setUp(self):
+        self.project, _ = create_project()
+
+    def test_empty_list(self):
+        self.assertEqual(set(), self.project.get_subscribed_emails())
+
+    def test_from_email_distribution_list(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        self.assertEqual({"test1@example.com", "test2@example.com"}, project.get_subscribed_emails())
+
+    def test_from_members_and_admins(self):
+        project = self.project
+        view_group = project.view_group
+        add_user_to_group(view_group, "view1@test.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        self.assertEqual(
+            {"view1@test.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())
+
+    def test_distribution_and_members(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        view_group = project.view_group
+        add_user_to_group(view_group, "view1@test.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        self.assertEqual(
+            {"test1@example.com", "test2@example.com", "view1@test.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())
+
+    def test_with_unsubscribed_users(self):
+        project = self.project
+        project.email_distribution_list = "test1@example.com, test2@example.com"
+        view_group = project.view_group
+        test_user = add_user_to_group(view_group, "test1@example.com")
+        add_user_to_group(view_group, "view2@test.com")
+        admin_group = project.admin_group
+        add_user_to_group(admin_group, "admin@test.com")
+        test_user.unsubscribed_projects.add(project)
+        self.assertEqual(
+            {"test2@example.com", "view2@test.com", "admin@test.com"},
+            project.get_subscribed_emails())

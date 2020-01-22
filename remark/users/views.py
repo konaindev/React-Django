@@ -438,11 +438,11 @@ class ValidateAddressView(APIView):
 class AccountReportsView(APIView):
     per_page_count = 10
 
-    def serialize_project(self, project, for_reports_ids):
+    def serialize_project(self, project, excluded_reports_ids):
         return {
             "id": project.public_id,
             "name": project.name,
-            "is_report": project.public_id in for_reports_ids
+            "is_report": project.public_id not in excluded_reports_ids
         }
 
     def get(self, request):
@@ -469,8 +469,8 @@ class AccountReportsView(APIView):
         has_hext = page.has_next()
         projects_q = page.object_list
 
-        for_reports_ids = [p.public_id for p in user.report_projects.all()]
-        projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
+        excluded_reports_ids = [p.public_id for p in user.unsubscribed_projects.all()]
+        projects = [self.serialize_project(p, excluded_reports_ids) for p in projects_q]
         return Response({
             "properties": projects,
             "has_next_page": has_hext,
@@ -484,8 +484,7 @@ class AccountReportsView(APIView):
         projects = Project.objects.filter(public_id__in=ids)
         for p in projects:
             if properties_toggled[p.public_id]:
-                user.report_projects.add(p)
+                user.unsubscribed_projects.remove(p)
             else:
-                user.report_projects.remove(p)
-        user.save()
+                user.unsubscribed_projects.add(p)
         return Response({}, status=status.HTTP_200_OK)
