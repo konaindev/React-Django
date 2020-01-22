@@ -37,7 +37,7 @@ from remark_airflow.insights.impl.vars import (
     var_top_usv_referral,
     var_benchmark_kpis,
     var_kpi_for_benchmark,
-    var_low_benchmark_kpi,
+    var_low_performing_kpi,
 )
 
 
@@ -202,7 +202,7 @@ low_performing = Insight(
         cop(var_computed_kpis, var_base_kpis),
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
-        cop(var_low_benchmark_kpi, var_benchmark_kpis),
-        cop(trigger_have_benchmark_kpis, var_low_benchmark_kpi),
+        cop(var_low_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
+        cop(trigger_have_benchmark_kpis, var_low_performing_kpi),
     ],
 )

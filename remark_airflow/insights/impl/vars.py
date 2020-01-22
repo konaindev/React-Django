@@ -353,16 +353,25 @@ def var_benchmark_kpis(kpis, project, start, end):
 
     if not benchmark_kpis:
         return []
+    else:
+        return list(benchmark_kpis.values())
 
+
+def var_low_performing_kpi(benchmark_kpis, kpis):
     benchmark_list = []
-    for b_kpi in benchmark_kpis:
-        if kpis[b_kpi.kpi] <= b_kpi.threshold_0:
-            benchmark_list.append({"name": b_kpi.kpi, "value": b_kpi.threshold_0})
-    return benchmark_list
-
-
-def var_low_benchmark_kpi(benchmark_kpi):
-    if not benchmark_kpi:
+    if not benchmark_kpis or not kpis:
         return None
-    min_kpi = min(benchmark_kpi, key=lambda kpi: kpi["value"])
+
+    for b_kpi in benchmark_kpis:
+        kpi_name = b_kpi["kpi"]
+        threshold_0 = b_kpi["threshold_0"]
+        if kpis[kpi_name] <= threshold_0:
+            benchmark_list.append(
+                {"name": kpi_name, "value": kpis[kpi_name] / threshold_0}
+            )
+
+    if not benchmark_list:
+        return None
+
+    min_kpi = min(benchmark_list, key=lambda kpi: kpi["value"])
     return min_kpi["name"]

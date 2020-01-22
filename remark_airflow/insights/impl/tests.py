@@ -12,7 +12,7 @@ from remark_airflow.insights.impl.vars import (
     var_prev_health_status,
     var_benchmark_kpis,
     var_kpi_for_benchmark,
-    var_low_benchmark_kpi,
+    var_low_performing_kpi,
 )
 
 
@@ -77,19 +77,49 @@ class VarBenchmarkKPIsTestCase(TestCase):
         self.project = create_project(baseline_start=self.start, baseline_end=self.end)
 
     def test_default(self):
-        kpis = {
-            "usvs": 184.20,
-            "usv_inq": 0.16,
-            "inqs": 24.21,
-            "inq_tou": 0.6,
-            "tous": 13.28,
-            "tou_app": 0.31,
-            "apps": 3.88,
-            "cd_rate": 0.34,
-            "exes": 2.53,
-        }
+        kpis = {"inqs": 24.21, "inq_tou": 0.6}
         benchmark_kpis = var_benchmark_kpis(kpis, self.project, self.start, self.end)
-        self.assertListEqual(benchmark_kpis, [{"name": "cd_rate", "value": 0.4}])
+
+        expected = [
+            {
+                "start": datetime.date(year=2019, month=9, day=21),
+                "end": datetime.date(year=2019, month=9, day=28),
+                "country_id": 233,
+                "category": 1,
+                "kpi": "inqs",
+                "threshold_0": 1,
+                "threshold_1": 2,
+                "threshold_2": 6,
+                "threshold_3": 10,
+                "property_count_0": 2,
+                "property_count_1": 1,
+                "property_count_2": 2,
+                "property_count_3": 2,
+                "property_count_4": 21,
+                "total_property_count": 28,
+            },
+            {
+                "start": datetime.date(year=2019, month=9, day=21),
+                "end": datetime.date(year=2019, month=9, day=28),
+                "country_id": 233,
+                "category": 1,
+                "kpi": "inq_tou",
+                "threshold_0": 0.2,
+                "threshold_1": 0.3,
+                "threshold_2": 0.4,
+                "threshold_3": 0.5,
+                "property_count_0": 2,
+                "property_count_1": 3,
+                "property_count_2": 8,
+                "property_count_3": 6,
+                "property_count_4": 7,
+                "total_property_count": 26,
+            },
+        ]
+        for kpi in benchmark_kpis:
+            del kpi["last_updated"]
+            del kpi["public_id"]
+        self.assertListEqual(benchmark_kpis, expected)
 
     def test_no_kpi(self):
         kpis = {}
@@ -179,19 +209,26 @@ class KPIForBenchmarkTestCase(TestCase):
 
 
 class LowBenchmarkKPITestCase(TestCase):
-    def test_have_kpi(self):
-        kpi = [
-            {"name": "usvs", "value": 1},
-            {"name": "usv_inq", "value": 2},
-            {"name": "inqs", "value": 3},
+    def setUp(self) -> None:
+        self.kpis = {"usvs": 2.01, "usv_inq": 0.01, "inqs": 0.9}
+        self.benchmark_kpis = [
+            {"kpi": "usvs", "threshold_0": 7.02},
+            {"kpi": "usv_inq", "threshold_0": 0.03},
+            {"kpi": "inqs", "threshold_0": 1},
         ]
-        result = var_low_benchmark_kpi(kpi)
+
+    def test_have_kpi(self):
+        result = var_low_performing_kpi(self.benchmark_kpis, self.kpis)
         self.assertEqual(result, "usvs")
 
     def test_no_kpi(self):
-        result = var_low_benchmark_kpi([])
+        result = var_low_performing_kpi(self.benchmark_kpis, {})
         self.assertEqual(result, None)
 
-    def test_is_none(self):
-        result = var_low_benchmark_kpi(None)
+    def test_no_benchmark_kpi(self):
+        result = var_low_performing_kpi([], self.kpis)
+        self.assertEqual(result, None)
+
+    def test_benchmark_kpi_is_none(self):
+        result = var_low_performing_kpi(None, self.kpis)
         self.assertEqual(result, None)
