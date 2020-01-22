@@ -199,7 +199,7 @@ jobs:
           name: Delete all items in test folder
           command:  |
             if [ "$(gsutil ls gs://$BUCKET/data/test)" ]; then
-              gsutil rm gs://"$BUCKET"/data/test/**
+              gsutil -m rm gs://"$BUCKET"/data/test/**
             else
               echo "Empty test folder"
             fi
