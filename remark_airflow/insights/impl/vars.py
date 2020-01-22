@@ -1,3 +1,4 @@
+import decimal
 from datetime import timedelta
 
 from django.db.models import Q
@@ -335,8 +336,12 @@ def var_benchmark_kpis(kpis, project, start, end):
     if kpis is None:
         return []
 
-    country_code = project.property.geo_address.country
-    country = Country.objects.get(code=country_code)
+    try:
+        country_code = project.property.geo_address.country
+        country = Country.objects.get(code=country_code)
+        country_id = country.id
+    except Country.DoesNotExist:
+        country_id = 233
 
     benchmark_kpis = (
         CountryBenchmark.objects.filter(
@@ -344,7 +349,7 @@ def var_benchmark_kpis(kpis, project, start, end):
                 (Q(start__gte=start) & Q(start__lte=end)),
                 (Q(end__gte=start) & Q(end__lte=end)),
             ),
-            country_id=country.id,
+            country_id=country_id,
             kpi__in=kpis.keys(),
         )
         .order_by("kpi", "-start")
@@ -364,11 +369,10 @@ def var_low_performing_kpi(benchmark_kpis, kpis):
 
     for b_kpi in benchmark_kpis:
         kpi_name = b_kpi["kpi"]
-        threshold_0 = b_kpi["threshold_0"]
+        threshold_0 = decimal.Decimal(b_kpi["threshold_0"])
         if kpis[kpi_name] <= threshold_0:
-            benchmark_list.append(
-                {"name": kpi_name, "value": kpis[kpi_name] / threshold_0}
-            )
+            kpi_value = decimal.Decimal(kpis[kpi_name])
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_0})
 
     if not benchmark_list:
         return None

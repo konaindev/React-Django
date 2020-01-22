@@ -12,7 +12,7 @@ from remark_airflow.insights.impl.utils import (
 
 jinja2.filters.FILTERS["health_status_to_str"] = health_status_to_str
 jinja2.filters.FILTERS["format_percent"] = format_percent
-jinja2.filters.FILTERS["benchmark_kpi_view"] = benchmark_kpi_humanize
+jinja2.filters.FILTERS["benchmark_kpi_humanize"] = benchmark_kpi_humanize
 
 
 class Insight:

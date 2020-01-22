@@ -7,7 +7,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_usv_exe_on_track,
     trigger_retention_rate_health,
     trigger_has_data_google_analytics,
-    trigger_have_benchmark_kpis,
+    trigger_have_benchmark_kpi,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -195,7 +195,7 @@ top_usv_referral = Insight(
 
 low_performing = Insight(
     name="low_performing",
-    template="{{ var_low_benchmark_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
+    template="{{ var_low_performing_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
     triggers=["trigger_have_benchmark_kpi"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -203,6 +203,6 @@ low_performing = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_low_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpis, var_low_performing_kpi),
+        cop(trigger_have_benchmark_kpi, var_low_performing_kpi),
     ],
 )
