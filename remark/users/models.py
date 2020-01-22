@@ -145,13 +145,20 @@ class User(PermissionsMixin, AbstractBaseUser):
         default=True, help_text="Should there be tutorial showing"
     )
 
-    report_projects = models.ManyToManyField(Project)
+    unsubscribed_projects = models.ManyToManyField(
+        Project,
+        related_name="unsubscribed_users",
+    )
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._cache_subscription_fields()
 
     def get_menu_dict(self):
         data = {
@@ -182,7 +189,6 @@ class User(PermissionsMixin, AbstractBaseUser):
         except Person.DoesNotExist:
             url = ""
         return url
-
 
     def get_business_name(self):
         try:
@@ -232,7 +238,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             "office_type": office.office_type,
         }
 
-
     def get_country_object(self, value):
         with open(f'{PATH_REF}/data/locations/countries.json', 'r') as read_file:
             countries = json.load(read_file)
@@ -243,7 +248,13 @@ class User(PermissionsMixin, AbstractBaseUser):
                         "value": country["iso3"]
                     }
                     return country_object
-        
+
+    def _cache_subscription_fields(self):
+        self._old_is_active = self.is_active
+
+    @property
+    def is_subscription_changed(self):
+        return self._old_is_active != self.is_active
 
 
 class Account(models.Model):

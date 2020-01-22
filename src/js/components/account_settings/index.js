@@ -22,13 +22,12 @@ const menuItemsData = {
     name: "Security",
     iconComponent: Lock,
     component: AccountSecurity
-  } /*,
+  },
   email: {
     name: "Email Preferences",
     iconComponent: Email,
     component: EmailReportsContainer
   }
-   */
 };
 
 function MenuItems({ item, selectItem, itemsOrder }) {
@@ -64,7 +63,7 @@ export default class AccountSettings extends React.PureComponent {
 
   static defaultProps = {
     initialItem: "lock", //"profile",
-    itemsOrder: ["lock"] //["profile", "lock", "email"]
+    itemsOrder: ["lock", "email"] //["profile", "lock", "email"]
   };
 
   constructor(props) {
