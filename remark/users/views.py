@@ -446,6 +446,12 @@ class UserProfileView(APIView):
 class CompanyProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def make_office(self, person, business):
+        office = Office(business=business)
+        person.office = office
+        office.save()
+        person.save()
+
     def post(self, request):
         params = json.loads(request.body)
         form = CompanyProfileForm(params)
@@ -457,23 +463,22 @@ class CompanyProfileView(APIView):
             business = Business.objects.get(name=data["company"])
         except Business.DoesNotExist:
             business = Business(name=data["company"])
-        for role in data["company_roles"]:
-            setattr(business, BUSINESS_TYPE[role], True)
-        business.save()
+            for role in data["company_roles"]:
+                setattr(business, BUSINESS_TYPE[role], True)
+            business.save()
 
         user = request.user
         try:
             person = user.person
-            try:
-                office = person.office
-            except Office.DoesNotExist:
-                office = None
+            office = person.office
+            if office:
+                office.business = business
+                office.save()
+            else:
+                self.make_office(person, business)
         except Person.DoesNotExist:
-            office = None
-
-        if office:
-            office.business = business
-            office.save()
+            person = Person(user=user, email=user.email)
+            self.make_office(person, business)
 
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
