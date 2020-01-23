@@ -30,7 +30,6 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.PropTypes.object,
       company_roles: PropTypes.arrayOf(PropTypes.string),
-      company_roles_locked: PropTypes.bool,
       office_country: PropTypes.object,
       office_street: PropTypes.string,
       office_city: PropTypes.string,
@@ -56,7 +55,6 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: undefined,
       company_roles: [],
-      company_roles_locked: true,
       office_country: {
         label: COUNTRY_FIELDS.USA.full_name,
         value: COUNTRY_FIELDS.USA.short_name
@@ -213,8 +211,7 @@ export default class Profile extends React.PureComponent {
     const p = this.getProfileValues(this.props.profile);
     return {
       company: p.company,
-      company_roles: p.company_roles,
-      company_roles_locked: p.company_roles_locked
+      company_roles: p.company_roles
     };
   };
 
@@ -245,26 +242,6 @@ export default class Profile extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  showSuccessMessage = () => {
-    if (!this.state.message) {
-      return;
-    }
-    return (
-      <div className="account-settings__success">
-        <Tick className="account-settings__checked" />
-        {this.state.message}
-      </div>
-    );
-  };
-
-  showMessage = (errors, touched) => {
-    if (this.state.message) {
-      return this.showSuccessMessage();
-    } else if (Object.keys(errors).length) {
-      return this.showErrorMessage(errors, touched);
-    }
-  };
-
   setUserDataSuccess = () => {
     this.formik.setSubmitting(false);
     this.setState({ userMessage: "General info has been saved." });
@@ -288,6 +265,30 @@ export default class Profile extends React.PureComponent {
     });
     this.props.dispatch(actions.requestSettings());
   };
+
+  showSuccessMessage = message => {
+    if (!message) {
+      return;
+    }
+    return (
+      <div className="account-settings__success">
+        <Tick className="account-settings__checked" />
+        {message}
+      </div>
+    );
+  };
+
+  showUserMessage = (errors, touched) => {
+    if (this.state.userMessage) {
+      return this.showSuccessMessage(this.state.userMessage);
+    } else if (Object.keys(errors).length) {
+      return this.showErrorMessage(errors, touched);
+    }
+  };
+
+  showCompanyMessage = () => this.showSuccessMessage(this.state.companyMessage);
+
+  showOfficeMessage = () => this.showSuccessMessage(this.state.officeMessage);
 
   updateValues = values => {
     this.formik.setFieldValue("office_street", values.office_street);
@@ -364,12 +365,10 @@ export default class Profile extends React.PureComponent {
 
   onSaveCompany = (onSuccess, onError) => values => {
     this.unsetMessage();
-    const dataValues = { ...values };
-    const data = new FormData();
-    data.append("company", dataValues.company.label);
-    for (const i of dataValues.company_roles) {
-      data.append("company_roles[]", i.value);
-    }
+    const data = {
+      company: values.company.label,
+      company_roles: values.company_roles.map(i => i.value)
+    };
     this.props.dispatch({
       type: "API_ACCOUNT_PROFILE_COMPANY",
       callback: onSuccess,
@@ -542,7 +541,7 @@ export default class Profile extends React.PureComponent {
                   >
                     Save
                   </Button>
-                  {this.showMessage(errors, touched)}
+                  {this.showUserMessage(errors, touched)}
                 </div>
               </Form>
               <div className="account-settings__tab-subsection">
@@ -582,6 +581,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                 </div>
+                {this.showCompanyMessage()}
               </div>
               <div className="account-settings__tab-subsection">
                 <div className="account-settings__tab-title">
@@ -661,6 +661,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                 </div>
+                {this.showOfficeMessage()}
               </div>
             </div>
           )}

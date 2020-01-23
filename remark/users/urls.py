@@ -16,6 +16,8 @@ from .views import (
     ResendInviteView,
     ValidateAddressView,
     UserProfileView,
+    CompanyProfileView,
+    OfficeProfileView,
 )
 
 app_name = "users"
@@ -68,6 +70,8 @@ urlpatterns = [
     path("account-settings", AccountSettingsView.as_view(), name="account_settings"),
     path("account-security", AccountSecurityView.as_view(), name="account_security"),
     path("account-user", UserProfileView.as_view(), name="account_user"),
+    path("account-company", CompanyProfileView.as_view(), name="account_company"),
+    path("account-office", OfficeProfileView.as_view(), name="account_office"),
     path("account-reports", AccountReportsView.as_view(), name="account_reports"),
     path("validate-address", ValidateAddressView.as_view(), name="validate_address")
 ]

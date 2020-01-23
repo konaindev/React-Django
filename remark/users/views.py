@@ -31,7 +31,14 @@ from remark.email_app.invites.added_to_property import (
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
-from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm, UserProfileForm
+from .forms import (
+    AccountCompleteForm,
+    AccountProfileForm,
+    AccountSecurityForm,
+    CompanyProfileForm,
+    UserProfileForm,
+    OfficeProfileForm,
+)
 from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
@@ -433,6 +440,88 @@ class UserProfileView(APIView):
         if data["avatar"]:
             person.avatar = data["avatar"]
         person.save()
+        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
+
+
+class CompanyProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        params = json.loads(request.body)
+        form = CompanyProfileForm(params)
+        if not form.is_valid():
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        data = form.cleaned_data
+
+        try:
+            business = Business.objects.get(name=data["company"])
+        except Business.DoesNotExist:
+            business = Business(name=data["company"])
+        for role in data["company_roles"]:
+            setattr(business, BUSINESS_TYPE[role], True)
+        business.save()
+
+        user = request.user
+        try:
+            person = user.person
+            try:
+                office = person.office
+            except Office.DoesNotExist:
+                office = None
+        except Person.DoesNotExist:
+            office = None
+
+        if office:
+            office.business = business
+            office.save()
+
+        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
+
+
+class OfficeProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        params = json.loads(request.body)
+        form = OfficeProfileForm(params)
+        if not form.is_valid():
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        data = form.cleaned_data
+        user = request.user
+        office_address = geocode(data["office_address"])
+        address = Address.objects.get_or_create(
+            formatted_address=office_address.formatted_address,
+            street_address_1=office_address.street_address,
+            city=office_address.city,
+            state=office_address.state,
+            full_state=office_address.full_state,
+            zip_code=office_address.zip5,
+            country=office_address.country,
+            geocode_json=office_address.geocode_json,
+        )[0]
+
+        person = None
+        try:
+            person = user.person
+            try:
+                office = person.office
+            except Office.DoesNotExist:
+                office = Office()
+                person.office = office
+        except Person.DoesNotExist:
+            office = Office()
+
+        business = None
+        if data["company"]:
+            business = Business.objects.get(name=data["company"])
+
+        office.address = address
+        office.name = data["office_name"]
+        office.office_type = data["office_type"]
+        office.business = business
+        office.save()
+        if person:
+            person.save()
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 
