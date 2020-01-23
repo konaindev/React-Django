@@ -388,10 +388,10 @@ def var_below_average_kpi(benchmark_kpis, kpis):
     benchmark_list = []
     for b_kpi in benchmark_kpis:
         kpi_name = b_kpi["kpi"]
+        threshold_1 = decimal.Decimal(b_kpi["threshold_1"])
         if b_kpi["threshold_0"] <= kpis[kpi_name] <= b_kpi["threshold_1"]:
-            benchmark_list.append(
-                {"name": kpi_name, "value": kpis[kpi_name] / b_kpi["threshold_1"]}
-            )
+            kpi_value = decimal.Decimal(kpis[kpi_name])
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_1})
 
     if not benchmark_list:
         return None

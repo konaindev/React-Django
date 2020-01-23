@@ -346,8 +346,7 @@ class LowPerformingTestCase(TestCase):
         self.start = datetime.date(year=2019, month=9, day=21)
         self.end = datetime.date(year=2019, month=9, day=28)
 
-    def test_triggered(self):
-        generate_benchmarks(stub_benchmark_kpis)
+    def generate_kpi(self):
         create_periods(
             self.project,
             start=self.start,
@@ -359,6 +358,9 @@ class LowPerformingTestCase(TestCase):
             },
         )
 
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = low_performing.graph(args)
 
@@ -404,16 +406,7 @@ class LowPerformingTestCase(TestCase):
         self.assertIsNone(result)
 
     def test_no_benchmarks(self):
-        create_periods(
-            self.project,
-            start=self.start,
-            end=self.end,
-            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
-            target_period_params={
-                "target_lease_renewal_notices": 3,
-                "target_lease_vacation_notices": 2,
-            },
-        )
+        self.generate_kpi()
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = low_performing.graph(args)
         self.assertEqual(project_facts["var_low_performing_kpi"], None)
@@ -438,8 +431,7 @@ class KPIBelowAverageTestCase(TestCase):
         self.start = datetime.date(year=2019, month=9, day=21)
         self.end = datetime.date(year=2019, month=9, day=28)
 
-    def test_triggered(self):
-        generate_benchmarks(stub_benchmark_kpis)
+    def generate_kpi(self):
         create_periods(
             self.project,
             start=self.start,
@@ -451,6 +443,10 @@ class KPIBelowAverageTestCase(TestCase):
             },
             target_period_params={"target_lease_applications": 5, "target_tours": 10},
         )
+
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)
 
@@ -486,16 +482,7 @@ class KPIBelowAverageTestCase(TestCase):
         self.assertIsNone(result)
 
     def test_no_benchmarks(self):
-        create_periods(
-            self.project,
-            start=self.start,
-            end=self.end,
-            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
-            target_period_params={
-                "target_lease_renewal_notices": 3,
-                "target_lease_vacation_notices": 2,
-            },
-        )
+        self.generate_kpi()
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)
         self.assertEqual(project_facts["var_below_average_kpi"], None)
