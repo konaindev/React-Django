@@ -505,28 +505,22 @@ class OfficeProfileView(APIView):
             geocode_json=office_address.geocode_json,
         )[0]
 
-        person = None
         try:
             person = user.person
-            try:
-                office = person.office
-            except Office.DoesNotExist:
+            office = person.office
+            if not office:
                 office = Office()
                 person.office = office
         except Person.DoesNotExist:
             office = Office()
-
-        business = None
-        if data["company"]:
-            business = Business.objects.get(name=data["company"])
+            person = Person(user=user, email=user.email, office=office)
 
         office.address = address
         office.name = data["office_name"]
         office.office_type = data["office_type"]
-        office.business = business
         office.save()
-        if person:
-            person.save()
+        person.save()
+
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 
