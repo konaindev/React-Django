@@ -383,24 +383,6 @@ workflows:
               ignore:
                 - staging
                 - master
-      - airflow-setup:
-          requires:
-            - build
-          filters:
-            branches:
-              only: l2-staging
-      - airflow-testing:
-          requires:
-            - airflow-setup
-          filters:
-            branches:
-              only: l2-staging
-      - airflow-deploy:
-          requires:
-            - airflow-testing
-          filters:
-            branches:
-              only: l2-staging
 
 
   build-deploy:
@@ -457,15 +439,21 @@ workflows:
           type: approval
           requires:
             - build
-      - airflow-setup:
+      - deploy-production:
           context: deploy-production
           requires:
             - hold
           filters:
             branches:
               only: master
-      - deploy-production:
+      - airflow-setup:
           context: deploy-production
+          requires:
+            - deploy-production
+          filters:
+            branches:
+              only: master
+      - airflow-deploy:
           requires:
             - airflow-setup
           filters:
