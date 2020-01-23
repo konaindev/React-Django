@@ -34,4 +34,11 @@ describe("Collapsible", () => {
     const tree = renderer.create(<Collapsible {...props} />, options).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render without trigger", () => {
+    const options = { createNodeMock };
+    const tree = renderer
+      .create(<Collapsible>{props.children}</Collapsible>, options)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

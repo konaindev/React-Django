@@ -2,7 +2,7 @@
 
 exports[`CommonReport renders baseline report with competitors correctly 1`] = `
 "<Container className=\\"common-report\\">
-  <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} />
+  <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} type=\\"baseline\\" />
   <CampaignInvestmentReport report={{...}} />
   <AcquisitionFunnelReport report={{...}} type=\\"baseline\\" />
   <BaselineComparisonMatrix report={{...}} />
@@ -11,7 +11,7 @@ exports[`CommonReport renders baseline report with competitors correctly 1`] = `
 
 exports[`CommonReport renders baseline report without competitor correctly 1`] = `
 "<Container className=\\"common-report\\">
-  <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} />
+  <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} type=\\"baseline\\" />
   <CampaignInvestmentReport report={{...}} />
   <AcquisitionFunnelReport report={{...}} type=\\"baseline\\" />
 </Container>"

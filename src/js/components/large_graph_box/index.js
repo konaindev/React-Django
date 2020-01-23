@@ -28,7 +28,6 @@ export class LargeGraphBox extends Component {
     formatDelta: PropTypes.func.isRequired,
     formatTarget: PropTypes.func.isRequired
   };
-
   render() {
     const {
       name,
@@ -41,7 +40,8 @@ export class LargeGraphBox extends Component {
       formatDelta,
       formatValue,
       formatTarget,
-      getDeltaDirection
+      getDeltaDirection,
+      type
     } = this.props;
 
     const graphDeltaBox = (
@@ -63,15 +63,23 @@ export class LargeGraphBox extends Component {
         )}
       </>
     );
+    const details = {
+      detail2: targetFormatter(formatTarget)(target),
+      detail: extraContent
+    };
 
+    if (type == "performance") {
+      details.detail = details.detail2;
+      delete details["detail2"];
+    }
     return (
       <LargeBoxLayout
+        type={type}
         name={name}
         infoTooltip={infoTooltip}
         content={formatValue(value)}
-        detail={extraContent}
-        detail2={targetFormatter(formatTarget)(target)}
         innerBox={graphDeltaBox}
+        {...details}
       />
     );
   }

@@ -1,41 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LargeBoxLayout renders correctly 1`] = `
-"<Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
-  <span className=\\"large-box__top-line\\">
-    Test name
-  </span>
-  <div className=\\"large-box__content\\">
-    <span className=\\"large-box__content-value\\">
-      Test content
-    </span>
-  </div>
-  <p className=\\"large-box__bottom-line\\">
-    This is details
-  </p>
-  <p className=\\"large-box__bottom-line\\">
-    This is more details
-  </p>
-  <Connect(InfoTooltipBase) transKey={[undefined]} />
-</Panel>"
+"<div id=\\"large-box__wrapper\\" onClick={[Function: onClick]}>
+  <Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
+    <Memo(PropertyStatus) className=\\"large-box__health-badge\\" performance_rating={[undefined]} />
+    <div className=\\"large-box__content\\">
+      <div className=\\"large-box__inner-container\\">
+        <span className=\\"large-box__top-line\\">
+          <span className=\\"test\\">
+            Test name
+            <Connect(InfoTooltipBase) className=\\"tooltip-wrapper\\" transKey={[undefined]} />
+          </span>
+        </span>
+        <span className=\\"large-box__content-value\\">
+          Test content
+        </span>
+        <div className=\\"large-box__detail-wrapper\\">
+          <p className=\\"large-box__bottom-line\\">
+            This is details
+          </p>
+          <p className=\\"large-box__bottom-line\\">
+            This is more details
+          </p>
+        </div>
+      </div>
+      <div className=\\"large-box__extra-container\\" />
+    </div>
+  </Panel>
+</div>"
 `;
 
 exports[`LargeBoxLayout renders with tooltip correctly 1`] = `
-"<Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
-  <span className=\\"large-box__top-line\\">
-    Test name
-  </span>
-  <div className=\\"large-box__content\\">
-    <span className=\\"large-box__content-value\\">
-      Test content
-    </span>
-  </div>
-  <p className=\\"large-box__bottom-line\\">
-    This is details
-  </p>
-  <p className=\\"large-box__bottom-line\\">
-    This is more details
-  </p>
-  <Connect(InfoTooltipBase) transKey=\\"i18n_key\\" />
-</Panel>"
+"<div id=\\"large-box__wrapper\\" onClick={[Function: onClick]}>
+  <Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
+    <Memo(PropertyStatus) className=\\"large-box__health-badge\\" performance_rating={[undefined]} />
+    <div className=\\"large-box__content\\">
+      <div className=\\"large-box__inner-container\\">
+        <span className=\\"large-box__top-line\\">
+          <span className=\\"test\\">
+            Test name
+            <Connect(InfoTooltipBase) className=\\"tooltip-wrapper\\" transKey=\\"i18n_key\\" />
+          </span>
+        </span>
+        <span className=\\"large-box__content-value\\">
+          Test content
+        </span>
+        <div className=\\"large-box__detail-wrapper\\">
+          <p className=\\"large-box__bottom-line\\">
+            This is details
+          </p>
+          <p className=\\"large-box__bottom-line\\">
+            This is more details
+          </p>
+        </div>
+      </div>
+      <div className=\\"large-box__extra-container\\" />
+    </div>
+  </Panel>
+</div>"
 `;

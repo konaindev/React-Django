@@ -69,7 +69,12 @@ export default class AcquisitionFunnelReport extends Component {
         />
         {/* we reverse the arrow here because declining percentages are *good* */}
         <PercentageGraphBox
-          name="Cost per Exe / Lowest Monthly Rent"
+          name={
+            <>
+              Cost per Exe / Lowest
+              <br /> Monthly Rent
+            </>
+          }
           infoTooltip="cost_per_exe_lowest_monthly_rent"
           value={r.property.cost_per_exe_vs_rent}
           target={r.targets?.property?.cost_per_exe_vs_rent}

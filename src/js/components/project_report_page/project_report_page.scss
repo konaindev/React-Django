@@ -34,6 +34,10 @@ $add-member-spacing: 28px;
     justify-content: space-between;
 }
 
+.project-report-page__subnav-right {
+    display: flex;
+}
+
 .project-report-page__members {
     display: flex;
     justify-content: flex-start;
@@ -45,4 +49,18 @@ $add-member-spacing: 28px;
     height: $add-member-size;
     margin-right: $add-member-spacing;
     cursor: pointer;
+}
+
+.insights-button {
+    margin-right: 23px;
+}
+
+.insights-button__icon {
+    width: $s2;
+    height: $s4;
+    margin-right: $s2;
+}
+
+.test-animation {
+    transition: all 1s ease;
 }

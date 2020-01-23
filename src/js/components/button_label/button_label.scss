@@ -1,0 +1,57 @@
+@import "css/base.scss";
+
+$button-label-padding: $s3 $s5;
+$button-label-bg: $button-secondary-bg-color;
+$button-label-color: $button-secondary-text-color;
+$button-label-border-color: $button-secondary-border-color;
+$button-label-label-br-color: $blue-7;
+$button-label-label-padding: 3px 5px;
+
+.button-label {
+    position: relative;
+    display: inline-flex;
+    padding: $button-label-padding;
+    font-family: $font-sans;
+    cursor: pointer;
+    background: $button-label-bg;
+    border: 1px solid $button-label-border-color;
+    border-radius: $border-radius-default;
+    box-sizing: content-box;
+
+    align-items: center;
+    &:hover, &:focus {
+        background-color: lighten($button-label-bg, 3%);
+    }
+
+    &:active {
+        background-color: darken($button-label-bg, 2%);
+    }
+}
+
+.button-label__text {
+    display: flex;
+    font-size: $text-xs;
+    font-weight: $weight-bold;
+    line-height: $line-height-normal;
+    letter-spacing: $letter-spacing-wider;
+    color: $button-label-color;
+    text-transform: uppercase;
+    align-items: center;
+}
+
+.button-label__label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: $button-label-label-padding;
+    font-size: $text-xs;
+    font-weight: $weight-medium;
+    letter-spacing: $letter-spacing-wider;
+    color: $button-label-color;
+    text-transform: uppercase;
+    pointer-events: none;
+    cursor: default;
+    background: $button-label-label-br-color;
+    border-radius: $border-radius-sm;
+    transform: translate(50%, -50%);
+}

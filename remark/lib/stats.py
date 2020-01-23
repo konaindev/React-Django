@@ -69,6 +69,8 @@ HEALTH_EXCEPTIONS = {
 
 
 def health_check(stat, stat_target):
+    if stat is None or stat_target is None:
+        return -1
     return _health_standard(stat, stat_target)
 
 
