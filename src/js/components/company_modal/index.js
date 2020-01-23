@@ -1,3 +1,4 @@
+import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -35,20 +36,36 @@ class CompanyModal extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.rolesLocked = !!props.data.company_roles?.length;
+    this.state = { rolesLocked: !!props.data.company_roles?.length };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      !_isEqual(prevProps.data.company_roles, this.props.data.company_roles)
+    ) {
+      this.setState({ rolesLocked: !!this.props.data.company_roles?.length });
+    }
   }
 
   setFormik = formik => {
     this.formik = formik;
   };
 
+  mapCompanyRolesToOptions = roles =>
+    this.props.companyRolesOptions.filter(i => roles.includes(i.value));
+
   onCreateCompany = value => {
     const option = { label: value, value };
     this.formik.setFieldValue("company", option);
+    this.formik.setFieldValue("company_roles", []);
+    this.setState({ rolesLocked: false });
   };
 
   onChangeCompany = company => {
     this.formik.setFieldValue("company", company);
+    const roles = this.mapCompanyRolesToOptions(company.roles || []);
+    this.formik.setFieldValue("company_roles", roles);
+    this.setState({ rolesLocked: !!roles.length });
     this.props.onChangeCompany(company);
   };
 
@@ -102,7 +119,7 @@ class CompanyModal extends React.PureComponent {
               errorKey="company_roles"
               errors={errors}
               touched={touched}
-              modifiers={this.rolesLocked ? ["disabled"] : []}
+              modifiers={this.state.rolesLocked ? ["disabled"] : []}
             >
               <div className="modal-form__inputs-wrap">
                 <MultiSelect
@@ -111,7 +128,7 @@ class CompanyModal extends React.PureComponent {
                   theme="gray"
                   isShowControls={false}
                   isShowAllOption={false}
-                  isDisabled={this.rolesLocked}
+                  isDisabled={this.state.rolesLocked}
                   options={this.props.companyRolesOptions}
                   value={values.company_roles}
                   label={values.company_roles?.map(v => v.label).join(", ")}

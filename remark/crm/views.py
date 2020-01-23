@@ -19,6 +19,7 @@ class CompanySearchView(APIView):
             company.append({
                 "value": b.public_id,
                 "label": b.name,
+                "roles": b.get_roles()
             })
         return Response({
             "company": company

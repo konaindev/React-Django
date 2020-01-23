@@ -28,7 +28,7 @@ const AccountSettingsField = ({
   ...props
 }) => (
   <div
-    className={cn(getFieldClasses(name, errors, touched), className)}
+    className={cn(getFieldClasses(name, errors, touched, modifiers), className)}
     {...props}
   >
     <div className="account-settings-field__label">{label}</div>
