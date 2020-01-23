@@ -241,7 +241,7 @@ class BelowAverageKPITestCase(TestCase):
         self.benchmark_kpis = [
             {"kpi": "inqs", "threshold_0": 1, "threshold_1": 2},
             {"kpi": "inq_tou", "threshold_0": 0.2, "threshold_1": 0.3},
-            {"kpi": "tous", "threshold_0": 0, "threshold_1": 0.25},
+            {"kpi": "tous", "threshold_0": 0.01, "threshold_1": 0.25},
             {"kpi": "tou_app", "threshold_0": 0.25, "threshold_1": 0.3},
         ]
 
@@ -249,14 +249,20 @@ class BelowAverageKPITestCase(TestCase):
         result = var_below_average_kpi(self.benchmark_kpis, self.kpis)
         self.assertEqual(result, "inqs")
 
+    def test_not_triggered(self):
+        kpis = self.kpis.copy()
+        kpis["tou_app"] = 0.2
+        result = var_below_average_kpi(self.benchmark_kpis, kpis)
+        self.assertIsNone(result)
+
     def test_no_kpi(self):
         result = var_below_average_kpi(self.benchmark_kpis, {})
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_no_benchmark_kpi(self):
         result = var_below_average_kpi([], self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_benchmark_kpi_is_none(self):
         result = var_below_average_kpi(None, self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
