@@ -14,6 +14,7 @@ from remark_airflow.insights.impl.vars import (
     var_kpi_for_benchmark,
     var_low_performing_kpi,
     var_below_average_kpi,
+    var_high_performing_kpi,
 )
 
 
@@ -259,4 +260,31 @@ class BelowAverageKPITestCase(TestCase):
 
     def test_benchmark_kpi_is_none(self):
         result = var_below_average_kpi(None, self.kpis)
+        self.assertEqual(result, None)
+
+
+class VarHighPerformingKPITestCase(TestCase):
+    def setUp(self) -> None:
+        self.kpis = {"inqs": 1.01, "inq_tou": 0.75, "tous": 1, "tou_app": 0.5}
+        self.benchmark_kpis = [
+            {"kpi": "inqs", "threshold_3": 10},
+            {"kpi": "inq_tou", "threshold_3": 0.5},
+            {"kpi": "tous", "threshold_3": 5},
+            {"kpi": "tou_app", "threshold_3": 0.5},
+        ]
+
+    def test_have_kpi(self):
+        result = var_high_performing_kpi(self.benchmark_kpis, self.kpis)
+        self.assertEqual(result, "inq_tou")
+
+    def test_no_kpi(self):
+        result = var_high_performing_kpi(self.benchmark_kpis, {})
+        self.assertEqual(result, None)
+
+    def test_no_benchmark_kpi(self):
+        result = var_high_performing_kpi([], self.kpis)
+        self.assertEqual(result, None)
+
+    def test_benchmark_kpi_is_none(self):
+        result = var_high_performing_kpi(None, self.kpis)
         self.assertEqual(result, None)

@@ -398,3 +398,22 @@ def var_below_average_kpi(benchmark_kpis, kpis):
 
     min_kpi = min(benchmark_list, key=lambda kpi: kpi["value"])
     return min_kpi["name"]
+
+
+def var_high_performing_kpi(benchmark_kpis, kpis):
+    if not benchmark_kpis or not kpis:
+        return None
+
+    benchmark_list = []
+    for b_kpi in benchmark_kpis:
+        threshold_3 = decimal.Decimal(b_kpi["threshold_3"])
+        kpi_name = b_kpi["kpi"]
+        if b_kpi["threshold_3"] <= kpis[kpi_name]:
+            kpi_value = decimal.Decimal(kpis[kpi_name])
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_3})
+
+    if not benchmark_list:
+        return None
+
+    min_kpi = max(benchmark_list, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]
