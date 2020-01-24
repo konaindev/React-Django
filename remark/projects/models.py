@@ -306,6 +306,18 @@ class Project(models.Model):
         Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="admin_of",
     )
 
+    DAY_OF_WEEK_CHOICES = [
+        ("Monday", "M"),
+        ("Tuesday", "T"),
+        ("Wednesday", "W"),
+        ("Thursday", "Th"),
+        ("Friday", "F"),
+        ("Saturday", "Sa"),
+        ("Sunday", "Su"),
+    ]
+
+    reporting_day = models.CharField(max_length=9, choices=DAY_OF_WEEK_CHOICES, default="Monday")
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cache_subscription_fields()

@@ -47,6 +47,8 @@ DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
 PATH_REF = "."
 if os.getenv("COMPOSER_AIRFLOW_ENV", False):
     PATH_REF = "/home/airflow/gcs/dags"
+if os.getenv("LOCAL_AIRFLOW", False):
+    PATH_REF = "/usr/local/airflow/dags"
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -336,10 +338,11 @@ locals()['DATABASES']['default'] = dj_database_url.config(
 if DOCKER_COMPOSE:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            # 'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'HOST': 'db',
+            'HOST': 'postgres',
             'PORT': 5432,
         }
     }

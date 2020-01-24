@@ -16,7 +16,8 @@ services:
         - LANG=C.UTF-8
     build: .
     command: >
-        bash -c "pipenv run python manage.py migrate &&
+        bash -c "pipenv run python manage.py makemigrations &&
+                 pipenv run python manage.py migrate &&
                  pipenv run python manage.py loaddata data/dumped/latest.json &&
                  npm rebuild node-sass && 
                  nohup yarn run run-build-ui > out.log &
@@ -25,7 +26,7 @@ services:
       - .:/code
     ports:
       - "8000:8000"
-      - "8080:8080"
+      - "8090:8090"
     depends_on:
       - db
       - cache
