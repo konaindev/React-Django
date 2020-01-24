@@ -15,5 +15,6 @@ export const performanceProps = {
   fetchingReports: false,
   isAddTagInput: false,
   suggestedTags: [],
-  insights
+  baselineInsights: insights,
+  performanceInsights: insights
 };

@@ -29,7 +29,9 @@ $add-member-spacing: 28px;
 
 .project-report-page__subnav {
     display: flex;
+    height: $s11;
     padding-top: 1.5rem;
+    box-sizing: content-box;
     align-items: center;
     justify-content: space-between;
 }
