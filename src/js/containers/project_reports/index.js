@@ -100,7 +100,7 @@ const mapState = state => ({
   isAddTagInput: state.projectReports.isAddTagInput,
   suggestedTags: state.projectReports.suggestedTags,
   performanceInsights: state.insights.performanceInsights,
-  performanceInsightsLoaded: state.insights.performanceInsightsLoaded
+  performanceInsightsLoaded: state.insights.performanceInsightsLoaded,
   baselineInsights: state.insights.baselineInsights,
   baselineInsightsLoaded: state.insights.baselineInsightsLoaded
 });
