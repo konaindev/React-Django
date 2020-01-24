@@ -73,6 +73,7 @@ class ModalForm extends React.PureComponent {
               touched,
               values,
               handleBlur,
+              handleChange,
               setFieldTouched,
               setFieldValue
             }) => (
@@ -83,8 +84,10 @@ class ModalForm extends React.PureComponent {
                     touched,
                     values,
                     handleBlur,
+                    handleChange,
                     setFieldTouched,
-                    setFieldValue
+                    setFieldValue,
+                    onError: this.onError
                   })}
                 </div>
                 <div className="modal-form__controls">

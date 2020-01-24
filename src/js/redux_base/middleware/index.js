@@ -16,6 +16,7 @@ import {
 import {
   getPropertiesData,
   updateCompanyData,
+  updateOfficeData,
   updateUserProfileData,
   updateReportsSettingsData,
   updateSecurityData
@@ -351,7 +352,8 @@ export const updateAccountSecurity = store => next => action => {
 export const updateAccountProfile = store => next => action => {
   const accountApiMap = {
     API_ACCOUNT_PROFILE_USER: updateUserProfileData,
-    API_ACCOUNT_PROFILE_COMPANY: updateCompanyData
+    API_ACCOUNT_PROFILE_COMPANY: updateCompanyData,
+    API_ACCOUNT_PROFILE_OFFICE: updateOfficeData
   };
   const callApi = accountApiMap[action.type];
   if (callApi) {

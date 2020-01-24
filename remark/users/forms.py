@@ -166,7 +166,6 @@ class CompanyProfileForm(forms.Form):
 
 
 class OfficeProfileForm(forms.Form):
-    company = forms.CharField(max_length=255, required=True)
     office_street = forms.CharField(max_length=255, required=True)
     office_city = forms.CharField(max_length=255, required=True)
     office_state = forms.CharField(max_length=15, required=False)

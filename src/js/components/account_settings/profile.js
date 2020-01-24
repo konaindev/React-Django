@@ -547,6 +547,7 @@ export default class Profile extends React.PureComponent {
               <div className="account-settings__tab-subsection">
                 <div className="account-settings__tab-title">
                   Company Info
+                  {this.showCompanyMessage()}
                   <Button
                     className="account-settings__edit-button"
                     color="secondary-gray"
@@ -563,8 +564,8 @@ export default class Profile extends React.PureComponent {
                     loadCompany={this.loadCompany}
                     onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
-                    onSuccess={this.setCompanySuccess}
                     onSave={this.onSaveCompany}
+                    onSuccess={this.setCompanySuccess}
                   />
                 </div>
                 <div className="account-settings__field-grid  account-settings__field-grid--col-3">
@@ -581,11 +582,11 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                 </div>
-                {this.showCompanyMessage()}
               </div>
               <div className="account-settings__tab-subsection">
                 <div className="account-settings__tab-title">
                   Office Info
+                  {this.showOfficeMessage()}
                   <Button
                     className="account-settings__edit-button"
                     color="secondary-gray"
@@ -604,6 +605,8 @@ export default class Profile extends React.PureComponent {
                     gb_county_list={this.props.gb_county_list}
                     loadAddress={this.loadAddress}
                     onClose={this.closeOfficeModal}
+                    onSuccess={this.setOfficeSuccess}
+                    dispatch={this.props.dispatch}
                   />
                 </div>
                 <div className="account-settings__value-field">
@@ -661,7 +664,6 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                 </div>
-                {this.showOfficeMessage()}
               </div>
             </div>
           )}
