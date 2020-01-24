@@ -54,6 +54,12 @@ class ProjectReportsContainer extends PureComponent {
       return newState;
     }
 
+    if (reportType === "performance" && !nextProps.performanceInsightsLoaded) {
+      nextProps.dispatch(
+        insightsAction.requestPerformanceInsights({ projectId })
+      );
+    }
+
     if (reportType === "baseline" && !nextProps.baselineInsightsLoaded) {
       nextProps.dispatch(insightsAction.requestBaselineInsights({ projectId }));
     }
@@ -94,6 +100,7 @@ const mapState = state => ({
   isAddTagInput: state.projectReports.isAddTagInput,
   suggestedTags: state.projectReports.suggestedTags,
   performanceInsights: state.insights.performanceInsights,
+  performanceInsightsLoaded: state.insights.performanceInsightsLoaded,
   baselineInsights: state.insights.baselineInsights,
   baselineInsightsLoaded: state.insights.baselineInsightsLoaded
 });

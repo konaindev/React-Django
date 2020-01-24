@@ -2,6 +2,8 @@ import functools
 
 from graphkit import operation
 
+from remark.projects.constants import BENCHMARK_KPIS
+
 
 def to_percentage(value):
     percentage = value * 100
@@ -19,6 +21,11 @@ def format_percent(value):
     return f"{value:.0%}"
 
 
+def benchmark_kpi_humanize(kpi_key):
+    benchmark_kpis_dict = {v[0]: v[1] for v in BENCHMARK_KPIS}
+    return benchmark_kpis_dict[kpi_key]
+
+
 def hash_dict(func):
     """Transform mutable dictionnary
     Into immutable
@@ -29,9 +36,15 @@ def hash_dict(func):
         def __hash__(self):
             return hash(frozenset(self.items()))
 
+    class HList(list):
+        def __hash__(self):
+            h_list = [HDict(item) if isinstance(item, dict) else item for item in self]
+            return hash(frozenset(h_list))
+
     @functools.wraps(func)
     def wrapped(*args, **kwargs):
         args = tuple([HDict(arg) if isinstance(arg, dict) else arg for arg in args])
+        args = tuple([HList(arg) if isinstance(arg, list) else arg for arg in args])
         kwargs = {k: HDict(v) if isinstance(v, dict) else v for k, v in kwargs.items()}
         return func(*args, **kwargs)
 

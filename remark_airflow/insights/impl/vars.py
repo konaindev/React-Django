@@ -1,8 +1,11 @@
+import decimal
 from datetime import timedelta
 
+from django.db.models import Q
 from graphkit import compose
 
 from remark.analytics.google_analytics import get_project_usv_sources
+from remark.geo.models import Country
 from remark.lib.stats import health_check
 from remark.lib.time_series.computed import (
     leased_rate_graph,
@@ -14,7 +17,7 @@ from remark.portfolio.api.strategy import (
     get_targets_for_project,
 )
 from remark.projects.constants import HEALTH_STATUS
-from remark.projects.models import Period, TargetPeriod, Project
+from remark.projects.models import Period, TargetPeriod, Project, CountryBenchmark
 
 from remark_airflow.insights.impl.utils import health_standard, cop
 
@@ -310,3 +313,138 @@ def var_top_usv_referral(project, start, end):
             return "Direct transitions"
         return source
     return None
+
+
+def var_kpi_for_benchmark(computed_kpis):
+    if not computed_kpis:
+        return None
+    kpis = {
+        "usvs": computed_kpis.get("usv_cost"),  # "Volume of USV"
+        "usv_inq": computed_kpis.get("usv_inq"),  # "USV>INQ"
+        "inqs": computed_kpis.get("inq_cost"),  # "Volume of INQ"
+        "inq_tou": computed_kpis.get("inq_tou"),  # "INQ>TOU"
+        "tous": computed_kpis.get("tou_cost"),  # "Volume of TOU"
+        "tou_app": computed_kpis.get("tou_app"),  # "TOU>APP"
+        "apps": computed_kpis.get("app_cost"),  # "Volume of APP"
+        "app_exe": computed_kpis.get("app_exe"),  # "APP > EXE"
+        "retention_rate": computed_kpis.get("renewal_rate"),  # "Retention Rate"
+    }
+    return {k: v for k, v in kpis.items() if v is not None}
+
+
+def var_benchmark_kpis(kpis, project, start, end):
+    if kpis is None:
+        return []
+
+    try:
+        country_code = project.property.geo_address.country
+        country = Country.objects.get(code=country_code)
+        country_id = country.id
+    except Country.DoesNotExist:
+        country_id = 233
+
+    benchmark_kpis = (
+        CountryBenchmark.objects.filter(
+            Q(
+                (Q(start__gte=start) & Q(start__lte=end)),
+                (Q(end__gte=start) & Q(end__lte=end)),
+            ),
+            country_id=country_id,
+            kpi__in=kpis.keys(),
+        )
+        .order_by("kpi", "-start")
+        .distinct("kpi")
+    )
+
+    if not benchmark_kpis:
+        return []
+    else:
+        return list(benchmark_kpis.values())
+
+
+def var_low_performing_kpi(benchmark_kpis, kpis):
+    benchmark_list = []
+    if not benchmark_kpis or not kpis:
+        return None
+
+    for b_kpi in benchmark_kpis:
+        kpi_name = b_kpi["kpi"]
+        threshold_0 = decimal.Decimal(b_kpi["threshold_0"])
+        if kpis[kpi_name] <= threshold_0:
+            kpi_value = decimal.Decimal(kpis[kpi_name])
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_0})
+
+    if not benchmark_list:
+        return None
+
+    min_kpi = min(benchmark_list, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]
+
+
+def var_below_average_kpi(benchmark_kpis, kpis):
+    if not benchmark_kpis or not kpis:
+        return None
+
+    benchmark_list = []
+    is_low_performing_kpi = False
+    for b_kpi in benchmark_kpis:
+        kpi_name = b_kpi["kpi"]
+        threshold_1 = decimal.Decimal(b_kpi["threshold_1"])
+        threshold_0 = decimal.Decimal(b_kpi["threshold_0"])
+        kpi_value = decimal.Decimal(kpis[kpi_name])
+        if kpi_value <= threshold_0:
+            is_low_performing_kpi = True
+            break
+
+        if threshold_0 <= kpi_value <= threshold_1:
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_1})
+
+    if not benchmark_list or is_low_performing_kpi:
+        return None
+
+    min_kpi = min(benchmark_list, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]
+
+
+def var_high_performing_kpi(benchmark_kpis, kpis):
+    if not benchmark_kpis or not kpis:
+        return None
+
+    benchmark_list = []
+    for b_kpi in benchmark_kpis:
+        threshold_3 = decimal.Decimal(b_kpi["threshold_3"])
+        kpi_name = b_kpi["kpi"]
+        if b_kpi["threshold_3"] <= kpis[kpi_name]:
+            kpi_value = decimal.Decimal(kpis[kpi_name])
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_3})
+
+    if not benchmark_list:
+        return None
+
+    min_kpi = max(benchmark_list, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]
+
+
+def var_above_average_kpi(benchmark_kpis, kpis):
+    if not benchmark_kpis or not kpis:
+        return None
+
+    benchmark_list = []
+    is_high_performing_kpi = False
+    for b_kpi in benchmark_kpis:
+        threshold_3 = decimal.Decimal(b_kpi["threshold_3"])
+        threshold_2 = decimal.Decimal(b_kpi["threshold_2"])
+        kpi_name = b_kpi["kpi"]
+        kpi_value = decimal.Decimal(kpis[kpi_name])
+        if threshold_3 <= kpi_value:
+            is_high_performing_kpi = True
+            break
+
+        if threshold_2 <= kpi_value <= threshold_3:
+            benchmark_list.append({"name": kpi_name, "value": kpi_value / threshold_2})
+
+    if not benchmark_list or is_high_performing_kpi:
+        return None
+
+    min_kpi = max(benchmark_list, key=lambda kpi: kpi["value"])
+    return min_kpi["name"]

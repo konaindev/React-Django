@@ -8,11 +8,20 @@ from googleapiclient.http import HttpMockSequence
 from graphkit import operation
 
 from remark.factories.analytics import create_google_provider
+from remark.factories.benchmarks import generate_benchmarks
 from remark.factories.periods import create_periods
 from remark.factories.projects import create_project
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
-from remark_airflow.insights.impl.projects.insights import (retention_rate_health, top_usv_referral)
+from remark_airflow.insights.impl.projects.insights import (
+    retention_rate_health,
+    top_usv_referral,
+    low_performing,
+    kpi_below_average,
+    kpi_high_performing,
+    kpi_above_average,
+)
+from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
 from .projects import get_project_facts, get_project_insights
 
@@ -330,4 +339,326 @@ class TopUSVTestCase(TestCase):
         self.assertFalse(project_facts["trigger_has_data_google_analytics"])
 
         result = top_usv_referral.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class LowPerformingTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def generate_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
+            target_period_params={
+                "target_lease_renewal_notices": 3,
+                "target_lease_vacation_notices": 2,
+            },
+        )
+
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = low_performing.graph(args)
+
+        self.assertEqual(project_facts["var_low_performing_kpi"], "apps")
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+
+        result = low_performing.evaluate(project_facts)
+        expected_text = "Volume of APP is your worst performing metric compared to your Remarkably customer peer set average, this period."
+        self.assertEqual(result[0], "low_performing")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_reputation_building": 3928.90,
+                "lease_applications": 3,
+                "tours": 11,
+            },
+            target_period_params={"target_lease_applications": 5, "target_tours": 10},
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = low_performing.graph(args)
+
+        self.assertEqual(project_facts["var_low_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = low_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = low_performing.graph(args)
+        self.assertEqual(project_facts["var_low_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = low_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_benchmarks(self):
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = low_performing.graph(args)
+        self.assertEqual(project_facts["var_low_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = low_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi_and_benchmarks(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = low_performing.graph(args)
+        self.assertEqual(project_facts["var_low_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = low_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIBelowAverageTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def generate_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_reputation_building": 3928.90,
+                "lease_applications": 3,
+                "tours": 11,
+            },
+            target_period_params={"target_lease_applications": 5, "target_tours": 10},
+        )
+
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_below_average.graph(args)
+
+        self.assertEqual(project_facts["var_below_average_kpi"], "tou_app")
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+
+        result = kpi_below_average.evaluate(project_facts)
+        expected_text = "TOU > APP is your worst performing metric compared to your Remarkably customer peer set average, this period."
+        self.assertEqual(result[0], "kpi_below_average")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
+            target_period_params={
+                "target_lease_renewal_notices": 3,
+                "target_lease_vacation_notices": 2,
+            },
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_below_average.graph(args)
+
+        self.assertEqual(project_facts["var_below_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_below_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_below_average.graph(args)
+        self.assertEqual(project_facts["var_below_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_below_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_benchmarks(self):
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_below_average.graph(args)
+        self.assertEqual(project_facts["var_below_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_below_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi_and_benchmarks(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_below_average.graph(args)
+        self.assertEqual(project_facts["var_below_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_below_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIHighPerformingTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def generate_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_reputation_building": 3928.90,
+                "lease_applications": 3,
+                "tours": 11,
+            },
+            target_period_params={"target_lease_applications": 5, "target_tours": 10},
+        )
+
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_high_performing.graph(args)
+
+        self.assertEqual(project_facts["var_high_performing_kpi"], "apps")
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+
+        result = kpi_high_performing.evaluate(project_facts)
+        expected_text = "Volume of APP is your best performing metric compared to your Remarkably customer peer set average, this period."
+        self.assertEqual(result[0], "kpi_high_performing")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        create_periods(self.project, start=self.start, end=self.end)
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_high_performing.graph(args)
+
+        self.assertEqual(project_facts["var_high_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_high_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_high_performing.graph(args)
+        self.assertEqual(project_facts["var_high_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_high_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_benchmarks(self):
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_high_performing.graph(args)
+        self.assertEqual(project_facts["var_high_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_high_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi_and_benchmarks(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_high_performing.graph(args)
+        self.assertEqual(project_facts["var_high_performing_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_high_performing.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIAboveAverageTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def generate_kpi(self):
+        create_periods(self.project, start=self.start, end=self.end)
+
+    def test_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_above_average.graph(args)
+
+        self.assertEqual(project_facts["var_above_average_kpi"], "usv_inq")
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+
+        result = kpi_above_average.evaluate(project_facts)
+        expected_text = "USV > INQ is your best performing metric compared to your Remarkably customer peer set average, this period."
+        self.assertEqual(result[0], "kpi_above_average")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_reputation_building": 3928.90,
+                "lease_applications": 3,
+                "tours": 11,
+            },
+            target_period_params={"target_lease_applications": 5, "target_tours": 10},
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_above_average.graph(args)
+
+        self.assertEqual(project_facts["var_above_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_above_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        generate_benchmarks(stub_benchmark_kpis)
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_above_average.graph(args)
+        self.assertEqual(project_facts["var_above_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_above_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_benchmarks(self):
+        self.generate_kpi()
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_above_average.graph(args)
+        self.assertEqual(project_facts["var_above_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_above_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi_and_benchmarks(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = kpi_above_average.graph(args)
+        self.assertEqual(project_facts["var_above_average_kpi"], None)
+        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+
+        result = kpi_above_average.evaluate(project_facts)
         self.assertIsNone(result)
