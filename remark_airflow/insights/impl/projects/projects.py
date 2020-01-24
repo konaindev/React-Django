@@ -35,12 +35,12 @@ def get_and_save_project_facts(
     insights = get_project_insights(project_facts, performance_insights)
 
     try:
-        baseline_ins = StorageModel.objects.get(
+        insight_obj = StorageModel.objects.get(
             project_id=project_id, start=start, end=end
         )
-        baseline_ins.facts = project_facts
-        baseline_ins.insights = insights
-        baseline_ins.save()
+        insight_obj.facts = project_facts
+        insight_obj.insights = insights
+        insight_obj.save()
     except StorageModel.DoesNotExist:
         StorageModel.objects.create(
             project_id=project_id,
