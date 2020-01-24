@@ -295,6 +295,7 @@ class VarHighPerformingKPITestCase(TestCase):
     def test_benchmark_kpi_is_none(self):
         result = var_high_performing_kpi(None, self.kpis)
         self.assertEqual(result, None)
+        self.assertIsNone(result)
 
 
 class VarAboveAverageKPITestCase(TestCase):
