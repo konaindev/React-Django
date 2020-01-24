@@ -60,7 +60,14 @@ class ProjectReportsContainer extends PureComponent {
       );
     }
 
+    if (reportType === "baseline" && !nextProps.baselineInsightsLoaded) {
+      nextProps.dispatch(insightsAction.requestBaselineInsights({ projectId }));
+    }
     return null;
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(insightsAction.resetState());
   }
 
   render() {
@@ -78,7 +85,8 @@ class ProjectReportsContainer extends PureComponent {
         isAddTagInput={this.props.isAddTagInput}
         suggestedTags={this.props.suggestedTags}
         dispatch={this.props.dispatch}
-        insights={this.props.performanceInsights}
+        performanceInsights={this.props.performanceInsights}
+        baselineInsights={this.props.baselineInsights}
       />
     );
   }
@@ -93,6 +101,8 @@ const mapState = state => ({
   suggestedTags: state.projectReports.suggestedTags,
   performanceInsights: state.insights.performanceInsights,
   performanceInsightsLoaded: state.insights.performanceInsightsLoaded
+  baselineInsights: state.insights.baselineInsights,
+  baselineInsightsLoaded: state.insights.baselineInsightsLoaded
 });
 
 export default withRouter(connect(mapState)(ProjectReportsContainer));

@@ -161,6 +161,7 @@ jobs:
             gsutil rsync -d -r ./remark_airflow/insights gs://"$BUCKET"/dags/remark_airflow/insights
 
 
+
   # Tests validity of dags and tasks (does NOT test logic...logic testing covered in build step)
   airflow-testing:
     docker:
@@ -177,6 +178,15 @@ jobs:
               --location us-central1 \
               --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
               echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run:
+          name: Check for django_dag file in dags folder
+          command:    |
+            FILE="gs://$BUCKET/dags/django_dag.py"
+            if [ ! "$(gsutil ls $FILE)" ]; then
+              gsutil cp ./remark_airflow/dags/django_dag.py gs://$BUCKET/dags
+            else
+              echo "$FILE exists"
+            fi
       - run:
           name: Copy dags folder to data/test folder in composer
           command:  |
@@ -383,24 +393,6 @@ workflows:
               ignore:
                 - staging
                 - master
-      - airflow-setup:
-          requires:
-            - build
-          filters:
-            branches:
-              only: l2-staging
-      - airflow-testing:
-          requires:
-            - airflow-setup
-          filters:
-            branches:
-              only: l2-staging
-      - airflow-deploy:
-          requires:
-            - airflow-testing
-          filters:
-            branches:
-              only: l2-staging
 
 
   build-deploy:
@@ -457,15 +449,21 @@ workflows:
           type: approval
           requires:
             - build
-      - airflow-setup:
+      - deploy-production:
           context: deploy-production
           requires:
             - hold
           filters:
             branches:
               only: master
-      - deploy-production:
+      - airflow-setup:
           context: deploy-production
+          requires:
+            - deploy-production
+          filters:
+            branches:
+              only: master
+      - airflow-deploy:
           requires:
             - airflow-setup
           filters:

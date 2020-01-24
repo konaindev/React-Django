@@ -44,7 +44,8 @@ export class ProjectReportPage extends Component {
     fetchingReports: PropTypes.bool,
     historyPush: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    insights: PropTypes.array
+    performanceInsights: PropTypes.array,
+    baselineInsights: PropTypes.array
   };
 
   static defaultProps = {
@@ -54,8 +55,16 @@ export class ProjectReportPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showInsights: false
+      showInsights: {
+        performance: false,
+        baseline: false
+      }
     };
+  }
+
+  get isShowInsightsButton() {
+    const { reportType } = this.props;
+    return reportType === "performance" || reportType === "baseline";
   }
 
   getBuildingImage = () => {
@@ -93,7 +102,7 @@ export class ProjectReportPage extends Component {
               />
             </div>
             <div className="project-report-page__subnav-right">
-              {reportType === "performance" && (
+              {this.isShowInsightsButton && (
                 <ButtonLabel
                   className="insights-button"
                   label="beta"
@@ -159,12 +168,20 @@ export class ProjectReportPage extends Component {
     switch (reportType) {
       case "baseline":
         return (
-          <CommonReport
-            type="baseline"
-            report={report}
-            reportType="baseline"
-            dateSpan={<ReportDateSpan name="Baseline" dates={report.dates} />}
-          />
+          <div>
+            <Collapsible isOpen={this.state.showInsights.baseline}>
+              <InsightsReport
+                insights={this.props.baselineInsights}
+                onClose={this.onCloseInsights}
+              />
+            </Collapsible>
+            <CommonReport
+              type="baseline"
+              report={report}
+              reportType="baseline"
+              dateSpan={<ReportDateSpan name="Baseline" dates={report.dates} />}
+            />
+          </div>
         );
       case "market":
         return <TotalAddressableMarket {...report} />;
@@ -175,9 +192,9 @@ export class ProjectReportPage extends Component {
       case "performance":
         return (
           <div>
-            <Collapsible isOpen={this.state.showInsights}>
+            <Collapsible isOpen={this.state.showInsights.performance}>
               <InsightsReport
-                insights={this.props.insights}
+                insights={this.props.performanceInsights}
                 onClose={this.onCloseInsights}
               />
             </Collapsible>
@@ -217,11 +234,17 @@ export class ProjectReportPage extends Component {
   onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
 
   onCloseInsights = () => {
-    this.setState({ showInsights: false });
+    const { reportType } = this.props;
+    const showInsights = { ...this.state.showInsights };
+    showInsights[reportType] = false;
+    this.setState({ showInsights });
   };
 
   toggleInsights = () => {
-    this.setState({ showInsights: !this.state.showInsights });
+    const { reportType } = this.props;
+    const showInsights = { ...this.state.showInsights };
+    showInsights[reportType] = !this.state.showInsights[reportType];
+    this.setState({ showInsights });
   };
 
   render() {

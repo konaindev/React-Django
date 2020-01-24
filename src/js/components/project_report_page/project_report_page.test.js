@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 import ProjectReportPage from "./index";
-import { performanceProps } from "./props";
+import { performanceProps, baselineProps } from "./props";
 
 const _ = () => createStore(() => ({}));
 
@@ -20,6 +20,19 @@ describe("ProjectReportPage", () => {
         <Provider store={_()}>
           <MemoryRouter>
             <ProjectReportPage {...performanceProps} />
+          </MemoryRouter>
+        </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders baseline report", () => {
+    const tree = renderer
+      .create(
+        <Provider store={_()}>
+          <MemoryRouter>
+            <ProjectReportPage {...baselineProps} />
           </MemoryRouter>
         </Provider>
       )
