@@ -28,11 +28,9 @@ def get_project_insights(project_facts, project_insights):
     return final_insights
 
 
-def get_and_save_project_facts(
-    performance_insights, project_id, start, end, StorageModel
-):
-    project_facts = get_project_facts(performance_insights, project_id, start, end)
-    insights = get_project_insights(project_facts, performance_insights)
+def get_and_save_project_facts(insights_list, project_id, start, end, StorageModel):
+    project_facts = get_project_facts(insights_list, project_id, start, end)
+    insights = get_project_insights(project_facts, insights_list)
 
     try:
         insight_obj = StorageModel.objects.get(
