@@ -1,5 +1,5 @@
 import { project, report_links } from "../project_page/props";
-import { performanceReport } from "../common_report/props";
+import { performanceReport, baselineReport } from "../common_report/props";
 import { insights } from "../insights_report/props";
 
 const emptyFun = () => {};
@@ -15,5 +15,14 @@ export const performanceProps = {
   fetchingReports: false,
   isAddTagInput: false,
   suggestedTags: [],
-  insights
+  performanceInsights: insights
+};
+
+export const baselineProps = {
+  project: { ...project, report_links },
+  reportType: "baseline",
+  historyPush: emptyFun,
+  dispatch: emptyFun,
+  report: baselineReport,
+  baselineInsights: insights
 };
