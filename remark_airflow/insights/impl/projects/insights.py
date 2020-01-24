@@ -40,6 +40,7 @@ from remark_airflow.insights.impl.vars import (
     var_low_performing_kpi,
     var_below_average_kpi,
     var_high_performing_kpi,
+    var_above_average_kpi,
 )
 
 
@@ -235,5 +236,19 @@ kpi_high_performing = Insight(
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_high_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
         cop(trigger_have_benchmark_kpi, var_high_performing_kpi),
+    ],
+)
+
+kpi_above_average = Insight(
+    name="kpi_above_average",
+    template="{{ var_above_average_kpi | benchmark_kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
+    triggers=["trigger_have_benchmark_kpi"],
+    graph=[
+        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_computed_kpis, var_base_kpis),
+        cop(var_kpi_for_benchmark, var_computed_kpis),
+        cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
+        cop(var_above_average_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
+        cop(trigger_have_benchmark_kpi, var_above_average_kpi),
     ],
 )
