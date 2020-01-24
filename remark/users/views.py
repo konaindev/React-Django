@@ -448,6 +448,10 @@ class CompanyProfileView(APIView):
 
     def make_office(self, person, business):
         office = Office(business=business)
+        offices = list(business.office_set.all())
+        # Get the first office in the business
+        if len(offices):
+            office = offices[0]
         person.office = office
         office.save()
         person.save()
@@ -486,6 +490,15 @@ class CompanyProfileView(APIView):
 class OfficeProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def make_office(self, person, address):
+        office = Office(address=address)
+        # Get the first by given address
+        offices = list(address.office_set.all())
+        if len(offices):
+            office = offices[0]
+        person.office = office
+        return office
+
     def post(self, request):
         params = json.loads(request.body)
         form = OfficeProfileForm(params)
@@ -509,13 +522,11 @@ class OfficeProfileView(APIView):
             person = user.person
             office = person.office
             if not office:
-                office = Office()
-                person.office = office
+                office = self.make_office(person, address)
         except Person.DoesNotExist:
-            office = Office()
-            person = Person(user=user, email=user.email, office=office)
+            person = Person(user=user, email=user.email)
+            office = self.make_office(person, address)
 
-        office.address = address
         office.name = data["office_name"]
         office.office_type = data["office_type"]
         office.save()
