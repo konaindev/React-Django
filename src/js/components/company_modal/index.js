@@ -15,7 +15,7 @@ class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
     data: PropTypes.shape({
-      company: PropTypes.string,
+      company: PropTypes.object,
       company_roles: PropTypes.array
     }),
     companyRolesOptions: PropTypes.array,

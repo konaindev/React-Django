@@ -29,7 +29,7 @@ class OfficeModal extends React.PureComponent {
       office_state: PropTypes.object,
       office_zip: PropTypes.string,
       office_name: PropTypes.string,
-      office_type: PropTypes.number
+      office_type: PropTypes.object
     }),
     office_options: Select.optionsType,
     office_countries: Select.optionsType,
