@@ -9,8 +9,11 @@ with DjangoDAG(
     dag_id="baseline", default_args=default_args, schedule_interval=None
 ) as dag:
 
-    from insights.impl.projects.projects import get_project_facts, get_project_insights
-    from insights.impl.projects.insights import top_usv_referral
+    from remark_airflow.insights.impl.projects.projects import (
+        get_project_facts,
+        get_project_insights,
+    )
+    from remark_airflow.insights.impl.projects.insights import top_usv_referral
     from remark.projects.models import Project
     from remark.insights.models import BaselineInsights
 

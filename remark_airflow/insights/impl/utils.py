@@ -53,8 +53,8 @@ def hash_dict(func):
 
 # We want to cache the response to operations if the arguments are the same
 # cache_operation -> cop
-def cop(func, *needs):
-    name = func.__name__
+def cop(func, *needs, name=""):
+    name = name or func.__name__
     func = hash_dict(functools.lru_cache()(func))
     actual_needs = []
     for need in needs:

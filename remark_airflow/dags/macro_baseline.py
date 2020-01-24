@@ -9,13 +9,25 @@ with DjangoDAG(
     dag_id="macro_baseline", default_args=default_args, schedule_interval=None
 ) as dag:
 
-    from remark_airflow.insights.impl.projects.insights import top_usv_referral
+    from remark_airflow.insights.impl.projects.insights import (
+        top_usv_referral,
+        low_performing,
+        kpi_below_average,
+        kpi_high_performing,
+        kpi_above_average,
+    )
     from remark_airflow.insights.impl.projects.projects import (
         get_and_save_project_facts,
     )
     from remark.insights.models import BaselineInsights
 
-    baseline_insights = [top_usv_referral]
+    baseline_insights = [
+        top_usv_referral,
+        low_performing,
+        kpi_below_average,
+        kpi_high_performing,
+        kpi_above_average,
+    ]
 
     def macro_baseline_insights(**kwargs):
         conf = kwargs["dag_run"].conf

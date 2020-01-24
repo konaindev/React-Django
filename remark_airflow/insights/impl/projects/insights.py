@@ -199,14 +199,14 @@ top_usv_referral = Insight(
 low_performing = Insight(
     name="low_performing",
     template="{{ var_low_performing_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
-    triggers=["trigger_have_benchmark_kpi"],
+    triggers=["trigger_low_performing"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_low_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_low_performing_kpi),
+        cop(trigger_have_benchmark_kpi, var_low_performing_kpi, name="trigger_low_performing"),
     ],
 )
 
@@ -214,41 +214,41 @@ low_performing = Insight(
 kpi_below_average = Insight(
     name="kpi_below_average",
     template="{{ var_below_average_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
-    triggers=["trigger_have_benchmark_kpi"],
+    triggers=["trigger_below_average"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_below_average_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_below_average_kpi),
+        cop(trigger_have_benchmark_kpi, var_below_average_kpi, name="trigger_below_average"),
     ],
 )
 
 kpi_high_performing = Insight(
     name="kpi_high_performing",
     template="{{ var_high_performing_kpi | benchmark_kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
-    triggers=["trigger_have_benchmark_kpi"],
+    triggers=["trigger_high_performing"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_high_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_high_performing_kpi),
+        cop(trigger_have_benchmark_kpi, var_high_performing_kpi, name="trigger_high_performing"),
     ],
 )
 
 kpi_above_average = Insight(
     name="kpi_above_average",
     template="{{ var_above_average_kpi | benchmark_kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
-    triggers=["trigger_have_benchmark_kpi"],
+    triggers=["trigger_above_average"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_above_average_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_above_average_kpi),
+        cop(trigger_have_benchmark_kpi, var_above_average_kpi, name="trigger_above_average"),
     ],
 )

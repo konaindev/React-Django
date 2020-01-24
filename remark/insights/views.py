@@ -5,8 +5,7 @@ from rest_framework.views import APIView
 from remark.lib.logging import getLogger
 from remark.projects.views import ProjectCustomPermission
 
-from .models import PerformanceInsights
-
+from .models import PerformanceInsights, BaselineInsights
 
 logger = getLogger(__name__)
 
@@ -47,3 +46,40 @@ class PerformanceInsightsView(APIView):
             insights = []
 
         return Response({"performance_insights": insights})
+
+
+class BaselineInsightsView(APIView):
+    ORDER_INSIGHTS = [
+        "top_usv_referral",
+        "top_usv_referral",
+        "low_performing",
+        "kpi_below_average",
+        "kpi_high_performing",
+        "kpi_above_average",
+    ]
+
+    allow_anonymous = False
+
+    permission_classes = [ProjectCustomPermission]
+
+    def get(self, request, public_id):
+        baseline_insights = (
+            BaselineInsights.objects.filter(project_id=public_id)
+            .order_by("-start")
+            .first()
+        )
+
+        if baseline_insights:
+            insights = [
+                {
+                    "start": baseline_insights.start,
+                    "end": baseline_insights.end,
+                    "text": baseline_insights.insights[o],
+                }
+                for o in BaselineInsightsView.ORDER_INSIGHTS
+                if baseline_insights.insights.get(o)
+            ]
+        else:
+            insights = []
+
+        return Response({"baseline_insights": insights})

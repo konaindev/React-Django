@@ -367,7 +367,7 @@ class LowPerformingTestCase(TestCase):
         project_facts = low_performing.graph(args)
 
         self.assertEqual(project_facts["var_low_performing_kpi"], "apps")
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+        self.assertEqual(project_facts["trigger_low_performing"], True)
 
         result = low_performing.evaluate(project_facts)
         expected_text = "Volume of APP is your worst performing metric compared to your Remarkably customer peer set average, this period."
@@ -392,7 +392,7 @@ class LowPerformingTestCase(TestCase):
         project_facts = low_performing.graph(args)
 
         self.assertEqual(project_facts["var_low_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_low_performing"], False)
 
         result = low_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -402,7 +402,7 @@ class LowPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = low_performing.graph(args)
         self.assertEqual(project_facts["var_low_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_low_performing"], False)
 
         result = low_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -412,7 +412,7 @@ class LowPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = low_performing.graph(args)
         self.assertEqual(project_facts["var_low_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_low_performing"], False)
 
         result = low_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -421,7 +421,7 @@ class LowPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = low_performing.graph(args)
         self.assertEqual(project_facts["var_low_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_low_performing"], False)
 
         result = low_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -453,7 +453,7 @@ class KPIBelowAverageTestCase(TestCase):
         project_facts = kpi_below_average.graph(args)
 
         self.assertEqual(project_facts["var_below_average_kpi"], "tou_app")
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+        self.assertEqual(project_facts["trigger_below_average"], True)
 
         result = kpi_below_average.evaluate(project_facts)
         expected_text = "TOU > APP is your worst performing metric compared to your Remarkably customer peer set average, this period."
@@ -477,7 +477,7 @@ class KPIBelowAverageTestCase(TestCase):
         project_facts = kpi_below_average.graph(args)
 
         self.assertEqual(project_facts["var_below_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_below_average"], False)
 
         result = kpi_below_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -487,7 +487,7 @@ class KPIBelowAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)
         self.assertEqual(project_facts["var_below_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_below_average"], False)
 
         result = kpi_below_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -497,7 +497,7 @@ class KPIBelowAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)
         self.assertEqual(project_facts["var_below_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_below_average"], False)
 
         result = kpi_below_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -506,7 +506,7 @@ class KPIBelowAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)
         self.assertEqual(project_facts["var_below_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_below_average"], False)
 
         result = kpi_below_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -538,7 +538,7 @@ class KPIHighPerformingTestCase(TestCase):
         project_facts = kpi_high_performing.graph(args)
 
         self.assertEqual(project_facts["var_high_performing_kpi"], "apps")
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+        self.assertEqual(project_facts["trigger_high_performing"], True)
 
         result = kpi_high_performing.evaluate(project_facts)
         expected_text = "Volume of APP is your best performing metric compared to your Remarkably customer peer set average, this period."
@@ -553,7 +553,7 @@ class KPIHighPerformingTestCase(TestCase):
         project_facts = kpi_high_performing.graph(args)
 
         self.assertEqual(project_facts["var_high_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_high_performing"], False)
 
         result = kpi_high_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -563,7 +563,7 @@ class KPIHighPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_high_performing.graph(args)
         self.assertEqual(project_facts["var_high_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_high_performing"], False)
 
         result = kpi_high_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -573,7 +573,7 @@ class KPIHighPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_high_performing.graph(args)
         self.assertEqual(project_facts["var_high_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_high_performing"], False)
 
         result = kpi_high_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -582,7 +582,7 @@ class KPIHighPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_high_performing.graph(args)
         self.assertEqual(project_facts["var_high_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_high_performing"], False)
 
         result = kpi_high_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -604,7 +604,7 @@ class KPIAboveAverageTestCase(TestCase):
         project_facts = kpi_above_average.graph(args)
 
         self.assertEqual(project_facts["var_above_average_kpi"], "usv_inq")
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], True)
+        self.assertEqual(project_facts["trigger_above_average"], True)
 
         result = kpi_above_average.evaluate(project_facts)
         expected_text = "USV > INQ is your best performing metric compared to your Remarkably customer peer set average, this period."
@@ -629,7 +629,7 @@ class KPIAboveAverageTestCase(TestCase):
         project_facts = kpi_above_average.graph(args)
 
         self.assertEqual(project_facts["var_above_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -639,7 +639,7 @@ class KPIAboveAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_above_average.graph(args)
         self.assertEqual(project_facts["var_above_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -649,7 +649,7 @@ class KPIAboveAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_above_average.graph(args)
         self.assertEqual(project_facts["var_above_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
         self.assertIsNone(result)
@@ -658,7 +658,7 @@ class KPIAboveAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_above_average.graph(args)
         self.assertEqual(project_facts["var_above_average_kpi"], None)
-        self.assertEqual(project_facts["trigger_have_benchmark_kpi"], False)
+        self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
         self.assertIsNone(result)
