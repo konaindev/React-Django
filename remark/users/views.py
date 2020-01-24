@@ -527,6 +527,7 @@ class OfficeProfileView(APIView):
             person = Person(user=user, email=user.email)
             office = self.make_office(person, address)
 
+        office.address = address
         office.name = data["office_name"]
         office.office_type = data["office_type"]
         office.save()
