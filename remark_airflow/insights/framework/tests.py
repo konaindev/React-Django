@@ -32,12 +32,13 @@ class InsightTestCase(TestCase):
         project_facts = {
             "health_status": "On Track",
             "prev_health_status": "On Track",
-            "health_has_changed": False,
+            "health_has_changed": True,
+            "second_condition": False,
         }
         insight = Insight(
             name="Change Health Status",
             template=self.template,
-            triggers=["health_has_changed"],
+            triggers=["health_has_changed", "second_condition"],
         )
         result = insight.evaluate(project_facts)
         self.assertIsNone(result)
