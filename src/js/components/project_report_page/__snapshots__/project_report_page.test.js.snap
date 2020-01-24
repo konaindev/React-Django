@@ -180,7 +180,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                 <p
                   className="section-header__title"
                 >
-                  <div
+                  <span
                     className="insights-report__title"
                   >
                     <svg
@@ -201,7 +201,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                       />
                     </svg>
                     Insights
-                  </div>
+                  </span>
                 </p>
                 <div
                   className="section-header__extra"

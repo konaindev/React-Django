@@ -318,6 +318,11 @@ CELERY_BROKER_URL = REDIS_URL
 CELERY_IGNORE_RESULT = True
 
 #
+# AIRFLOW
+#
+AIRFLOW_URL = os.getenv("AIRFLOW_URL", "http://localhost:8081")
+
+#
 # MJML
 #
 MJML_EXEC_CMD = "./node_modules/.bin/mjml"

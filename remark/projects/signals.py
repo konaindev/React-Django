@@ -3,6 +3,7 @@ from django.dispatch import receiver
 
 from celery import shared_task
 
+from remark.lib.airflow import trigger_dag
 from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.logging import getLogger
 from remark.lib.stats import health_check
@@ -243,3 +244,12 @@ def post_save_period(sender, instance, created, raw, **kwargs):
         return
 
     update_performance_report.apply_async(args=(instance.id,), countdown=2)
+
+
+@receiver(post_save,  sender=Period)
+def trigger_dag_macro(sender, instance, **kwargs):
+    params = {
+        "start": instance.start.strftime("%Y-%m-%d"),
+        "end": instance.end.strftime("%Y-%m-%d"),
+    }
+    trigger_dag("macro", params)
