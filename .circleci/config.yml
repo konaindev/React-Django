@@ -274,6 +274,9 @@ jobs:
       - run:
           name: Build Frontend
           command: yarn run build:prod
+      - run: 
+          name: Collect static assets from frontend build
+          command: pipenv run python manage.py collectstatic
       - run:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
@@ -331,6 +334,9 @@ jobs:
       - run:
           name: Build Frontend
           command: yarn run build:prod
+      - run: 
+          name: Collect static assets from frontend build
+          command: pipenv run python manage.py collectstatic
       - run:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably

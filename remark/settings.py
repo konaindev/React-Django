@@ -239,7 +239,7 @@ LOGOUT_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = []
+STATICFILES_DIRS = ['./dist']
 
 #
 # Storages for all other files
