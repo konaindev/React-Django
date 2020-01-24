@@ -8,7 +8,7 @@ with DjangoDAG(
     dag_id="macro", default_args=default_args, schedule_interval=None
 ) as dag:
 
-    from remark_airflow.insights.impl.projects.dag import operators_generator
+    from remark_airflow.insights.impl.projects.operators import operators_generator
     from remark_airflow.insights.impl.projects.projects import (
         get_and_save_project_facts,
     )
