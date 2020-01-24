@@ -5,7 +5,6 @@ exports[`CommonReport renders baseline report with competitors correctly 1`] = `
   <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} type=\\"baseline\\" />
   <CampaignInvestmentReport report={{...}} />
   <AcquisitionFunnelReport report={{...}} type=\\"baseline\\" />
-  <FunnelPerformanceAnalysis dates={{...}} property_name=\\"Portland Multi-Family\\" property={{...}} funnel={{...}} investment={{...}} four_week_funnel_averages={{...}} competitors={{...}} funnel_history={{...}} />
   <BaselineComparisonMatrix report={{...}} />
 </Container>"
 `;
@@ -15,6 +14,5 @@ exports[`CommonReport renders baseline report without competitor correctly 1`] =
   <LeasingPerformanceReport report={{...}} sectionItems={[undefined]} type=\\"baseline\\" />
   <CampaignInvestmentReport report={{...}} />
   <AcquisitionFunnelReport report={{...}} type=\\"baseline\\" />
-  <FunnelPerformanceAnalysis dates={{...}} property_name=\\"Portland Multi-Family\\" property={{...}} funnel={{...}} investment={{...}} four_week_funnel_averages={{...}} competitors={{...}} funnel_history={{...}} />
 </Container>"
 `;

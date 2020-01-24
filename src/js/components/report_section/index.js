@@ -14,7 +14,7 @@ import "./report_section.scss";
  */
 export default class ReportSection extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.node.isRequired,
     // sectionItems are arbitrary extra items to render in the section header
     sectionItems: PropTypes.node,
     smallMarginTop: PropTypes.bool

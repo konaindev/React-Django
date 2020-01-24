@@ -462,7 +462,16 @@ class KPIBelowAverageTestCase(TestCase):
 
     def test_not_triggered(self):
         generate_benchmarks(stub_benchmark_kpis)
-        create_periods(self.project, start=self.start, end=self.end)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
+            target_period_params={
+                "target_lease_renewal_notices": 3,
+                "target_lease_vacation_notices": 2,
+            },
+        )
 
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_below_average.graph(args)

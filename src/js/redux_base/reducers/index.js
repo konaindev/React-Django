@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 import dashboard from "./dashboard";
 import portfolio from "./portfolio";
 import projectReports from "./project_reports";
+import insights from "./insights";
 import inviteModal from "./invite_modal";
 import accountSettings from "./account_settings";
 import viewMembersModal from "./view_members";
@@ -307,6 +308,7 @@ export default combineReducers({
   dashboard,
   projectReports,
   portfolio,
+  insights,
   inviteModal,
   tutorial,
   createPassword,

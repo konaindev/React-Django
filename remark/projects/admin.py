@@ -473,7 +473,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         super().save_formset(request, form, formset, change=change)
 
     class Media:
-        js = ("js/project_admin.js",)
+        js = ("js/project_admin.js", "js/change_email_distribution_list.js")
 
 
 @admin.register(Tag, site=admin_site)
