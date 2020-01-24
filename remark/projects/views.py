@@ -261,7 +261,7 @@ class AddMembersView(APIView):
         if not request.user.is_superuser:
             for project in projects:
                 if not project.is_admin(request.user):
-                    return self.render_403()
+                    return Response(status=403)
 
         # print("AddMemberView::post 4")
         users = []
