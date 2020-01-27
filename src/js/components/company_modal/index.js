@@ -24,7 +24,8 @@ class CompanyModal extends React.PureComponent {
     onClose: PropTypes.func,
     onSuccess: PropTypes.func,
     onError: PropTypes.func,
-    onSave: PropTypes.func
+    onSave: PropTypes.func,
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
@@ -69,6 +70,19 @@ class CompanyModal extends React.PureComponent {
     this.props.onChangeCompany(company);
   };
 
+  onSave = (onSuccess, onError) => values => {
+    const data = {
+      company: values.company.label,
+      company_roles: values.company_roles.map(i => i.value)
+    };
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE_COMPANY",
+      callback: onSuccess,
+      onError: onError,
+      data
+    });
+  };
+
   render() {
     return (
       <ModalForm
@@ -80,7 +94,7 @@ class CompanyModal extends React.PureComponent {
         onClose={this.props.onClose}
         onSuccess={this.props.onSuccess}
         onError={this.props.onError}
-        onSave={this.props.onSave}
+        onSave={this.onSave}
       >
         {({
           errors,

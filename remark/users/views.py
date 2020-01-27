@@ -33,7 +33,6 @@ from remark.settings import INVITATION_EXP
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
 from .forms import (
     AccountCompleteForm,
-    AccountProfileForm,
     AccountSecurityForm,
     CompanyProfileForm,
     UserProfileForm,
@@ -351,69 +350,6 @@ class AccountSecurityView(APIView):
             message = "Password has successfully been reset."
         user.save()
         return Response({"message": message}, status=status.HTTP_200_OK)
-
-
-class AccountProfileView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def update_profile(self, user, data):
-        office_address = geocode(data["office_address"])
-        address = Address.objects.get_or_create(
-            formatted_address=office_address.formatted_address,
-            street_address_1=office_address.street_address,
-            city=office_address.city,
-            state=office_address.state,
-            full_state=office_address.full_state,
-            zip_code=office_address.zip5,
-            country=office_address.country,
-            geocode_json=office_address.geocode_json,
-        )[0]
-
-        try:
-            business = Business.objects.get(name=data["company"])
-        except Business.DoesNotExist:
-            business = Business(name=data["company"])
-        for role in data["company_roles"]:
-            setattr(business, BUSINESS_TYPE[role], True)
-        business.save()
-
-        try:
-            person = user.person
-        except Person.DoesNotExist:
-            person = Person(user=user, email=user.email)
-
-        person.first_name = data["first_name"]
-        person.last_name = data["last_name"]
-        person.role = data["title"]
-        person.office_phone_country_code = data["phone_country_code"]
-        person.office_phone = data["phone"]
-        person.office_phone_ext = data["phone_ext"]
-        if data["avatar"]:
-            person.avatar = data["avatar"]
-
-        try:
-            office = person.office
-        except Office.DoesNotExist:
-            office = Office()
-            person.office = office
-        office.address = address
-        office.name = data["office_name"]
-        office.office_type = data["office_type"]
-        office.business = business
-        office.save()
-        person.save()
-
-    def post(self, request):
-        post_data = request.POST.copy()
-        post_data \
-            .setlist("company_roles", request.POST.getlist("company_roles[]"))
-        post_data.pop("company_roles[]", None)
-        form = AccountProfileForm(post_data, request.FILES)
-        if not form.is_valid():
-            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        user = request.user
-        self.update_profile(user, form.cleaned_data)
-        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 
 class UserProfileView(APIView):

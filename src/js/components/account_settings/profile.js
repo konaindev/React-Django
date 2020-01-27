@@ -320,6 +320,7 @@ export default class Profile extends React.PureComponent {
   };
 
   openCompanyModal = () => {
+    this.unsetMessage();
     this.setState({ isCompanyOpen: true });
   };
 
@@ -328,6 +329,7 @@ export default class Profile extends React.PureComponent {
   };
 
   openOfficeModal = () => {
+    this.unsetMessage();
     this.setState({ isOfficeOpen: true });
   };
 
@@ -359,20 +361,6 @@ export default class Profile extends React.PureComponent {
       type: "API_ACCOUNT_PROFILE_USER",
       callback: this.setUserDataSuccess,
       onError: this.setErrorMessages,
-      data
-    });
-  };
-
-  onSaveCompany = (onSuccess, onError) => values => {
-    this.unsetMessage();
-    const data = {
-      company: values.company.label,
-      company_roles: values.company_roles.map(i => i.value)
-    };
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE_COMPANY",
-      callback: onSuccess,
-      onError: onError,
       data
     });
   };
@@ -564,8 +552,8 @@ export default class Profile extends React.PureComponent {
                     loadCompany={this.loadCompany}
                     onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
-                    onSave={this.onSaveCompany}
                     onSuccess={this.setCompanySuccess}
+                    dispatch={this.props.dispatch}
                   />
                 </div>
                 <div className="account-settings__field-grid  account-settings__field-grid--col-3">

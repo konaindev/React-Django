@@ -1,13 +1,9 @@
-import cn from "classnames";
 import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
 
 import { COUNTRY_FIELDS } from "../../constants";
-import {
-  accountSettings as actions,
-  addressModal
-} from "../../redux_base/actions";
+import { addressModal } from "../../redux_base/actions";
 
 import AccountSettingsField from "../account_settings_field";
 import AddressModal from "../address_modal";
@@ -255,8 +251,8 @@ class OfficeModal extends React.PureComponent {
                   name="office_city"
                   theme="gray"
                   value={values.office_city}
-                  onBlur={this.onBlur}
-                  onChange={this.onChange}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                 />
               </AccountSettingsField>
               <AccountSettingsField

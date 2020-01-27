@@ -106,48 +106,6 @@ class AccountSecurityForm(forms.Form):
         return cleaned_data
 
 
-class AccountProfileForm(forms.Form):
-    avatar = forms.ImageField(required=False)
-    first_name = forms.CharField(max_length=255, required=True)
-    last_name = forms.CharField(max_length=255, required=True)
-    title = forms.CharField(max_length=255, required=False)
-    phone_country_code = forms.RegexField(COUNTRY_CODE_REGEX, required=False)
-    phone = forms.RegexField(PHONE_REGEX, required=False)
-    phone_ext = forms.RegexField(PHONE_REGEX, required=False)
-    company = forms.CharField(max_length=255, required=True)
-    company_roles = forms.MultipleChoiceField(
-        choices=company_roles_values, required=True
-    )
-    office_street = forms.CharField(max_length=255, required=True)
-    office_city = forms.CharField(max_length=255, required=True)
-    office_state = forms.CharField(max_length=15, required=False)
-    office_zip = forms.RegexField(ZIP_REGEX, required=True)
-    office_name = forms.CharField(max_length=255, required=True)
-    office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
-    office_address = forms.CharField(max_length=255, required=False)
-
-    def _check_address_attrs(self, address):
-        required_attrs = [
-            "formatted_address",
-            "street_address",
-            "city",
-            "state",
-            "zip5",
-            "country",
-            "geocode_json"
-        ]
-        for i in required_attrs:
-            if not getattr(address, i):
-                return False
-        return True
-
-    # def clean_office_address(self):
-    #     office_address = geocode(self.cleaned_data["office_address"])
-    #     if not office_address or not self._check_address_attrs(office_address):
-    #         raise forms.ValidationError("Please enter a valid address.")
-    #     return office_address
-
-
 class UserProfileForm(forms.Form):
     avatar = forms.ImageField(required=False)
     first_name = forms.CharField(max_length=255, required=True)
@@ -168,7 +126,7 @@ class CompanyProfileForm(forms.Form):
 class OfficeProfileForm(forms.Form):
     office_street = forms.CharField(max_length=255, required=True)
     office_city = forms.CharField(max_length=255, required=True)
-    office_state = forms.CharField(max_length=15, required=False)
+    office_state = forms.CharField(max_length=128, required=False)
     office_zip = forms.RegexField(ZIP_REGEX, required=True)
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
