@@ -1,7 +1,6 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
