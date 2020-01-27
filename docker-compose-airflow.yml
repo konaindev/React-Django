@@ -15,7 +15,7 @@ services:
 
   web:
     environment:
-        - DOCKER_COMPOSE=true
+        - LOCAL_AIRFLOW=true
         - LC_ALL=C.UTF-8
         - LANG=C.UTF-8
     build: .
@@ -41,11 +41,12 @@ services:
     env_file:
       - .env
     environment:
-      - DOCKER_COMPOSE=true
       - LOAD_EX=n
       - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - EXECUTOR=Celery
       - LOCAL_AIRFLOW=true
+      - POSTGRES_PASSWORD=airflow
+      - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
     volumes:
       - ./airflow_requirements.txt:/requirements.txt
       - ./remark_airflow/dags:/usr/local/airflow/dags
@@ -98,8 +99,9 @@ services:
         - LOAD_EX=n
         - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
         - EXECUTOR=Celery
-        - DOCKER_COMPOSE=true
         - LOCAL_AIRFLOW=true
+        - POSTGRES_PASSWORD=airflow
+        - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
         # - POSTGRES_USER=airflow
         # - POSTGRES_PASSWORD=airflow
         # - POSTGRES_DB=airflow
@@ -124,10 +126,12 @@ services:
     environment:
         - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
         - EXECUTOR=Celery
-        - DOCKER_COMPOSE=true
         - LOCAL_AIRFLOW=true
+        - POSTGRES_PASSWORD=airflow
+        - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
         # - POSTGRES_USER=airflow
         # - POSTGRES_PASSWORD=airflow
         # - POSTGRES_DB=airflow
         # - REDIS_PASSWORD=redispass
+
     command: worker

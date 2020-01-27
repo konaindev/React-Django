@@ -44,6 +44,7 @@ STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
 DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
+LOCAL_AIRFLOW = os.getenv("LOCAL_AIRFLOW", False)
 PATH_REF = "."
 if os.getenv("COMPOSER_AIRFLOW_ENV", False):
     PATH_REF = "/home/airflow/gcs/dags"
@@ -335,17 +336,30 @@ ssl_require = ENV == PROD
 locals()['DATABASES']['default'] = dj_database_url.config(
     conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
-if DOCKER_COMPOSE:
+if LOCAL_AIRFLOW:
     DATABASES = {
         'default': {
             # 'ENGINE': 'django.db.backends.postgresql',
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'airflow',
+            'USER': 'airflow',
+            'PASSWORD': 'airflow',
+            'HOST': 'postgres',
+            'PORT': 5432,
+        }
+    }
+elif DOCKER_COMPOSE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
             'USER': 'postgres',
             'HOST': 'postgres',
             'PORT': 5432,
         }
     }
+
+
 # Configure Sentry -jc 11-jul-19
 
 sentry_sdk.init(
