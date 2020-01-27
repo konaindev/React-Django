@@ -12,4 +12,4 @@ def trigger_dag(dag_id, params=None):
         response = requests.post(url, json={"conf": params})
         response.raise_for_status()
     except requests.RequestException:
-        logger.error("airflow::trigger_dag", dag_id)
+        logger.error("airflow::trigger_dag", dag_id, params)

@@ -51,7 +51,6 @@ class PerformanceInsightsView(APIView):
 class BaselineInsightsView(APIView):
     ORDER_INSIGHTS = [
         "top_usv_referral",
-        "top_usv_referral",
         "low_performing",
         "kpi_below_average",
         "kpi_high_performing",
