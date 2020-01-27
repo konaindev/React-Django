@@ -5,7 +5,6 @@ import React from "react";
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
 import LoaderContainer from "../../containers/loader/index";
-import { accountSettings as actions } from "../../redux_base/actions";
 import AccountSecurity from "./account_security";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
@@ -69,10 +68,6 @@ export default class AccountSettings extends React.PureComponent {
     this.state = {
       item: props.initialItem
     };
-  }
-
-  componentDidMount() {
-    this.props.dispatch(actions.requestSettings());
   }
 
   selectItem = item => this.setState({ item });
