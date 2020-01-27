@@ -242,7 +242,7 @@ LOGOUT_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = []
+STATICFILES_DIRS = ['./dist']
 
 #
 # Storages for all other files
@@ -319,6 +319,11 @@ FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 REDIS_URL = os.getenv("REDIS_URL", "redis://")
 CELERY_BROKER_URL = REDIS_URL
 CELERY_IGNORE_RESULT = True
+
+#
+# AIRFLOW
+#
+AIRFLOW_URL = os.getenv("AIRFLOW_URL", "http://localhost:8081")
 
 #
 # MJML

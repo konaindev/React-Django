@@ -6,7 +6,7 @@ import "./section_header.scss";
 
 export class SectionHeader extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
     children: PropTypes.node,
     smallMarginTop: PropTypes.bool
   };

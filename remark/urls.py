@@ -59,6 +59,7 @@ urlpatterns = [
     path("api/v1/", include("remark.web.urls", namespace="v1_web")),
     path("api/v1/", include("remark.projects.urls", namespace="v1_projects")),
     path("api/v1/", include("remark.users.urls", namespace="v1_users")),
+    path("api/v1/", include("remark.insights.urls", namespace="v1_insights")),
 
     # used in project admin page to generate links
     path("projects/<project_id>/", TemplateView.as_view(), name="project_detail_page"),
