@@ -29,6 +29,43 @@ exports[`AccountSettings account security tab 1`] = `
           className="account-settings__menu"
         >
           <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Profile
+            </span>
+          </div>
+          <div
             className="account-settings__menu-item account-settings__menu-item--active"
             onClick={[Function]}
           >
@@ -63,6 +100,43 @@ exports[`AccountSettings account security tab 1`] = `
               className="account-settings__menu-item-text"
             >
               Security
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
             </span>
           </div>
         </div>
