@@ -1,0 +1,81 @@
+@import "css/base.scss";
+
+$error-color: $orange-6;
+$label-color: $gray-6;
+$input-label-line-height: 1.25rem;
+
+.account-settings-field {
+    &--max-width {
+        max-width: 315px;
+    }
+    &--error {
+        .account-settings-field__error {
+            color: $error-color;
+        }
+
+        .account-settings-field__input,
+        .account-settings-field__input:focus {
+            &:not(.select) {
+                border: 1px solid $error-color;
+            }
+            .select__control,
+            .select__menu {
+                border: 1px solid $error-color;
+            }
+            .select__menu {
+                border-top: none;
+            }
+        }
+    }
+    &--error-country-code {
+
+        .account-settings-field__country-code,
+        .account-settings-field__country-code:focus {
+            &:not(.select) {
+                border: 1px solid $error-color;
+            }
+            .select__control,
+            .select__menu {
+                border: 1px solid $error-color;
+            }
+            .select__menu {
+                border-top: none;
+            }
+        }
+    }
+    &--full-grid {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    &--disabled {
+        .account-settings-field__input {
+            opacity: .5;
+        }
+    }
+}
+
+.account-settings-field__label {
+    margin-bottom: 8px;
+    color: $label-color;
+    font-size: $text-xs;
+    font-weight: $weight-medium;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: $input-label-line-height;
+}
+
+.account-settings-field__input {
+    height: 44px;
+}
+
+.account-settings-field__error {
+    height: $s5;
+    margin-top: 0.625rem;
+    color: $error-color;
+    font-size: $text-xs;
+}
+
+.account-settings-field__country-code {
+    width: 25% !important;
+    text-align: right;
+}

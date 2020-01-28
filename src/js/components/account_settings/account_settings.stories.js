@@ -34,16 +34,19 @@ function onSearch(store, properties, propertiesName, value) {
 }
 
 storiesOf("AccountSettings", module)
-  /*
   .add("Profile", () => (
     <Provider
       store={createStore(() => ({
         network: {}
       }))}
     >
-      <AccountSettings initialItem="profile" {...props} />
+      <AccountSettings
+        initialItem="profile"
+        {...props}
+        itemsOrder={["profile"]}
+      />
     </Provider>
-  ))*/
+  ))
   .add("Account Security", () => (
     <Provider
       store={createStore(() => ({
@@ -54,10 +57,10 @@ storiesOf("AccountSettings", module)
         initialItem="lock"
         validate={validateSecurity}
         {...props}
+        itemsOrder={["lock"]}
       />
     </Provider>
-  ));
-/*
+  ))
   .add(
     "Email Reports",
     withState({ groups })(({ store }) => (
@@ -69,7 +72,7 @@ storiesOf("AccountSettings", module)
       >
         <AccountSettings
           initialItem="email"
-          itemsOrder={props.itemsOrder}
+          itemsOrder={["email"]}
           tabsOrder={props.tabsOrder}
           initialTab={props.initialTab}
           portfolioProperties={portfolio}
@@ -83,4 +86,4 @@ storiesOf("AccountSettings", module)
         />
       </Provider>
     ))
-  )*/
+  );

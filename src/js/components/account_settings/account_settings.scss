@@ -97,6 +97,8 @@ $info-line-height: 1.75rem;
 }
 
 .account-settings__tab-title {
+    display: flex;
+    align-items: center;
     color: $text-color;
     font-size: $text-xl;
     line-height: $tab-title-line-height;
@@ -156,6 +158,11 @@ $info-line-height: 1.75rem;
     margin-top: 30px;
 }
 
+.account-settings__tab-subsection {
+    border-top: $menu-border;
+    padding: $box-spacing;
+}
+
 .account-settings__field {
     &--max-width {
         max-width: 315px;
@@ -201,13 +208,12 @@ $info-line-height: 1.75rem;
     }
 }
 
-.account-settings__phone-input {
-    display: inline-flex;
+.account-settings__value-field {
+    margin-top: $box-spacing;
 }
 
-.account-settings__country-code {
-    width: 25% !important;
-    text-align: right;
+.account-settings__phone-input {
+    display: inline-flex;
 }
 
 .account-settings__plus-tag {
@@ -236,8 +242,13 @@ $info-line-height: 1.75rem;
 .account-settings__controls {
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: $box-spacing;
     border-top: $buttons-border;
+
+    &--noborder {
+        padding-top: 0;
+        border: none;
+    }
 }
 
 .account-settings__button {
@@ -246,6 +257,17 @@ $info-line-height: 1.75rem;
     font-weight: $weight-semibold;
     letter-spacing: 1px;
     text-transform: uppercase;
+    line-height: $button-line-height;
+}
+
+.account-settings__edit-button {
+    margin-left: auto;
+    padding: 8px 10px;
+}
+
+.account-settings__edit-button-text {
+    color: $text-color;
+    font-size: $text-xs;
     line-height: $button-line-height;
 }
 
@@ -386,4 +408,9 @@ $info-line-height: 1.75rem;
 
 .account-settings__reporting-table {
     padding: 0 $box-spacing;
+}
+
+.account-settings__value {
+    color: $text-color;
+    font-size: $text-sm;
 }

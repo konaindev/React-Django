@@ -110,15 +110,15 @@ class Office(models.Model):
     is_home_office = models.BooleanField(default=False, help_text="Is the home office?")
 
     name = models.CharField(
-        default="", max_length=255, blank=False, help_text="Office Name"
+        default="", max_length=255, null=True, blank=False, help_text="Office Name"
     )
 
     address = models.ForeignKey(
-        "geo.Address", on_delete=models.CASCADE, blank=False, help_text="Address"
+        "geo.Address", on_delete=models.CASCADE, null=True, blank=False, help_text="Address"
     )
 
     business = models.ForeignKey(
-        "crm.Business", on_delete=models.CASCADE, blank=False, help_text="Business"
+        "crm.Business", on_delete=models.CASCADE, null=True, blank=False, help_text="Business"
     )
 
     office_type = models.IntegerField(
@@ -166,6 +166,7 @@ class Person(models.Model):
     office = models.ForeignKey(
         "crm.Office",
         on_delete=models.CASCADE,
+        null=True,
         blank=False,
         help_text="Office the person works at",
     )
