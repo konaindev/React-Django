@@ -226,15 +226,15 @@ class LowBenchmarkKPITestCase(TestCase):
 
     def test_no_kpi(self):
         result = var_low_performing_kpi(self.benchmark_kpis, {})
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_no_benchmark_kpi(self):
         result = var_low_performing_kpi([], self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_benchmark_kpi_is_none(self):
         result = var_low_performing_kpi(None, self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
 
 class BelowAverageKPITestCase(TestCase):
@@ -267,7 +267,7 @@ class BelowAverageKPITestCase(TestCase):
 
     def test_benchmark_kpi_is_none(self):
         result = var_below_average_kpi(None, self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
 
 class VarHighPerformingKPITestCase(TestCase):
@@ -286,15 +286,14 @@ class VarHighPerformingKPITestCase(TestCase):
 
     def test_no_kpi(self):
         result = var_high_performing_kpi(self.benchmark_kpis, {})
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_no_benchmark_kpi(self):
         result = var_high_performing_kpi([], self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_benchmark_kpi_is_none(self):
         result = var_high_performing_kpi(None, self.kpis)
-        self.assertEqual(result, None)
         self.assertIsNone(result)
 
 
@@ -319,14 +318,13 @@ class VarAboveAverageKPITestCase(TestCase):
 
     def test_no_kpi(self):
         result = var_above_average_kpi(self.benchmark_kpis, {})
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_no_benchmark_kpi(self):
         result = var_above_average_kpi([], self.kpis)
-        self.assertEqual(result, None)
+        self.assertIsNone(result)
 
     def test_benchmark_kpi_is_none(self):
         result = var_above_average_kpi(None, self.kpis)
-        self.assertEqual(result, None)
         self.assertIsNone(result)
 
