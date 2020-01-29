@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 
+import CompleteAccountView from "../components/complete_account_view";
 import AccountSettingsContainer from "../containers/account_settings";
 import ProjectReportsContainer from "../containers/project_reports";
 import DashboardContainer from "../containers/dashboard";
@@ -18,6 +19,7 @@ export function RemarkableRouter() {
           path="/users/create-password/:hash"
           component={CreatePasswordContainer}
         />
+        <Route path="/users/complete-account" component={CompleteAccountView} />
         <Route path="/dashboard" component={DashboardContainer} />
         <Route
           path="/projects/:projectId/:reportType/:reportSpan?"

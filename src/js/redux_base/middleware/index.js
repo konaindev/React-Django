@@ -90,8 +90,8 @@ export const fetchCreatePassword = store => next => action => {
           if (response.status === 200) {
             const email = response.data.email;
             const password = action.data.password;
-            const completeAccountUrl = createFEUrl("/complete-account");
-            next(auth.login({ email, password, completeAccountUrl }));
+            const redirect_url = createFEUrl("/users/complete-account");
+            next(auth.login({ email, password, redirect_url }));
           } else {
             throw response;
           }

@@ -178,7 +178,7 @@ class CreatePasswordTestCase(APITestCase):
             "password": crypto.get_random_string(24)
         }
         response = self.client.post(self.url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT, "response not 200")
+        self.assertEqual(response.status_code, status.HTTP_200_OK, "response not 200")
 
     def test_short_password(self):
         data = {
