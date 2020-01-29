@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from remark_airflow.dags.django_dag import DjangoDAG
+from django_dag import DjangoDAG
 
 default_args = {"start_date": datetime(2020, 1, 1, 0, 0)}
 
