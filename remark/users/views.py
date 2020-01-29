@@ -163,7 +163,7 @@ class CreatePasswordView(APIView):
 
         print("CreatePasswordView::post bottom")
 
-        return Response({"email": user.email}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"email": user.email}, status=status.HTTP_200_OK)
 
 
 class PasswordRulesView(APIView):

@@ -9,7 +9,6 @@ class CreatePasswordContainer extends PureComponent {
   componentDidMount() {
     this.hash = this.props.match.params.hash;
     this.props.dispatch(createPassword.getRules());
-    console.log("COMPONENT MOUNTED");
   }
 
   getConfig() {

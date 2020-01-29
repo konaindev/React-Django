@@ -15,28 +15,22 @@ import "css/main.scss";
  *
  * Be sure to add your Page to the pages object.
  */
-import AccountSettings from "./components/account_settings";
 import DashboardPage from "./components/dashboard_page";
 import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
-import CreatePasswordView from "./components/create_password_view";
-import CompleteAccountView from "./components/complete_account_view";
 import SessionExpiredPage from "./components/session_expired_page";
 import LoginView from "./components/login";
 import ResetPasswordForm from "./components/reset_password_form";
 import ResetPasswordDone from "./components/reset_password_done";
 
 const pages = {
-  AccountSettings,
   DashboardPage,
   ProjectPage,
   ReleaseNotesPage,
   ReleaseNoteDetailsPage,
   PortfolioAnalysisView,
-  CompleteAccountView,
-  CreatePasswordView,
   SessionExpiredPage,
   LoginView,
   ResetPasswordForm,
