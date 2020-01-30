@@ -7,7 +7,7 @@ $complete-account-terms-spacing: 50px;
 $complete-account-button-spacing: 20px;
 $complete-account-checkbox-spacing: 10px;
 $complete-account-link-color: $gray-3;
-$edit-button-line-height: 1.25rem;
+$button-line-height: 1.25rem;
 $edit-button-top-padding: 12px;
 
 .complete-account {
@@ -23,6 +23,7 @@ $edit-button-top-padding: 12px;
 .complete-account__section-label {
     padding-bottom: 30px;
     padding-top: 50px;
+    color: $gray-3;
     font-size: 20px;
 
     &--first {
@@ -32,6 +33,10 @@ $edit-button-top-padding: 12px;
 
 .complete-account__field {
     min-width: $complete-account-field-min-width;
+
+    .form-field__label {
+        color: $gray-9;
+    }
 }
 
 .complete-account__field + .complete-account__field {
@@ -55,6 +60,9 @@ $edit-button-top-padding: 12px;
 
 .complete-account__button {
     margin-top: $complete-account-button-spacing;
+    line-height: $button-line-height;
+    font-size: $text-xs;
+    font-weight: bold;
     letter-spacing: $letter-spacing-wider;
 }
 
@@ -62,7 +70,7 @@ $edit-button-top-padding: 12px;
     width: 100%;
     padding-top: $edit-button-top-padding;
     padding-bottom: $edit-button-top-padding;
-    line-height: $edit-button-line-height;
+    line-height: $button-line-height;
     font-size: $text-xs;
     font-weight: bold;
     letter-spacing: 1px;
