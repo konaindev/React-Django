@@ -363,11 +363,21 @@ export class CompleteAccountView extends React.PureComponent {
                 <div className="complete-account__section-label">
                   Company Info
                 </div>
-                <Button color="secondary-gray">Enter Company info</Button>
+                <Button
+                  className="complete-account__edit-button"
+                  color="secondary-gray"
+                >
+                  Enter Company info
+                </Button>
                 <div className="complete-account__section-label">
                   Office Info
                 </div>
-                <Button color="secondary-gray">Enter Office info</Button>
+                <Button
+                  className="complete-account__edit-button"
+                  color="secondary-gray"
+                >
+                  Enter Office info
+                </Button>
                 <div className="complete-account__terms">
                   <Checkbox
                     className="complete-account__checkbox"

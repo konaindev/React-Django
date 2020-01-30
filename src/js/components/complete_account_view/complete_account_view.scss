@@ -7,6 +7,8 @@ $complete-account-terms-spacing: 50px;
 $complete-account-button-spacing: 20px;
 $complete-account-checkbox-spacing: 10px;
 $complete-account-link-color: $gray-3;
+$edit-button-line-height: 1.25rem;
+$edit-button-top-padding: 12px;
 
 .complete-account {
     .form-field__input-container {
@@ -54,4 +56,15 @@ $complete-account-link-color: $gray-3;
 .complete-account__button {
     margin-top: $complete-account-button-spacing;
     letter-spacing: $letter-spacing-wider;
+}
+
+.complete-account__edit-button {
+    width: 100%;
+    padding-top: $edit-button-top-padding;
+    padding-bottom: $edit-button-top-padding;
+    line-height: $edit-button-line-height;
+    font-size: $text-xs;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
