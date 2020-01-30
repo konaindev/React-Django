@@ -1298,7 +1298,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
             <div
               className="form-field__label"
             >
-              zip code
+              zipcode
             </div>
             <div
               className="form-field__input-container"

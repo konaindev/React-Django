@@ -216,27 +216,32 @@ class User(PermissionsMixin, AbstractBaseUser):
                 return {}
         except Person.DoesNotExist:
             return {}
-        office = person.office
-        business = office.business
-        return {
+        data = {
             "avatar_url": self.get_avatar_url(),
             "first_name": person.first_name,
             "last_name": person.last_name,
             "title": person.role,
             "phone_country_code": person.office_phone_country_code,
             "phone": person.office_phone,
-            "phone_ext": person.office_phone_ext,
-            "company": { "label": business.name, "value": business.public_id},
-            "company_roles": business.get_roles(),
-            "office_address": office.address.formatted_address,
-            "office_street": office.address.street_address_1,
-            "office_city": office.address.city,
-            "office_state": {"label": office.address.full_state, "value": office.address.full_state},
-            "office_zip": office.address.zip_code,
-            "office_country": self.get_country_object(office.address.country),
-            "office_name": office.name,
-            "office_type": office.office_type,
+            "phone_ext": person.office_phone_ext
         }
+        office = person.office
+        if office:
+            address = office.address
+            if address:
+                data["office_address"] = office.address.formatted_address
+                data["office_street"] = office.address.street_address_1
+                data["office_city"] = office.address.city
+                data["office_state"] = {"label": office.address.full_state, "value": office.address.full_state}
+                data["office_zip"] = office.address.zip_code
+                data["office_country"] = self.get_country_object(office.address.country)
+            data["office_name"] = office.name
+            data["office_type"] = office.office_type
+            business = office.business
+            if business:
+                data["company"] = {"label": business.name, "value": business.public_id}
+                data["company_roles"] = business.get_roles()
+        return data
 
     def get_country_object(self, value):
         with open(f'{PATH_REF}/data/locations/countries.json', 'r') as read_file:

@@ -1,26 +1,22 @@
 import cn from "classnames";
-import { ErrorMessage, Formik, Form } from "formik";
+import { Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
-import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
-import AddressModal from "../address_modal";
 import { COUNTRY_FIELDS } from "../../constants";
 
+import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
-import {
-  accountSettings as actions,
-  addressModal
-} from "../../redux_base/actions";
+import { accountSettings as actions } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
-import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
+import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
-import Select, { SelectSearch } from "../select";
-import GoogleAddress from "../google_address";
-import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
+import OfficeModal from "../office_modal";
+import Select from "../select";
+import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -81,22 +77,15 @@ export default class Profile extends React.PureComponent {
     "title",
     "phone_country_code",
     "phone",
-    "phone_ext",
-    "company",
-    "company_roles",
-    "office_country",
-    "office_street",
-    "office_city",
-    "office_state",
-    "office_zip",
-    "office_name",
-    "office_type"
+    "phone_ext"
   ];
 
   constructor(props) {
     super(props);
     this.state = {
-      fieldsSubmitted: false
+      fieldsSubmitted: false,
+      isCompanyOpen: false,
+      isOfficeOpen: false
     };
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
@@ -124,9 +113,11 @@ export default class Profile extends React.PureComponent {
   }
 
   unsetMessage() {
-    if (this.state.message) {
-      this.setState({ message: null });
-    }
+    this.setState({
+      userMessage: null,
+      companyMessage: null,
+      officeMessage: null
+    });
   }
 
   getProfileValues = profile => {
@@ -134,12 +125,21 @@ export default class Profile extends React.PureComponent {
     if (!Object.keys(p).length) {
       p = { ...Profile.defaultProps.profile };
     }
-    p.company_roles = this.props.company_roles.filter(i =>
-      p.company_roles.includes(i.value)
-    );
+    if (p.company_roles) {
+      p.company_roles = this.props.company_roles.filter(i =>
+        p.company_roles.includes(i.value)
+      );
+    }
     p.office_type = this.props.office_options.filter(
       i => i.value === p.office_type
     )[0];
+    if (!p.office_country) {
+      p.office_country = {
+        label: COUNTRY_FIELDS.USA.full_name,
+        value: COUNTRY_FIELDS.USA.short_name
+      };
+    }
+
     return p;
   };
 
@@ -159,18 +159,6 @@ export default class Profile extends React.PureComponent {
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  getFieldClasses = (name, errors, touched, modifiers = []) => {
-    const classes = modifiers.map(m => `account-settings__field--${m}`);
-    let error_dict = {
-      "account-settings__field--error": errors[name] && touched[name]
-    };
-    if (name == "phone") {
-      error_dict["account-settings__field--error-country-code"] =
-        errors["phone_country_code"] && touched["phone_country_code"];
-    }
-    return cn("account-settings__field", classes, error_dict);
   };
 
   getHelpTextClasses = (name, errors, touched) => {
@@ -194,16 +182,11 @@ export default class Profile extends React.PureComponent {
     DropdownIndicator: () => null
   };
 
-  onCreateCompany = value => {
-    const option = { label: value, value };
-    this.formik.setFieldValue("company", option);
-  };
-
   loadAddress = (inputValue, callback) => {
     const data = { address: inputValue };
-    const context = this.formik?.getFormikContext();
-    const businessId = context?.values?.company?.value;
-    const businessName = context?.values?.company?.label;
+    const { profile } = this.props;
+    const businessId = profile.company?.value;
+    const businessName = profile.company?.label;
     if (businessId !== businessName) {
       data["business_id"] = businessId;
     }
@@ -217,56 +200,32 @@ export default class Profile extends React.PureComponent {
     }, 300);
   };
 
-  onChangeOfficeAddress = value => {
-    if (value.street) {
-      this.formik.setFieldValue("office_street", value.street);
-      this.formik.setFieldValue("office_city", value.city);
-      this.formik.setFieldValue("office_state", {
-        label: value.state,
-        value: value.state
-      });
-      this.formik.setFieldValue("office_zip", value.zip);
-      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
-        this.formik.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.GBR.full_name,
-          value: COUNTRY_FIELDS.GBR.short_name
-        });
-      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
-        this.formik.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.USA.full_name,
-          value: COUNTRY_FIELDS.USA.short_name
-        });
-      }
-    } else {
-      this.formik.setFieldValue("office_street", value.value);
-    }
-  };
-
-  onBlurOfficeAddress = () => {
-    this.formik.setFieldTouched("office_street");
-    const formikContext = this.formik.getFormikContext();
-    if (formikContext.values.office_street) {
-      this.formik.setFieldTouched("office_street");
-    }
-    if (formikContext.values.office_city) {
-      this.formik.setFieldTouched("office_city");
-    }
-    if (formikContext.values.office_state) {
-      this.formik.setFieldTouched("office_state");
-    }
-    if (formikContext.values.office_zip) {
-      this.formik.setFieldTouched("office_zip");
-    }
-  };
-
   onChangeCompany = company => {
-    this.formik.setFieldValue("company", company);
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
       data: { address: "", business_id: company.label }
     });
+  };
+
+  getCompanyValues = () => {
+    const p = this.getProfileValues(this.props.profile);
+    return {
+      company: p.company,
+      company_roles: p.company_roles
+    };
+  };
+
+  getOfficeValues = () => {
+    const p = this.getProfileValues(this.props.profile);
+    return {
+      office_country: p.office_country,
+      office_street: p.office_street,
+      office_city: p.office_city,
+      office_state: p.office_state,
+      office_zip: p.office_zip,
+      office_name: p.office_name,
+      office_type: p.office_type
+    };
   };
 
   showErrorMessage = (errors, touched) => {
@@ -283,32 +242,53 @@ export default class Profile extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  showSuccessMessage = () => {
-    if (!this.state.message) {
+  setUserDataSuccess = () => {
+    this.formik.setSubmitting(false);
+    this.setState({ userMessage: "General info has been saved." });
+    this.props.dispatch(actions.requestSettings());
+  };
+
+  setCompanySuccess = () => {
+    this.formik.setSubmitting(false);
+    this.setState({
+      companyMessage: "Company info has been saved.",
+      isCompanyOpen: false
+    });
+    this.props.dispatch(actions.requestSettings());
+  };
+
+  setOfficeSuccess = () => {
+    this.formik.setSubmitting(false);
+    this.setState({
+      officeMessage: "Office info has been saved.",
+      isOfficeOpen: false
+    });
+    this.props.dispatch(actions.requestSettings());
+  };
+
+  showSuccessMessage = message => {
+    if (!message) {
       return;
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        {this.state.message}
+        {message}
       </div>
     );
   };
 
-  showMessage = (errors, touched) => {
-    if (this.state.message) {
-      return this.showSuccessMessage();
+  showUserMessage = (errors, touched) => {
+    if (this.state.userMessage) {
+      return this.showSuccessMessage(this.state.userMessage);
     } else if (Object.keys(errors).length) {
       return this.showErrorMessage(errors, touched);
     }
   };
 
-  setSuccessMessage = () => {
-    this.formik.setSubmitting(false);
-    const message = "Your profile has been saved.";
-    this.setState({ message });
-    this.props.dispatch(actions.requestSettings());
-  };
+  showCompanyMessage = () => this.showSuccessMessage(this.state.companyMessage);
+
+  showOfficeMessage = () => this.showSuccessMessage(this.state.officeMessage);
 
   updateValues = values => {
     this.formik.setFieldValue("office_street", values.office_street);
@@ -329,25 +309,41 @@ export default class Profile extends React.PureComponent {
     this.formik.setErrors(formikErrors);
   };
 
-  onSubmit = values => {
+  onChange = v => {
+    this.unsetMessage();
+    this.formik.handleChange(v);
+  };
+
+  onBlur = v => {
+    this.unsetMessage();
+    this.formik.handleBlur(v);
+  };
+
+  openCompanyModal = () => {
+    this.unsetMessage();
+    this.setState({ isCompanyOpen: true });
+  };
+
+  closeCompanyModal = () => {
+    this.setState({ isCompanyOpen: false });
+  };
+
+  openOfficeModal = () => {
+    this.unsetMessage();
+    this.setState({ isOfficeOpen: true });
+  };
+
+  closeOfficeModal = () => {
+    this.setState({ isOfficeOpen: false });
+  };
+
+  onSaveUser = values => {
     this.unsetMessage();
     const dataValues = { ...values };
     const data = new FormData();
     for (const k of Object.keys(dataValues)) {
       if (Profile.fieldsSubmit.includes(k)) {
-        if (k === "company_roles") {
-          for (const i of dataValues.company_roles) {
-            data.append("company_roles[]", i.value);
-          }
-        } else if (k === "office_type") {
-          data.append("office_type", dataValues.office_type.value);
-        } else if (k === "office_country") {
-          data.append("office_country", dataValues.office_country.value);
-        } else if (k === "office_state") {
-          data.append("office_state", dataValues.office_state.value);
-        } else if (k === "company") {
-          data.append("company", dataValues.company.label);
-        } else if (
+        if (
           k === "phone_country_code" &&
           dataValues["phone"] &&
           !dataValues["phone_country_code"]
@@ -361,81 +357,29 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    const addressValues = _pick(values, [
-      "office_country",
-      "office_street",
-      "office_city",
-      "office_state",
-      "office_zip"
-    ]);
-    validateAddress(addressValues).then(response => {
-      if (response.data.error) {
-        this.setState({ invalid_address: true });
-        this.formik.setErrors({
-          office_street:
-            "Unable to verify address. Please provide a valid address.",
-          office_city: "*",
-          office_state: "*",
-          office_zip: "*"
-        });
-      } else {
-        this.setState({ addresses: response.data, invalid_address: false });
-        this.props.dispatch(addressModal.open(data, response.data));
-      }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE_USER",
+      callback: this.setUserDataSuccess,
+      onError: this.setErrorMessages,
+      data
     });
-  };
-
-  onChange = v => {
-    this.unsetMessage();
-    this.formik.handleChange(v);
-  };
-
-  onBlur = v => {
-    this.unsetMessage();
-    this.formik.handleBlur(v);
-  };
-
-  onChangeCountry = value => {
-    this.selectedCountry = value.value;
-    this.formik.setFieldValue("office_country", value);
-    this.formik.setFieldValue("office_state", {
-      label: "",
-      value: ""
-    });
-    this.formik.setFieldTouched("office_state");
   };
 
   render() {
-    const { companyAddresses, profile } = this.props;
+    const { profile } = this.props;
     return (
       <div className="account-settings__tab">
         <Formik
           ref={this.setFormik}
           initialValues={this.getProfileValues(profile)}
-          validationSchema={profileSchema}
+          validationSchema={userSchema}
           validateOnBlur={true}
           validateOnChange={true}
-          onSubmit={this.onSubmit}
+          onSubmit={this.onSaveUser}
         >
-          {({
-            errors,
-            touched,
-            values,
-            isValid,
-            handleChange,
-            handleBlur,
-            setFieldTouched,
-            setFieldValue
-          }) => (
-            <Form method="post" autoComplete="off">
-              <AddressModal
-                title="Confirm Office Address"
-                callback={this.setSuccessMessage}
-                onError={this.setErrorMessages}
-                dispatch_type="API_ACCOUNT_PROFILE"
-                updateValues={this.updateValues}
-              />
-              <div className="account-settings__tab-content">
+          {({ errors, touched, values }) => (
+            <div className="account-settings__tab-content">
+              <Form method="post" autoComplete="off">
                 <div className="account-settings__tab-section">
                   <div className="account-settings__tab-title">
                     General Info
@@ -474,52 +418,42 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                   <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "first_name",
-                        errors,
-                        touched
-                      )}
+                    <AccountSettingsField
+                      label="First Name"
+                      name="first_name"
+                      errorKey="first_name"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">First Name</div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="first_name"
                         theme="gray"
                         value={values.first_name}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="first_name" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "last_name",
-                        errors,
-                        touched
-                      )}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Last Name"
+                      name="last_name"
+                      errorKey="last_name"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">Last Name</div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="last_name"
                         theme="gray"
                         value={values.last_name}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="last_name" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses("title", errors, touched)}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Title (Optional)"
+                      name="title"
+                      errorKey="title"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Title (Optional)
-                      </div>
                       <Input
                         className="account-settings__input"
                         name="title"
@@ -528,97 +462,55 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="title" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_country",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Phone Number (Optional)"
+                      name="phone"
+                      errorKey="phone"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Office Country
-                      </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_country"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        value={values.office_country}
-                        options={this.props.office_countries}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_country", true);
-                        }}
-                        onChange={this.onChangeCountry}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_country" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses("phone", errors, touched)}
-                    >
-                      <div className="account-settings__label">
-                        Phone Number (Optional)
-                      </div>
-                      <div className="account-settings__plus-tag">+</div>
-                      <div className="account-settings__phone-input">
-                        <Input
-                          className="account-settings__country-code"
-                          name="phone_country_code"
-                          theme="gray"
-                          type="tel"
-                          placeholder={
-                            COUNTRY_FIELDS[this.selectedCountry].phone_code
-                          }
-                          value={values.phone_country_code}
-                          onBlur={this.onBlur}
-                          onChange={this.onChange}
-                        />
-                        <Input
-                          className="account-settings__input"
-                          name="phone"
-                          theme="gray"
-                          type="tel"
-                          value={values.phone}
-                          onBlur={this.onBlur}
-                          onChange={this.onChange}
-                          valueFormatter={
-                            values.phone_country_code == "1" ||
-                            (this.selectedCountry == "USA" &&
-                              !values.phone_country_code)
-                              ? formatPhone
-                              : undefined
-                          }
-                        />
-                      </div>
-                      {errors["phone_country_code"] && (
-                        <div className="account-settings__error">
-                          <ErrorMessage name="phone_country_code" />
+                      <>
+                        <div className="account-settings__plus-tag">+</div>
+                        <div className="account-settings__phone-input">
+                          <Input
+                            className="account-settings-field__country-code"
+                            name="phone_country_code"
+                            theme="gray"
+                            type="tel"
+                            placeholder={
+                              COUNTRY_FIELDS[this.selectedCountry].phone_code
+                            }
+                            value={values.phone_country_code}
+                            onBlur={this.onBlur}
+                            onChange={this.onChange}
+                          />
+                          <Input
+                            className="account-settings-field__input"
+                            name="phone"
+                            theme="gray"
+                            type="tel"
+                            value={values.phone}
+                            onBlur={this.onBlur}
+                            onChange={this.onChange}
+                            valueFormatter={
+                              values.phone_country_code == "1" ||
+                              (this.selectedCountry == "USA" &&
+                                !values.phone_country_code)
+                                ? formatPhone
+                                : undefined
+                            }
+                          />
                         </div>
-                      )}
-                      <div className="account-settings__error">
-                        <ErrorMessage name="phone" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "phone_ext",
-                        errors,
-                        touched
-                      )}
+                      </>
+                    </AccountSettingsField>
+                    <AccountSettingsField
+                      label="Phone Extension (Optional)"
+                      name="phone_ext"
+                      errorKey="phone_ext"
+                      {...{ errors, touched }}
                     >
-                      <div className="account-settings__label">
-                        Phone Extension (Optional)
-                      </div>
                       <Input
-                        className="account-settings__input"
+                        className="account-settings-field__input"
                         name="phone_ext"
                         theme="gray"
                         type="tel"
@@ -626,265 +518,142 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="phone_ext" />
-                      </div>
-                    </div>
+                    </AccountSettingsField>
                   </div>
                 </div>
-                <div className="account-settings__tab-section">
-                  <div className="account-settings__tab-title">
-                    Business Info
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "company",
-                        errors,
-                        touched
-                      )}
-                    >
-                      <div className="account-settings__label">Company</div>
-                      <SelectSearch
-                        name="company"
-                        theme="default"
-                        placeholder=""
-                        components={this.selectSearchComponents}
-                        className="account-settings__input"
-                        loadOptions={this.loadCompany}
-                        defaultOptions={[]}
-                        isCreatable={true}
-                        value={values.company}
-                        onCreateOption={this.onCreateCompany}
-                        onChange={this.onChangeCompany}
-                        onBlur={this.onBlur}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="company.value" />
-                      </div>
+                <div className="account-settings__controls account-settings__controls--noborder">
+                  <Button
+                    className="account-settings__button"
+                    color="primary"
+                    type="submit"
+                  >
+                    Save
+                  </Button>
+                  {this.showUserMessage(errors, touched)}
+                </div>
+              </Form>
+              <div className="account-settings__tab-subsection">
+                <div className="account-settings__tab-title">
+                  Company Info
+                  {this.showCompanyMessage()}
+                  <Button
+                    className="account-settings__edit-button"
+                    color="secondary-gray"
+                    onClick={this.openCompanyModal}
+                  >
+                    <div className="account-settings__edit-button-text">
+                      Edit Company Info
                     </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "company_roles",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        Company Type
-                      </div>
-                      <MultiSelect
-                        className="account-settings__input"
-                        name="company_roles"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        options={this.props.company_roles}
-                        value={values.company_roles}
-                        label={values.company_roles
-                          ?.map(v => v.label)
-                          .join(", ")}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("company_roles", true);
-                        }}
-                        onChange={values => {
-                          this.unsetMessage();
-                          setFieldValue("company_roles", values);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="company_roles" />
-                      </div>
+                  </Button>
+                  <CompanyModal
+                    isOpen={this.state.isCompanyOpen}
+                    data={this.getCompanyValues()}
+                    companyRolesOptions={this.props.company_roles}
+                    loadCompany={this.loadCompany}
+                    onChangeCompany={this.onChangeCompany}
+                    onClose={this.closeCompanyModal}
+                    onSuccess={this.setCompanySuccess}
+                    dispatch={this.props.dispatch}
+                  />
+                </div>
+                <div className="account-settings__field-grid  account-settings__field-grid--col-3">
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Company</div>
+                    <div className="account-settings__value">
+                      {values.company?.label}
                     </div>
                   </div>
-                  <div className="account-settings__tab-title">
-                    Company Info
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_street",
-                        errors,
-                        touched,
-                        ["full-grid"]
-                      )}
-                    >
-                      <div className="account-settings__label">Address</div>
-                      <GoogleAddress
-                        name="office_street"
-                        className="account-settings__input"
-                        loadOptions={this.loadAddress}
-                        cacheOptions={false}
-                        companyAddresses={companyAddresses}
-                        theme=""
-                        labelCompany=""
-                        labelGoogle=""
-                        display="full"
-                        value={values.office_street}
-                        onChange={this.onChangeOfficeAddress}
-                        onBlur={this.onBlurOfficeAddress}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_street" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_city",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .city
-                        }
-                      </div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_city"
-                        theme="gray"
-                        value={values.office_city}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_city" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_state",
-                        errors,
-                        touched
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .state
-                        }
-                      </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_state"
-                        theme="gray"
-                        isSearchable={true}
-                        options={
-                          this.selectedCountry == COUNTRY_FIELDS.USA.short_name
-                            ? this.props.us_state_list
-                            : this.props.gb_county_list
-                        }
-                        value={values.office_state}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_state", true);
-                        }}
-                        onChange={value => {
-                          this.unsetMessage();
-                          setFieldValue("office_state", value);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_state" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_zip",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .zip
-                        }
-                      </div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_zip"
-                        theme="gray"
-                        value={values.office_zip}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      ></Input>
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_zip" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_name",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">Office Name</div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_name"
-                        theme="gray"
-                        value={values.office_name}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_name" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_type",
-                        errors,
-                        touched
-                      )}
-                    >
-                      <div className="account-settings__label">Office Type</div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_type"
-                        theme="gray"
-                        options={this.props.office_options}
-                        value={values.office_type}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_type", true);
-                        }}
-                        onChange={value => {
-                          this.unsetMessage();
-                          setFieldValue("office_type", value);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_type" />
-                      </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Company Role</div>
+                    <div className="account-settings__value">
+                      {values.company_roles?.map(v => v.label).join(", ")}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="account-settings__controls">
-                <Button
-                  className="account-settings__button"
-                  color="primary"
-                  type="submit"
-                >
-                  Save
-                </Button>
-                {this.showMessage(errors, touched)}
+              <div className="account-settings__tab-subsection">
+                <div className="account-settings__tab-title">
+                  Office Info
+                  {this.showOfficeMessage()}
+                  <Button
+                    className="account-settings__edit-button"
+                    color="secondary-gray"
+                    onClick={this.openOfficeModal}
+                  >
+                    <div className="account-settings__edit-button-text">
+                      Edit Office Info
+                    </div>
+                  </Button>
+                  <OfficeModal
+                    isOpen={this.state.isOfficeOpen}
+                    data={this.getOfficeValues()}
+                    office_options={this.props.office_options}
+                    office_countries={this.props.office_countries}
+                    us_state_list={this.props.us_state_list}
+                    gb_county_list={this.props.gb_county_list}
+                    loadAddress={this.loadAddress}
+                    onClose={this.closeOfficeModal}
+                    onSuccess={this.setOfficeSuccess}
+                    dispatch={this.props.dispatch}
+                  />
+                </div>
+                <div className="account-settings__value-field">
+                  <div className="account-settings__label">Country</div>
+                  <div className="account-settings__value">
+                    {COUNTRY_FIELDS[this.selectedCountry].full_name}
+                  </div>
+                </div>
+                <div className="account-settings__value-field">
+                  <div className="account-settings__label">Address</div>
+                  <div className="account-settings__value">
+                    {values.office_street}
+                  </div>
+                </div>
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {COUNTRY_FIELDS[this.selectedCountry].address_fields.city}
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_city}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {
+                        COUNTRY_FIELDS[this.selectedCountry].address_fields
+                          .state
+                      }
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_state?.value}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {COUNTRY_FIELDS[this.selectedCountry].address_fields.zip}
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_zip}
+                    </div>
+                  </div>
+                </div>
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Name</div>
+                    <div className="account-settings__value">
+                      {values.office_name}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Type</div>
+                    <div className="account-settings__value">
+                      {values.office_type?.label}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </Form>
+            </div>
           )}
         </Formik>
       </div>

@@ -17,7 +17,7 @@ export default class GoogleAddress extends React.PureComponent {
       })
     ),
     className: PropTypes.string,
-    theme: PropTypes.oneOf(["", "highlight"]),
+    theme: PropTypes.oneOf(["", "highlight", "gray"]),
     loadOptions: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     labelCompany: PropTypes.string,

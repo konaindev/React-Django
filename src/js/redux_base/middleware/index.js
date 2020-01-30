@@ -15,7 +15,9 @@ import {
 } from "../actions";
 import {
   getPropertiesData,
-  updateProfileData,
+  updateCompanyData,
+  updateOfficeData,
+  updateUserProfileData,
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
@@ -88,8 +90,8 @@ export const fetchCreatePassword = store => next => action => {
           if (response.status === 200) {
             const email = response.data.email;
             const password = action.data.password;
-            const completeAccountUrl = createFEUrl("/complete-account");
-            next(auth.login({ email, password, completeAccountUrl }));
+            const redirect_url = createFEUrl("/users/complete-account");
+            next(auth.login({ email, password, redirect_url }));
           } else {
             throw response;
           }
@@ -348,10 +350,16 @@ export const updateAccountSecurity = store => next => action => {
 };
 
 export const updateAccountProfile = store => next => action => {
-  if (action.type === "API_ACCOUNT_PROFILE") {
+  const accountApiMap = {
+    API_ACCOUNT_PROFILE_USER: updateUserProfileData,
+    API_ACCOUNT_PROFILE_COMPANY: updateCompanyData,
+    API_ACCOUNT_PROFILE_OFFICE: updateOfficeData
+  };
+  const callApi = accountApiMap[action.type];
+  if (callApi) {
     if (action.data) {
       startFetchingState(store);
-      updateProfileData(action.data)
+      callApi(action.data)
         .then(response => {
           if (response.status === 200 && !response.data?.errors) {
             action.callback(response.data);

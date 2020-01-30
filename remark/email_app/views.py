@@ -19,7 +19,7 @@ class WeeklyPerformanceTestPage(ContentView):
             "property_name": "El Cortez",
             "city": "Phoenix",
             "state": "AZ",
-            "campaign_goal_chart_url": "https://app.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
+            "campaign_goal_chart_url": "https://internal.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
             "campaign_health": 2,
             "campaign_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "top_macro_insight_1": "Property is 92% Leased against period target of 89%, assessed as On Track.",

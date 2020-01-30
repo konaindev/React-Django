@@ -15,6 +15,7 @@ from jsonfield import JSONField
 from stdimage.models import StdImageField
 from image_cropping.utils import get_backend
 
+from remark.lib.airflow import trigger_dag
 from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
@@ -38,8 +39,9 @@ from remark.projects.constants import (
     BENCHMARK_KPIS,
     SIZE_PROPERTY_HOME,
     SIZE_DASHBOARD,
-    PROPERTY_STYLE_AUTO
+    PROPERTY_STYLE_AUTO,
 )
+from remark.settings import TESTING
 
 from remark.users.constants import PROJECT_ROLES
 
@@ -321,6 +323,7 @@ class Project(models.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cache_subscription_fields()
+        self._cache_baseline_fields()
 
     def _target_periods(self, qs, start, end):
         """
@@ -597,6 +600,10 @@ class Project(models.Model):
     def _cache_subscription_fields(self):
         self._email_distribution_list = self.email_distribution_list
 
+    def _cache_baseline_fields(self):
+        self._baseline_start = self.baseline_start
+        self._baseline_end = self.baseline_end
+
     def __assign_blank_groups(self):
         """
         Creates a new Group and assign it to view_gruop field
@@ -608,10 +615,25 @@ class Project(models.Model):
         self.view_group = view_group
         self.admin_group = admin_group
 
+    def __trigger_dag(self):
+        if (
+            self._baseline_start is None
+            or self._baseline_end is None
+            or self._baseline_start == self.baseline_start
+            or self._baseline_end == self.baseline_end
+        ) and not TESTING:
+            params = {
+                "start": self.baseline_start.strftime("%Y-%m-%d"),
+                "end": self.baseline_end.strftime("%Y-%m-%d"),
+                "project_id": self.public_id,
+            }
+            trigger_dag("macro_baseline", params)
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_groups()
         super().save(*args, **kwargs)
+        self.__trigger_dag()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)

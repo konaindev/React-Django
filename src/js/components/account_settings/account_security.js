@@ -132,7 +132,7 @@ export default class AccountSecurity extends React.PureComponent {
     });
   };
 
-  onSubmit = data => {
+  onSaveUser = data => {
     this.unsetMessage();
     this.props.dispatch({
       type: "API_SECURITY_ACCOUNT",
@@ -164,7 +164,7 @@ export default class AccountSecurity extends React.PureComponent {
           validateOnBlur={true}
           validateOnChange={true}
           initialValues={this.initialValues}
-          onSubmit={this.onSubmit}
+          onSubmit={this.onSaveUser}
         >
           {({ errors, touched, values }) => (
             <Form method="post" autoComplete="off">

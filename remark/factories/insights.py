@@ -1,6 +1,6 @@
 import datetime
 
-from remark.insights.models import PerformanceInsights
+from remark.insights.models import PerformanceInsights, BaselineInsights
 
 
 def crete_performance_insights(project_id, **kwargs):
@@ -48,4 +48,18 @@ def crete_performance_insights(project_id, **kwargs):
     insights = PerformanceInsights.objects.create(
         project_id=project_id, **default_params
     )
+    return insights
+
+
+def crete_baseline_insights(project_id, **kwargs):
+    default_params = {
+        "start": datetime.date(year=2018, month=4, day=1),
+        "end": datetime.date(year=2019, month=3, day=29),
+        "facts": {},
+        "insights": {
+            "kpi_high_performing": "Volume of APP is your best performing metric compared to your Remarkably customer peer set average, this period."
+        },
+        **kwargs,
+    }
+    insights = BaselineInsights.objects.create(project_id=project_id, **default_params)
     return insights

@@ -1,5 +1,9 @@
 @import "css/base.scss";
 
+$gray-button-bg-color: $gray-4;
+$gray-button-border: 1px solid $gray-9;
+$gray-button-line-height: 1.25rem;
+
 .button {
     padding: $s3 $s4;
     border-radius: $border-radius-default;
@@ -52,6 +56,22 @@
 
         &:active {
             background-color: darken($button-secondary-bg-color, 2%);
+        }
+    }
+
+    &--secondary-gray {
+        color: $button-secondary-text-color;
+        font-size: $text-xs;
+        line-height: $gray-button-line-height;
+        background: $gray-button-bg-color;
+        border: $gray-button-border;
+        border-radius: 4px;
+
+        &:hover, &:focus {
+            background-color: lighten($gray-button-bg-color, 3%);
+        }
+        &:active {
+            background-color: darken($gray-button-bg-color, 2%);
         }
     }
 
