@@ -4,14 +4,14 @@ import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import { COUNTRY_FIELDS } from "../../constants";
 
+import { COUNTRY_FIELDS } from "../../constants";
+import CompanyModal from "../../containers/settings_company_modal";
 import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
 import { accountSettings as actions } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
-import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import OfficeModal from "../office_modal";
@@ -553,7 +553,6 @@ export default class Profile extends React.PureComponent {
                     onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
                     onSuccess={this.setCompanySuccess}
-                    dispatch={this.props.dispatch}
                   />
                 </div>
                 <div className="account-settings__field-grid  account-settings__field-grid--col-3">

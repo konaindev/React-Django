@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import _intersection from "lodash/intersection";
 
 import AccountForm from "../account_form";
+import CompanyModal from "../company_modal";
 import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import Input from "../input";
@@ -13,10 +14,10 @@ import Select, { SelectSearch } from "../select";
 import Button from "../button";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
+import OfficeModal from "../office_modal";
 import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
 import { addressModal } from "../../redux_base/actions";
-import GoogleAddress from "../google_address";
 import LoaderContainer from "../../containers/loader";
 
 import { propertySchema } from "./validators";
