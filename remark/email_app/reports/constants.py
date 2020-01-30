@@ -177,3 +177,13 @@ KPI_CATEGORIES = {
     "risk": "Risk",
     "low": "Low"
 }
+
+MACRO_INSIGHT_PRIORITY_RANK = {
+    "1": "lease_rate_against_target",
+    "2": "change_health_status",
+    "3": "usv_exe_off_track",
+    "4": "usv_exe_at_risk",
+    "5": "usv_exe_on_track",
+    "6": "retention_rate_health",
+    "7": "top_usv_referral"
+}

@@ -2,8 +2,10 @@
 
 import click
 import json
+import random
 
 TEST_PASSWORD = "pbkdf2_sha256$150000$mB9xzUGC4xro$a4oeUKHtyc8TDMinSQ2kPkuZH/kU467JdKY8Ew3dlkE="
+DAY_LIST = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 @click.command()
 @click.argument("input_file", required=True, type=click.File(mode="r"))
@@ -18,6 +20,8 @@ def command(input_file, output_file):
         elif model["model"] == "projects.property":
             model["fields"]["building_image"] = None
             model["fields"]["building_logo"] = None
+        elif model["model"] == "projects.project":
+            model["fields"]["reporting_day"] = random.choice(DAY_LIST)
         result.append(model)
 
     json.dump(result, output_file)

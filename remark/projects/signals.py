@@ -1,7 +1,10 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core import serializers
 
 from celery import shared_task
+
+import json
 
 from remark.lib.airflow import trigger_dag
 from remark.lib.cache import get_dashboard_cache_key, reset_cache
@@ -13,9 +16,11 @@ from remark.email_app.reports.constants import (
     SELECTORS,
     KPI_NAMES,
     KPI_POSITIVE_DIRECTION,
-    KPIS_INCLUDE_IN_EMAIL
+    KPIS_INCLUDE_IN_EMAIL,
+    MACRO_INSIGHT_PRIORITY_RANK
 )
 from remark.email_app.reports.weekly_performance import update_project_contacts
+from remark.insights.models import WeeklyInsights
 
 from .models import Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 
@@ -132,6 +137,23 @@ def get_ctd_kpi_lists(ctd_model_percent):
     return (top_kpis, risk_kpis, low_kpis)
 
 
+def set_macro_insights(pe):
+    try:
+        weekly_insights = WeeklyInsights.objects.get(project_id=pe.project)
+        insights = weekly_insights.insights
+        count = 1
+        for k, v in MACRO_INSIGHT_PRIORITY_RANK.items():
+            if v in insights:
+                field_name = f"top_macro_insight_{str(count)}"
+                setattr(pe, field_name, insights[v])
+                count += 1
+            if count > 3:
+                break
+    except:
+        logger.info("No weekly insights entry for project")
+    return
+
+
 @shared_task
 def update_performance_report(period_id):
     try:
@@ -205,6 +227,7 @@ def update_performance_report(period_id):
     pe.top_performing_insight = top_kpi_insight(top_kpi)
     pe.low_performing_kpi = low_kpi
     pe.low_performing_insight = low_kpi_insight(low_kpi)
+    set_macro_insights(pe)
     pe.save()
 
     logger.info(f"TOP_KPIS::{top_kpis}")
@@ -246,10 +269,10 @@ def post_save_period(sender, instance, created, raw, **kwargs):
     update_performance_report.apply_async(args=(instance.id,), countdown=2)
 
 
-@receiver(post_save,  sender=Period)
-def trigger_dag_macro(sender, instance, **kwargs):
-    params = {
-        "start": instance.start.strftime("%Y-%m-%d"),
-        "end": instance.end.strftime("%Y-%m-%d"),
-    }
-    trigger_dag("macro", params)
+# @receiver(post_save,  sender=Period)
+# def trigger_dag_macro(sender, instance, **kwargs):
+#     params = {
+#         "start": instance.start.strftime("%Y-%m-%d"),
+#         "end": instance.end.strftime("%Y-%m-%d"),
+#     }
+#     trigger_dag("macro", params)

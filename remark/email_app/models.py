@@ -42,6 +42,11 @@ class PerformanceEmail(models.Model):
     lease_rate_text = models.TextField(
         null=True, blank=True, help_text="Optional text for Lease Rate section"
     )
+
+    top_macro_insight_1 = models.TextField(null=True, blank=True, help_text="Highest Priority Macro Insight")
+    top_macro_insight_2 = models.TextField(null=True, blank=True, help_text="Second Highest Priority Macro Insight")
+    top_macro_insight_3 = models.TextField(null=True, blank=True, help_text="Third Highest Priority Macro Insight")
+
     top_performing_kpi = models.TextField(choices=KPI_NAMES.items())
     top_performing_insight = models.TextField(
         null=True, blank=True, help_text="Optional text for Highest Performer"
