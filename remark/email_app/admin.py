@@ -23,7 +23,6 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "start",
         "campaign_health",
         "email_campaign_id",
-        "lease_rate_text",
         "top_macro_insight_1",
         "top_macro_insight_2",
         "top_macro_insight_3",

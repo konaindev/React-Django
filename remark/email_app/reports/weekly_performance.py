@@ -132,7 +132,6 @@ def generate_template_vars(perf_email):
 
     address = project.property.geo_address
     health = perf_email.campaign_health
-    lease_rate_text = perf_email.lease_rate_text
     top_macro_insight_1 = perf_email.top_macro_insight_1
     top_macro_insight_2 = perf_email.top_macro_insight_2
     top_macro_insight_3 = perf_email.top_macro_insight_3

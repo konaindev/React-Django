@@ -222,7 +222,6 @@ def update_performance_report(period_id):
     pe.start = start
     pe.end = end
     pe.campaign_health = str(campaign_health)
-    pe.lease_rate_text = campaign_insight(campaign_health)
     pe.top_performing_kpi = top_kpi
     pe.top_performing_insight = top_kpi_insight(top_kpi)
     pe.low_performing_kpi = low_kpi
