@@ -45,13 +45,16 @@
                                     <![endif]-->
                             <!-- START Macro Insights -->
                                     {% include "./text_field.html" with text_input=top_macro_insight_1 only %}
+                                    {% include "./details_button.html" with background="dark" text="Details" %}
                                     {% if top_macro_insight_2 %}
                                       {% include "./campaign_to_date_list_break.html" %}
                                       {% include "./text_field.html" with text_input=top_macro_insight_2 only %}
+                                      {% include "./details_button.html" with background="dark" text="Details" %}
                                     {% endif %}
                                     {% if top_macro_insight_3 %}
                                       {% include "./campaign_to_date_list_break.html" %}
                                       {% include "./text_field.html" with text_input=top_macro_insight_3 only %}
+                                      {% include "./details_button.html" with background="dark" text="Details" %}
                                     {% endif %}
                                     {% include "./campaign_to_date_list_break.html" %}
                                     {% include "./view_report_button.html" with background="dark" text="See more insights" %}
