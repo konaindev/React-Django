@@ -12,17 +12,37 @@ const data = {
   second: ""
 };
 
-storiesOf("ModalForm", module).add("default", () => (
-  <ModalForm isOpen={true} title="Test Modal" initialData={data}>
-    {() => [
-      <>
-        <AccountSettingsField label="First Input" errorKey="first">
-          <Input className="account-settings-field__input" />
-        </AccountSettingsField>
-        <AccountSettingsField label="Second Input" errorKey="second">
-          <Input className="account-settings-field__input" />
-        </AccountSettingsField>
-      </>
-    ]}
-  </ModalForm>
-));
+storiesOf("ModalForm", module)
+  .add("default", () => (
+    <ModalForm isOpen={true} title="Test Modal" initialData={data}>
+      {() => [
+        <>
+          <AccountSettingsField label="First Input" errorKey="first">
+            <Input className="account-settings-field__input" />
+          </AccountSettingsField>
+          <AccountSettingsField label="Second Input" errorKey="second">
+            <Input className="account-settings-field__input" />
+          </AccountSettingsField>
+        </>
+      ]}
+    </ModalForm>
+  ))
+  .add("light", () => (
+    <ModalForm
+      theme="light"
+      isOpen={true}
+      title="Light Modal"
+      initialData={data}
+    >
+      {() => [
+        <>
+          <AccountSettingsField label="First Input" errorKey="first">
+            <Input className="account-settings-field__input" />
+          </AccountSettingsField>
+          <AccountSettingsField label="Second Input" errorKey="second">
+            <Input className="account-settings-field__input" />
+          </AccountSettingsField>
+        </>
+      ]}
+    </ModalForm>
+  ));

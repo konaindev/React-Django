@@ -36,6 +36,9 @@ export class CompleteAccountView extends React.PureComponent {
     super(props);
     this.formik = React.createRef();
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
+    this.state = {
+      isCompanyOpen: false
+    };
   }
 
   initialValues = {
@@ -269,6 +272,15 @@ export class CompleteAccountView extends React.PureComponent {
     this.props.dispatch(addressModal.close);
   };
 
+  onOpenCompanyModal = e => {
+    e.preventDefault();
+    this.setState({ isCompanyOpen: true });
+  };
+
+  onCloseCompanyModal = () => {
+    this.setState({ isCompanyOpen: false });
+  };
+
   render() {
     const {
       company_roles,
@@ -361,24 +373,40 @@ export class CompleteAccountView extends React.PureComponent {
                     onBlur={handleBlur}
                   />
                 </FormField>
-                <div className="complete-account__section-label">
-                  Company Info
+                <div>
+                  <div className="complete-account__section-label">
+                    Company Info
+                  </div>
+                  <Button
+                    className="complete-account__edit-button"
+                    color="secondary-gray"
+                    onClick={this.onOpenCompanyModal}
+                  >
+                    Enter Company info
+                  </Button>
+                  <CompanyModal
+                    isOpen={this.state.isCompanyOpen}
+                    data={{
+                      company: values.company,
+                      company_roles: values.company_roles
+                    }}
+                    companyRolesOptions={this.props.company_roles}
+                    loadCompany={this.loadCompany}
+                    onChangeCompany={this.onChangeCompany}
+                    onClose={this.onCloseCompanyModal}
+                  />
                 </div>
-                <Button
-                  className="complete-account__edit-button"
-                  color="secondary-gray"
-                >
-                  Enter Company info
-                </Button>
-                <div className="complete-account__section-label">
-                  Office Info
+                <div>
+                  <div className="complete-account__section-label">
+                    Office Info
+                  </div>
+                  <Button
+                    className="complete-account__edit-button"
+                    color="secondary-gray"
+                  >
+                    Enter Office info
+                  </Button>
                 </div>
-                <Button
-                  className="complete-account__edit-button"
-                  color="secondary-gray"
-                >
-                  Enter Office info
-                </Button>
                 <div className="complete-account__terms">
                   <Checkbox
                     className="complete-account__checkbox"

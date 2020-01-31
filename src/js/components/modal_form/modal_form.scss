@@ -5,10 +5,24 @@ $modal-spacing: 1.25rem;
 $close-size: 1.25rem;
 $button-line-height: 1.25rem;
 
+$light-title-color: $gray-3;
+$light-body-border: 1px solid $gray-10;
+
 .modal-form {
     width: 560px;
     padding: 0;
     border-radius: 4px;
+
+    &--light {
+        background-color: #fff;
+        .modal-form__title {
+            color: $light-title-color;
+        }
+        .modal-form__content {
+            border-top: $light-body-border;
+            border-bottom: $light-body-border;
+        }
+    }
 }
 
 .modal-form.modal-window {

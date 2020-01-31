@@ -1,3 +1,4 @@
+import cn from "classnames";
 import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
@@ -14,6 +15,7 @@ import "./company_modal.scss";
 class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
+    theme: PropTypes.oneOf(["dark", "light"]),
     data: PropTypes.shape({
       company: PropTypes.object,
       company_roles: PropTypes.array
@@ -28,10 +30,12 @@ class CompanyModal extends React.PureComponent {
   };
 
   static defaultProps = {
+    theme: "dark",
     companyRolesOptions: [],
     loadCompany() {},
     onChangeCompany() {},
-    onSave() {}
+    onSave() {},
+    onSuccess() {}
   };
 
   constructor(props) {
