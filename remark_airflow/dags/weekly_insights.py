@@ -6,7 +6,7 @@ from airflow.operators.dummy_operator import DummyOperator
 import json
 
 default_args = {
-    "start_date": datetime(2020, 1, 27),
+    "start_date": datetime(2020, 2, 1),
     "owner": "remarkably",
     "depends_on_past": False,
     "email": ["engineering@remarkably.io"],
@@ -16,14 +16,14 @@ default_args = {
     "retry_delay": timedelta(minutes=5),
 }
 
-with DjangoDAG(dag_id="new_weekly_insights", default_args=default_args, concurrency=2, max_active_runs=1, schedule_interval=None) as dag:
+with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_runs=1, schedule_interval='0 2 * * *') as dag:
     from remark.projects.models import Project
     from remark.insights.models import WeeklyInsights
-    from remark.insights.impl.projects.projects import (
+    from remark_airflow.insights.impl.projects.projects import (
         get_project_facts,
         get_project_insights,
     )
-    from remark.insights.impl.projects.insights import (
+    from remark_airflow.insights.impl.projects.insights import (
         change_health_status,
         lease_rate_against_target,
         usv_exe_off_track,
