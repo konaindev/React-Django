@@ -7,6 +7,7 @@ $button-line-height: 1.25rem;
 
 $light-title-color: $gray-3;
 $light-body-border: 1px solid $gray-10;
+$light-close-color: $gray-6;
 
 .modal-form {
     width: 560px;
@@ -21,6 +22,9 @@ $light-body-border: 1px solid $gray-10;
         .modal-form__content {
             border-top: $light-body-border;
             border-bottom: $light-body-border;
+        }
+        .modal-window__close > svg {
+            fill: $light-close-color;
         }
     }
 }

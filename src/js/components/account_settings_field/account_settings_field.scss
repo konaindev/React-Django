@@ -20,9 +20,6 @@ $light-label-color: $gray-9;
             &:not(.select) {
                 border: 1px solid $error-color;
             }
-            .select {
-                display: block;
-            }
             .select__control,
             .select__menu {
                 border: 1px solid $error-color;
@@ -76,6 +73,10 @@ $light-label-color: $gray-9;
 
 .account-settings-field__input {
     height: 44px;
+
+    &.select {
+        display: block;
+    }
 }
 
 .account-settings-field__error {

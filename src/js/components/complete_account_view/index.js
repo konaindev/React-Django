@@ -385,6 +385,7 @@ export class CompleteAccountView extends React.PureComponent {
                     Enter Company info
                   </Button>
                   <CompanyModal
+                    theme="highlight"
                     isOpen={this.state.isCompanyOpen}
                     data={{
                       company: values.company,
