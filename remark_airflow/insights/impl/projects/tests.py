@@ -1,4 +1,5 @@
 import datetime
+import decimal
 import os
 from unittest import mock
 
@@ -20,6 +21,7 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_below_average,
     kpi_high_performing,
     kpi_above_average,
+    kpi_off_track_mitigated,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -661,4 +663,100 @@ class KPIAboveAverageTestCase(TestCase):
         self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIOffTrackMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+            },
+        )
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+            },
+        )
+
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertEqual(project_facts["kpi_off_track_a"], "tours")
+        self.assertEqual(project_facts["var_kpi_health_weeks"], 2)
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        self.assertEqual(result[0], "kpi_off_track_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+                "usvs": 350,
+            },
+        )
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+                "usvs": 350,
+            },
+        )
+
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertEqual(project_facts["kpi_off_track_a"], "tours")
+        self.assertEqual(project_facts["var_kpi_health_weeks"], 2)
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        self.assertEqual(result[0], "kpi_off_track_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_health_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_off_track_a"])
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_health_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_off_track_a"])
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
         self.assertIsNone(result)

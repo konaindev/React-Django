@@ -16,6 +16,10 @@ from remark_airflow.insights.impl.vars import (
     var_below_average_kpi,
     var_high_performing_kpi,
     var_above_average_kpi,
+    var_kpis_healths_statuses,
+    var_kpi_mitigation,
+    var_kpi_health_weeks,
+    var_unpack_kpi,
 )
 
 
@@ -328,3 +332,189 @@ class VarAboveAverageKPITestCase(TestCase):
         result = var_above_average_kpi(None, self.kpis)
         self.assertIsNone(result)
 
+
+class VarKPIsHealthsStatusesTestCase(TestCase):
+    def setUp(self) -> None:
+        self.computed_kpis = {"usvs": 6, "usv_inq": None, "inquiries": 0, "inq_tou": 2}
+        self.target_computed_kpis = {
+            "usvs": 8,
+            "usv_inq": 3,
+            "inquiries": 3,
+            "inq_tou": 1,
+        }
+        self.kpis_names = ["usvs", "usv_inq", "inquiries", "inq_tou"]
+
+    def test_kpi_is_none(self):
+        result = var_kpis_healths_statuses(
+            None, self.target_computed_kpis, self.kpis_names
+        )
+        self.assertIsNone(result)
+
+    def test_target_kpi_is_none(self):
+        result = var_kpis_healths_statuses(self.computed_kpis, None, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_all_kpi_is_none(self):
+        result = var_kpis_healths_statuses(None, None, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_kpi_is_empty(self):
+        result = var_kpis_healths_statuses(
+            {}, self.target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, {})
+
+    def test_target_kpi_is_empty(self):
+        result = var_kpis_healths_statuses(self.computed_kpis, {}, self.kpis_names)
+        self.assertDictEqual(result, {})
+
+    def test_all_kpi_is_empty(self):
+        result = var_kpis_healths_statuses({}, {}, self.kpis_names)
+        self.assertDictEqual(result, {})
+
+    def test_kpi_name_is_empty(self):
+        result = var_kpis_healths_statuses(
+            self.computed_kpis, self.target_computed_kpis, []
+        )
+        self.assertDictEqual(result, {})
+
+    def test_have_kpi(self):
+        expected = {"usvs": 1, "usv_inq": -1, "inquiries": 0, "inq_tou": 2}
+        result = var_kpis_healths_statuses(
+            self.computed_kpis, self.target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, expected)
+
+    def test_kpi_not_full(self):
+        expected = {"usv_inq": -1, "inquiries": 0, "inq_tou": 2}
+        computed_kpis = self.computed_kpis.copy()
+        del computed_kpis["usvs"]
+        result = var_kpis_healths_statuses(
+            computed_kpis, self.target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, expected)
+
+    def test_target_kpi_not_full(self):
+        expected = {"usv_inq": -1, "inquiries": 0, "inq_tou": 2}
+        target_computed_kpis = self.target_computed_kpis.copy()
+        del target_computed_kpis["usvs"]
+        result = var_kpis_healths_statuses(
+            self.computed_kpis, target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, expected)
+
+
+class VarKPIMitigationTestCase(TestCase):
+    def setUp(self) -> None:
+        self.computed_kpis = {
+            "usvs": 6,
+            "usv_inq": None,
+            "inquiries": 0,
+            "inq_tou": 2,
+            "tours": 13,
+        }
+        self.target_computed_kpis = {
+            "usvs": 8,
+            "usv_inq": 3,
+            "inquiries": 3,
+            "inq_tou": 1,
+            "tours": 14,
+        }
+        self.kpis_healths = {
+            "usvs": 2,
+            "usv_inq": -1,
+            "inquiries": 0,
+            "inq_tou": 2,
+            "tours": 2,
+        }
+
+    def test_kpi_is_none(self):
+        result = var_kpi_mitigation(self.kpis_healths, None, self.target_computed_kpis)
+        self.assertIsNone(result)
+
+    def test_target_kpi_is_none(self):
+        result = var_kpi_mitigation(self.kpis_healths, self.computed_kpis, None)
+        self.assertIsNone(result)
+
+    def test_all_kpi_is_none(self):
+        result = var_kpi_mitigation(self.kpis_healths, None, None)
+        self.assertIsNone(result)
+
+    def test_kpi_is_empty(self):
+        result = var_kpi_mitigation(self.kpis_healths, {}, self.target_computed_kpis)
+        self.assertIsNone(result)
+
+    def test_target_kpi_is_empty(self):
+        result = var_kpi_mitigation(self.kpis_healths, self.computed_kpis, {})
+        self.assertIsNone(result)
+
+    def test_all_kpi_is_empty(self):
+        result = var_kpi_mitigation(self.kpis_healths, {}, {})
+        self.assertIsNone(result)
+
+    def test_kpis_healths_is_none(self):
+        result = var_kpi_mitigation(None, self.computed_kpis, self.target_computed_kpis)
+        self.assertIsNone(result)
+
+    def test_kpis_healths_is_empty(self):
+        result = var_kpi_mitigation({}, self.computed_kpis, self.target_computed_kpis)
+        self.assertIsNone(result)
+
+    def test_have_kpi(self):
+        result = var_kpi_mitigation(
+            self.kpis_healths, self.computed_kpis, self.target_computed_kpis
+        )
+        self.assertTupleEqual(result, ("inquiries", "inq_tou", "tours"))
+
+    def test_have_many_mitigation_kpi(self):
+        computed_kpis = self.computed_kpis.copy()
+        computed_kpis["tou_app"] = 0
+        computed_kpis["lease_applications"] = 5
+        computed_kpis["tours"] = 14
+        target_computed_kpis = self.target_computed_kpis.copy()
+        target_computed_kpis["tou_app"] = 13
+        target_computed_kpis["lease_applications"] = 5
+        target_computed_kpis["tours"] = 13
+        kpis_healths = self.kpis_healths.copy()
+        kpis_healths["tou_app"] = 0
+        kpis_healths["lease_applications"] = 2
+        result = var_kpi_mitigation(kpis_healths, computed_kpis, target_computed_kpis)
+        self.assertTupleEqual(result, ("inquiries", "inq_tou", "tours"))
+
+
+class VarKPIHealthWeeksTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+
+    def test_no_kpi(self):
+        result = var_kpi_health_weeks("usvs", self.project, self.start, -1)
+        self.assertEqual(result, 0)
+
+    def test_kpi_is_none(self):
+        result = var_kpi_health_weeks(None, self.project, self.start, -1)
+        self.assertEqual(result, 0)
+
+    def test_two_week(self):
+        start = self.start
+        end = self.start - datetime.timedelta(weeks=1)
+        create_periods(self.project, start=start, end=end)
+        start = end
+        end = start - datetime.timedelta(weeks=1)
+        create_periods(self.project, start=start, end=end)
+        result = var_kpi_health_weeks("usv_inq", self.project, self.start, 2)
+        self.assertEqual(result, 2)
+
+
+class VarUnpackKPITestCase(TestCase):
+    def test_kpi_is_none(self):
+        result = var_unpack_kpi(None, 1)
+        self.assertIsNone(result)
+
+    def test_kpi_is_empty(self):
+        result = var_unpack_kpi([], 1)
+        self.assertIsNone(result)
+
+    def test_index_out_of_range(self):
+        result = var_unpack_kpi(["usv_inq"], 2)
+        self.assertIsNone(result)
