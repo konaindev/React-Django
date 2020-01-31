@@ -2,7 +2,7 @@ import functools
 
 from graphkit import operation
 
-from remark.projects.constants import BENCHMARK_KPIS
+from remark_airflow.insights.impl.constants import KPIS_NAMES
 
 
 def to_percentage(value):
@@ -21,9 +21,8 @@ def format_percent(value):
     return f"{value:.0%}"
 
 
-def benchmark_kpi_humanize(kpi_key):
-    benchmark_kpis_dict = {v[0]: v[1] for v in BENCHMARK_KPIS}
-    return benchmark_kpis_dict[kpi_key]
+def kpi_humanize(kpi_key):
+    return KPIS_NAMES.get(kpi_key, kpi_key)
 
 
 def hash_dict(func):
@@ -53,7 +52,7 @@ def hash_dict(func):
 
 # We want to cache the response to operations if the arguments are the same
 # cache_operation -> cop
-def cop(func, *needs, name=""):
+def cop(func, *needs, name="", params=None):
     name = name or func.__name__
     func = hash_dict(functools.lru_cache()(func))
     actual_needs = []
@@ -62,7 +61,9 @@ def cop(func, *needs, name=""):
             actual_needs.append(need)
         else:
             actual_needs.append(need.__name__)
-    return operation(name=f"{name}_op", needs=actual_needs, provides=[name])(func)
+    return operation(
+        name=f"{name}_op", needs=actual_needs, provides=[name], params=params
+    )(func)
 
 
 def health_standard(stat, stat_target):
@@ -78,9 +79,9 @@ def health_standard(stat, stat_target):
         return 2
 
     percent = stat / denominator
-    if percent < stat_type(0.75):
+    if percent < 0.75:
         return 0
-    elif stat_type(0.75) <= percent < stat_type(1):
+    elif 0.75 <= percent < 1:
         return 1
     else:
         return 2

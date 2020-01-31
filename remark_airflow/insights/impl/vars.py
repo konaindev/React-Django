@@ -2,38 +2,25 @@ import decimal
 from datetime import timedelta
 
 from django.db.models import Q
-from graphkit import compose
 
 from remark.analytics.google_analytics import get_project_usv_sources
 from remark.geo.models import Country
 from remark.lib.stats import health_check
-from remark.lib.time_series.computed import (
-    leased_rate_graph,
-    generate_computed_kpis,
-    generate_computed_targets,
-)
-from remark.portfolio.api.strategy import (
-    get_base_kpis_for_project,
-    get_targets_for_project,
-)
+from remark.lib.time_series.computed import leased_rate_graph
 from remark.projects.constants import HEALTH_STATUS
 from remark.projects.models import Period, TargetPeriod, Project, CountryBenchmark
-
-from remark_airflow.insights.impl.utils import health_standard, cop
+from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS
+from remark_airflow.insights.impl.graphs import (
+    projects_kpi_graph,
+    usv_exe_health_graph,
+    kpi_graph,
+    kpi_healths_graph,
+)
+from remark_airflow.insights.impl.utils import health_standard
 
 
 def var_project(project_id):
     return Project.objects.get(public_id=project_id)
-
-
-def var_base_kpis(project, start, end):
-    base_kpis = get_base_kpis_for_project(project, start, end)
-    return base_kpis
-
-
-def var_base_targets(project, start, end):
-    base_targets = get_targets_for_project(project, start, end)
-    return base_targets
 
 
 def var_current_period_leased_rate(computed_kpis):
@@ -74,35 +61,6 @@ def var_prev_health_status(project, start):
         prev_target_leased_rate = None
 
     return health_check(prev_leased_rate, prev_target_leased_rate)
-
-
-def var_computed_kpis(base_kpis):
-    return generate_computed_kpis(base_kpis)
-
-
-def var_target_computed_kpis(base_kpis, base_targets):
-    if base_kpis is None or base_targets is None:
-        return None
-    kpis = base_kpis.copy()
-    kpis.update(base_targets)
-    return generate_computed_targets(kpis)
-
-
-def var_usv_exe(computed_kpis):
-    if computed_kpis is None:
-        return None
-    return computed_kpis["usv_exe"]
-
-
-def var_target_usv_exe(target_computed_kpis):
-    if target_computed_kpis is None:
-        return None
-    return target_computed_kpis["usv_exe"]
-
-
-def var_usv_exe_health_status(usv_exe, target_usv_exe):
-    health_status = health_standard(usv_exe, target_usv_exe)
-    return health_status
 
 
 def var_weeks_usv_exe_off_track(project, start, end):
@@ -200,21 +158,6 @@ def var_kpi_usv_exe_on_track(project, weeks, end):
     return var_kpi_usv_exe_highest_health(project, weeks, end)
 
 
-projects_kpi_graph = compose(name="projects_kpi_graph")(
-    cop(var_base_kpis, "project", "start", "end"),
-    cop(var_base_targets, "project", "start", "end"),
-    cop(var_computed_kpis, var_base_kpis),
-    cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
-)
-
-usv_exe_health_graph = compose(name="usv_exe_health", merge=True)(
-    projects_kpi_graph,
-    cop(var_usv_exe, var_computed_kpis),
-    cop(var_target_usv_exe, var_target_computed_kpis),
-    cop(var_usv_exe_health_status, var_usv_exe, var_target_usv_exe),
-)
-
-
 def var_retention_rate(computed_kpis):
     if computed_kpis is None:
         return None
@@ -270,38 +213,6 @@ def var_retention_rate_trend(retention_rate, prev_retention_rate):
         return "up"
     else:
         return "down"
-
-
-def var_kpi(computed_kpis, kpi_name):
-    if computed_kpis is None:
-        return None
-    return computed_kpis[kpi_name]
-
-
-def var_target_kpi(computed_kpis, kpi_name):
-    return var_kpi(computed_kpis, kpi_name)
-
-
-def var_kpi_health(kpi, target_kpi):
-    return health_check(kpi, target_kpi)
-
-
-kpi_graph = compose(name="kpi_graph")(
-    cop(var_base_kpis, "project", "start", "end"),
-    cop(var_computed_kpis, var_base_kpis),
-    cop(var_kpi, var_computed_kpis, "kpi_name"),
-)
-
-target_kpi_graph = compose(name="target_kpi_graph")(
-    cop(var_base_kpis, "project", "start", "end"),
-    cop(var_base_targets, "project", "start", "end"),
-    cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
-    cop(var_target_kpi, var_target_computed_kpis, "kpi_name"),
-)
-
-kpi_healths_graph = compose(name="kpi_healths_graph", merge=True)(
-    kpi_graph, target_kpi_graph, cop(var_kpi_health, var_kpi, var_target_kpi)
-)
 
 
 def var_top_usv_referral(project, start, end):
@@ -448,3 +359,73 @@ def var_above_average_kpi(benchmark_kpis, kpis):
 
     min_kpi = max(benchmark_list, key=lambda kpi: kpi["value"])
     return min_kpi["name"]
+
+
+def var_kpis_healths_statuses(
+    computed_kpis, target_computed_kpis, kpis_names=KPIS_NAMES.keys()
+):
+    if computed_kpis is None or target_computed_kpis is None:
+        return None
+    result = {}
+    for kpi_name in kpis_names:
+        if kpi_name in computed_kpis and kpi_name in target_computed_kpis:
+            health_status = health_standard(
+                computed_kpis[kpi_name], target_computed_kpis[kpi_name]
+            )
+            result[kpi_name] = health_status
+    return result
+
+
+def var_kpi_mitigation(kpis_healths_statuses, computed_kpis, target_computed_kpis):
+    if (
+        kpis_healths_statuses is None
+        or computed_kpis is None
+        or target_computed_kpis is None
+    ):
+        return None
+
+    kpis = []
+    for kpi_a, kpi_b, kpi_c in MITIGATED_KPIS:
+        if (
+            kpi_a not in kpis_healths_statuses
+            or kpi_b not in kpis_healths_statuses
+            or kpi_c not in kpis_healths_statuses
+            or kpi_b not in computed_kpis
+            or kpi_b not in target_computed_kpis
+            or target_computed_kpis[kpi_b] is None
+            or target_computed_kpis[kpi_b] == 0
+            or computed_kpis[kpi_b] is None
+        ):
+            continue
+        health = computed_kpis[kpi_b] / target_computed_kpis[kpi_b]
+        if (
+            kpis_healths_statuses[kpi_a] == HEALTH_STATUS["OFF_TRACK"]
+            and kpis_healths_statuses[kpi_c] == HEALTH_STATUS["ON_TRACK"]
+            and kpis_healths_statuses[kpi_b] == HEALTH_STATUS["ON_TRACK"]
+            and health >= 1  # KPI is at or over 100% of target value
+        ):
+            kpis.append({"kpi": (kpi_a, kpi_b, kpi_c), "health": health})
+    if not kpis:
+        return None
+    return max(kpis, key=lambda kpi: kpi["health"])["kpi"]
+
+
+def var_kpi_health_weeks(kpi_name, project, start, health_target):
+    weeks = 0
+    if kpi_name is None:
+        return weeks
+    is_off = health_target != -1
+    while is_off:
+        weeks += 1
+        end = start
+        start = end - timedelta(weeks=1)
+        args = {"start": start, "end": end, "project": project, "kpi_name": kpi_name}
+        health = kpi_healths_graph(args)["var_kpi_health"]
+        is_off = health == health_target
+    return weeks
+
+
+def var_unpack_kpi(kpis, index):
+    if kpis is None or len(kpis) <= index:
+        return None
+    return kpis[index]

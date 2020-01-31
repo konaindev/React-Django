@@ -1,3 +1,4 @@
+from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
 from remark_airflow.insights.impl.triggers import (
     trigger_is_active_campaign,
@@ -8,6 +9,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_retention_rate_health,
     trigger_has_data_google_analytics,
     trigger_have_benchmark_kpi,
+    trigger_kpi_off_track_mitigated,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -15,13 +17,6 @@ from remark_airflow.insights.impl.vars import (
     var_prev_health_status,
     var_current_period_leased_rate,
     var_target_leased_rate,
-    var_computed_kpis,
-    var_base_targets,
-    var_base_kpis,
-    var_usv_exe_health_status,
-    var_usv_exe,
-    var_target_usv_exe,
-    var_target_computed_kpis,
     var_weeks_usv_exe_off_track,
     var_kpi_usv_exe_off_track,
     var_weeks_usv_exe_at_risk,
@@ -41,8 +36,20 @@ from remark_airflow.insights.impl.vars import (
     var_below_average_kpi,
     var_high_performing_kpi,
     var_above_average_kpi,
+    var_kpis_healths_statuses,
+    var_kpi_mitigation,
+    var_kpi_health_weeks,
+    var_unpack_kpi,
 )
-
+from remark_airflow.insights.impl.vars_base import (
+    var_base_kpis,
+    var_base_targets,
+    var_computed_kpis,
+    var_target_computed_kpis,
+    var_usv_exe,
+    var_target_usv_exe,
+    var_usv_exe_health_status,
+)
 
 lease_rate_against_target = Insight(
     name="lease_rate_against_target",
@@ -198,7 +205,7 @@ top_usv_referral = Insight(
 
 low_performing = Insight(
     name="low_performing",
-    template="{{ var_low_performing_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
+    template="{{ var_low_performing_kpi | kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
     triggers=["trigger_low_performing"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -206,14 +213,18 @@ low_performing = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_low_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_low_performing_kpi, name="trigger_low_performing"),
+        cop(
+            trigger_have_benchmark_kpi,
+            var_low_performing_kpi,
+            name="trigger_low_performing",
+        ),
     ],
 )
 
 
 kpi_below_average = Insight(
     name="kpi_below_average",
-    template="{{ var_below_average_kpi | benchmark_kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
+    template="{{ var_below_average_kpi | kpi_humanize }} is your worst performing metric compared to your Remarkably customer peer set average, this period.",
     triggers=["trigger_below_average"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -221,13 +232,17 @@ kpi_below_average = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_below_average_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_below_average_kpi, name="trigger_below_average"),
+        cop(
+            trigger_have_benchmark_kpi,
+            var_below_average_kpi,
+            name="trigger_below_average",
+        ),
     ],
 )
 
 kpi_high_performing = Insight(
     name="kpi_high_performing",
-    template="{{ var_high_performing_kpi | benchmark_kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
+    template="{{ var_high_performing_kpi | kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
     triggers=["trigger_high_performing"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -235,13 +250,17 @@ kpi_high_performing = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_high_performing_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_high_performing_kpi, name="trigger_high_performing"),
+        cop(
+            trigger_have_benchmark_kpi,
+            var_high_performing_kpi,
+            name="trigger_high_performing",
+        ),
     ],
 )
 
 kpi_above_average = Insight(
     name="kpi_above_average",
-    template="{{ var_above_average_kpi | benchmark_kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
+    template="{{ var_above_average_kpi | kpi_humanize }} is your best performing metric compared to your Remarkably customer peer set average, this period.",
     triggers=["trigger_above_average"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -249,6 +268,55 @@ kpi_above_average = Insight(
         cop(var_kpi_for_benchmark, var_computed_kpis),
         cop(var_benchmark_kpis, var_kpi_for_benchmark, "project", "start", "end"),
         cop(var_above_average_kpi, var_benchmark_kpis, var_kpi_for_benchmark),
-        cop(trigger_have_benchmark_kpi, var_above_average_kpi, name="trigger_above_average"),
+        cop(
+            trigger_have_benchmark_kpi,
+            var_above_average_kpi,
+            name="trigger_above_average",
+        ),
+    ],
+)
+
+kpi_off_track_mitigated = Insight(
+    name="kpi_off_track_mitigated",
+    template="While {{ kpi_off_track_a | kpi_humanize }} is Off Track for {{ var_kpi_health_weeks }} of Weeks, {{ kpi_off_track_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_off_track_c | kpi_humanize }}.",
+    triggers=["trigger_kpi_off_track_mitigated"],
+    graph=[
+        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_targets, "project", "start", "end"),
+        cop(var_computed_kpis, var_base_kpis),
+        cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+        cop(var_kpis_healths_statuses, var_computed_kpis, var_target_computed_kpis),
+        cop(
+            var_kpi_mitigation,
+            var_kpis_healths_statuses,
+            var_computed_kpis,
+            var_target_computed_kpis,
+        ),
+        cop(
+            var_unpack_kpi,
+            var_kpi_mitigation,
+            name="kpi_off_track_a",
+            params={"index": 0},
+        ),
+        cop(
+            var_unpack_kpi,
+            var_kpi_mitigation,
+            name="kpi_off_track_b",
+            params={"index": 1},
+        ),
+        cop(
+            var_unpack_kpi,
+            var_kpi_mitigation,
+            name="kpi_off_track_c",
+            params={"index": 2},
+        ),
+        cop(
+            var_kpi_health_weeks,
+            "kpi_off_track_a",
+            "project",
+            "start",
+            params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
+        ),
+        cop(trigger_kpi_off_track_mitigated, "kpi_off_track_a", "var_kpi_health_weeks"),
     ],
 )
