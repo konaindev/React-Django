@@ -39,9 +39,6 @@ class PerformanceEmail(models.Model):
         null=False,
         default="2",
     )
-    lease_rate_text = models.TextField(
-        null=True, blank=True, help_text="Optional text for Lease Rate section"
-    )
 
     top_macro_insight_1 = models.TextField(null=True, blank=True, help_text="Highest Priority Macro Insight")
     top_macro_insight_2 = models.TextField(null=True, blank=True, help_text="Second Highest Priority Macro Insight")
