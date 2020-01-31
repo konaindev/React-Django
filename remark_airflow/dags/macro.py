@@ -1,3 +1,4 @@
+# Commented out pending clarity on the purpose of this DAG and to avoid false errors
 # from datetime import datetime
 #
 # from django_dag import DjangoDAG

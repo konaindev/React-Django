@@ -22,11 +22,6 @@ def command(input_file, output_file):
             model["fields"]["building_logo"] = None
         elif model["model"] == "projects.project":
             model["fields"]["reporting_day"] = random.choice(DAY_LIST)
-        # elif model["model"] == "email_app.performanceemail":
-        #     model["fields"]["top_macro_insight_1"] = model["fields"]["lease_rate_text"]
-        #     model["fields"]["top_macro_insight_2"] = None
-        #     model["fields"]["top_macro_insight_3"] = None
-        #     model["fields"].pop("lease_rate_text", None)
         result.append(model)
 
     json.dump(result, output_file)

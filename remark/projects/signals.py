@@ -267,7 +267,7 @@ def post_save_period(sender, instance, created, raw, **kwargs):
 
     update_performance_report.apply_async(args=(instance.id,), countdown=2)
 
-
+# Commented out because this is something that may be used, but currently, it doesn't integrate (resulting in false errors).
 # @receiver(post_save,  sender=Period)
 # def trigger_dag_macro(sender, instance, **kwargs):
 #     params = {
