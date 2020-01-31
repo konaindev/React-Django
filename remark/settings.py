@@ -49,7 +49,7 @@ TESTING = sys.argv[1:2] == ['test']
 PATH_REF = "."
 if os.getenv("COMPOSER_AIRFLOW_ENV", False):
     PATH_REF = "/home/airflow/gcs/dags"
-if os.getenv("LOCAL_AIRFLOW", False):
+if LOCAL_AIRFLOW:
     PATH_REF = "/usr/local/airflow/dags"
 
 
@@ -226,7 +226,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CSRF_TRUSTED_ORIGINS = ["staging.remarkably.io", "app.remarkably.io"]
 
 ALLOWED_HOSTS = ["app.remarkably.io", "staging.remarkably.io", "localhost"]
-if DOCKER_COMPOSE:
+if DOCKER_COMPOSE or LOCAL_AIRFLOW:
     ALLOWED_HOSTS = ["*"]
 INTERNAL_IPS = ["127.0.0.1"]
 
@@ -324,7 +324,7 @@ CELERY_IGNORE_RESULT = True
 #
 # AIRFLOW
 #
-AIRFLOW_URL = os.getenv("AIRFLOW_URL", "http://localhost:8081")
+AIRFLOW_URL = os.getenv("AIRFLOW_URL", "http://localhost:8080")
 
 #
 # MJML
@@ -342,7 +342,7 @@ ssl_require = ENV == PROD
 locals()['DATABASES']['default'] = dj_database_url.config(
     conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
-if LOCAL_AIRFLOW:
+if DOCKER_COMPOSE and LOCAL_AIRFLOW:
     DATABASES = {
         'default': {
             # 'ENGINE': 'django.db.backends.postgresql',
@@ -354,13 +354,13 @@ if LOCAL_AIRFLOW:
             'PORT': 5432,
         }
     }
-elif DOCKER_COMPOSE:
+elif DOCKER_COMPOSE and not LOCAL_AIRFLOW:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'HOST': 'postgres',
+            'HOST': 'db',
             'PORT': 5432,
         }
     }
