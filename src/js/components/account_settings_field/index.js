@@ -6,8 +6,8 @@ import React from "react";
 import "./account_settings_field.scss";
 
 const getFieldClasses = (name, theme, errors, touched, modifiers = []) => {
-  if (theme !== "dark") {
-    modifiers.push(theme);
+  if (theme !== "gray") {
+    modifiers = [theme, ...modifiers];
   }
   const classes = modifiers.map(m => `account-settings-field--${m}`);
   const error_dict = {
@@ -55,7 +55,7 @@ const AccountSettingsField = ({
 );
 AccountSettingsField.propTypes = {
   className: PropTypes.string,
-  theme: PropTypes.oneOf(["dark", "light"]),
+  theme: PropTypes.oneOf(["gray", "highlight"]),
   name: PropTypes.string,
   errorKey: PropTypes.string,
   label: PropTypes.string,

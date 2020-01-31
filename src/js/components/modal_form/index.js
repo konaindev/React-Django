@@ -11,7 +11,7 @@ import "./modal_form.scss";
 class ModalForm extends React.PureComponent {
   static propTypes = {
     children: PropTypes.func.isRequired,
-    theme: PropTypes.oneOf(["dark", "light"]),
+    theme: PropTypes.oneOf(["dark", "highlight"]),
     title: PropTypes.string.isRequired,
     initialData: PropTypes.object,
     validationSchema: PropTypes.object,

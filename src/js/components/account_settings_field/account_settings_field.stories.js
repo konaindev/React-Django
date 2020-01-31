@@ -30,7 +30,7 @@ storiesOf("AccountSettingsField", module)
       <AccountSettingsField
         label="Test Field"
         errorName="field"
-        theme="light"
+        theme="highlight"
         style={style}
       >
         <Input className="account-settings-field__input" theme="highlight" />

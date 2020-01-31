@@ -29,18 +29,32 @@ storiesOf("ModalForm", module)
   ))
   .add("light", () => (
     <ModalForm
-      theme="light"
+      theme="highlight"
       isOpen={true}
       title="Light Modal"
       initialData={data}
     >
       {() => [
         <>
-          <AccountSettingsField label="First Input" errorKey="first">
-            <Input className="account-settings-field__input" />
+          <AccountSettingsField
+            label="First Input"
+            errorKey="first"
+            theme="highlight"
+          >
+            <Input
+              className="account-settings-field__input"
+              theme="highlight"
+            />
           </AccountSettingsField>
-          <AccountSettingsField label="Second Input" errorKey="second">
-            <Input className="account-settings-field__input" />
+          <AccountSettingsField
+            label="Second Input"
+            errorKey="second"
+            theme="highlight"
+          >
+            <Input
+              className="account-settings-field__input"
+              theme="highlight"
+            />
           </AccountSettingsField>
         </>
       ]}

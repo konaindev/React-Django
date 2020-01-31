@@ -20,6 +20,9 @@ $light-label-color: $gray-9;
             &:not(.select) {
                 border: 1px solid $error-color;
             }
+            .select {
+                display: block;
+            }
             .select__control,
             .select__menu {
                 border: 1px solid $error-color;
@@ -54,7 +57,7 @@ $light-label-color: $gray-9;
             opacity: .5;
         }
     }
-    &--light {
+    &--highlight {
         .account-settings-field__label {
             color: $light-label-color;
         }

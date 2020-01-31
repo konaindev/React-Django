@@ -15,7 +15,7 @@ import "./company_modal.scss";
 class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
-    theme: PropTypes.oneOf(["dark", "light"]),
+    theme: PropTypes.oneOf(["gray", "highlight"]),
     data: PropTypes.shape({
       company: PropTypes.object,
       company_roles: PropTypes.array
@@ -30,7 +30,7 @@ class CompanyModal extends React.PureComponent {
   };
 
   static defaultProps = {
-    theme: "dark",
+    theme: "gray",
     companyRolesOptions: [],
     loadCompany() {},
     onChangeCompany() {},
@@ -76,6 +76,7 @@ class CompanyModal extends React.PureComponent {
   render() {
     return (
       <ModalForm
+        theme={this.props.theme}
         title="Company Info"
         initialData={this.props.data}
         validationSchema={companySchema}
@@ -96,6 +97,7 @@ class CompanyModal extends React.PureComponent {
         }) => (
           <>
             <AccountSettingsField
+              theme={this.props.theme}
               name="company"
               label="Company"
               errorKey="company.value"
@@ -103,11 +105,11 @@ class CompanyModal extends React.PureComponent {
               touched={touched}
             >
               <SelectSearch
+                className="account-settings-field__input"
+                theme={this.props.theme}
                 name="company"
-                theme="gray"
                 placeholder=""
                 components={{ DropdownIndicator: () => null }}
-                className="account-settings-field__input"
                 loadOptions={this.props.loadCompany}
                 defaultOptions={[]}
                 isCreatable={true}
@@ -118,6 +120,7 @@ class CompanyModal extends React.PureComponent {
               />
             </AccountSettingsField>
             <AccountSettingsField
+              theme={this.props.theme}
               name="company_roles"
               label="Company Role"
               errorKey="company_roles"
@@ -127,9 +130,9 @@ class CompanyModal extends React.PureComponent {
             >
               <div className="modal-form__inputs-wrap">
                 <MultiSelect
+                  theme={this.props.theme}
                   className="account-settings-field__input company-modal__company-roles"
                   name="company_roles"
-                  theme="gray"
                   isShowControls={false}
                   isShowAllOption={false}
                   isDisabled={this.state.rolesLocked}
