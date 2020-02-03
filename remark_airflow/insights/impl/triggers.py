@@ -44,3 +44,7 @@ def trigger_have_benchmark_kpi(low_kpi):
 
 def trigger_kpi_off_track_mitigated(kpi, weeks):
     return kpi is not None and weeks >= 2
+
+
+def trigger_kpi_at_risk_mitigated(kpi, weeks):
+    return kpi is not None and weeks >= 2

@@ -10,6 +10,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_has_data_google_analytics,
     trigger_have_benchmark_kpi,
     trigger_kpi_off_track_mitigated,
+    trigger_kpi_at_risk_mitigated,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -325,5 +326,54 @@ kpi_off_track_mitigated = Insight(
             "kpi_off_track_a",
             "var_kpi_off_track_weeks",
         ),
+    ],
+)
+
+
+kpi_at_risk_mitigated = Insight(
+    name="kpi_at_risk_mitigated",
+    template="While {{ kpi_at_risk_a | kpi_humanize }} is At Risk for {{ var_kpi_at_risk_weeks }} of Weeks, {{ kpi_at_risk_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_at_risk_c | kpi_humanize }}.",
+    triggers=["trigger_kpi_at_risk_mitigated"],
+    graph=[
+        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_targets, "project", "start", "end"),
+        cop(var_computed_kpis, var_base_kpis),
+        cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+        cop(var_kpis_healths_statuses, var_computed_kpis, var_target_computed_kpis),
+        cop(
+            var_kpi_mitigation,
+            var_kpis_healths_statuses,
+            var_computed_kpis,
+            var_target_computed_kpis,
+            params={"target_health": HEALTH_STATUS["AT_RISK"]},
+            name="var_kpi_at_risk_mitigated",
+        ),
+        cop(
+            var_unpack_kpi,
+            "var_kpi_at_risk_mitigated",
+            name="kpi_at_risk_a",
+            params={"index": 0},
+        ),
+        cop(
+            var_unpack_kpi,
+            "var_kpi_at_risk_mitigated",
+            name="kpi_at_risk_b",
+            params={"index": 1},
+        ),
+        cop(
+            var_unpack_kpi,
+            "var_kpi_at_risk_mitigated",
+            name="kpi_at_risk_c",
+            params={"index": 2},
+        ),
+        cop(
+            var_kpi_health_weeks,
+            "kpi_at_risk_a",
+            "project",
+            "start",
+            name="var_kpi_at_risk_weeks",
+            params={"health_target": HEALTH_STATUS["AT_RISK"]},
+        ),
+        cop(trigger_kpi_at_risk_mitigated, "kpi_at_risk_a", "var_kpi_at_risk_weeks"),
     ],
 )
