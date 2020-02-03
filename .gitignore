@@ -184,9 +184,6 @@ requirements.txt
 
 .cache
 
-# vscode
-.vscode/
-
 # redis
 dump.rdb
 
@@ -196,11 +193,9 @@ dump.rdb
 # vi swp
 *.swp
 
-# Pycharm
-.idea/
-
 # IDE files
 .idea/
+.vscode/
 
 *-storybook/
 *_storybook/
