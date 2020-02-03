@@ -6,6 +6,7 @@ from remark.factories.benchmarks import generate_benchmarks
 from remark.factories.geo import create_us
 from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
+from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
 from remark_airflow.insights.impl.vars import (
@@ -429,40 +430,68 @@ class VarKPIMitigationTestCase(TestCase):
         }
 
     def test_kpi_is_none(self):
-        result = var_kpi_mitigation(self.kpis_healths, None, self.target_computed_kpis)
+        result = var_kpi_mitigation(
+            self.kpis_healths,
+            None,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
         self.assertIsNone(result)
 
     def test_target_kpi_is_none(self):
-        result = var_kpi_mitigation(self.kpis_healths, self.computed_kpis, None)
+        result = var_kpi_mitigation(
+            self.kpis_healths, self.computed_kpis, None, HEALTH_STATUS["OFF_TRACK"]
+        )
         self.assertIsNone(result)
 
     def test_all_kpi_is_none(self):
-        result = var_kpi_mitigation(self.kpis_healths, None, None)
+        result = var_kpi_mitigation(
+            self.kpis_healths, None, None, HEALTH_STATUS["OFF_TRACK"]
+        )
         self.assertIsNone(result)
 
     def test_kpi_is_empty(self):
-        result = var_kpi_mitigation(self.kpis_healths, {}, self.target_computed_kpis)
+        result = var_kpi_mitigation(
+            self.kpis_healths, {}, self.target_computed_kpis, HEALTH_STATUS["OFF_TRACK"]
+        )
         self.assertIsNone(result)
 
     def test_target_kpi_is_empty(self):
-        result = var_kpi_mitigation(self.kpis_healths, self.computed_kpis, {})
+        result = var_kpi_mitigation(
+            self.kpis_healths, self.computed_kpis, {}, HEALTH_STATUS["OFF_TRACK"]
+        )
         self.assertIsNone(result)
 
     def test_all_kpi_is_empty(self):
-        result = var_kpi_mitigation(self.kpis_healths, {}, {})
+        result = var_kpi_mitigation(
+            self.kpis_healths, {}, {}, HEALTH_STATUS["OFF_TRACK"]
+        )
         self.assertIsNone(result)
 
     def test_kpis_healths_is_none(self):
-        result = var_kpi_mitigation(None, self.computed_kpis, self.target_computed_kpis)
+        result = var_kpi_mitigation(
+            None,
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
         self.assertIsNone(result)
 
     def test_kpis_healths_is_empty(self):
-        result = var_kpi_mitigation({}, self.computed_kpis, self.target_computed_kpis)
+        result = var_kpi_mitigation(
+            {},
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
         self.assertIsNone(result)
 
     def test_have_kpi(self):
         result = var_kpi_mitigation(
-            self.kpis_healths, self.computed_kpis, self.target_computed_kpis
+            self.kpis_healths,
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
         )
         self.assertTupleEqual(result, ("inquiries", "inq_tou", "tours"))
 
@@ -478,7 +507,9 @@ class VarKPIMitigationTestCase(TestCase):
         kpis_healths = self.kpis_healths.copy()
         kpis_healths["tou_app"] = 0
         kpis_healths["lease_applications"] = 2
-        result = var_kpi_mitigation(kpis_healths, computed_kpis, target_computed_kpis)
+        result = var_kpi_mitigation(
+            kpis_healths, computed_kpis, target_computed_kpis, 0
+        )
         self.assertTupleEqual(result, ("inquiries", "inq_tou", "tours"))
 
 

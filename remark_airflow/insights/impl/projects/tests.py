@@ -698,7 +698,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
         project_facts = kpi_off_track_mitigated.graph(self.args)
         self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
         self.assertEqual(project_facts["kpi_off_track_a"], "tours")
-        self.assertEqual(project_facts["var_kpi_health_weeks"], 2)
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
 
         result = kpi_off_track_mitigated.evaluate(project_facts)
         expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
@@ -733,7 +733,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
 
         self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
         self.assertEqual(project_facts["kpi_off_track_a"], "tours")
-        self.assertEqual(project_facts["var_kpi_health_weeks"], 2)
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
 
         result = kpi_off_track_mitigated.evaluate(project_facts)
         expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
@@ -744,7 +744,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
         project_facts = kpi_off_track_mitigated.graph(self.args)
         self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
         self.assertIsNone(project_facts["var_base_kpis"])
-        self.assertEqual(project_facts["var_kpi_health_weeks"], 0)
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 0)
         self.assertIsNone(project_facts["kpi_off_track_a"])
 
         result = kpi_off_track_mitigated.evaluate(project_facts)
@@ -755,7 +755,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
         project_facts = kpi_off_track_mitigated.graph(self.args)
         self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
         self.assertIsNotNone(project_facts["var_base_kpis"])
-        self.assertEqual(project_facts["var_kpi_health_weeks"], 0)
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 0)
         self.assertIsNone(project_facts["kpi_off_track_a"])
 
         result = kpi_off_track_mitigated.evaluate(project_facts)

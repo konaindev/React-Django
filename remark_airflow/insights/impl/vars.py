@@ -376,7 +376,9 @@ def var_kpis_healths_statuses(
     return result
 
 
-def var_kpi_mitigation(kpis_healths_statuses, computed_kpis, target_computed_kpis):
+def var_kpi_mitigation(
+    kpis_healths_statuses, computed_kpis, target_computed_kpis, target_health
+):
     if (
         kpis_healths_statuses is None
         or computed_kpis is None
@@ -399,7 +401,7 @@ def var_kpi_mitigation(kpis_healths_statuses, computed_kpis, target_computed_kpi
             continue
         health = computed_kpis[kpi_b] / target_computed_kpis[kpi_b]
         if (
-            kpis_healths_statuses[kpi_a] == HEALTH_STATUS["OFF_TRACK"]
+            kpis_healths_statuses[kpi_a] == target_health
             and kpis_healths_statuses[kpi_c] == HEALTH_STATUS["ON_TRACK"]
             and kpis_healths_statuses[kpi_b] == HEALTH_STATUS["ON_TRACK"]
             and health >= 1  # KPI is at or over 100% of target value

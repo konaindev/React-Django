@@ -278,7 +278,7 @@ kpi_above_average = Insight(
 
 kpi_off_track_mitigated = Insight(
     name="kpi_off_track_mitigated",
-    template="While {{ kpi_off_track_a | kpi_humanize }} is Off Track for {{ var_kpi_health_weeks }} of Weeks, {{ kpi_off_track_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_off_track_c | kpi_humanize }}.",
+    template="While {{ kpi_off_track_a | kpi_humanize }} is Off Track for {{ var_kpi_off_track_weeks }} of Weeks, {{ kpi_off_track_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_off_track_c | kpi_humanize }}.",
     triggers=["trigger_kpi_off_track_mitigated"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -291,22 +291,24 @@ kpi_off_track_mitigated = Insight(
             var_kpis_healths_statuses,
             var_computed_kpis,
             var_target_computed_kpis,
+            params={"target_health": HEALTH_STATUS["OFF_TRACK"]},
+            name="var_kpi_off_track_mitigated",
         ),
         cop(
             var_unpack_kpi,
-            var_kpi_mitigation,
+            "var_kpi_off_track_mitigated",
             name="kpi_off_track_a",
             params={"index": 0},
         ),
         cop(
             var_unpack_kpi,
-            var_kpi_mitigation,
+            "var_kpi_off_track_mitigated",
             name="kpi_off_track_b",
             params={"index": 1},
         ),
         cop(
             var_unpack_kpi,
-            var_kpi_mitigation,
+            "var_kpi_off_track_mitigated",
             name="kpi_off_track_c",
             params={"index": 2},
         ),
@@ -315,8 +317,13 @@ kpi_off_track_mitigated = Insight(
             "kpi_off_track_a",
             "project",
             "start",
+            name="var_kpi_off_track_weeks",
             params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
         ),
-        cop(trigger_kpi_off_track_mitigated, "kpi_off_track_a", "var_kpi_health_weeks"),
+        cop(
+            trigger_kpi_off_track_mitigated,
+            "kpi_off_track_a",
+            "var_kpi_off_track_weeks",
+        ),
     ],
 )
