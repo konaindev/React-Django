@@ -128,7 +128,11 @@ class Office(models.Model):
     objects = OfficeManager()
 
     def __str__(self):
-        return "{}: {} ({})".format(self.business.name, self.name, self.public_id)
+        if self.business:
+            s = "{}: {} ({})".format(self.business.name, self.name, self.public_id)
+        else:
+            s = "{} ({})".format(self.name, self.public_id)
+        return s
 
 
 class PeopleManager(models.Manager):
@@ -195,6 +199,12 @@ class Person(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
-        return "{}: {} {} ({})".format(
-            self.office.business.name, self.first_name, self.last_name, self.public_id
-        )
+        if self.office:
+            s = "{}: {} {} ({})".format(
+                self.office.business.name, self.first_name, self.last_name, self.public_id
+            )
+        else:
+            s = "{} {} ({})".format(
+                self.first_name, self.last_name, self.public_id
+            )
+        return s
