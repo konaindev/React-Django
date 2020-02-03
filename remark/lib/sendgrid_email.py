@@ -78,7 +78,7 @@ def get_recipients_on_list(list_id, page_size=1000):
     try:
         response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
         result = process_response(response, "Could not fetch recipient list")                        
-        return result["recipients"] + recipients
+        return result["recipients"]
     except Exception as e:
         raise Exception(f"Error fetching contact list `{list_id}` from sendgrid")
    

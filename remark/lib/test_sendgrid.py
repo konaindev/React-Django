@@ -28,7 +28,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
     @mock.patch("remark.lib.sendgrid_email.process_response")
     def test_no_recipients(self, mock_process_response, _):
         mock_process_response.side_effect = [{"recipient_count": 0, "recipients": []}]
-        recipients = get_recipients_on_list("id", page=1, page_size=20)
+        recipients = get_recipients_on_list("id", page_size=20)
         self.assertCountEqual(recipients, [])
 
     @mock.patch("remark.lib.sendgrid_email.sg")
@@ -40,7 +40,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
                 "recipients": [{"id": r} for r in self.recipients_ids],
             }
         ]
-        recipients = get_recipients_on_list("id", page=1, page_size=20)
+        recipients = get_recipients_on_list("id",  page_size=20)
         recipients_ids = [r["id"] for r in recipients]
         self.assertCountEqual(recipients_ids, self.recipients_ids)
 
@@ -53,7 +53,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
                 "recipients": [{"id": r} for r in self.recipients_ids],
             }
         ]
-        recipients = get_recipients_on_list("id", page=1, page_size=12)
+        recipients = get_recipients_on_list("id", page_size=12)
         recipients_ids = [r["id"] for r in recipients]
         self.assertCountEqual(recipients_ids, self.recipients_ids)
 
