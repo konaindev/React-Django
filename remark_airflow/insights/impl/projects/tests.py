@@ -24,6 +24,7 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_off_track_mitigated,
     kpi_at_risk_mitigated,
     kpi_off_track_not_mitigated,
+    kpi_at_risk_not_mitigated,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -932,4 +933,89 @@ class KPIOffTrackNotMitigatedTestCase(TestCase):
         self.assertIsNone(project_facts["var_kpi_off_track_not_mitigated"])
 
         result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIAtRiskNotMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        period_params = {"inquiries": 20, "tours": 12}
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params=period_params,
+        )
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params=period_params
+        )
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "tou_app")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 2)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "TOU > APP has been At Risk for 2 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_triggered_one_week(self):
+        create_periods(self.project, start=self.start, end=self.end)
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "usvs")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "Volume of USV has been At Risk for 1 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"inquiries": 20, "tours": 12},
+        )
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "tou_app")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "TOU > APP has been At Risk for 1 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_at_risk_not_mitigated"])
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params={"usvs": 480}
+        )
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_at_risk_not_mitigated"])
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
         self.assertIsNone(result)
