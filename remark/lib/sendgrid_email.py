@@ -13,7 +13,9 @@ sg = sendgrid.SendGridAPIClient(api_key)
 
 
 def process_response(response, msg, ignore_response=False):
-    if 200 > response.status_code > 299:
+    # per https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html
+    # the only valid success codes are 200 to 299 (2xx)
+    if response.status_code > 299:
         print(response.body)
         print(response.status_code)
         print(response.headers)
