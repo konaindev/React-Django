@@ -415,6 +415,13 @@ def var_kpi_mitigation(
 def var_kpi_without_mitigated(
     kpis_healths_statuses, computed_kpis, target_computed_kpis, target_health
 ):
+    if (
+        kpis_healths_statuses is None
+        or computed_kpis is None
+        or target_computed_kpis is None
+    ):
+        return None
+
     kpis = []
     for kpi_name, _, _ in MITIGATED_KPIS:
         if (
