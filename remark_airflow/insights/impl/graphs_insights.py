@@ -1,10 +1,7 @@
 from graphkit import compose
 
 from remark.projects.constants import HEALTH_STATUS
-from remark_airflow.insights.impl.triggers import (
-    trigger_kpi_at_risk_mitigated,
-    trigger_kpi_off_track_mitigated,
-)
+from remark_airflow.insights.impl.triggers import trigger_kpi_mitigated
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
     var_kpis_healths_statuses,
@@ -60,7 +57,12 @@ graph_kpi_off_track_mitigated = compose(name="kpi_off_track_mitigated", merge=Tr
         name="var_kpi_off_track_weeks",
         params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
     ),
-    cop(trigger_kpi_off_track_mitigated, "kpi_off_track_a", "var_kpi_off_track_weeks"),
+    cop(
+        trigger_kpi_mitigated,
+        "kpi_off_track_a",
+        "var_kpi_off_track_weeks",
+        name="trigger_kpi_off_track_mitigated",
+    ),
 )
 
 
@@ -104,5 +106,10 @@ graph_kpi_at_risk_mitigated = compose(name="kpi_at_risk_mitigated", merge=True)(
         name="var_kpi_at_risk_weeks",
         params={"health_target": HEALTH_STATUS["AT_RISK"]},
     ),
-    cop(trigger_kpi_at_risk_mitigated, "kpi_at_risk_a", "var_kpi_at_risk_weeks"),
+    cop(
+        trigger_kpi_mitigated,
+        "kpi_at_risk_a",
+        "var_kpi_at_risk_weeks",
+        name="trigger_kpi_at_risk_mitigated",
+    ),
 )

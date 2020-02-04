@@ -13,7 +13,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_retention_rate_health,
     trigger_has_data_google_analytics,
     trigger_have_benchmark_kpi,
-    trigger_kpi_off_track_not_mitigated,
+    trigger_kpi_not_mitigated,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -318,10 +318,45 @@ kpi_off_track_not_mitigated = Insight(
             params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
         ),
         cop(
-            trigger_kpi_off_track_not_mitigated,
+            trigger_kpi_not_mitigated,
             "var_kpi_off_track_not_mitigated",
             "trigger_kpi_off_track_mitigated",
             "trigger_kpi_at_risk_mitigated",
+            name="trigger_kpi_off_track_not_mitigated",
+        ),
+    ],
+)
+
+
+kpi_at_risk_not_mitigated = Insight(
+    name="kpi_at_risk_not_mitigated",
+    template="{{ var_kpi_at_risk_not_mitigated | kpi_humanize }} has been At Risk for {{ var_kpi_at_risk_not_mitigated_weeks }} weeks.",
+    triggers=["trigger_kpi_at_risk_not_mitigated"],
+    graph=[
+        graph_kpi_off_track_mitigated,
+        graph_kpi_at_risk_mitigated,
+        cop(
+            var_kpi_without_mitigated,
+            "var_kpis_healths_statuses",
+            "var_computed_kpis",
+            "var_target_computed_kpis",
+            params={"target_health": HEALTH_STATUS["AT_RISK"]},
+            name="var_kpi_at_risk_not_mitigated",
+        ),
+        cop(
+            var_kpi_health_weeks,
+            "var_kpi_at_risk_not_mitigated",
+            "project",
+            "start",
+            name="var_kpi_at_risk_not_mitigated_weeks",
+            params={"health_target": HEALTH_STATUS["AT_RISK"]},
+        ),
+        cop(
+            trigger_kpi_not_mitigated,
+            "var_kpi_at_risk_not_mitigated",
+            "trigger_kpi_off_track_mitigated",
+            "trigger_kpi_at_risk_mitigated",
+            name="trigger_kpi_at_risk_not_mitigated",
         ),
     ],
 )
