@@ -412,6 +412,27 @@ def var_kpi_mitigation(
     return max(kpis, key=lambda kpi: kpi["health"])["kpi"]
 
 
+def var_kpi_without_mitigated(
+    kpis_healths_statuses, computed_kpis, target_computed_kpis, target_health
+):
+    kpis = []
+    for kpi_name, _, _ in MITIGATED_KPIS:
+        if (
+            kpi_name not in kpis_healths_statuses
+            or kpi_name not in computed_kpis
+            or kpi_name not in target_computed_kpis
+            or target_computed_kpis[kpi_name] is None
+            or target_computed_kpis[kpi_name] == 0
+        ):
+            continue
+        if kpis_healths_statuses[kpi_name] == target_health:
+            health = computed_kpis[kpi_name] / target_computed_kpis[kpi_name]
+            kpis.append({"kpi_name": kpi_name, "health": health})
+    if not kpis:
+        return None
+    return min(kpis, key=lambda kpi: kpi["health"])["kpi_name"]
+
+
 def var_kpi_health_weeks(kpi_name, project, start, health_target):
     weeks = 0
     if kpi_name is None:

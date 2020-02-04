@@ -48,3 +48,13 @@ def trigger_kpi_off_track_mitigated(kpi, weeks):
 
 def trigger_kpi_at_risk_mitigated(kpi, weeks):
     return kpi is not None and weeks >= 2
+
+
+def trigger_kpi_off_track_not_mitigated(
+    kpi_off_track, kpi_off_track_mitigated, kpi_at_risk_mitigated
+):
+    return (
+        not kpi_off_track_mitigated
+        and not kpi_at_risk_mitigated
+        and kpi_off_track is not None
+    )
