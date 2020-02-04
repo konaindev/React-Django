@@ -21,6 +21,7 @@ from remark_airflow.insights.impl.vars import (
     var_kpi_mitigation,
     var_kpi_health_weeks,
     var_unpack_kpi,
+    var_kpi_without_mitigated,
 )
 
 
@@ -549,3 +550,111 @@ class VarUnpackKPITestCase(TestCase):
     def test_index_out_of_range(self):
         result = var_unpack_kpi(["usv_inq"], 2)
         self.assertIsNone(result)
+
+
+class VarKPIWithoutMitigated(TestCase):
+    def setUp(self) -> None:
+        self.computed_kpis = {
+            "usvs": 6,
+            "usv_inq": None,
+            "inquiries": 0,
+            "inq_tou": 2,
+            "tours": 13,
+        }
+        self.target_computed_kpis = {
+            "usvs": 8,
+            "usv_inq": 3,
+            "inquiries": 3,
+            "inq_tou": 1,
+            "tours": 14,
+        }
+        self.kpis_healths = {
+            "usvs": 2,
+            "usv_inq": -1,
+            "inquiries": 0,
+            "inq_tou": 2,
+            "tours": 2,
+        }
+
+    def test_kpi_is_none(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths,
+            None,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
+        self.assertIsNone(result)
+
+    def test_target_kpi_is_none(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths, self.computed_kpis, None, HEALTH_STATUS["OFF_TRACK"]
+        )
+        self.assertIsNone(result)
+
+    def test_all_kpi_is_none(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths, None, None, HEALTH_STATUS["OFF_TRACK"]
+        )
+        self.assertIsNone(result)
+
+    def test_kpi_is_empty(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths, {}, self.target_computed_kpis, HEALTH_STATUS["OFF_TRACK"]
+        )
+        self.assertIsNone(result)
+
+    def test_target_kpi_is_empty(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths, self.computed_kpis, {}, HEALTH_STATUS["OFF_TRACK"]
+        )
+        self.assertIsNone(result)
+
+    def test_all_kpi_is_empty(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths, {}, {}, HEALTH_STATUS["OFF_TRACK"]
+        )
+        self.assertIsNone(result)
+
+    def test_kpis_healths_is_none(self):
+        result = var_kpi_without_mitigated(
+            None,
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
+        self.assertIsNone(result)
+
+    def test_kpis_healths_is_empty(self):
+        result = var_kpi_without_mitigated(
+            {},
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
+        self.assertIsNone(result)
+
+    def test_have_kpi(self):
+        result = var_kpi_without_mitigated(
+            self.kpis_healths,
+            self.computed_kpis,
+            self.target_computed_kpis,
+            HEALTH_STATUS["OFF_TRACK"],
+        )
+        self.assertEqual(result, "inquiries")
+
+    def test_have_many_mitigation_kpi(self):
+        computed_kpis = self.computed_kpis.copy()
+        computed_kpis["tou_app"] = 0
+        computed_kpis["lease_applications"] = 5
+        computed_kpis["tours"] = 14
+        target_computed_kpis = self.target_computed_kpis.copy()
+        target_computed_kpis["tou_app"] = 13
+        target_computed_kpis["lease_applications"] = 5
+        target_computed_kpis["tours"] = 13
+        kpis_healths = self.kpis_healths.copy()
+        kpis_healths["tou_app"] = 0
+        kpis_healths["lease_applications"] = 2
+        result = var_kpi_without_mitigated(
+            kpis_healths, computed_kpis, target_computed_kpis, 0
+        )
+        self.assertEqual(result, "inquiries")
