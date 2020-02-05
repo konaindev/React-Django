@@ -28,7 +28,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
     @mock.patch("remark.lib.sendgrid_email.process_response")
     def test_no_recipients(self, mock_process_response, _):
         mock_process_response.side_effect = [{"recipient_count": 0, "recipients": []}]
-        recipients = get_recipients_on_list("id", page=1, page_size=20)
+        recipients = get_recipients_on_list("id", page_size=20)
         self.assertCountEqual(recipients, [])
 
     @mock.patch("remark.lib.sendgrid_email.sg")
@@ -40,7 +40,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
                 "recipients": [{"id": r} for r in self.recipients_ids],
             }
         ]
-        recipients = get_recipients_on_list("id", page=1, page_size=20)
+        recipients = get_recipients_on_list("id",  page_size=20)
         recipients_ids = [r["id"] for r in recipients]
         self.assertCountEqual(recipients_ids, self.recipients_ids)
 
@@ -53,48 +53,53 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
                 "recipients": [{"id": r} for r in self.recipients_ids],
             }
         ]
-        recipients = get_recipients_on_list("id", page=1, page_size=12)
+        recipients = get_recipients_on_list("id", page_size=12)
         recipients_ids = [r["id"] for r in recipients]
         self.assertCountEqual(recipients_ids, self.recipients_ids)
+    ######NOTE:
+    #
+    # THE FOLLOWING TESTS WERE COMMENTED OUT AS PAGINATION WAS 
+    # DISABLED IN THE CODE. RE-ENABLE WHEN PAGINATION HAS BEEN
+    # ADDED BACK TO THE CODEBASE
+    #
+    # @mock.patch("remark.lib.sendgrid_email.sg")
+    # @mock.patch("remark.lib.sendgrid_email.process_response")
+    # def test_many_page(self, mock_process_response, _):
+    #     mock_process_response.side_effect = [
+    #         {
+    #             "recipient_count": len(self.recipients_ids),
+    #             "recipients": [{"id": r} for r in self.recipients_ids[:10]],
+    #         },
+    #         {
+    #             "recipient_count": len(self.recipients_ids),
+    #             "recipients": [{"id": r} for r in self.recipients_ids[10:]],
+    #         },
+    #     ]
+    #     recipients = get_recipients_on_list("id", page_size=10)
+    #     recipients_ids = [r["id"] for r in recipients]
+    #     self.assertCountEqual(recipients_ids, self.recipients_ids)
 
-    @mock.patch("remark.lib.sendgrid_email.sg")
-    @mock.patch("remark.lib.sendgrid_email.process_response")
-    def test_many_page(self, mock_process_response, _):
-        mock_process_response.side_effect = [
-            {
-                "recipient_count": len(self.recipients_ids),
-                "recipients": [{"id": r} for r in self.recipients_ids[:10]],
-            },
-            {
-                "recipient_count": len(self.recipients_ids),
-                "recipients": [{"id": r} for r in self.recipients_ids[10:]],
-            },
-        ]
-        recipients = get_recipients_on_list("id", page=1, page_size=10)
-        recipients_ids = [r["id"] for r in recipients]
-        self.assertCountEqual(recipients_ids, self.recipients_ids)
-
-    @mock.patch("remark.lib.sendgrid_email.sg")
-    @mock.patch("remark.lib.sendgrid_email.process_response")
-    def test_many_page_page_size_equal_recipients_count(self, mock_process_response, _):
-        page_size = 4
-        mock_process_response.side_effect = [
-            {
-                "recipient_count": len(self.recipients_ids),
-                "recipients": [{"id": r} for r in self.recipients_ids[:4]],
-            },
-            {
-                "recipient_count": len(self.recipients_ids),
-                "recipients": [{"id": r} for r in self.recipients_ids[4:8]],
-            },
-            {
-                "recipient_count": len(self.recipients_ids),
-                "recipients": [{"id": r} for r in self.recipients_ids[8:]],
-            },
-        ]
-        recipients = get_recipients_on_list("id", page=1, page_size=page_size)
-        recipients_ids = [r["id"] for r in recipients]
-        self.assertCountEqual(recipients_ids, self.recipients_ids)
+    # @mock.patch("remark.lib.sendgrid_email.sg")
+    # @mock.patch("remark.lib.sendgrid_email.process_response")
+    # def test_many_page_page_size_equal_recipients_count(self, mock_process_response, _):
+    #     page_size = 4
+    #     mock_process_response.side_effect = [
+    #         {
+    #             "recipient_count": len(self.recipients_ids),
+    #             "recipients": [{"id": r} for r in self.recipients_ids[:4]],
+    #         },
+    #         {
+    #             "recipient_count": len(self.recipients_ids),
+    #             "recipients": [{"id": r} for r in self.recipients_ids[4:8]],
+    #         },
+    #         {
+    #             "recipient_count": len(self.recipients_ids),
+    #             "recipients": [{"id": r} for r in self.recipients_ids[8:]],
+    #         },
+    #     ]
+    #     recipients = get_recipients_on_list("id", page_size=page_size)
+    #     recipients_ids = [r["id"] for r in recipients]
+    #     self.assertCountEqual(recipients_ids, self.recipients_ids)
 
 
 class CreateContactListIfNotExistsTestCase(SimpleTestCase):
