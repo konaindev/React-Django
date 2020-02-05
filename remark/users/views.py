@@ -61,17 +61,15 @@ class CompleteAccountView(APIView):
     """
     permission_classes = [IsAuthenticated]
 
-    office_options = [{"label": type[1], "value": type[0]} for type in OFFICE_TYPES]
-
     def get(self, request):
         data = {
-            "office_types": self.office_options,
+            "office_types": OFFICE_OPTIONS,
             "company_roles": COMPANY_ROLES,
             "office_countries": COUNTRY_LIST,
             "us_state_list": US_STATE_LIST,
             "gb_county_list": GB_COUNTY_LIST
         }
-        return self.render_success(data=data)
+        return Response(data, status=status.HTTP_200_OK)
 
     def post(self, request):
         params = json.loads(request.body)

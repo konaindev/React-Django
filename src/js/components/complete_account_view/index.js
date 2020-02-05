@@ -17,7 +17,7 @@ import MultiSelect from "../multi_select";
 import OfficeModal from "../office_modal";
 import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
-import { addressModal } from "../../redux_base/actions";
+import { addressModal, completeAccount } from "../../redux_base/actions";
 import LoaderContainer from "../../containers/loader";
 
 import { propertySchema } from "./validators";
@@ -60,6 +60,10 @@ export class CompleteAccountView extends React.PureComponent {
     office_type: undefined,
     terms: false
   };
+
+  componentDidMount() {
+    this.props.dispatch(completeAccount.fetch());
+  }
 
   selectSearchComponents = {
     DropdownIndicator: () => null
