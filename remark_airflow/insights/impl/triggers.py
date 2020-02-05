@@ -40,3 +40,17 @@ def trigger_has_data_google_analytics(usv_source):
 
 def trigger_have_benchmark_kpi(low_kpi):
     return bool(low_kpi)
+
+
+def trigger_kpi_mitigated(kpi, weeks):
+    return kpi is not None and weeks >= 2
+
+
+def trigger_kpi_not_mitigated(
+    kpi_off_track, kpi_off_track_mitigated, kpi_at_risk_mitigated
+):
+    return (
+        not kpi_off_track_mitigated
+        and not kpi_at_risk_mitigated
+        and kpi_off_track is not None
+    )
