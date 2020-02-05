@@ -11,13 +11,12 @@ from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.logging import getLogger
 from remark.lib.stats import health_check
 
-from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI
+from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI, MacroInsights
 from remark.email_app.reports.constants import (
     SELECTORS,
     KPI_NAMES,
     KPI_POSITIVE_DIRECTION,
-    KPIS_INCLUDE_IN_EMAIL,
-    MACRO_INSIGHT_PRIORITY_RANK
+    KPIS_INCLUDE_IN_EMAIL
 )
 from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.insights.models import WeeklyInsights
@@ -52,8 +51,8 @@ def model_percent(name, report):
     selector = SELECTORS[name]
     dir = KPI_POSITIVE_DIRECTION[name]
     try:
-        value = float( selector(report) )
-        target = float( selector(report["targets"]) )
+        value = float(selector(report))
+        target = float(selector(report["targets"]))
 
         if target == 0.0:
             return None
@@ -67,6 +66,7 @@ def model_percent(name, report):
 
     return None
 
+
 def campaign_insight(campaign_health):
     if campaign_health == 2:
         return "Overall, your campaign is on track, and very likely to hit your goal by deadline."
@@ -74,13 +74,16 @@ def campaign_insight(campaign_health):
         return "Overall, your campaign is at risk, and becoming unlikely to hit your goal by deadline."
     return "Overall, your campaign is off track, and very unlikely to hit your goal by deadline."
 
+
 def top_kpi_insight(name):
     human_name = KPI_NAMES[name]
     return f"Congratulations on your {human_name} last week! Gold star performance."
 
+
 def low_kpi_insight(name):
     human_name = KPI_NAMES[name]
     return f"Disappointing {human_name} last week. Let's make this old news quickly."
+
 
 def rank_kpis(report):
     # Find Top Weekly KPIs
@@ -93,8 +96,10 @@ def rank_kpis(report):
             result[k] = mp
     return result
 
+
 def sort_kpis(kpis):
     return sorted(kpis, key=kpis.get, reverse=True)
+
 
 def get_ctd_top_kpis(ctd_model_percent, ctd_sorted):
     top_kpis = []
@@ -108,6 +113,7 @@ def get_ctd_top_kpis(ctd_model_percent, ctd_sorted):
     except IndexError:
         pass
     return top_kpis
+
 
 def get_ctd_rest(ctd_model_percent, ctd_sorted):
     risk_kpis = []
@@ -130,6 +136,7 @@ def get_ctd_rest(ctd_model_percent, ctd_sorted):
         pass
     return (risk_kpis, low_kpis)
 
+
 def get_ctd_kpi_lists(ctd_model_percent):
     ctd_sorted = sort_kpis(ctd_model_percent)
     top_kpis = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
@@ -139,13 +146,19 @@ def get_ctd_kpi_lists(ctd_model_percent):
 
 def set_macro_insights(pe):
     try:
-        weekly_insights = WeeklyInsights.objects.get(project_id=pe.project)
-        insights = weekly_insights.insights
+        get_macro_insights_options = serializers.serialize("json", MacroInsights.objects.all())
+        macro_insight_options = json.loads(get_macro_insights_options)
+        sorted_macro_insights = sorted(macro_insight_options, key=lambda i: i['fields']['macro_insight_priority_order'])
+        get_weekly_insights = WeeklyInsights.objects.get(project_id=pe.project)
+        insights = get_weekly_insights.insights
         count = 1
-        for k, v in MACRO_INSIGHT_PRIORITY_RANK.items():
-            if v in insights:
+
+        for macro_insight in sorted_macro_insights:
+            insight_title = macro_insight['fields']['title']
+            insight_active = macro_insight['fields']['is_active']
+            if insight_active and insight_title in insights:
                 field_name = f"top_macro_insight_{str(count)}"
-                setattr(pe, field_name, insights[v])
+                setattr(pe, field_name, insights[insight_title])
                 count += 1
             if count > 3:
                 break
@@ -172,7 +185,8 @@ def update_performance_report(period_id):
         logger.info(f"start: {start} || campaign start: {campaign_start}")
         return
 
-    if not PerformanceReport.has_dates(project, campaign_start, end) or not PerformanceReport.has_dates(project, start, end):
+    if not PerformanceReport.has_dates(project, campaign_start, end) or not PerformanceReport.has_dates(project, start,
+                                                                                                        end):
         logger.info("Does not have required reports available. Skipping.")
         return
 

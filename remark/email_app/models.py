@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from .reports.constants import KPI_NAMES, KPI_CATEGORIES
+from .reports.constants import KPI_NAMES, KPI_CATEGORIES, MACRO_INSIGHTS_OPTIONS
 
 
 class PerformanceEmailManager(models.Manager):
@@ -94,3 +94,17 @@ class PerformanceEmailKPI(models.Model):
 
     name = models.TextField(choices=KPI_NAMES.items())
     category = models.TextField(choices=KPI_CATEGORIES.items())
+
+
+class MacroInsightsManager(models.Manager):
+    pass
+
+
+class MacroInsights(models.Model):
+    objects = MacroInsightsManager()
+    title = models.TextField(choices=MACRO_INSIGHTS_OPTIONS)
+    is_active = models.BooleanField(default=True)
+    macro_insight_priority_order = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        ordering = ["macro_insight_priority_order"]
