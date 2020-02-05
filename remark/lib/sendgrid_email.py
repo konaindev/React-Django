@@ -13,7 +13,9 @@ sg = sendgrid.SendGridAPIClient(api_key)
 
 
 def process_response(response, msg, ignore_response=False):
-    if 200 > response.status_code > 299:
+    # per https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html
+    # the only valid success codes are 200 to 299 (2xx)
+    if response.status_code > 299:
         print(response.body)
         print(response.status_code)
         print(response.headers)
@@ -71,16 +73,18 @@ def create_list(list_name):
     return result["id"]
 
 
-def get_recipients_on_list(list_id, page=1, page_size=10):
-    params = {'page': page, 'page_size': page_size}
-    recipients = []
-    response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
-    result = process_response(response, "Could not fetch recipient list")
-    previous_recipients = (page - 1) * page_size
-    if result.get("recipient_count", 0) > len(result["recipients"]) + previous_recipients:
-        recipients = get_recipients_on_list(list_id, page=page+1, page_size=page_size)
-    recipients = result["recipients"] + recipients
-    return recipients
+def get_recipients_on_list(list_id, page_size=1000):
+    params = {'page_size': page_size}
+    if page_size > 1000:
+        raise Exception(F"Error::get_recipients_on_list:: max page size limit is 1000, `{page_size} provided`")
+    try:
+        response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
+        result = process_response(response, "Could not fetch recipient list")                        
+        return result["recipients"]
+    except Exception as e:
+        raise Exception(f"Error fetching contact list `{list_id}` from sendgrid")
+   
+
 
 
 def delete_recipient_from_list(list_id, recipient_id):
