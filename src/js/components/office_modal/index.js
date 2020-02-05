@@ -1,13 +1,10 @@
-import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
 
 import { COUNTRY_FIELDS } from "../../constants";
-import { addressModal } from "../../redux_base/actions";
 
 import AccountSettingsField from "../account_settings_field";
 import AddressModal from "../address_modal";
-import { validateAddress } from "../../api/account_settings";
 import GoogleAddress from "../google_address";
 import Input from "../input";
 import ModalForm from "../modal_form";
@@ -18,6 +15,7 @@ import { officeSchema } from "./validators";
 class OfficeModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    isConfirmModal: PropTypes.bool,
     data: PropTypes.shape({
       office_country: PropTypes.object,
       office_street: PropTypes.string,
@@ -34,11 +32,11 @@ class OfficeModal extends React.PureComponent {
     loadAddress: PropTypes.func,
     onClose: PropTypes.func,
     onSave: PropTypes.func,
-    onSuccess: PropTypes.func,
-    dispatch: PropTypes.func
+    onSuccess: PropTypes.func
   };
 
   static defaultProps = {
+    isConfirmModal: false,
     data: {
       office_country: {
         label: COUNTRY_FIELDS.USA.full_name,
@@ -123,38 +121,10 @@ class OfficeModal extends React.PureComponent {
     this.formik.setFieldValue("office_zip", values.office_zip);
   };
 
-  onSave = () => values => {
-    const data = { ...values };
-    data["office_type"] = values.office_type.value;
-    data["office_country"] = values.office_country.value;
-    data["office_state"] = values.office_state.value;
-    const addressValues = _pick(values, [
-      "office_country",
-      "office_street",
-      "office_city",
-      "office_state",
-      "office_zip"
-    ]);
-    validateAddress(addressValues).then(response => {
-      if (response.data.error) {
-        this.setState({ invalid_address: true });
-        this.formik.setErrors({
-          office_street:
-            "Unable to verify address. Please provide a valid address.",
-          office_city: "*",
-          office_state: "*",
-          office_zip: "*"
-        });
-      } else {
-        this.setState({ addresses: response.data, invalid_address: false });
-        this.props.dispatch(addressModal.open(data, response.data));
-      }
-    });
-  };
-
   render() {
     const {
       isOpen,
+      isConfirmModal,
       data,
       companyAddresses,
       office_options,
@@ -163,7 +133,8 @@ class OfficeModal extends React.PureComponent {
       gb_county_list,
       onClose,
       loadAddress,
-      onSuccess
+      onSuccess,
+      onSave
     } = this.props;
     return (
       <ModalForm
@@ -172,7 +143,7 @@ class OfficeModal extends React.PureComponent {
         initialData={data}
         validationSchema={officeSchema}
         onSuccess={onSuccess}
-        onSave={this.onSave}
+        onSave={onSave}
         onClose={onClose}
         setFormik={this.setFormik}
       >
@@ -187,13 +158,15 @@ class OfficeModal extends React.PureComponent {
           onError
         }) => (
           <>
-            <AddressModal
-              title="Confirm Office Address"
-              callback={onSuccess}
-              onError={onError}
-              dispatch_type="API_ACCOUNT_PROFILE_OFFICE"
-              updateValues={this.updateValues}
-            />
+            {isConfirmModal ? (
+              <AddressModal
+                title="Confirm Office Address"
+                callback={onSuccess}
+                onError={onError}
+                dispatch_type="API_ACCOUNT_PROFILE_OFFICE"
+                updateValues={this.updateValues}
+              />
+            ) : null}
             <AccountSettingsField
               label="Country"
               name="office_country"

@@ -7,6 +7,7 @@ import React from "react";
 
 import { COUNTRY_FIELDS } from "../../constants";
 import CompanyModal from "../../containers/settings_company_modal";
+import OfficeModal from "../../containers/settings_office_modal";
 import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
 import { accountSettings as actions } from "../../redux_base/actions";
@@ -14,7 +15,6 @@ import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
-import OfficeModal from "../office_modal";
 import Select from "../select";
 import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 
@@ -176,10 +176,6 @@ export default class Profile extends React.PureComponent {
         callback
       });
     }, 300);
-  };
-
-  selectSearchComponents = {
-    DropdownIndicator: () => null
   };
 
   loadAddress = (inputValue, callback) => {
@@ -585,6 +581,7 @@ export default class Profile extends React.PureComponent {
                   </Button>
                   <OfficeModal
                     isOpen={this.state.isOfficeOpen}
+                    isConfirmModal={true}
                     data={this.getOfficeValues()}
                     office_options={this.props.office_options}
                     office_countries={this.props.office_countries}
@@ -593,7 +590,6 @@ export default class Profile extends React.PureComponent {
                     loadAddress={this.loadAddress}
                     onClose={this.closeOfficeModal}
                     onSuccess={this.setOfficeSuccess}
-                    dispatch={this.props.dispatch}
                   />
                 </div>
                 <div className="account-settings__value-field">

@@ -37,7 +37,8 @@ export class CompleteAccountView extends React.PureComponent {
     this.formik = React.createRef();
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
     this.state = {
-      isCompanyOpen: false
+      isCompanyOpen: false,
+      isOfficeOpen: false
     };
   }
 
@@ -411,6 +412,18 @@ export class CompleteAccountView extends React.PureComponent {
                   >
                     Enter Office info
                   </Button>
+                  <OfficeModal
+                    isOpen={this.state.isOfficeOpen}
+                    // data={this.getOfficeValues()}
+                    data={{}}
+                    office_options={this.props.office_options}
+                    office_countries={this.props.office_countries}
+                    us_state_list={this.props.us_state_list}
+                    gb_county_list={this.props.gb_county_list}
+                    loadAddress={this.loadAddress}
+                    onClose={this.closeOfficeModal}
+                    onSuccess={this.setOfficeSuccess}
+                  />
                 </div>
                 <div className="complete-account__terms">
                   <Checkbox
