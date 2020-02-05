@@ -16,6 +16,7 @@ class OfficeModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     isConfirmModal: PropTypes.bool,
+    theme: PropTypes.oneOf(["gray", "highlight"]),
     data: PropTypes.shape({
       office_country: PropTypes.object,
       office_street: PropTypes.string,
@@ -37,6 +38,7 @@ class OfficeModal extends React.PureComponent {
 
   static defaultProps = {
     isConfirmModal: false,
+    theme: "gray",
     data: {
       office_country: {
         label: COUNTRY_FIELDS.USA.full_name,
@@ -124,6 +126,7 @@ class OfficeModal extends React.PureComponent {
   render() {
     const {
       isOpen,
+      theme,
       isConfirmModal,
       data,
       companyAddresses,
@@ -138,6 +141,7 @@ class OfficeModal extends React.PureComponent {
     } = this.props;
     return (
       <ModalForm
+        theme={theme}
         title="Office Info"
         isOpen={isOpen}
         initialData={data}
@@ -160,6 +164,7 @@ class OfficeModal extends React.PureComponent {
           <>
             {isConfirmModal ? (
               <AddressModal
+                theme={theme}
                 title="Confirm Office Address"
                 callback={onSuccess}
                 onError={onError}
@@ -168,6 +173,7 @@ class OfficeModal extends React.PureComponent {
               />
             ) : null}
             <AccountSettingsField
+              theme={theme}
               label="Country"
               name="office_country"
               errorKey="office_country"
@@ -176,7 +182,7 @@ class OfficeModal extends React.PureComponent {
               <Select
                 className="account-settings-field__input"
                 name="office_country"
-                theme="gray"
+                theme={theme}
                 isShowControls={false}
                 isShowAllOption={false}
                 value={values.office_country}
@@ -188,6 +194,7 @@ class OfficeModal extends React.PureComponent {
               />
             </AccountSettingsField>
             <AccountSettingsField
+              theme={theme}
               label="Address"
               name="office_street"
               errorKey="office_street"
@@ -199,7 +206,7 @@ class OfficeModal extends React.PureComponent {
                 loadOptions={loadAddress}
                 cacheOptions={false}
                 companyAddresses={companyAddresses}
-                theme="gray"
+                theme={theme}
                 labelCompany=""
                 labelGoogle=""
                 display="full"
@@ -210,6 +217,7 @@ class OfficeModal extends React.PureComponent {
             </AccountSettingsField>
             <div className="modal-form__grid modal-form__grid--col-3">
               <AccountSettingsField
+                theme={theme}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .city
@@ -222,13 +230,14 @@ class OfficeModal extends React.PureComponent {
                 <Input
                   className="account-settings-field__input"
                   name="office_city"
-                  theme="gray"
+                  theme={theme}
                   value={values.office_city}
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
               </AccountSettingsField>
               <AccountSettingsField
+                theme={theme}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .state
@@ -240,7 +249,7 @@ class OfficeModal extends React.PureComponent {
                 <Select
                   className="account-settings-field__input"
                   name="office_state"
-                  theme="gray"
+                  theme={theme}
                   isSearchable={true}
                   options={
                     values.office_country?.value ==
@@ -258,6 +267,7 @@ class OfficeModal extends React.PureComponent {
                 />
               </AccountSettingsField>
               <AccountSettingsField
+                theme={theme}
                 label={
                   COUNTRY_FIELDS[(values.office_country?.value)]?.address_fields
                     .zip
@@ -269,7 +279,7 @@ class OfficeModal extends React.PureComponent {
                 <Input
                   className="account-settings-field__input"
                   name="office_zip"
-                  theme="gray"
+                  theme={theme}
                   value={values.office_zip}
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -278,6 +288,7 @@ class OfficeModal extends React.PureComponent {
             </div>
             <div className="modal-form__grid">
               <AccountSettingsField
+                theme={theme}
                 label="Type"
                 name="office_type"
                 errorKey="office_type"
@@ -286,7 +297,7 @@ class OfficeModal extends React.PureComponent {
                 <Select
                   className="account-settings-field__input"
                   name="office_type"
-                  theme="gray"
+                  theme={theme}
                   options={office_options}
                   value={values.office_type}
                   onBlur={() => {
@@ -298,6 +309,7 @@ class OfficeModal extends React.PureComponent {
                 />
               </AccountSettingsField>
               <AccountSettingsField
+                theme={theme}
                 label="Name"
                 name="office_name"
                 errorKey="office_name"
@@ -307,7 +319,7 @@ class OfficeModal extends React.PureComponent {
                 <Input
                   className="account-settings-field__input"
                   name="office_name"
-                  theme="gray"
+                  theme={theme}
                   value={values.office_name}
                   onBlur={handleBlur}
                   onChange={handleChange}

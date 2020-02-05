@@ -286,6 +286,15 @@ export class CompleteAccountView extends React.PureComponent {
     this.setState({ isCompanyOpen: false });
   };
 
+  openOfficeModal = e => {
+    e.preventDefault();
+    this.setState({ isOfficeOpen: true });
+  };
+
+  closeOfficeModal = () => {
+    this.setState({ isOfficeOpen: false });
+  };
+
   render() {
     const {
       company_roles,
@@ -409,10 +418,12 @@ export class CompleteAccountView extends React.PureComponent {
                   <Button
                     className="complete-account__edit-button"
                     color="secondary-gray"
+                    onClick={this.openOfficeModal}
                   >
                     Enter Office info
                   </Button>
                   <OfficeModal
+                    theme="highlight"
                     isOpen={this.state.isOfficeOpen}
                     // data={this.getOfficeValues()}
                     data={{}}
