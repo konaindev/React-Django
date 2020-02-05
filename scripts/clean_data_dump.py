@@ -6,6 +6,7 @@ import random
 
 TEST_PASSWORD = "pbkdf2_sha256$150000$mB9xzUGC4xro$a4oeUKHtyc8TDMinSQ2kPkuZH/kU467JdKY8Ew3dlkE="
 DAY_LIST = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+MACRO_INSIGHTS_PRIORITY = ["lease_rate_against_target", "change_health_status", "usv_exe_off_track", "usv_exe_at_risk", "usv_exe_on_track", "retention_rate_health", "top_usv_referral"]
 
 @click.command()
 @click.argument("input_file", required=True, type=click.File(mode="r"))
@@ -14,15 +15,31 @@ def command(input_file, output_file):
     print("Start.")
     input_json = json.load(input_file)
     result = []
+    pk = 0
     for model in input_json:
-        if model["model"] == "users.user":
-            model["fields"]['password'] = TEST_PASSWORD
-        elif model["model"] == "projects.property":
-            model["fields"]["building_image"] = None
-            model["fields"]["building_logo"] = None
-        elif model["model"] == "projects.project":
-            model["fields"]["reporting_day"] = random.choice(DAY_LIST)
-        result.append(model)
+        # if model["model"] == "users.user":
+        #     model["fields"]['password'] = TEST_PASSWORD
+        # elif model["model"] == "projects.property":
+        #     model["fields"]["building_image"] = None
+        #     model["fields"]["building_logo"] = None
+        # elif model["model"] == "projects.project":
+        #     model["fields"]["reporting_day"] = random.choice(DAY_LIST)
+        if model["model"] != "email_app.macroinsights":
+            # value = model["fields"]["name"]
+            # model["fields"] = {"title": value}
+            result.append(model)
+
+    for insight in MACRO_INSIGHTS_PRIORITY:
+        insight_model = {
+            "model": "email_app.macroinsights",
+            "pk": pk + 1,
+            "fields": {
+                "title": insight,
+                "macro_insight_priority_order": pk
+            }
+        }
+        result.append(insight_model)
+        pk += 1
 
     json.dump(result, output_file)
     print("Done.")

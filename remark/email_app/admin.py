@@ -5,8 +5,10 @@ from django.contrib import admin
 from remark.admin import admin_site, custom_titled_filter
 from remark.lib.logging import error_text, getLogger
 from .forms import PerformanceEmailForm
-from .models import PerformanceEmail, PerformanceEmailKPI
+from .models import PerformanceEmail, PerformanceEmailKPI, MacroInsights
 from .reports.weekly_performance import send_performance_email
+
+from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminMixin
 
 logger = getLogger(__name__)
 
@@ -55,3 +57,10 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
             logger.error(error_text(e))
 
         logger.info("PerformanceEmailAdmin::save_model:bottom")
+
+
+@admin.register(MacroInsights, site=admin_site)
+class MacroInsightsAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ["title", "is_active"]
+
+
