@@ -52,8 +52,7 @@ services:
       - EXECUTOR=Celery
       - LOCAL_AIRFLOW=true
       - POSTGRES_PASSWORD=airflow
-      - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
-      - AIRFLOW__CORE__DEFAULT_TIMEZONE=America/Los_Angeles
+      - AIRFLOW_PATHING=true
     volumes:
       - ./airflow_requirements.txt:/requirements.txt
       - ./remark_airflow/dags:/usr/local/airflow/dags
@@ -107,8 +106,7 @@ services:
         - DOCKER_COMPOSE=true
         - LOCAL_AIRFLOW=true
         - POSTGRES_PASSWORD=airflow
-        - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
-        - AIRFLOW__CORE__DEFAULT_TIMEZONE=America/Los_Angeles
+        - AIRFLOW_PATHING=true
     command: scheduler
 
   worker:
@@ -133,6 +131,5 @@ services:
         - DOCKER_COMPOSE=true
         - LOCAL_AIRFLOW=true
         - POSTGRES_PASSWORD=airflow
-        - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=200
-        - AIRFLOW__CORE__DEFAULT_TIMEZONE=America/Los_Angeles
+        - AIRFLOW_PATHING=true
     command: worker

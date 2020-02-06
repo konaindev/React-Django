@@ -49,7 +49,7 @@ TESTING = sys.argv[1:2] == ['test']
 PATH_REF = "."
 if os.getenv("COMPOSER_AIRFLOW_ENV", False):
     PATH_REF = "/home/airflow/gcs/dags"
-if LOCAL_AIRFLOW:
+if LOCAL_AIRFLOW and os.getenv("AIRFLOW_PATHING", False):
     PATH_REF = "/usr/local/airflow/dags"
 
 

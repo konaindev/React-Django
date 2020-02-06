@@ -11,7 +11,7 @@ from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.logging import getLogger
 from remark.lib.stats import health_check
 
-from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI, MacroInsights
+from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI
 from remark.email_app.reports.constants import (
     SELECTORS,
     KPI_NAMES,
@@ -19,7 +19,7 @@ from remark.email_app.reports.constants import (
     KPIS_INCLUDE_IN_EMAIL
 )
 from remark.email_app.reports.weekly_performance import update_project_contacts
-from remark.insights.models import WeeklyInsights
+from remark.insights.models import WeeklyInsights, Insight
 
 from .models import Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 
@@ -146,24 +146,24 @@ def get_ctd_kpi_lists(ctd_model_percent):
 
 def set_macro_insights(pe):
     try:
-        get_macro_insights_options = serializers.serialize("json", MacroInsights.objects.all())
-        macro_insight_options = json.loads(get_macro_insights_options)
-        sorted_macro_insights = sorted(macro_insight_options, key=lambda i: i['fields']['macro_insight_priority_order'])
+        get_all_insights = serializers.serialize("json", Insight.objects.all())
+        all_insights = json.loads(get_all_insights)
+        sorted_insights = sorted(all_insights, key=lambda i: i['fields']['priority_order'])
         get_weekly_insights = WeeklyInsights.objects.get(project_id=pe.project)
-        insights = get_weekly_insights.insights
+        project_insights = get_weekly_insights.insights
         count = 1
 
-        for macro_insight in sorted_macro_insights:
-            insight_title = macro_insight['fields']['title']
-            insight_active = macro_insight['fields']['is_active']
-            if insight_active and insight_title in insights:
+        for insight in sorted_insights:
+            insight_name = insight['fields']['name']
+            email_insight = insight['fields']['include_in_email']
+            if email_insight and insight_name in project_insights:
                 field_name = f"top_macro_insight_{str(count)}"
-                setattr(pe, field_name, insights[insight_title])
+                setattr(pe, field_name, project_insights[insight_name])
                 count += 1
             if count > 3:
                 break
     except:
-        logger.info("No weekly insights entry for project")
+        logger.info("Error setting insights for email")
     return
 
 

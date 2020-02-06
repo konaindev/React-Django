@@ -15,31 +15,15 @@ def command(input_file, output_file):
     print("Start.")
     input_json = json.load(input_file)
     result = []
-    pk = 0
     for model in input_json:
-        # if model["model"] == "users.user":
-        #     model["fields"]['password'] = TEST_PASSWORD
-        # elif model["model"] == "projects.property":
-        #     model["fields"]["building_image"] = None
-        #     model["fields"]["building_logo"] = None
-        # elif model["model"] == "projects.project":
-        #     model["fields"]["reporting_day"] = random.choice(DAY_LIST)
-        if model["model"] != "email_app.macroinsights":
-            # value = model["fields"]["name"]
-            # model["fields"] = {"title": value}
-            result.append(model)
-
-    for insight in MACRO_INSIGHTS_PRIORITY:
-        insight_model = {
-            "model": "email_app.macroinsights",
-            "pk": pk + 1,
-            "fields": {
-                "title": insight,
-                "macro_insight_priority_order": pk
-            }
-        }
-        result.append(insight_model)
-        pk += 1
+        if model["model"] == "users.user":
+            model["fields"]['password'] = TEST_PASSWORD
+        elif model["model"] == "projects.property":
+            model["fields"]["building_image"] = None
+            model["fields"]["building_logo"] = None
+        elif model["model"] == "projects.project":
+            model["fields"]["reporting_day"] = random.choice(DAY_LIST)
+        result.append(model)
 
     json.dump(result, output_file)
     print("Done.")
