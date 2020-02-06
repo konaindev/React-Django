@@ -269,7 +269,7 @@ def update_performance_report(period_id):
         pek.save()
 
 
-@receiver(post_save, sender=Period)
+@receiver(post_save, sender=WeeklyInsights)
 def post_save_period(sender, instance, created, raw, **kwargs):
     # dont run this for fixtures
     if raw:
