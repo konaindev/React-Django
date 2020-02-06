@@ -20,6 +20,7 @@ from rest_framework.response import Response
 
 from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_OPTIONS, OFFICE_TYPES
+from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
@@ -547,9 +548,18 @@ class AccountReportsView(APIView):
         properties_toggled = json.loads(request.body)["properties"]
         ids = properties_toggled.keys()
         projects = Project.objects.filter(public_id__in=ids)
+        unsubscribed_projects = set(user.unsubscribed_projects.all())
+        projects_to_update_contacts = []
         for p in projects:
             if properties_toggled[p.public_id]:
-                user.unsubscribed_projects.remove(p)
+                if p in unsubscribed_projects:
+                    unsubscribed_projects.remove(p)
+                    projects_to_update_contacts.append(p)
             else:
-                user.unsubscribed_projects.add(p)
+                if p not in unsubscribed_projects:
+                    unsubscribed_projects.add(p)
+                    projects_to_update_contacts.append(p)
+        user.unsubscribed_projects.set(list(unsubscribed_projects), clear=True)
+        for p in projects_to_update_contacts:
+            update_project_contacts.apply_async(args=(p.get_project_public_id(),), countdown=2)
         return Response({}, status=status.HTTP_200_OK)
