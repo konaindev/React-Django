@@ -1,4 +1,5 @@
 import datetime
+import decimal
 import os
 from unittest import mock
 
@@ -20,6 +21,10 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_below_average,
     kpi_high_performing,
     kpi_above_average,
+    kpi_off_track_mitigated,
+    kpi_at_risk_mitigated,
+    kpi_off_track_not_mitigated,
+    kpi_at_risk_not_mitigated,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -661,4 +666,356 @@ class KPIAboveAverageTestCase(TestCase):
         self.assertEqual(project_facts["trigger_above_average"], False)
 
         result = kpi_above_average.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIOffTrackMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+            },
+        )
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+            },
+        )
+
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertEqual(project_facts["kpi_off_track_a"], "tours")
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        self.assertEqual(result[0], "kpi_off_track_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+                "usvs": 350,
+            },
+        )
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+                "usvs": 350,
+            },
+        )
+
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertEqual(project_facts["kpi_off_track_a"], "tours")
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        self.assertEqual(result[0], "kpi_off_track_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_off_track_a"])
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        project_facts = kpi_off_track_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_off_track_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_off_track_a"])
+
+        result = kpi_off_track_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIAtRiskMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        create_periods(
+            self.project, start=self.start - datetime.timedelta(weeks=1), end=self.start
+        )
+        create_periods(self.project, start=self.start, end=self.end)
+
+        project_facts = kpi_at_risk_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_at_risk_mitigated"])
+        self.assertEqual(project_facts["kpi_at_risk_a"], "usvs")
+        self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 2)
+
+        result = kpi_at_risk_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of USV is At Risk for 2 of Weeks, USV > INQ is exceeding performance target, resulting in On Track Volume of INQ."
+        self.assertEqual(result[0], "kpi_at_risk_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params={"lease_applications": 7, "tours": 10},
+            target_period_params={},
+        )
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"lease_applications": 7, "tours": 10},
+        )
+
+        project_facts = kpi_at_risk_mitigated.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_at_risk_mitigated"])
+        self.assertEqual(project_facts["kpi_at_risk_a"], "tours")
+        self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 2)
+
+        result = kpi_at_risk_mitigated.evaluate(project_facts)
+        expected_text = "While Volume of TOU is At Risk for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        self.assertEqual(result[0], "kpi_at_risk_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_at_risk_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_at_risk_a"])
+
+        result = kpi_at_risk_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params={"usvs": 480}
+        )
+        project_facts = kpi_at_risk_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 0)
+        self.assertIsNone(project_facts["kpi_at_risk_a"])
+
+        result = kpi_at_risk_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIOffTrackNotMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        period_params = {"inquiries": 30, "tours": 10}
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params=period_params,
+        )
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params=period_params
+        )
+
+        project_facts = kpi_off_track_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_off_track_not_mitigated"])
+        self.assertEqual(
+            project_facts["var_kpi_off_track_not_mitigated"], "lease_applications"
+        )
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 2)
+
+        result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        expected_text = "Volume of APP has been Off Track for 2 weeks."
+        self.assertEqual(result[0], "kpi_off_track_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_triggered_one_week(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "acq_demand_creation": decimal.Decimal("2350.0"),
+                "lease_applications": 7,
+                "tours": 2,
+            },
+        )
+
+        project_facts = kpi_off_track_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_off_track_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated"], "inq_tou")
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 1)
+
+        result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        expected_text = "INQ > TOU has been Off Track for 1 weeks."
+        self.assertEqual(result[0], "kpi_off_track_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"inquiries": 30, "tours": 5},
+        )
+
+        project_facts = kpi_off_track_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_off_track_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated"], "tours")
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 1)
+
+        result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        expected_text = "Volume of TOU has been Off Track for 1 weeks."
+        self.assertEqual(result[0], "kpi_off_track_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_off_track_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_not_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_off_track_not_mitigated"])
+
+        result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"lease_applications": 6},
+        )
+        project_facts = kpi_off_track_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_off_track_not_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_off_track_not_mitigated"])
+
+        result = kpi_off_track_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPIAtRiskNotMitigatedTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        period_params = {"inquiries": 20, "tours": 12}
+        create_periods(
+            self.project,
+            start=self.start - datetime.timedelta(weeks=1),
+            end=self.start,
+            period_params=period_params,
+        )
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params=period_params
+        )
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "tou_app")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 2)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "TOU > APP has been At Risk for 2 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_triggered_one_week(self):
+        create_periods(self.project, start=self.start, end=self.end)
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "usvs")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "Volume of USV has been At Risk for 1 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_multiple_kpi(self):
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"inquiries": 20, "tours": 12},
+        )
+
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated"], "tou_app")
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        expected_text = "TOU > APP has been At Risk for 1 weeks."
+        self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
+        self.assertEqual(result[1], expected_text)
+
+    def test_no_kpi(self):
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertIsNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_at_risk_not_mitigated"])
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(
+            self.project, start=self.start, end=self.end, period_params={"usvs": 480}
+        )
+        project_facts = kpi_at_risk_not_mitigated.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_at_risk_not_mitigated"])
+        self.assertIsNotNone(project_facts["var_base_kpis"])
+        self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 0)
+        self.assertIsNone(project_facts["var_kpi_at_risk_not_mitigated"])
+
+        result = kpi_at_risk_not_mitigated.evaluate(project_facts)
         self.assertIsNone(result)
