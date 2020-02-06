@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from .reports.constants import KPI_NAMES, KPI_CATEGORIES
+from .reports.constants import KPI_NAMES, KPI_CATEGORIES, MACRO_INSIGHTS_OPTIONS
 
 
 class PerformanceEmailManager(models.Manager):
@@ -39,9 +39,11 @@ class PerformanceEmail(models.Model):
         null=False,
         default="2",
     )
-    lease_rate_text = models.TextField(
-        null=True, blank=True, help_text="Optional text for Lease Rate section"
-    )
+
+    top_macro_insight_1 = models.TextField(null=True, blank=True, help_text="Highest Priority Macro Insight")
+    top_macro_insight_2 = models.TextField(null=True, blank=True, help_text="Second Highest Priority Macro Insight")
+    top_macro_insight_3 = models.TextField(null=True, blank=True, help_text="Third Highest Priority Macro Insight")
+
     top_performing_kpi = models.TextField(choices=KPI_NAMES.items())
     top_performing_insight = models.TextField(
         null=True, blank=True, help_text="Optional text for Highest Performer"
@@ -92,3 +94,4 @@ class PerformanceEmailKPI(models.Model):
 
     name = models.TextField(choices=KPI_NAMES.items())
     category = models.TextField(choices=KPI_CATEGORIES.items())
+

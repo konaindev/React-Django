@@ -22,6 +22,9 @@ class WeeklyPerformanceTestPage(ContentView):
             "campaign_goal_chart_url": "https://internal.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
             "campaign_health": 2,
             "campaign_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
+            "top_macro_insight_1": "Property is 92% Leased against period target of 89%, assessed as On Track.",
+            "top_macro_insight_2": "Campaign health has changed from Off Track to On Track during this period.",
+            "top_macro_insight_3": "Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been On Track for 2 of Weeks your USV>INQ has positively impacted it most.",
             "lease_rate": {
                 "value" : "80%",
                 "target" : "79%",
