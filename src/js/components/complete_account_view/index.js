@@ -1,9 +1,10 @@
 import cn from "classnames";
 import { Formik, Form } from "formik";
+import _intersection from "lodash/intersection";
+import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
-import _intersection from "lodash/intersection";
 
 import AccountForm from "../account_form";
 import CompanyModal from "../company_modal";
@@ -47,7 +48,7 @@ export class CompleteAccountView extends React.PureComponent {
     last_name: "",
     title: "",
     company: undefined,
-    company_role: [],
+    company_roles: [],
     office_country: {
       label: COUNTRY_FIELDS.USA.full_name,
       value: COUNTRY_FIELDS.USA.short_name
@@ -66,15 +67,6 @@ export class CompleteAccountView extends React.PureComponent {
     this.props.dispatch(completeAccount.fetch());
   }
 
-  selectSearchComponents = {
-    DropdownIndicator: () => null
-  };
-
-  selectStyles = {
-    container: provided => ({ ...provided, width: "100%" }),
-    valueContainer: provided => ({ ...provided, height: "18px" })
-  };
-
   steps = [
     { name: "Set Password", isComplete: true },
     { name: "Complete Account", isActive: true }
@@ -86,8 +78,6 @@ export class CompleteAccountView extends React.PureComponent {
     }
     return "disabled-light";
   };
-
-  getSelectLabel = values => values?.map(v => v.label).join(", ");
 
   loadAddress = (inputValue, callback) => {
     const data = { address: inputValue };
@@ -151,7 +141,7 @@ export class CompleteAccountView extends React.PureComponent {
   onSubmit = (values, actions) => {
     const data = { ...values };
     data.company = values.company.value;
-    data.company_role = values.company_role.map(type => type.value);
+    data.company_roles = values.company_roles.map(type => type.value);
     data.office_type = values.office_type.value;
     data.office_state = values.office_state.value;
     validateAddress(values).then(response => {
@@ -173,11 +163,6 @@ export class CompleteAccountView extends React.PureComponent {
     });
   };
 
-  onCreateCompany = value => {
-    const option = { label: value, value };
-    this.formik.current.setFieldValue("company", option);
-  };
-
   onChangeCompany = company => {
     this.formik.current.setFieldValue("company", company);
     this.props.dispatch({
@@ -186,91 +171,10 @@ export class CompleteAccountView extends React.PureComponent {
     });
   };
 
-  onBlurCompany = () => {
-    this.formik.current.setFieldTouched("company");
-  };
-
-  onChangeCompanyRole = value => {
-    this.formik.current.setFieldValue("company_role", value);
-  };
-
-  onBlurCompanyRole = () => {
-    this.formik.current.setFieldTouched("company_role");
-  };
-
-  onChangeOfficeAddress = value => {
-    if (value.street) {
-      this.formik.current.setFieldValue("office_street", value.street);
-      this.formik.current.setFieldValue("office_city", value.city);
-      this.formik.current.setFieldValue("office_state", {
-        label: value.state,
-        value: value.state
-      });
-      this.formik.current.setFieldValue("office_zip", value.zip);
-      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
-        this.formik.current.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.GBR.full_name,
-          value: COUNTRY_FIELDS.GBR.short_name
-        });
-      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
-        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
-        this.formik.current.setFieldValue("office_country", {
-          label: COUNTRY_FIELDS.USA.full_name,
-          value: COUNTRY_FIELDS.USA.short_name
-        });
-      }
-    } else {
-      this.formik.current.setFieldValue("office_street", value.value);
-    }
-  };
-
-  onBlurOfficeAddress = () => {
-    this.formik.current.setFieldTouched("office_street");
-    const formikContext = this.formik.current.getFormikContext();
-    if (formikContext.values.office_street) {
-      this.formik.current.setFieldTouched("office_street");
-    }
-    if (formikContext.values.office_city) {
-      this.formik.current.setFieldTouched("office_city");
-    }
-    if (formikContext.values.office_state) {
-      this.formik.current.setFieldTouched("office_state");
-    }
-    if (formikContext.values.office_zip) {
-      this.formik.current.setFieldTouched("office_zip");
-    }
-  };
-
-  onChangeOfficeType = value => {
-    this.formik.current.setFieldValue("office_type", value);
-  };
-
-  onBlurOfficeType = () => {
-    this.formik.current.setFieldTouched("office_type");
-  };
-
   onChangeTerms = () => {
     const context = this.formik.current.getFormikContext();
     const value = context?.values?.terms;
     this.formik.current.setFieldValue("terms", !value);
-  };
-
-  onChangeCountry = value => {
-    this.selectedCountry = value.value;
-    this.formik.current.setFieldValue("office_country", value);
-    const context = this.formik.current.getFormikContext();
-    if (context.values.office_state) {
-      this.formik.current.setFieldValue("office_state", undefined);
-    }
-  };
-
-  onChangeOfficeState = value => {
-    this.formik.current.setFieldValue("office_state", value);
-  };
-
-  onBlurOfficeState = () => {
-    this.formik.current.setFieldTouched("office_state");
   };
 
   onCloseModal = () => {
@@ -286,13 +190,59 @@ export class CompleteAccountView extends React.PureComponent {
     this.setState({ isCompanyOpen: false });
   };
 
-  openOfficeModal = e => {
+  onOpenOfficeModal = e => {
     e.preventDefault();
     this.setState({ isOfficeOpen: true });
   };
 
-  closeOfficeModal = () => {
+  onCloseOfficeModal = () => {
     this.setState({ isOfficeOpen: false });
+  };
+
+  getCompanyValues = () => {
+    const initialValues = _pick(this.initialValues, [
+      "company",
+      "company_roles"
+    ]);
+    const values = this.formik.current?.state.values || initialValues;
+    return {
+      company: values.company,
+      company_roles: values.company_roles
+    };
+  };
+
+  getOfficeValues = () => {
+    const initialValues = _pick(this.initialValues, [
+      "office_country",
+      "office_street",
+      "office_city",
+      "office_state",
+      "office_zip",
+      "office_name",
+      "office_type"
+    ]);
+    const values = this.formik.current?.state.values || initialValues;
+    return {
+      office_country: values.office_country,
+      office_street: values.office_street,
+      office_city: values.office_city,
+      office_state: values.office_state,
+      office_zip: values.office_zip,
+      office_name: values.office_name,
+      office_type: values.office_type
+    };
+  };
+
+  putCompanyValues = () => values => {
+    const data = { ...this.formik.current.state.values, ...values };
+    this.formik.current.setValues(data);
+    this.onCloseCompanyModal();
+  };
+
+  putOfficeValues = () => values => {
+    const data = { ...this.formik.current.state.values, ...values };
+    this.formik.current.setValues(data);
+    this.onCloseOfficeModal();
   };
 
   render() {
@@ -305,6 +255,29 @@ export class CompleteAccountView extends React.PureComponent {
           theme="highlight"
           onError={this.setErrorMessages}
           dispatch_type="API_COMPLETE_ACCOUNT"
+        />
+        <CompanyModal
+          theme="highlight"
+          isOpen={this.state.isCompanyOpen}
+          data={this.getCompanyValues()}
+          companyRolesOptions={this.props.company_roles}
+          loadCompany={this.loadCompany}
+          onChangeCompany={this.onChangeCompany}
+          onClose={this.onCloseCompanyModal}
+          onSave={this.putCompanyValues}
+        />
+        <OfficeModal
+          theme="highlight"
+          isOpen={this.state.isOfficeOpen}
+          data={this.getOfficeValues()}
+          office_options={this.props.office_types}
+          office_countries={this.props.office_countries}
+          us_state_list={this.props.us_state_list}
+          gb_county_list={this.props.gb_county_list}
+          loadAddress={this.loadAddress}
+          onClose={this.onCloseOfficeModal}
+          onSuccess={this.setOfficeSuccess}
+          onSave={this.putOfficeValues}
         />
         <LoaderContainer />
         <AccountForm
@@ -392,18 +365,6 @@ export class CompleteAccountView extends React.PureComponent {
                   >
                     Enter Company info
                   </Button>
-                  <CompanyModal
-                    theme="highlight"
-                    isOpen={this.state.isCompanyOpen}
-                    data={{
-                      company: values.company,
-                      company_roles: values.company_roles
-                    }}
-                    companyRolesOptions={this.props.company_roles}
-                    loadCompany={this.loadCompany}
-                    onChangeCompany={this.onChangeCompany}
-                    onClose={this.onCloseCompanyModal}
-                  />
                 </div>
                 <div>
                   <div className="complete-account__section-label">
@@ -412,30 +373,10 @@ export class CompleteAccountView extends React.PureComponent {
                   <Button
                     className="complete-account__edit-button"
                     color="secondary-gray"
-                    onClick={this.openOfficeModal}
+                    onClick={this.onOpenOfficeModal}
                   >
                     Enter Office info
                   </Button>
-                  <OfficeModal
-                    theme="highlight"
-                    isOpen={this.state.isOfficeOpen}
-                    data={{
-                      office_country: values.office_country,
-                      office_street: values.office_street,
-                      office_city: values.office_city,
-                      office_state: values.office_state,
-                      office_zip: values.office_zip,
-                      office_name: values.office_name,
-                      office_type: values.office_type
-                    }}
-                    office_options={this.props.office_types}
-                    office_countries={this.props.office_countries}
-                    us_state_list={this.props.us_state_list}
-                    gb_county_list={this.props.gb_county_list}
-                    loadAddress={this.loadAddress}
-                    onClose={this.closeOfficeModal}
-                    onSuccess={this.setOfficeSuccess}
-                  />
                 </div>
                 <div className="complete-account__terms">
                   <Checkbox
