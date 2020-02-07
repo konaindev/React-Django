@@ -17,7 +17,9 @@ default_args = {
     "retry_delay": timedelta(minutes=5),
 }
 
-with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_runs=1, schedule_interval='0 10 * * *') as dag:
+# schedule_interval='0 10 * * *'
+
+with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_runs=1, schedule_interval=None) as dag:
     from remark.lib.time_series.query import select
     from remark.projects.models import Project, Period
     from remark.insights.models import WeeklyInsights, Insight

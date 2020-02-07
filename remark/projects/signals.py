@@ -273,6 +273,7 @@ def update_performance_report(period_id):
 def post_save_period(sender, instance, created, raw, **kwargs):
     # dont run this for fixtures
     if raw:
+        logger.info("IN POST SAVE PERIOD")
         return
 
     if not created:
