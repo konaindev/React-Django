@@ -60,7 +60,7 @@ class AccountCompleteForm(forms.Form):
     last_name = forms.CharField(max_length=255, required=True)
     title = forms.CharField(max_length=255, required=False)
     company = forms.CharField(max_length=255, required=False)
-    company_role = forms.MultipleChoiceField(
+    company_roles = forms.MultipleChoiceField(
         choices=company_roles_values, required=True
     )
     office_address = forms.CharField(max_length=255, required=True)

@@ -90,7 +90,7 @@ class CompleteAccountView(APIView):
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-            for role in data["company_role"]:
+            for role in data["company_roles"]:
                 setattr(business, BUSINESS_TYPE[role], True)
             business.save()
 
@@ -111,8 +111,8 @@ class CompleteAccountView(APIView):
             )
             person.save()
             send_welcome_email.apply_async(args=(request.user.email,), countdown=2)
-            return self.render_success(status=status.HTTP_204_NO_CONTENT)
-        return self.render_failure(errors=form.errors.get_json_data(), status=500)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"errors": form.errors.get_json_data()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class CreatePasswordView(APIView):

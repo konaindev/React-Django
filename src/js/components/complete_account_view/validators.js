@@ -26,7 +26,7 @@ export const propertySchema = Yup.object().shape({
       .required()
       .label(" ")
   }).label(" "),
-  company_role: Yup.array()
+  company_roles: Yup.array()
     .required()
     .of(
       Yup.object({

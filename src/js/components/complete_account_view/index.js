@@ -118,6 +118,8 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   showMessage = (errors, touched) => {
+    console.log("---ERRORS-------");
+    console.log(errors);
     if (Object.keys(errors).length) {
       return this.showErrorMessage(errors, touched);
     }
