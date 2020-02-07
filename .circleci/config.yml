@@ -403,26 +403,12 @@ workflows:
 
   tests-only:
     jobs:
-      - airflow-setup:
+      - build:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-      - airflow-deploy:
-          requires:
-            - airflow-setup
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
-#      - build:
-#          filters:
-#            branches:
-#              ignore:
-#                - staging
-#                - master
 
   build-deploy:
     jobs:
