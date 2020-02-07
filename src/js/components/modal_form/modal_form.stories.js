@@ -27,7 +27,7 @@ storiesOf("ModalForm", module)
       ]}
     </ModalForm>
   ))
-  .add("light", () => (
+  .add("highlight", () => (
     <ModalForm
       theme="highlight"
       isOpen={true}

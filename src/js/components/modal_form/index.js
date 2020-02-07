@@ -11,7 +11,7 @@ import "./modal_form.scss";
 class ModalForm extends React.PureComponent {
   static propTypes = {
     children: PropTypes.func.isRequired,
-    theme: PropTypes.oneOf(["dark", "highlight"]),
+    theme: PropTypes.oneOf(["gray", "highlight"]),
     title: PropTypes.string.isRequired,
     initialData: PropTypes.object,
     validationSchema: PropTypes.object,
@@ -24,7 +24,7 @@ class ModalForm extends React.PureComponent {
   };
 
   static defaultProps = {
-    theme: "dark",
+    theme: "gray",
     isOpen: false,
     initialData: {},
     setFormik() {},
@@ -55,7 +55,7 @@ class ModalForm extends React.PureComponent {
   render() {
     const { theme } = this.props;
     const classes = cn("modal-form", {
-      [`modal-form--${theme}`]: theme !== "dark"
+      [`modal-form--${theme}`]: theme !== "gray"
     });
     return (
       <ModalWindow

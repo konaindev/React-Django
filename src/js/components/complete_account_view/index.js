@@ -10,7 +10,7 @@ import CompanyModal from "../company_modal";
 import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import Input from "../input";
-import Select, { SelectSearch } from "../select";
+import Select from "../select";
 import Button from "../button";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
@@ -296,19 +296,13 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   render() {
-    const {
-      company_roles,
-      office_types,
-      companyAddresses,
-      office_countries
-    } = this.props;
     const classes = cn("complete-account__field-set", AccountForm.fieldClass);
     return (
       <PageAuth backLink="/">
         <AddressModal
           title="Confirm Office Address"
           onClose={this.onCloseModal}
-          theme="light"
+          theme="highlight"
           onError={this.setErrorMessages}
           dispatch_type="API_COMPLETE_ACCOUNT"
         />
@@ -425,9 +419,16 @@ export class CompleteAccountView extends React.PureComponent {
                   <OfficeModal
                     theme="highlight"
                     isOpen={this.state.isOfficeOpen}
-                    // data={this.getOfficeValues()}
-                    data={{}}
-                    office_options={this.props.office_options}
+                    data={{
+                      office_country: values.office_country,
+                      office_street: values.office_street,
+                      office_city: values.office_city,
+                      office_state: values.office_state,
+                      office_zip: values.office_zip,
+                      office_name: values.office_name,
+                      office_type: values.office_type
+                    }}
+                    office_options={this.props.office_types}
                     office_countries={this.props.office_countries}
                     us_state_list={this.props.us_state_list}
                     gb_county_list={this.props.gb_county_list}

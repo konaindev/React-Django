@@ -19,7 +19,7 @@ class AddressModal extends React.PureComponent {
     onError: PropTypes.func,
     updateValues: PropTypes.func,
     dispatch_type: PropTypes.string.isRequired,
-    theme: PropTypes.oneOf(["dark", "light"])
+    theme: PropTypes.oneOf(["gray", "highlight"])
   };
 
   static defaultProps = {
@@ -29,7 +29,7 @@ class AddressModal extends React.PureComponent {
     callback: () => {},
     onError: () => {},
     title: "Confirm Office Address",
-    theme: "dark"
+    theme: "gray"
   };
 
   parentCallback = () => {
