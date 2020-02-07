@@ -54,7 +54,7 @@ export function ShareToggle(props) {
       <CopyToClipboard
         className="share-toggle__copy"
         textToCopy={share_url}
-        buttonLabel="Copy Link"
+        buttonLabel="Share Link"
         disabled={!flag}
       />
     </div>
