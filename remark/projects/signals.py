@@ -144,13 +144,11 @@ def get_ctd_kpi_lists(ctd_model_percent):
     return (top_kpis, risk_kpis, low_kpis)
 
 
-def set_macro_insights(pe):
+def set_macro_insights(pe, project_insights):
     try:
         get_all_insights = serializers.serialize("json", Insight.objects.all())
         all_insights = json.loads(get_all_insights)
         sorted_insights = sorted(all_insights, key=lambda i: i['fields']['priority_order'])
-        get_weekly_insights = WeeklyInsights.objects.get(project_id=pe.project)
-        project_insights = get_weekly_insights.insights
         count = 1
 
         for insight in sorted_insights:
@@ -168,16 +166,16 @@ def set_macro_insights(pe):
 
 
 @shared_task
-def update_performance_report(period_id):
+def update_performance_report(weekly_insight_id):
     try:
-        period = Period.objects.get(pk=period_id)
+        weekly_insight = WeeklyInsights.objects.get(pk=weekly_insight_id)
     except:
-        logger.info(f"Period does not exists! {period_id}")
+        logger.info(f"Weekly Insight does not exists! {weekly_insight_id}")
         return
 
-    project = period.project
-    start = period.start
-    end = period.end
+    project = weekly_insight.project
+    start = weekly_insight.start
+    end = weekly_insight.end
     campaign_start = project.get_campaign_start()
 
     if start < campaign_start:
@@ -240,7 +238,7 @@ def update_performance_report(period_id):
     pe.top_performing_insight = top_kpi_insight(top_kpi)
     pe.low_performing_kpi = low_kpi
     pe.low_performing_insight = low_kpi_insight(low_kpi)
-    set_macro_insights(pe)
+    set_macro_insights(pe, weekly_insight.insights)
     pe.save()
 
     logger.info(f"TOP_KPIS::{top_kpis}")
@@ -270,7 +268,7 @@ def update_performance_report(period_id):
 
 
 @receiver(post_save, sender=WeeklyInsights)
-def post_save_period(sender, instance, created, raw, **kwargs):
+def post_save_weeklyinsights(sender, instance, created, raw, **kwargs):
     # dont run this for fixtures
     if raw:
         return

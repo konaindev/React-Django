@@ -134,7 +134,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
     get_current_insights >> verify_project_insights >> get_projects >> start_weekly_insights
 
     for project in get_projects_for_today():
-        process_weekly_insight = PythonOperator(task_id="weekly_insights" + project['pk'], python_callable=weekly_insights, provide_context=True, op_kwargs={'project_id': project['pk']}, dag=dag)
+        process_weekly_insight = PythonOperator(task_id="weekly_insights_" + project['pk'], python_callable=weekly_insights, provide_context=True, op_kwargs={'project_id': project['pk']}, dag=dag)
         start_weekly_insights >> process_weekly_insight >> complete_weekly_insights
 
     complete_weekly_insights
