@@ -232,23 +232,26 @@ class ResetPasswordView(APIView):
     Reset urls are defined in "remark/users/templates/users/emails/password_reset_email.<html|txt>"
     @param email
     """
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request):
         if not request.user.is_anonymous:
             raise exceptions.APIException
-
-        opts = dict(
-            email_template_name="users/emails/password_reset_email.txt",
-            subject_template_name="users/emails/password_reset_subject.txt",
-            html_email_template_name="users/emails/password_reset_email.html",
-            domain_override="Remarkably",
-            extra_email_context={
+    
+        opts = {
+            "email_template_name": "users/emails/password_reset_email.txt",
+            "subject_template_name": "users/emails/password_reset_subject.txt",
+            "html_email_template_name": "users/emails/password_reset_email.html",
+            "domain_override": "Remarkably",
+            "extra_email_context": {
                 "BASE_URL": BASE_URL,
                 "title": "Password reset",
                 "subject": "Set your Remarkably password",
-            },
-        )
-        params = json.loads(request.body)
+            }
+        }
+        email = request.POST.get("email", "")
+        params = { "email": email }
         form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
             form.save(**opts)
