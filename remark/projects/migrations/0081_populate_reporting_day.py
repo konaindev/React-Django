@@ -18,7 +18,7 @@ def gen_reporting_day(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0081_remove_options_reporting_day'),
+        ('projects', '0080_project_reporting_day'),
     ]
 
     operations = [
