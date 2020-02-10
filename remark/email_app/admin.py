@@ -27,9 +27,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "top_macro_insight_2",
         "top_macro_insight_3",
         "top_performing_kpi",
-        "top_performing_insight",
         "low_performing_kpi",
-        "low_performing_insight",
         "risk_kpi_insight_text",
         "low_kpi_insight_text",
     ]
