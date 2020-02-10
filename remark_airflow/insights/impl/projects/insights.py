@@ -374,7 +374,7 @@ kpi_trend_change_health = Insight(
     name="kpi_trend_change_health",
     template="{{ var_predicted_kpi['name'] | kpi_humanize }} has been trending {{ var_predicted_kpi['trend'] }}"
     " for {{ var_predicted_kpi['weeks'] }} of weeks;"
-    " if it continues for {{ var_predicted_kpi['predicted_weeks'] }},"
+    " if it continues for {{ var_predicted_kpi['predicted_weeks'] }} weeks,"
     " performance health is expected to change to {{ var_predicted_kpi['predicted_health'] | health_status_to_str }}.",
     triggers=["trigger_kpi_trend_change_health"],
     graph=[

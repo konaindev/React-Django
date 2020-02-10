@@ -359,29 +359,33 @@ all_target_computed_kpis = [
     },
 ]
 
-kpis_trends = {
-    "inq_tou": {
-        "trend": "down",
-        "weeks": 3,
-        "values": [4, 3, 2],
-        "target_values": [5, 3, 4],
-    },
-    "inquiries": {
-        "trend": "flat",
-        "weeks": 3,
-        "values": [0, 0, 0],
-        "target_values": [3, 3, 3],
-    },
-    "usv_inq": {
-        "trend": "down",
-        "weeks": 3,
-        "values": [4, 1, None],
-        "target_values": [5, 6, 3],
-    },
-    "usvs": {
+kpis_trends = [
+    {
+        "name": "usvs",
         "trend": "up",
         "weeks": 3,
         "values": [4, 5, 6],
         "target_values": [6, 7, 8],
     },
-}
+    {
+        "name": "usv_inq",
+        "trend": "down",
+        "weeks": 3,
+        "values": [4, 1, None],
+        "target_values": [5, 6, 3],
+    },
+    {
+        "name": "inquiries",
+        "trend": "flat",
+        "weeks": 3,
+        "values": [0, 0, 0],
+        "target_values": [3, 3, 3],
+    },
+    {
+        "name": "inq_tou",
+        "trend": "down",
+        "weeks": 3,
+        "values": [4, 3, 2],
+        "target_values": [5, 3, 4],
+    },
+]

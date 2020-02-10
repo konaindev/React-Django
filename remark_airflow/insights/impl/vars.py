@@ -375,6 +375,13 @@ def var_kpis_healths_statuses(
 ):
     if computed_kpis is None or target_computed_kpis is None:
         return None
+
+    if isinstance(computed_kpis, list):
+        computed_kpis = computed_kpis[0]
+
+    if isinstance(target_computed_kpis, list):
+        target_computed_kpis = target_computed_kpis[0]
+
     result = {}
     for kpi_name in kpis_names:
         if kpi_name in computed_kpis and kpi_name in target_computed_kpis:
@@ -510,7 +517,7 @@ def var_all_target_computed_kpis(all_base_kpis, all_target_kpis):
     count_kpis = min(len(all_base_kpis), len(all_target_kpis))
     result = []
     for i in range(count_kpis):
-        kpi = all_base_kpis[i]
+        kpi = all_base_kpis[i].copy()
         target_kpi = all_target_kpis[i]
         kpi.update(target_kpi)
         computed_targets_kpi = generate_computed_targets(kpi)
@@ -562,39 +569,38 @@ def var_kpis_trends(
                 kpis_trends[kpi_name] = False
             else:
                 kpis_trends[kpi_name] = {
+                    "name": kpi_name,
                     "values": [prev_value] + kpis_trends[kpi_name]["values"],
                     "target_values": [prev_target_value]
                     + kpis_trends[kpi_name]["target_values"],
                     "weeks": weeks + 1,
                     "trend": prev_trend,
                 }
+    return [v for k, v in kpis_trends.items() if v]
 
-    return {k: v for k, v in kpis_trends.items() if v}
 
-
-def var_predicting_change_health(
-    kpis_trends, kpis_healths, kpis_names=KPIS_NAMES.keys(), weeks_predict=8
-):
+def var_predicting_change_health(kpis_trends, kpis_healths, weeks_predict=8):
     if kpis_trends is None or kpis_healths is None:
         return None
 
-    result = {}
-    for kpi_name in kpis_names:
-        data = kpis_trends.get(kpi_name)
+    result = []
+    for kpi_trend in kpis_trends:
+        kpi_name = kpi_trend["name"]
         health = kpis_healths.get(kpi_name)
-        if data is None or health is None:
+        if health is None:
             continue
-        if (data["trend"] == TRENDS["UP"] and health != HEALTH_STATUS["ON_TRACK"]) or (
-            kpis_trends[kpi_name]["trend"] == TRENDS["DOWN"]
-            and health == HEALTH_STATUS["ON_TRACK"]
+        if (
+            kpi_trend["trend"] == TRENDS["UP"] and health != HEALTH_STATUS["ON_TRACK"]
+        ) or (
+            kpi_trend["trend"] == TRENDS["DOWN"] and health == HEALTH_STATUS["ON_TRACK"]
         ):
 
-            value = data["values"]
+            value = kpi_trend["values"]
             value_length = len(value)
             extrapolator = UnivariateSpline(range(value_length), value, k=1)
             new_value = extrapolator(range(value_length, value_length + weeks_predict))
 
-            target_value = data["target_values"]
+            target_value = kpi_trend["target_values"]
             target_value_length = len(target_value)
             target_extrapolator = UnivariateSpline(
                 range(target_value_length), target_value, k=1
@@ -608,7 +614,9 @@ def var_predicting_change_health(
                 weeks += 1
                 new_health = health_standard(v, t_v)
                 if new_health != health:
-                    result[kpi_name] = {"weeks": weeks, "health": new_health}
+                    result.append(
+                        {"name": kpi_name, "weeks": weeks, "health": new_health}
+                    )
                     break
     return result
 
@@ -617,15 +625,14 @@ def var_predicted_kpi(predicting_change_health, kpis_trends):
     if not predicting_change_health or not kpis_trends:
         return None
 
-    kpis = [
-        {
-            "name": kpi_name,
-            "trend": kpis_trends[kpi_name]["trend"],
-            "weeks": kpis_trends[kpi_name]["weeks"],
-            "predicted_weeks": prediction["weeks"],
-            "predicted_health": prediction["health"],
-        }
-        for kpi_name, prediction in predicting_change_health.items()
-    ]
-    kpis = sorted(kpis, key=lambda kpi: kpi["predicted_weeks"])
-    return kpis[0]
+    kpis = sorted(predicting_change_health, key=lambda p: p["weeks"])
+    prediction = kpis[0]
+    kpi_name = prediction["name"]
+    kpi_trend = next(t for t in kpis_trends if t["name"] == kpi_name)
+    return {
+        "name": kpi_name,
+        "trend": kpi_trend["trend"],
+        "weeks": kpi_trend["weeks"],
+        "predicted_weeks": prediction["weeks"],
+        "predicted_health": prediction["health"],
+    }

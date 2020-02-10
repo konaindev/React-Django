@@ -780,7 +780,7 @@ class VarKPIsTrendsTestCase(TestCase):
         result = var_kpis_trends(
             self.computed_kpis, self.target_computed_kpis, self.kpis_names
         )
-        self.assertDictEqual(result, kpis_trends)
+        self.assertListEqual(result, kpis_trends)
 
     def test_computed_kpi_is_none(self):
         result = var_kpis_trends(None, self.target_computed_kpis, self.kpis_names)
@@ -807,7 +807,7 @@ class VarKPIsTrendsTestCase(TestCase):
         result = var_kpis_trends(
             self.computed_kpis, target_computed_kpis, self.kpis_names
         )
-        self.assertDictEqual(result, kpis_trends)
+        self.assertListEqual(result, kpis_trends)
 
     def test_kpi_not_full(self):
         kpis_names = self.kpis_names.copy()
@@ -815,12 +815,11 @@ class VarKPIsTrendsTestCase(TestCase):
         result = var_kpis_trends(
             self.computed_kpis, self.target_computed_kpis, kpis_names
         )
-        self.assertDictEqual(result, kpis_trends)
+        self.assertListEqual(result, kpis_trends)
 
 
 class VarPredictingChangeHealth(TestCase):
     def setUp(self) -> None:
-        self.kpis_names = ["usvs", "usv_inq", "inquiries", "inq_tou", "tous"]
         self.kpis_healths = {
             "inq_tou": -1,
             "inquiries": 0,
@@ -830,32 +829,30 @@ class VarPredictingChangeHealth(TestCase):
         }
 
     def test_default(self):
-        result = var_predicting_change_health(
-            kpis_trends, self.kpis_healths, self.kpis_names
-        )
-        expected = {"usvs": {"health": 1, "weeks": 1}}
-        self.assertDictEqual(result, expected)
+        result = var_predicting_change_health(kpis_trends, self.kpis_healths)
+        expected = [{"name": "usvs", "health": 1, "weeks": 1}]
+        self.assertListEqual(result, expected)
 
     def test_kpis_trends_is_none(self):
-        result = var_predicting_change_health(None, self.kpis_healths, self.kpis_names)
+        result = var_predicting_change_health(None, self.kpis_healths)
         self.assertIsNone(result)
 
     def test_kpis_trends_is_empty(self):
-        result = var_predicting_change_health({}, self.kpis_healths, self.kpis_names)
-        self.assertDictEqual(result, {})
+        result = var_predicting_change_health([], self.kpis_healths)
+        self.assertListEqual(result, [])
 
     def test_kpis_healths_is_none(self):
-        result = var_predicting_change_health(kpis_trends, None, self.kpis_names)
+        result = var_predicting_change_health(kpis_trends, None)
         self.assertIsNone(result)
 
     def test_kpis_healths_is_empty(self):
-        result = var_predicting_change_health(kpis_trends, {}, self.kpis_names)
-        self.assertDictEqual(result, {})
+        result = var_predicting_change_health(kpis_trends, {})
+        self.assertListEqual(result, [])
 
 
 class VarPredictedKPITestCase(TestCase):
     def setUp(self) -> None:
-        self.predicting_change_health = {"usvs": {"health": 1, "weeks": 2}}
+        self.predicting_change_health = [{"name": "usvs", "health": 1, "weeks": 2}]
 
     def test_one_prediction(self):
         result = var_predicted_kpi(self.predicting_change_health, kpis_trends)
@@ -870,7 +867,7 @@ class VarPredictedKPITestCase(TestCase):
 
     def test_many_prediction(self):
         predicting_change_health = self.predicting_change_health.copy()
-        predicting_change_health["usv_inq"] = {"health": 0, "weeks": 1}
+        predicting_change_health.append({"name": "usv_inq", "health": 0, "weeks": 1})
         result = var_predicted_kpi(predicting_change_health, kpis_trends)
         expected = {
             "name": "usv_inq",
@@ -886,7 +883,7 @@ class VarPredictedKPITestCase(TestCase):
         self.assertIsNone(result)
 
     def test_prediction_is_empty(self):
-        result = var_predicted_kpi({}, kpis_trends)
+        result = var_predicted_kpi([], kpis_trends)
         self.assertIsNone(result)
 
     def test_kpis_trends_is_none(self):
@@ -894,5 +891,5 @@ class VarPredictedKPITestCase(TestCase):
         self.assertIsNone(result)
 
     def test_kpis_trends_is_empty(self):
-        result = var_predicted_kpi(self.predicting_change_health, {})
+        result = var_predicted_kpi(self.predicting_change_health, [])
         self.assertIsNone(result)

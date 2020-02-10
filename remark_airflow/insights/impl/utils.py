@@ -33,7 +33,10 @@ def hash_dict(func):
 
     class HDict(dict):
         def __hash__(self):
-            return hash(frozenset(self.items()))
+            h_dict = {
+                k: HList(v) if isinstance(v, list) else v for k, v in self.items()
+            }
+            return hash(frozenset(h_dict.items()))
 
     class HList(list):
         def __hash__(self):

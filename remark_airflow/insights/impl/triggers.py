@@ -57,4 +57,4 @@ def trigger_kpi_not_mitigated(
 
 
 def trigger_kpi_trend_change_health(predicting_health):
-    return predicting_health is None
+    return predicting_health is not None
