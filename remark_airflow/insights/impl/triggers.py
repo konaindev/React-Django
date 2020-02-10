@@ -11,7 +11,7 @@ def trigger_is_active_campaign(
         or leased_rate is None
         or target_leased_rate is None
     ):
-        return None
+        return False
     return project.baseline_end <= start
 
 
