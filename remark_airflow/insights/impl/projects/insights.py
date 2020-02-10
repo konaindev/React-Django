@@ -14,6 +14,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_has_data_google_analytics,
     trigger_have_benchmark_kpi,
     trigger_kpi_not_mitigated,
+    trigger_kpi_trend_change_health,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -42,6 +43,14 @@ from remark_airflow.insights.impl.vars import (
     var_above_average_kpi,
     var_kpi_without_mitigated,
     var_kpi_health_weeks,
+    var_all_base_kpis,
+    var_all_target_kpis,
+    var_all_computed_kpis,
+    var_all_target_computed_kpis,
+    var_kpis_trends,
+    var_kpis_healths_statuses,
+    var_predicting_change_health,
+    var_predicted_kpi,
 )
 from remark_airflow.insights.impl.vars_base import (
     var_base_kpis,
@@ -77,6 +86,8 @@ lease_rate_against_target = Insight(
             "start",
             var_campaign_health_status,
             var_prev_health_status,
+            var_current_period_leased_rate,
+            var_target_leased_rate,
         ),
     ],
 )
@@ -106,10 +117,12 @@ change_health_status = Insight(
     ],
 )
 
+# TPC: Check the logic for picking the USV_EXE OFF Track
+
 usv_exe_off_track = Insight(
     name="usv_exe_off_track",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been Off Track for {{ var_weeks_usv_exe_off_track }} of Weeks"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    " has been Off Track for {{ var_weeks_usv_exe_off_track }} Weeks and"
     " your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
     triggers=["trigger_usv_exe_off_track"],
     graph=[
@@ -170,7 +183,7 @@ usv_exe_on_track = Insight(
 retention_rate_health = Insight(
     name="retention_rate_health",
     template="Your Retention Rate has been {{ var_retention_rate_health | health_status_to_str }}"
-    " for {{ var_retention_rate_health_weeks }}"
+    " for {{ var_retention_rate_health_weeks }} week(s)"
     " and is trending {{ var_retention_rate_trend }}.",
     triggers=["trigger_retention_rate_health"],
     graph=[
@@ -358,5 +371,29 @@ kpi_at_risk_not_mitigated = Insight(
             "trigger_kpi_at_risk_mitigated",
             name="trigger_kpi_at_risk_not_mitigated",
         ),
+    ],
+)
+
+kpi_trend_change_health = Insight(
+    name="kpi_trend_change_health",
+    template="{{ var_predicted_kpi['name'] | kpi_humanize }} has been trending {{ var_predicted_kpi['trend'] }}"
+    " for {{ var_predicted_kpi['weeks'] }} of weeks;"
+    " if it continues for {{ var_predicted_kpi['predicted_weeks'] }} weeks,"
+    " performance health is expected to change to {{ var_predicted_kpi['predicted_health'] | health_status_to_str }}.",
+    triggers=["trigger_kpi_trend_change_health"],
+    graph=[
+        cop(var_all_base_kpis, "project", "start", "end"),
+        cop(var_all_target_kpis, "project", "start", "end"),
+        cop(var_all_computed_kpis, var_all_base_kpis),
+        cop(var_all_target_computed_kpis, var_all_base_kpis, var_all_target_kpis),
+        cop(var_kpis_trends, var_all_computed_kpis, var_all_target_computed_kpis),
+        cop(
+            var_kpis_healths_statuses,
+            var_all_computed_kpis,
+            var_all_target_computed_kpis,
+        ),
+        cop(var_predicting_change_health, var_kpis_trends, var_kpis_healths_statuses),
+        cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
+        cop(trigger_kpi_trend_change_health, var_predicted_kpi),
     ],
 )

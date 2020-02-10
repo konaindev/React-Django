@@ -10,7 +10,7 @@ from graphkit import operation
 
 from remark.factories.analytics import create_google_provider
 from remark.factories.benchmarks import generate_benchmarks
-from remark.factories.periods import create_periods
+from remark.factories.periods import create_periods, generate_weekly_periods
 from remark.factories.projects import create_project
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
@@ -25,6 +25,7 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_at_risk_mitigated,
     kpi_off_track_not_mitigated,
     kpi_at_risk_not_mitigated,
+    kpi_trend_change_health,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -192,7 +193,7 @@ class RetentionRateInsightTestCase(TestCase):
         )
         result = retention_rate_health.evaluate(project_facts)
         expected_text = (
-            "Your Retention Rate has been Off Track for 2 and is trending flat."
+            "Your Retention Rate has been Off Track for 2 week(s) and is trending flat."
         )
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
@@ -229,7 +230,7 @@ class RetentionRateInsightTestCase(TestCase):
         )
         result = retention_rate_health.evaluate(project_facts)
         expected_text = (
-            "Your Retention Rate has been Off Track for 1 and is trending down."
+            "Your Retention Rate has been Off Track for 1 week(s) and is trending down."
         )
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
@@ -265,7 +266,7 @@ class RetentionRateInsightTestCase(TestCase):
             expected["trigger_retention_rate_health"],
         )
         result = retention_rate_health.evaluate(project_facts)
-        expected_text = "Your Retention Rate has been At Risk for 1 and is trending up."
+        expected_text = "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
 
@@ -1018,4 +1019,44 @@ class KPIAtRiskNotMitigatedTestCase(TestCase):
         self.assertIsNone(project_facts["var_kpi_at_risk_not_mitigated"])
 
         result = kpi_at_risk_not_mitigated.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPITrendChangeHealthTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        generate_weekly_periods(8, self.project, self.end)
+
+        project_facts = kpi_trend_change_health.graph(self.args)
+
+        self.assertTrue(project_facts["trigger_kpi_trend_change_health"])
+        expected = {
+            "name": "usvs",
+            "predicted_health": 2,
+            "predicted_weeks": 2,
+            "trend": "up",
+            "weeks": 8,
+        }
+        self.assertDictEqual(project_facts["var_predicted_kpi"], expected)
+        result = kpi_trend_change_health.evaluate(project_facts)
+        expected_text = "Volume of USV has been trending up for 8 of weeks; if it continues for 2 weeks, performance health is expected to change to On Track."
+        self.assertEqual(result[0], "kpi_trend_change_health")
+        self.assertEqual(result[1], expected_text)
+
+    def test_triggered_one_week(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        project_facts = kpi_trend_change_health.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_change_health"])
+        result = kpi_trend_change_health.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        project_facts = kpi_trend_change_health.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_change_health"])
+        result = kpi_trend_change_health.evaluate(project_facts)
         self.assertIsNone(result)

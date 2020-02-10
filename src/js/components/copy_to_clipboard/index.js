@@ -11,7 +11,7 @@ function CopyIcon() {
   return (
     <React.Fragment>
       <Link className="copy-to-clipboard__icon" />
-      <span className="copy-to-clipboard__label">Copy Link</span>
+      <span className="copy-to-clipboard__label">Share Link</span>
     </React.Fragment>
   );
 }

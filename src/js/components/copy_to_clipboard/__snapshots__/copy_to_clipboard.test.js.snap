@@ -22,7 +22,7 @@ exports[`CopyToClipboard renders disabled button correctly 1`] = `
   <span
     className="copy-to-clipboard__label"
   >
-    Copy Link
+    Share Link
   </span>
 </button>
 `;
@@ -49,7 +49,7 @@ exports[`CopyToClipboard renders enabled button correctly 1`] = `
   <span
     className="copy-to-clipboard__label"
   >
-    Copy Link
+    Share Link
   </span>
 </button>
 `;

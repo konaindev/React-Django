@@ -2,21 +2,30 @@ import decimal
 from datetime import timedelta
 
 from django.db.models import Q
+from scipy.interpolate import UnivariateSpline
 
 from remark.analytics.google_analytics import get_project_usv_sources
 from remark.geo.models import Country
 from remark.lib.stats import health_check
-from remark.lib.time_series.computed import leased_rate_graph
+from remark.lib.time_series.computed import (
+    leased_rate_graph,
+    generate_computed_targets,
+    generate_computed_kpis,
+)
+from remark.portfolio.api.strategy import (
+    get_base_kpis_for_project,
+    get_targets_for_project,
+)
 from remark.projects.constants import HEALTH_STATUS
 from remark.projects.models import Period, TargetPeriod, Project, CountryBenchmark
-from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS
+from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS, TRENDS
 from remark_airflow.insights.impl.graphs import (
     projects_kpi_graph,
     usv_exe_health_graph,
     kpi_graph,
     kpi_healths_graph,
 )
-from remark_airflow.insights.impl.utils import health_standard
+from remark_airflow.insights.impl.utils import health_standard, get_trend
 
 
 def var_project(project_id):
@@ -102,31 +111,30 @@ def var_kpi_usv_exe_healths(project, weeks, end):
         return None
     kpi_health = {
         "Volume of USV": health_standard(
-            computed_kpis["usv_cost"], target_computed_kpis["usv_cost"]
+            computed_kpis["usvs"], target_computed_kpis["usvs"]
         ),
         "USV>INQ": health_standard(
             computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]
         ),
         "INQ": health_standard(
-            computed_kpis["inq_cost"], target_computed_kpis["inq_cost"]
+            computed_kpis["inquiries"], target_computed_kpis["inquiries"]
         ),
         "INQ>TOU": health_standard(
             computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
         ),
-        "TOU": health_standard(
-            computed_kpis["tou_cost"], target_computed_kpis["tou_cost"]
-        ),
+        "TOU": health_standard(computed_kpis["tous"], target_computed_kpis["tous"]),
         "TOU>APP": health_standard(
             computed_kpis["tou_app"], target_computed_kpis["tou_app"]
         ),
         "APP": health_standard(
-            computed_kpis["app_cost"], target_computed_kpis["app_cost"]
+            computed_kpis["lease_applications"],
+            target_computed_kpis["lease_applications"],
         ),
         "C&D Rate": health_standard(
             computed_kpis["lease_cd_rate"], target_computed_kpis["lease_cds"]
         ),
         "EXE": health_standard(
-            computed_kpis["exe_cost"], target_computed_kpis["exe_cost"]
+            computed_kpis["leases_executed"], target_computed_kpis["leases_executed"]
         ),
     }
     return kpi_health
@@ -366,6 +374,13 @@ def var_kpis_healths_statuses(
 ):
     if computed_kpis is None or target_computed_kpis is None:
         return None
+
+    if isinstance(computed_kpis, list):
+        computed_kpis = computed_kpis[0]
+
+    if isinstance(target_computed_kpis, list):
+        target_computed_kpis = target_computed_kpis[0]
+
     result = {}
     for kpi_name in kpis_names:
         if kpi_name in computed_kpis and kpi_name in target_computed_kpis:
@@ -459,3 +474,164 @@ def var_unpack_kpi(kpis, index):
     if kpis is None or len(kpis) <= index:
         return None
     return kpis[index]
+
+
+def var_all_base_kpis(project, start, end):
+    result = []
+    base_kpis = get_base_kpis_for_project(project, start, end)
+
+    while base_kpis:
+        result.append(base_kpis)
+        end = start
+        start = start - timedelta(weeks=1)
+        base_kpis = get_base_kpis_for_project(project, start, end)
+    if len(result) == 0:
+        return None
+    return result
+
+
+def var_all_target_kpis(project, start, end):
+    result = []
+    base_kpis = get_targets_for_project(project, start, end)
+    while base_kpis:
+        result.append(base_kpis)
+        end = start
+        start = start - timedelta(weeks=1)
+        base_kpis = get_targets_for_project(project, start, end)
+    if len(result) == 0:
+        return None
+    return result
+
+
+def var_all_computed_kpis(all_base_kpis):
+    if all_base_kpis is None:
+        return None
+    return [generate_computed_kpis(base_kpi) for base_kpi in all_base_kpis]
+
+
+def var_all_target_computed_kpis(all_base_kpis, all_target_kpis):
+    if all_base_kpis is None or all_target_kpis is None:
+        return None
+
+    count_kpis = min(len(all_base_kpis), len(all_target_kpis))
+    result = []
+    for i in range(count_kpis):
+        kpi = all_base_kpis[i].copy()
+        target_kpi = all_target_kpis[i]
+        kpi.update(target_kpi)
+        computed_targets_kpi = generate_computed_targets(kpi)
+        if computed_targets_kpi is None:
+            break
+        result.append(computed_targets_kpi)
+    return result
+
+
+def var_kpis_trends(
+    all_computed_kpis, all_target_computed_kpis, kpis_names=KPIS_NAMES.keys()
+):
+    if (
+        all_computed_kpis is None
+        or len(all_computed_kpis) < 3
+        or all_target_computed_kpis is None
+        or len(all_target_computed_kpis) < 3
+    ):
+        return None
+
+    kpis_trends = {}
+    for kpi_name in kpis_names:
+        if kpi_name in all_computed_kpis[0] and kpi_name in all_target_computed_kpis[0]:
+            kpis_trends[kpi_name] = {
+                "values": [all_computed_kpis[0][kpi_name]],
+                "target_values": [all_target_computed_kpis[0][kpi_name]],
+                "weeks": 1,
+                "trend": None,
+            }
+
+    for computed_kpi, target_computed_kpi in zip(
+        all_computed_kpis[1:], all_target_computed_kpis[1:]
+    ):
+        for kpi_name in kpis_names:
+            if kpi_name not in kpis_trends:
+                continue
+
+            data = kpis_trends[kpi_name]
+            if not data:
+                continue
+            value = data["values"][0]
+            trend = data["trend"]
+            weeks = data["weeks"]
+
+            prev_value = computed_kpi[kpi_name]
+            prev_target_value = target_computed_kpi[kpi_name]
+            prev_trend = get_trend(prev_value, value)
+            if prev_trend != trend and trend is not None:
+                kpis_trends[kpi_name] = False
+            else:
+                kpis_trends[kpi_name] = {
+                    "name": kpi_name,
+                    "values": [prev_value] + kpis_trends[kpi_name]["values"],
+                    "target_values": [prev_target_value]
+                    + kpis_trends[kpi_name]["target_values"],
+                    "weeks": weeks + 1,
+                    "trend": prev_trend,
+                }
+    return [v for k, v in kpis_trends.items() if v]
+
+
+def var_predicting_change_health(kpis_trends, kpis_healths, weeks_predict=8):
+    if kpis_trends is None or kpis_healths is None:
+        return None
+
+    result = []
+    for kpi_trend in kpis_trends:
+        kpi_name = kpi_trend["name"]
+        health = kpis_healths.get(kpi_name)
+        if health is None:
+            continue
+        if (
+            kpi_trend["trend"] == TRENDS["UP"] and health != HEALTH_STATUS["ON_TRACK"]
+        ) or (
+            kpi_trend["trend"] == TRENDS["DOWN"] and health == HEALTH_STATUS["ON_TRACK"]
+        ):
+
+            value = kpi_trend["values"]
+            value_length = len(value)
+            extrapolator = UnivariateSpline(range(value_length), value, k=1)
+            new_value = extrapolator(range(value_length, value_length + weeks_predict))
+
+            target_value = kpi_trend["target_values"]
+            target_value_length = len(target_value)
+            target_extrapolator = UnivariateSpline(
+                range(target_value_length), target_value, k=1
+            )
+            new_target_value = target_extrapolator(
+                range(target_value_length, target_value_length + weeks_predict)
+            )
+
+            weeks = 0
+            for v, t_v in zip(new_value, new_target_value):
+                weeks += 1
+                new_health = health_standard(v, t_v)
+                if new_health != health:
+                    result.append(
+                        {"name": kpi_name, "weeks": weeks, "health": new_health}
+                    )
+                    break
+    return result
+
+
+def var_predicted_kpi(predicting_change_health, kpis_trends):
+    if not predicting_change_health or not kpis_trends:
+        return None
+
+    kpis = sorted(predicting_change_health, key=lambda p: p["weeks"])
+    prediction = kpis[0]
+    kpi_name = prediction["name"]
+    kpi_trend = next(t for t in kpis_trends if t["name"] == kpi_name)
+    return {
+        "name": kpi_name,
+        "trend": kpi_trend["trend"],
+        "weeks": kpi_trend["weeks"],
+        "predicted_weeks": prediction["weeks"],
+        "predicted_health": prediction["health"],
+    }
