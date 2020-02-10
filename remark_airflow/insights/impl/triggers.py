@@ -54,3 +54,7 @@ def trigger_kpi_not_mitigated(
         and not kpi_at_risk_mitigated
         and kpi_off_track is not None
     )
+
+
+def trigger_kpi_trend_change_health(predicting_health):
+    return predicting_health is None
