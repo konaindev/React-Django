@@ -24,7 +24,7 @@ from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
-from remark.settings import BASE_URL
+from remark.settings import BASE_URL, FRONTEND_URL
 from remark.email_app.invites.added_to_property import (
     send_invite_email,
     send_welcome_email,
@@ -245,12 +245,12 @@ class ResetPasswordView(APIView):
             "html_email_template_name": "users/emails/password_reset_email.html",
             "domain_override": "Remarkably",
             "extra_email_context": {
-                "BASE_URL": BASE_URL,
+                "BASE_URL": FRONTEND_URL,
                 "title": "Password reset",
                 "subject": "Set your Remarkably password",
             }
         }
-        email = request.POST.get("email", "")
+        email = request.data['email']
         params = { "email": email }
         form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
