@@ -111,31 +111,30 @@ def var_kpi_usv_exe_healths(project, weeks, end):
         return None
     kpi_health = {
         "Volume of USV": health_standard(
-            computed_kpis["usv_cost"], target_computed_kpis["usv_cost"]
+            computed_kpis["usvs"], target_computed_kpis["usvs"]
         ),
         "USV>INQ": health_standard(
             computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]
         ),
         "INQ": health_standard(
-            computed_kpis["inq_cost"], target_computed_kpis["inq_cost"]
+            computed_kpis["inquiries"], target_computed_kpis["inquiries"]
         ),
         "INQ>TOU": health_standard(
             computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
         ),
-        "TOU": health_standard(
-            computed_kpis["tou_cost"], target_computed_kpis["tou_cost"]
-        ),
+        "TOU": health_standard(computed_kpis["tous"], target_computed_kpis["tous"]),
         "TOU>APP": health_standard(
             computed_kpis["tou_app"], target_computed_kpis["tou_app"]
         ),
         "APP": health_standard(
-            computed_kpis["app_cost"], target_computed_kpis["app_cost"]
+            computed_kpis["lease_applications"],
+            target_computed_kpis["lease_applications"],
         ),
         "C&D Rate": health_standard(
             computed_kpis["lease_cd_rate"], target_computed_kpis["lease_cds"]
         ),
         "EXE": health_standard(
-            computed_kpis["exe_cost"], target_computed_kpis["exe_cost"]
+            computed_kpis["leases_executed"], target_computed_kpis["leases_executed"]
         ),
     }
     return kpi_health

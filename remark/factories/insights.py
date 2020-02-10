@@ -1,6 +1,6 @@
 import datetime
 
-from remark.insights.models import PerformanceInsights, BaselineInsights
+from remark.insights.models import PerformanceInsights, BaselineInsights, WeeklyInsights
 
 
 def crete_performance_insights(project_id, **kwargs):
@@ -45,7 +45,7 @@ def crete_performance_insights(project_id, **kwargs):
         },
         **kwargs,
     }
-    insights = PerformanceInsights.objects.create(
+    insights = WeeklyInsights.objects.create(
         project_id=project_id, **default_params
     )
     return insights

@@ -177,3 +177,10 @@ KPI_CATEGORIES = {
     "risk": "Risk",
     "low": "Low"
 }
+
+MACRO_INSIGHTS_OPTIONS = [
+    ("lease_rate_against_target", "lease_rate_against_target"),
+    ("change_health_status", "change_health_status"),
+    ("usv_exe_off_track", "usv_exe_off_track"),
+    ("usv_exe_at_risk", "usv_exe_at_risk"),
+    ("usv_exe_on_track", "usv_exe_on_track"), ("retention_rate_health", "retention_rate_health"), ("top_usv_referral", "top_usv_referral")]

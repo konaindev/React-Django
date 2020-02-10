@@ -56,3 +56,20 @@ class PerformanceInsights(AbstractBaseInsights):
     id = models.CharField(
         primary_key=True, max_length=37, default=get_performance_insights_id
     )
+
+
+class InsightManager(models.Manager):
+    pass
+
+
+class Insight(models.Model):
+    objects = InsightManager()
+
+    name = models.CharField(max_length=62)
+    description = models.TextField(null=True, blank=True)
+    include_in_email = models.BooleanField(default=True)
+
+    priority_order = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        ordering = ["priority_order"]

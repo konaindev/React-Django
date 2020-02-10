@@ -14,13 +14,17 @@
 
     {% include "./includes/campaign_health.html" %}
 
+    {% if top_macro_insight_1 %}
+      {% include "./includes/campaign_insights.html" %}
+    {% endif %}
+
     {% include "./includes/this_week_kpi_highlights_header.html" %}
 
     {% include "./includes/this_week_kpi.html" with kpi=best_kpi health=2 only %}
 
     {% include "./includes/this_week_kpi.html" with kpi=worst_kpi health=0 only %}
 
-    {% include "./includes/view_report_button.html" %}
+    {% include "./includes/view_report_button.html" with text="View Report" %}
 
     {% include "./includes/campaign_to_date_highlights_header.html" %}
 
@@ -30,7 +34,7 @@
 
     {% include "./includes/campaign_to_date_list.html" with kpi_1=low_1 kpi_2=low_2 kpi_3=low_3 kpi_insight_text=low_kpi_insight_text health=0 only %}
 
-    {% include "./includes/view_report_button.html" %}
+    {% include "./includes/view_report_button.html" with text="View Report" %}
 
     {% include "./includes/question_or_feedback.html" %}
 

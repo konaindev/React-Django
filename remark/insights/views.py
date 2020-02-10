@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from remark.lib.logging import getLogger
 from remark.projects.views import ProjectCustomPermission
 
-from .models import PerformanceInsights, BaselineInsights
+from .models import PerformanceInsights, BaselineInsights, WeeklyInsights
 
 logger = getLogger(__name__)
 
@@ -27,7 +27,7 @@ class PerformanceInsightsView(APIView):
 
     def get(self, request, public_id):
         performance_insights = (
-            PerformanceInsights.objects.filter(project_id=public_id)
+            WeeklyInsights.objects.filter(project_id=public_id)
             .order_by("-start")
             .first()
         )

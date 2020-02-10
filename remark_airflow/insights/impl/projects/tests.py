@@ -193,7 +193,7 @@ class RetentionRateInsightTestCase(TestCase):
         )
         result = retention_rate_health.evaluate(project_facts)
         expected_text = (
-            "Your Retention Rate has been Off Track for 2 and is trending flat."
+            "Your Retention Rate has been Off Track for 2 week(s) and is trending flat."
         )
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
@@ -230,7 +230,7 @@ class RetentionRateInsightTestCase(TestCase):
         )
         result = retention_rate_health.evaluate(project_facts)
         expected_text = (
-            "Your Retention Rate has been Off Track for 1 and is trending down."
+            "Your Retention Rate has been Off Track for 1 week(s) and is trending down."
         )
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
@@ -266,7 +266,7 @@ class RetentionRateInsightTestCase(TestCase):
             expected["trigger_retention_rate_health"],
         )
         result = retention_rate_health.evaluate(project_facts)
-        expected_text = "Your Retention Rate has been At Risk for 1 and is trending up."
+        expected_text = "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
 
