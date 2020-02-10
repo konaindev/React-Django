@@ -106,10 +106,12 @@ change_health_status = Insight(
     ],
 )
 
+# TPC: Check the logic for picking the USV_EXE OFF Track
+
 usv_exe_off_track = Insight(
     name="usv_exe_off_track",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been Off Track for {{ var_weeks_usv_exe_off_track }} of Weeks"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    " has been Off Track for {{ var_weeks_usv_exe_off_track }} Weeks and"
     " your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
     triggers=["trigger_usv_exe_off_track"],
     graph=[
@@ -170,7 +172,7 @@ usv_exe_on_track = Insight(
 retention_rate_health = Insight(
     name="retention_rate_health",
     template="Your Retention Rate has been {{ var_retention_rate_health | health_status_to_str }}"
-    " for {{ var_retention_rate_health_weeks }}"
+    " for {{ var_retention_rate_health_weeks }} week(s)"
     " and is trending {{ var_retention_rate_trend }}.",
     triggers=["trigger_retention_rate_health"],
     graph=[
