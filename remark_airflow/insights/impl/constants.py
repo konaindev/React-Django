@@ -39,3 +39,6 @@ KPIS_NAMES = {
     "tou_app": "TOU > APP",
     "app_exe": "APP > EXE",
 }
+
+
+TRENDS = {"FLAT": "flat", "UP": "up", "DOWN": "down"}

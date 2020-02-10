@@ -68,3 +68,12 @@ def create_periods(
         project=project, lease_stage=stage, **default_period_params
     )
     return target_period, period
+
+
+def generate_weekly_periods(count, project, end):
+    usvs = 460
+    for i in range(count):
+        start = end - datetime.timedelta(weeks=1)
+        create_periods(project, start=start, end=end, period_params={"usvs": usvs})
+        end = start
+        usvs -= 10

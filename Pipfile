@@ -61,6 +61,7 @@ parameterized = "*"
 xmlschema = "*"
 defusedxml = "*"
 jinja2 = "*"
+scipy = "*"
 
 [requires]
 python_version = "3.7"
