@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0082_populate_reporting_day'),
+        ('projects', '0081_update_project_reporting_day'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='project',
             name='reporting_day',
-            field=models.CharField(blank=True, choices=[('Monday', 'M'), ('Tuesday', 'T'), ('Wednesday', 'W'), ('Thursday', 'Th'), ('Friday', 'F'), ('Saturday', 'Sa'), ('Sunday', 'Su')], max_length=9, null=True),
+            field=models.CharField(choices=[('Monday', 'M'), ('Tuesday', 'T'), ('Wednesday', 'W'), ('Thursday', 'Th'), ('Friday', 'F'), ('Saturday', 'Sa'), ('Sunday', 'Su')], default='Monday', max_length=9),
         ),
     ]

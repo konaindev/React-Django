@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='project',
             name='reporting_day',
-            field=models.CharField(blank=True, choices=[('Monday', 'M'), ('Tuesday', 'T'), ('Wednesday', 'W'), ('Thursday', 'Th'), ('Friday', 'F'), ('Saturday', 'Sa'), ('Sunday', 'Su')], max_length=9, null=True),
+            field=models.CharField(blank=True, choices=[('Monday', 'M'), ('Tuesday', 'T'), ('Wednesday', 'W'), ('Thursday', 'Th'), ('Friday', 'F'), ('Saturday', 'Sa'), ('Sunday', 'Su')], max_length=9, null=True, default="Monday"),
         ),
     ]
