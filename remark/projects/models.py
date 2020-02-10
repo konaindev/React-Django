@@ -318,7 +318,7 @@ class Project(models.Model):
         ("Sunday", "Su"),
     ]
 
-    reporting_day = models.CharField(max_length=9, choices=DAY_OF_WEEK_CHOICES, default="Monday")
+    reporting_day = models.CharField(blank=True, null=True, max_length=9, choices=DAY_OF_WEEK_CHOICES)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
