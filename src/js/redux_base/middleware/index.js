@@ -110,6 +110,26 @@ export const fetchCreatePassword = store => next => action => {
   }
 };
 
+export const fetchResetPassword = store => next => action => {
+  if (action.type === "API_RESET_PASSWORD") {
+    const url = createAPIUrl(`/users/reset-password-confirm/`);
+    console.log("--------action.data", action.data);
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            console.log("password has been reset");
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
 export const fetchPasswordRules = store => next => action => {
   if (action.type == "CREATE_PASSWORD_FETCH_RULES") {
     axiosGet(createAPIUrl("/users/password-rules/"))

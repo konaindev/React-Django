@@ -6,6 +6,7 @@ import createSagaMiddleware from "redux-saga";
 import reducers from "./reducers";
 import {
   fetchCreatePassword,
+  fetchResetPassword,
   fetchPasswordRules,
   fetchCompany,
   fetchCompleteAccount,
@@ -45,6 +46,7 @@ export default () => {
       applyMiddleware(
         segmentMiddleware,
         fetchCreatePassword,
+        fetchResetPassword,
         fetchCompany,
         fetchCompleteAccount,
         sendGaEvent,
