@@ -86,7 +86,8 @@ const completeAccount = (
   state = {
     companyAddresses: [],
     company_roles: [],
-    office_types: []
+    office_types: [],
+    is_completed: false
   },
   action
 ) => {

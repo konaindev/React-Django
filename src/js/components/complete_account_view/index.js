@@ -30,7 +30,8 @@ export class CompleteAccountView extends React.PureComponent {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,
     office_address: PropTypes.string,
-    office_countries: Select.optionsType
+    office_countries: Select.optionsType,
+    is_completed: PropTypes.bool
   };
 
   constructor(props) {
@@ -65,6 +66,12 @@ export class CompleteAccountView extends React.PureComponent {
 
   componentDidMount() {
     this.props.dispatch(completeAccount.fetch());
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.is_completed) {
+      this.props.dispatch(completeAccount.redirect("/"));
+    }
   }
 
   steps = [
@@ -118,8 +125,6 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   showMessage = (errors, touched) => {
-    console.log("---ERRORS-------");
-    console.log(errors);
     if (Object.keys(errors).length) {
       return this.showErrorMessage(errors, touched);
     }

@@ -67,11 +67,15 @@ class CompleteAccountView(APIView):
             "company_roles": COMPANY_ROLES,
             "office_countries": COUNTRY_LIST,
             "us_state_list": US_STATE_LIST,
-            "gb_county_list": GB_COUNTY_LIST
+            "gb_county_list": GB_COUNTY_LIST,
+            "is_completed": hasattr(request.user, "person")
         }
         return Response(data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        user = request.user
+        if hasattr(user, "person"):
+            return Response(status=status.HTTP_200_OK)
         params = json.loads(request.body)
         form = AccountCompleteForm(params)
         if form.is_valid():
@@ -105,13 +109,13 @@ class CompleteAccountView(APIView):
                 first_name=data["first_name"],
                 last_name=data["last_name"],
                 role=data["title"],
-                email=request.user.email,
-                user=request.user,
+                email=user.email,
+                user=user,
                 office=office,
             )
             person.save()
-            send_welcome_email.apply_async(args=(request.user.email,), countdown=2)
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            send_welcome_email.apply_async(args=(user.email,), countdown=2)
+            return Response(status=status.HTTP_200_OK)
         return Response({"errors": form.errors.get_json_data()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
