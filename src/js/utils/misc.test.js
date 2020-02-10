@@ -1,4 +1,4 @@
-import { qsParse, qsStringify, stripURL } from "./misc";
+import { isTrueValues, qsParse, qsStringify, stripURL } from "./misc";
 
 describe("utils > query strings", () => {
   it("qsParse()", () => {
@@ -27,5 +27,16 @@ describe("strip URL protocol", () => {
     expect(stripURL("ftp://www.test.com")).toBe("test.com");
     expect(stripURL("http://test.com/")).toBe("test.com");
     expect(stripURL("http://test.com/test")).toBe("test.com/test");
+  });
+});
+
+describe("is True values in object", () => {
+  it("isTrueValues", () => {
+    expect(isTrueValues({ a: 1, b: 2 })).toBe(true);
+    expect(isTrueValues({ a: "1", b: "2" })).toBe(true);
+    expect(isTrueValues({ a: "1", b: "" })).toBe(false);
+    expect(isTrueValues({ a: "1", b: 0 })).toBe(false);
+    expect(isTrueValues({ a: "1", b: null })).toBe(false);
+    expect(isTrueValues({})).toBe(false);
   });
 });

@@ -9,6 +9,7 @@ import {
   differenceInCalendarMonths,
   differenceInCalendarYears
 } from "date-fns";
+import _isEmpty from "lodash/isEmpty";
 import _mapValues from "lodash/mapValues";
 
 export const convertToKebabCase = (string = "") => {
@@ -105,4 +106,14 @@ export const qsStringify = (queryParams, appendLeadingPrefix = true) => {
 export const stripURL = url => {
   const r = /^(\w+:\/\/)(www\.)?/i;
   return url.replace(r, "").replace(/\/$/, "");
+};
+
+/*
+ * Checks if all values in object are true
+ */
+export const isTrueValues = obj => {
+  if (_isEmpty(obj)) {
+    return false;
+  }
+  return !Object.values(obj).filter(item => !item).length;
 };

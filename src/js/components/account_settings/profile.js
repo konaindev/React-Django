@@ -551,7 +551,7 @@ export default class Profile extends React.PureComponent {
                     onSuccess={this.setCompanySuccess}
                   />
                 </div>
-                <div className="account-settings__field-grid  account-settings__field-grid--col-3">
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
                   <div className="account-settings__value-field">
                     <div className="account-settings__label">Company</div>
                     <div className="account-settings__value">

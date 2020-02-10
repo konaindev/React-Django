@@ -7,8 +7,16 @@ $complete-account-terms-spacing: 50px;
 $complete-account-button-spacing: 20px;
 $complete-account-checkbox-spacing: 10px;
 $complete-account-link-color: $gray-3;
+
 $button-line-height: 1.25rem;
 $edit-button-top-padding: 12px;
+$edit-button-inbox-padding: 8px 10px;
+
+$value-field-margin: 30px;
+$value-spacing: 4px;
+$value-color: $gray-1;
+$value-line-height: 1.25rem;
+$value-title-line-height: 1.25rem;
 
 .complete-account {
     .form-field__input-container {
@@ -21,6 +29,8 @@ $edit-button-top-padding: 12px;
 }
 
 .complete-account__section-label {
+    display: flex;
+    align-items: center;
     padding-bottom: 30px;
     padding-top: 50px;
     color: $gray-3;
@@ -75,4 +85,32 @@ $edit-button-top-padding: 12px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
+
+    &--in-box {
+        width: auto;
+        padding: $edit-button-inbox-padding;
+        margin-left: auto;
+        font-weight: $weight-normal;
+        letter-spacing: normal;
+        text-transform: capitalize;
+    }
+}
+
+.complete-account__field-value + .complete-account__field-value {
+    margin-top: $value-field-margin;
+}
+
+.complete-account__field-label {
+    color: $gray-9;
+    font-size: $text-xs;
+    letter-spacing: 1px;
+    line-height: $value-title-line-height;
+    text-transform: uppercase;
+}
+
+.complete-account__value {
+    margin-top: $value-spacing;
+    line-height: $value-line-height;
+    font-size: $text-sm;
+    color: $value-color;
 }

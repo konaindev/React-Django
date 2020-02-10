@@ -18,12 +18,51 @@ import MultiSelect from "../multi_select";
 import OfficeModal from "../office_modal";
 import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
-import { addressModal, completeAccount } from "../../redux_base/actions";
+import { COUNTRY_FIELDS } from "../../constants";
 import LoaderContainer from "../../containers/loader";
+import { addressModal, completeAccount } from "../../redux_base/actions";
+import { isTrueValues } from "../../utils/misc";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
-import { COUNTRY_FIELDS } from "../../constants";
+
+const CompanyInfoEmpty = ({ onOpenCompanyModal }) => (
+  <div>
+    <div className="complete-account__section-label">Company Info</div>
+    <Button
+      className="complete-account__edit-button"
+      color="secondary-gray"
+      onClick={onOpenCompanyModal}
+    >
+      Enter Company info
+    </Button>
+  </div>
+);
+
+const CompanyInfo = ({ onOpenCompanyModal, data }) => (
+  <div>
+    <div className="complete-account__section-label">
+      Company Info
+      <Button
+        className="complete-account__edit-button complete-account__edit-button--in-box"
+        color="secondary-gray"
+        onClick={onOpenCompanyModal}
+      >
+        Enter Company info
+      </Button>
+    </div>
+    <div className="complete-account__field-value">
+      <div className="complete-account__field-label">Company</div>
+      <div className="complete-account__value">{data.company.label}</div>
+    </div>
+    <div className="complete-account__field-value">
+      <div className="complete-account__field-label">Company Role</div>
+      <div className="complete-account__value">
+        {data.company_roles.map(r => r.label).join(", ")}
+      </div>
+    </div>
+  </div>
+);
 
 export class CompleteAccountView extends React.PureComponent {
   static propTypes = {
@@ -254,6 +293,8 @@ export class CompleteAccountView extends React.PureComponent {
 
   render() {
     const classes = cn("complete-account__field-set", AccountForm.fieldClass);
+    const company = this.getCompanyValues();
+    const office = this.getOfficeValues();
     return (
       <PageAuth backLink="/">
         <AddressModal
@@ -266,7 +307,7 @@ export class CompleteAccountView extends React.PureComponent {
         <CompanyModal
           theme="highlight"
           isOpen={this.state.isCompanyOpen}
-          data={this.getCompanyValues()}
+          data={company}
           companyRolesOptions={this.props.company_roles}
           loadCompany={this.loadCompany}
           onChangeCompany={this.onChangeCompany}
@@ -276,7 +317,7 @@ export class CompleteAccountView extends React.PureComponent {
         <OfficeModal
           theme="highlight"
           isOpen={this.state.isOfficeOpen}
-          data={this.getOfficeValues()}
+          data={office}
           office_options={this.props.office_types}
           office_countries={this.props.office_countries}
           us_state_list={this.props.us_state_list}
@@ -361,18 +402,16 @@ export class CompleteAccountView extends React.PureComponent {
                     onBlur={handleBlur}
                   />
                 </FormField>
-                <div>
-                  <div className="complete-account__section-label">
-                    Company Info
-                  </div>
-                  <Button
-                    className="complete-account__edit-button"
-                    color="secondary-gray"
-                    onClick={this.onOpenCompanyModal}
-                  >
-                    Enter Company info
-                  </Button>
-                </div>
+                {isTrueValues(company) ? (
+                  <CompanyInfo
+                    data={company}
+                    onOpenCompanyModal={this.onOpenCompanyModal}
+                  />
+                ) : (
+                  <CompanyInfoEmpty
+                    onOpenCompanyModal={this.onOpenCompanyModal}
+                  />
+                )}
                 <div>
                   <div className="complete-account__section-label">
                     Office Info
