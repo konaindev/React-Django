@@ -165,7 +165,6 @@ def set_macro_insights(pe, project_insights):
     return
 
 
-@shared_task
 def update_performance_report(weekly_insight_id):
     try:
         weekly_insight = WeeklyInsights.objects.get(pk=weekly_insight_id)
@@ -266,18 +265,6 @@ def update_performance_report(weekly_insight_id):
         pek.performance_email = pe
         pek.save()
 
-
-@receiver(post_save, sender=WeeklyInsights)
-def post_save_weeklyinsights(sender, instance, created, raw, **kwargs):
-    # dont run this for fixtures
-    if raw:
-        return
-
-    if not created:
-        logger.info("No new record created for this period. Skipping.")
-        return
-
-    update_performance_report.apply_async(args=(instance.id,), countdown=2)
 
 # Commented out because this is something that may be used, but currently, it doesn't integrate (resulting in false errors).
 # @receiver(post_save,  sender=Period)
