@@ -383,9 +383,13 @@ kpi_trend_change_health = Insight(
         cop(var_all_computed_kpis, var_all_base_kpis),
         cop(var_all_target_computed_kpis, var_all_base_kpis, var_all_target_kpis),
         cop(var_kpis_trends, var_all_computed_kpis, var_all_target_computed_kpis),
-        cop(var_kpis_healths_statuses, var_computed_kpis, var_target_computed_kpis),
+        cop(
+            var_kpis_healths_statuses,
+            var_all_computed_kpis,
+            var_all_target_computed_kpis,
+        ),
         cop(var_predicting_change_health, var_kpis_trends, var_kpis_healths_statuses),
         cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
-        cop(trigger_kpi_trend_change_health, var_predicting_change_health),
+        cop(trigger_kpi_trend_change_health, var_predicted_kpi),
     ],
 )

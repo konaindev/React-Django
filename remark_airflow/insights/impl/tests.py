@@ -8,6 +8,13 @@ from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
+from remark_airflow.insights.impl.stub_data.kpi import (
+    all_base_kpis,
+    all_computed_kpis,
+    all_target_kpis,
+    all_target_computed_kpis,
+    kpis_trends,
+)
 
 from remark_airflow.insights.impl.vars import (
     var_prev_health_status,
@@ -22,6 +29,13 @@ from remark_airflow.insights.impl.vars import (
     var_kpi_health_weeks,
     var_unpack_kpi,
     var_kpi_without_mitigated,
+    var_kpis_trends,
+    var_predicting_change_health,
+    var_all_base_kpis,
+    var_all_target_kpis,
+    var_all_computed_kpis,
+    var_all_target_computed_kpis,
+    var_predicted_kpi,
 )
 
 
@@ -658,3 +672,227 @@ class VarKPIWithoutMitigated(TestCase):
             kpis_healths, computed_kpis, target_computed_kpis, 0
         )
         self.assertEqual(result, "inquiries")
+
+
+class VarAllBaseKPIsTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def test_one_period(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        result = var_all_base_kpis(self.project, self.start, self.end)
+        self.assertEqual(len(result), 1)
+        self.assertListEqual(result, all_base_kpis[:1])
+
+    def test_many_periods(self):
+        create_periods(
+            self.project, start=self.start - datetime.timedelta(weeks=1), end=self.start
+        )
+        create_periods(self.project, start=self.start, end=self.end)
+        result = var_all_base_kpis(self.project, self.start, self.end)
+        self.assertEqual(len(result), 2)
+        self.assertListEqual(result, all_base_kpis)
+
+    def test_no_periods(self):
+        result = var_all_base_kpis(self.project, self.start, self.end)
+        self.assertIsNone(result)
+
+
+class VarAllTargetKPIsTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+
+    def test_one_target_period(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        result = var_all_target_kpis(self.project, self.start, self.end)
+        self.assertEqual(len(result), 1)
+        self.assertListEqual(result, all_target_kpis[:1])
+
+    def test_many_periods(self):
+        create_periods(
+            self.project, start=self.start - datetime.timedelta(weeks=1), end=self.start
+        )
+        create_periods(self.project, start=self.start, end=self.end)
+        result = var_all_target_kpis(self.project, self.start, self.end)
+        self.assertEqual(len(result), 2)
+        self.assertListEqual(result, all_target_kpis)
+
+    def test_no_target_periods(self):
+        result = var_all_target_kpis(self.project, self.start, self.end)
+        self.assertIsNone(result)
+
+
+class VarAllComputedKPIsTestCase(TestCase):
+    def test_kpi_is_none(self):
+        result = var_all_computed_kpis(None)
+        self.assertIsNone(result)
+
+    def test_kpi_is_empty(self):
+        result = var_all_computed_kpis([])
+        self.assertListEqual(result, [])
+
+    def test_one_kpi(self):
+        result = var_all_computed_kpis(all_base_kpis)
+        self.assertListEqual(result, all_computed_kpis)
+
+
+class VarAllTargetComputedKPIsTestCase(TestCase):
+    def test_(self):
+        result = var_all_target_computed_kpis(all_base_kpis, all_target_kpis)
+        self.assertListEqual(result, all_target_computed_kpis)
+
+    def test_base_kpi_is_none(self):
+        result = var_all_target_computed_kpis(None, all_target_kpis)
+        self.assertIsNone(result)
+
+    def test_base_kpi_is_empty(self):
+        result = var_all_target_computed_kpis([], all_target_kpis)
+        self.assertListEqual(result, [])
+
+    def test_base_target_kpi_is_none(self):
+        result = var_all_target_computed_kpis(all_base_kpis, None)
+        self.assertIsNone(result)
+
+    def test_base_target_kpi_is_empty(self):
+        result = var_all_target_computed_kpis(all_base_kpis, [])
+        self.assertListEqual(result, [])
+
+
+class VarKPIsTrendsTestCase(TestCase):
+    def setUp(self) -> None:
+        self.computed_kpis = [
+            {"usvs": 6, "usv_inq": None, "inquiries": 0, "inq_tou": 2, "tous": 7},
+            {"usvs": 5, "usv_inq": 1, "inquiries": 0, "inq_tou": 3, "tous": 4},
+            {"usvs": 4, "usv_inq": 4, "inquiries": 0, "inq_tou": 4, "tous": 5},
+        ]
+        self.target_computed_kpis = [
+            {"usvs": 8, "usv_inq": 3, "inquiries": 3, "inq_tou": 4, "tous": 8},
+            {"usvs": 7, "usv_inq": 6, "inquiries": 3, "inq_tou": 3, "tous": 6},
+            {"usvs": 6, "usv_inq": 5, "inquiries": 3, "inq_tou": 5, "tous": 6},
+        ]
+        self.kpis_names = ["usvs", "usv_inq", "inquiries", "inq_tou", "tous"]
+
+    def test_default(self):
+        result = var_kpis_trends(
+            self.computed_kpis, self.target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, kpis_trends)
+
+    def test_computed_kpi_is_none(self):
+        result = var_kpis_trends(None, self.target_computed_kpis, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_computed_kpi_is_empty(self):
+        result = var_kpis_trends([], self.target_computed_kpis, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_target_computed_kpis_is_none(self):
+        result = var_kpis_trends(self.computed_kpis, None, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_target_computed_kpis_is_empty(self):
+        result = var_kpis_trends(self.computed_kpis, {}, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_different_number_kpi(self):
+        target_computed_kpis = self.target_computed_kpis.copy()
+        target_computed_kpis.append(
+            {"usvs": 6, "usv_inq": 5, "inquiries": 3, "inq_tou": 5, "tous": 6}
+        )
+
+        result = var_kpis_trends(
+            self.computed_kpis, target_computed_kpis, self.kpis_names
+        )
+        self.assertDictEqual(result, kpis_trends)
+
+    def test_kpi_not_full(self):
+        kpis_names = self.kpis_names.copy()
+        kpis_names.append("test_kpi")
+        result = var_kpis_trends(
+            self.computed_kpis, self.target_computed_kpis, kpis_names
+        )
+        self.assertDictEqual(result, kpis_trends)
+
+
+class VarPredictingChangeHealth(TestCase):
+    def setUp(self) -> None:
+        self.kpis_names = ["usvs", "usv_inq", "inquiries", "inq_tou", "tous"]
+        self.kpis_healths = {
+            "inq_tou": -1,
+            "inquiries": 0,
+            "usv_inq": 2,
+            "usvs": 0,
+            "tous": 1,
+        }
+
+    def test_default(self):
+        result = var_predicting_change_health(
+            kpis_trends, self.kpis_healths, self.kpis_names
+        )
+        expected = {"usvs": {"health": 1, "weeks": 1}}
+        self.assertDictEqual(result, expected)
+
+    def test_kpis_trends_is_none(self):
+        result = var_predicting_change_health(None, self.kpis_healths, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_kpis_trends_is_empty(self):
+        result = var_predicting_change_health({}, self.kpis_healths, self.kpis_names)
+        self.assertDictEqual(result, {})
+
+    def test_kpis_healths_is_none(self):
+        result = var_predicting_change_health(kpis_trends, None, self.kpis_names)
+        self.assertIsNone(result)
+
+    def test_kpis_healths_is_empty(self):
+        result = var_predicting_change_health(kpis_trends, {}, self.kpis_names)
+        self.assertDictEqual(result, {})
+
+
+class VarPredictedKPITestCase(TestCase):
+    def setUp(self) -> None:
+        self.predicting_change_health = {"usvs": {"health": 1, "weeks": 2}}
+
+    def test_one_prediction(self):
+        result = var_predicted_kpi(self.predicting_change_health, kpis_trends)
+        expected = {
+            "name": "usvs",
+            "trend": "up",
+            "weeks": 3,
+            "predicted_weeks": 2,
+            "predicted_health": 1,
+        }
+        self.assertDictEqual(result, expected)
+
+    def test_many_prediction(self):
+        predicting_change_health = self.predicting_change_health.copy()
+        predicting_change_health["usv_inq"] = {"health": 0, "weeks": 1}
+        result = var_predicted_kpi(predicting_change_health, kpis_trends)
+        expected = {
+            "name": "usv_inq",
+            "trend": "down",
+            "weeks": 3,
+            "predicted_weeks": 1,
+            "predicted_health": 0,
+        }
+        self.assertDictEqual(result, expected)
+
+    def test_prediction_is_none(self):
+        result = var_predicted_kpi(None, kpis_trends)
+        self.assertIsNone(result)
+
+    def test_prediction_is_empty(self):
+        result = var_predicted_kpi({}, kpis_trends)
+        self.assertIsNone(result)
+
+    def test_kpis_trends_is_none(self):
+        result = var_predicted_kpi(self.predicting_change_health, None)
+        self.assertIsNone(result)
+
+    def test_kpis_trends_is_empty(self):
+        result = var_predicted_kpi(self.predicting_change_health, {})
+        self.assertIsNone(result)
