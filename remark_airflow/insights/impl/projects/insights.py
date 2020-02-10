@@ -77,6 +77,8 @@ lease_rate_against_target = Insight(
             "start",
             var_campaign_health_status,
             var_prev_health_status,
+            var_current_period_leased_rate,
+            var_target_leased_rate,
         ),
     ],
 )
