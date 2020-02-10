@@ -10,6 +10,9 @@ import AuthContainer from "../containers/auth";
 import CreatePasswordContainer from "../containers/create_password";
 import ErrorContainer from "../containers/error";
 import { TrackedRoute as Route } from "./gaTracked";
+import ResetPasswordForm from "../components/reset_password_form";
+import ResetPasswordDone from "../components/reset_password_done";
+import CreatePasswordView from "../components/create_password_view";
 
 export function RemarkableRouter() {
   return (
@@ -19,6 +22,9 @@ export function RemarkableRouter() {
           path="/users/create-password/:hash"
           component={CreatePasswordContainer}
         />
+        <Route path="/users/reset/:uid/:token" component={CreatePasswordView} />
+        <Route path="/users/password-reset/" component={ResetPasswordForm} />
+        <Route path="/users/password-resend/" component={ResetPasswordDone} />
         <Route path="/users/complete-account" component={CompleteAccountView} />
         <Route path="/dashboard" component={DashboardContainer} />
         <Route
