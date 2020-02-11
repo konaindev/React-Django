@@ -534,13 +534,14 @@ class VarKPIHealthWeeksTestCase(TestCase):
     def setUp(self) -> None:
         self.project = create_project()
         self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
 
     def test_no_kpi(self):
-        result = var_kpi_health_weeks("usvs", self.project, self.start, -1)
+        result = var_kpi_health_weeks(self.project, self.start, self.end, "usvs", -1)
         self.assertEqual(result, 0)
 
     def test_kpi_is_none(self):
-        result = var_kpi_health_weeks(None, self.project, self.start, -1)
+        result = var_kpi_health_weeks(self.project, self.start, self.end, None, -1)
         self.assertEqual(result, 0)
 
     def test_two_week(self):
@@ -550,7 +551,7 @@ class VarKPIHealthWeeksTestCase(TestCase):
         start = end
         end = start - datetime.timedelta(weeks=1)
         create_periods(self.project, start=start, end=end)
-        result = var_kpi_health_weeks("usv_inq", self.project, self.start, 2)
+        result = var_kpi_health_weeks(self.project, self.start, self.end, "usv_inq", 2)
         self.assertEqual(result, 2)
 
 

@@ -455,11 +455,13 @@ def var_kpi_without_mitigated(
     return min(kpis, key=lambda kpi: kpi["health"])["kpi_name"]
 
 
-def var_kpi_health_weeks(kpi_name, project, start, health_target):
+def var_kpi_health_weeks(project, start, end, kpi_name, health_target):
     weeks = 0
     if kpi_name is None:
         return weeks
-    is_off = health_target != -1
+    args = {"start": start, "end": end, "project": project, "kpi_name": kpi_name}
+    health = kpi_healths_graph(args)["var_kpi_health"]
+    is_off = health == health_target and health_target != -1
     while is_off:
         weeks += 1
         end = start
