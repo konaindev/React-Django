@@ -126,12 +126,15 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
             except:
                 logging.error("UNABLE TO FOLLOW THROUGH ON CREATION")
 
-        return weekly_ins
+        serialized_weekly_ins = serialize('json', [weekly_ins,])
+        response = json.loads(serialized_weekly_ins)
+
+        return response[0]
 
 
     def create_performance_email(task_id, **context):
         weekly_insight = context['task_instance'].xcom_pull(task_ids=task_id)
-        response = update_performance_report(weekly_insight.id)
+        response = update_performance_report(weekly_insight["pk"])
         return response
 
 
