@@ -708,7 +708,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
 
         result = kpi_off_track_mitigated.evaluate(project_facts)
-        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        expected_text = "While Volume of TOU is Off Track for 2 week(s), TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
         self.assertEqual(result[0], "kpi_off_track_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -743,7 +743,7 @@ class KPIOffTrackMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_off_track_weeks"], 2)
 
         result = kpi_off_track_mitigated.evaluate(project_facts)
-        expected_text = "While Volume of TOU is Off Track for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        expected_text = "While Volume of TOU is Off Track for 2 week(s), TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
         self.assertEqual(result[0], "kpi_off_track_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -788,7 +788,7 @@ class KPIAtRiskMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 2)
 
         result = kpi_at_risk_mitigated.evaluate(project_facts)
-        expected_text = "While Volume of USV is At Risk for 2 of Weeks, USV > INQ is exceeding performance target, resulting in On Track Volume of INQ."
+        expected_text = "While Volume of USV is At Risk for 2 week(s), USV > INQ is exceeding performance target, resulting in On Track Volume of INQ."
         self.assertEqual(result[0], "kpi_at_risk_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -814,7 +814,7 @@ class KPIAtRiskMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_at_risk_weeks"], 2)
 
         result = kpi_at_risk_mitigated.evaluate(project_facts)
-        expected_text = "While Volume of TOU is At Risk for 2 of Weeks, TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
+        expected_text = "While Volume of TOU is At Risk for 2 week(s), TOU > APP is exceeding performance target, resulting in On Track Volume of APP."
         self.assertEqual(result[0], "kpi_at_risk_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -869,7 +869,7 @@ class KPIOffTrackNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 2)
 
         result = kpi_off_track_not_mitigated.evaluate(project_facts)
-        expected_text = "Volume of APP has been Off Track for 2 weeks."
+        expected_text = "Volume of APP has been Off Track for 2 week(s)."
         self.assertEqual(result[0], "kpi_off_track_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -891,7 +891,7 @@ class KPIOffTrackNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 1)
 
         result = kpi_off_track_not_mitigated.evaluate(project_facts)
-        expected_text = "INQ > TOU has been Off Track for 1 weeks."
+        expected_text = "INQ > TOU has been Off Track for 1 week(s)."
         self.assertEqual(result[0], "kpi_off_track_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -909,7 +909,7 @@ class KPIOffTrackNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_off_track_not_mitigated_weeks"], 1)
 
         result = kpi_off_track_not_mitigated.evaluate(project_facts)
-        expected_text = "Volume of TOU has been Off Track for 1 weeks."
+        expected_text = "Volume of TOU has been Off Track for 1 week(s)."
         self.assertEqual(result[0], "kpi_off_track_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -965,7 +965,7 @@ class KPIAtRiskNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 2)
 
         result = kpi_at_risk_not_mitigated.evaluate(project_facts)
-        expected_text = "TOU > APP has been At Risk for 2 weeks."
+        expected_text = "TOU > APP has been At Risk for 2 week(s)."
         self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -978,7 +978,7 @@ class KPIAtRiskNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
 
         result = kpi_at_risk_not_mitigated.evaluate(project_facts)
-        expected_text = "Volume of USV has been At Risk for 1 weeks."
+        expected_text = "Volume of USV has been At Risk for 1 week(s)."
         self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -997,7 +997,7 @@ class KPIAtRiskNotMitigatedTestCase(TestCase):
         self.assertEqual(project_facts["var_kpi_at_risk_not_mitigated_weeks"], 1)
 
         result = kpi_at_risk_not_mitigated.evaluate(project_facts)
-        expected_text = "TOU > APP has been At Risk for 1 weeks."
+        expected_text = "TOU > APP has been At Risk for 1 week(s)."
         self.assertEqual(result[0], "kpi_at_risk_not_mitigated")
         self.assertEqual(result[1], expected_text)
 
@@ -1049,7 +1049,7 @@ class KPITrendChangeHealthTestCase(TestCase):
         }
         self.assertDictEqual(project_facts["var_predicted_kpi"], expected)
         result = kpi_trend_change_health.evaluate(project_facts)
-        expected_text = "Volume of USV has been trending up for 8 of weeks; if it continues for 2 weeks, performance health is expected to change to On Track."
+        expected_text = "Volume of USV has been trending up for 8 week(s); if it continues for 2 weeks, performance health is expected to change to On Track."
         self.assertEqual(result[0], "kpi_trend_change_health")
         self.assertEqual(result[1], expected_text)
 
