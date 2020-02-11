@@ -251,25 +251,30 @@ export class CompleteAccountView extends React.PureComponent {
     const data = { ...values };
     data.company = values.company.value;
     data.company_roles = values.company_roles.map(type => type.value);
-    data.office_type = values.office_type.value;
-    data.office_state = values.office_state.value;
-    validateAddress(values).then(response => {
-      if (response.data.error) {
-        this.setState({ invalid_address: true });
-        this.formik.current.setErrors({
-          office_street: "see below",
-          office_city: "*",
-          office_state: "*",
-          office_zip: "*"
-        });
-      } else {
-        this.setState({
-          addresses: response.data,
-          invalid_address: false
-        });
-        this.props.dispatch(addressModal.open(data, response.data));
-      }
-    });
+    const office = this.getOfficeValues();
+    if (isTrueValues(office)) {
+      data.office_type = values.office_type.value;
+      data.office_state = values.office_state.value;
+      validateAddress(office).then(response => {
+        if (response.data.error) {
+          this.setState({ invalid_address: true });
+          this.formik.current.setErrors({
+            office_street: "see below",
+            office_city: "*",
+            office_state: "*",
+            office_zip: "*"
+          });
+        } else {
+          this.setState({
+            addresses: response.data,
+            invalid_address: false
+          });
+          this.props.dispatch(addressModal.open(data, response.data));
+        }
+      });
+    } else {
+      this.props.dispatch(completeAccount.post(data, this.setErrorMessages));
+    }
   };
 
   onChangeCompany = company => {

@@ -19,7 +19,7 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_MET
 from rest_framework.response import Response
 
 from remark.crm.models import Business, Office, Person
-from remark.crm.constants import OFFICE_OPTIONS, OFFICE_TYPES
+from remark.crm.constants import OFFICE_OPTIONS
 from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
@@ -33,6 +33,7 @@ from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
 from .forms import (
+    AccountCompanyForm,
     AccountCompleteForm,
     AccountSecurityForm,
     CompanyProfileForm,
@@ -77,19 +78,12 @@ class CompleteAccountView(APIView):
         if hasattr(user, "person"):
             return Response(status=status.HTTP_200_OK)
         params = json.loads(request.body)
-        form = AccountCompleteForm(params)
+        if "office_address" in params:
+            form = AccountCompleteForm(params)
+        else:
+            form = AccountCompanyForm(params)
         if form.is_valid():
             data = form.data
-            office_address = geocode(data["office_address"])
-            address = Address.objects.get_or_create(
-                formatted_address=office_address.formatted_address,
-                street_address_1=office_address.street_address,
-                city=office_address.city,
-                state=office_address.state,
-                zip_code=office_address.zip5,
-                country=office_address.country,
-                geocode_json=office_address.geocode_json,
-            )[0]
             try:
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
@@ -98,13 +92,25 @@ class CompleteAccountView(APIView):
                 setattr(business, BUSINESS_TYPE[role], True)
             business.save()
 
-            office = Office(
-                office_type=data["office_type"],
-                name=data["office_name"],
-                address=address,
-                business=business,
-            )
-            office.save()
+            office = None
+            if "office_address" in data:
+                office_address = geocode(data["office_address"])
+                address = Address.objects.get_or_create(
+                    formatted_address=office_address.formatted_address,
+                    street_address_1=office_address.street_address,
+                    city=office_address.city,
+                    state=office_address.state,
+                    zip_code=office_address.zip5,
+                    country=office_address.country,
+                    geocode_json=office_address.geocode_json,
+                )[0]
+                office = Office(
+                    office_type=data["office_type"],
+                    name=data["office_name"],
+                    address=address,
+                    business=business,
+                )
+                office.save()
             person = Person(
                 first_name=data["first_name"],
                 last_name=data["last_name"],

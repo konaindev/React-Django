@@ -79,6 +79,7 @@ export const createPassword = {
 
 export const completeAccount = {
   fetch: () => ({ type: "API_COMPLETE_ACCOUNT" }),
+  post: (data, onError) => ({ type: "API_COMPLETE_ACCOUNT", data, onError }),
   redirect: url => ({
     type: "COMPLETE_ACCOUNT_REDIRECT",
     url
