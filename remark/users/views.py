@@ -77,6 +77,7 @@ class CompleteAccountView(APIView):
         user = request.user
         if hasattr(user, "person"):
             return Response(status=status.HTTP_200_OK)
+
         params = json.loads(request.body)
         if "office_address" in params:
             form = AccountCompleteForm(params)
@@ -92,7 +93,6 @@ class CompleteAccountView(APIView):
                 setattr(business, BUSINESS_TYPE[role], True)
             business.save()
 
-            office = None
             if "office_address" in data:
                 office_address = geocode(data["office_address"])
                 address = Address.objects.get_or_create(
@@ -104,13 +104,20 @@ class CompleteAccountView(APIView):
                     country=office_address.country,
                     geocode_json=office_address.geocode_json,
                 )[0]
-                office = Office(
+                office = Office.objects.get_or_create(
                     office_type=data["office_type"],
                     name=data["office_name"],
                     address=address,
                     business=business,
                 )
-                office.save()
+            else:
+                offices = list(business.office_set.all())
+                if offices:
+                    office = offices[0]
+                else:
+                    office = Office(business=business)
+            office.save()
+
             person = Person(
                 first_name=data["first_name"],
                 last_name=data["last_name"],
