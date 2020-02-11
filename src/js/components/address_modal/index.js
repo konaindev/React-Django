@@ -78,6 +78,7 @@ class AddressModal extends React.PureComponent {
     const { title, isOpen, theme } = this.props;
     const address = _get(this.props, "addresses.suggested_address");
     const modalClass = cx("address-modal", `address-modal--theme-${theme}`);
+    const backBtnClasses = `address-modal__back-btn address-modal__back-btn--${theme}`;
     //
     // @TODO: if we want to support dark/light themes in all modals,
     //           prop names should be changed a bit
@@ -100,7 +101,12 @@ class AddressModal extends React.PureComponent {
             <p>{address?.office_country}</p>
           </div>
           <div className="address-modal__footer">
-            <Button color="secondary" uppercase onClick={this.closeModal}>
+            <Button
+              className={backBtnClasses}
+              color="secondary"
+              uppercase
+              onClick={this.closeModal}
+            >
               Go Back
             </Button>
             <Button color="primary" uppercase onClick={this.onSubmit}>

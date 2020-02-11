@@ -10,6 +10,7 @@ $gray-theme-border-color: $gray-4;
 $light-theme-background: $white;
 $light-theme-text-color: $gray-3;
 $light-theme-border-color: $gray-10;
+$light-button-border: 1px solid #ccd0d6;
 
 .address-modal.modal-window {
     width: $modal-width;
@@ -86,6 +87,20 @@ $light-theme-border-color: $gray-10;
         }
         .button--outline {
             color: $light-theme-text-color;
+        }
+    }
+}
+
+.address-modal__back-btn {
+    &--highlight {
+        color: $gray-9;
+        background-color: #fff;
+        border: $light-button-border;
+        &:hover, &:focus {
+            background-color: darken(#fff, 3%);
+        }
+        &:active {
+            background-color: darken(#fff, 6%);
         }
     }
 }
