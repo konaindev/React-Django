@@ -70,10 +70,8 @@ def create_periods(
     return target_period, period
 
 
-def generate_weekly_periods(count, project, end):
-    usvs = 460
+def generate_weekly_periods(count, project, end, period_data=lambda i: {}):
     for i in range(count):
         start = end - datetime.timedelta(weeks=1)
-        create_periods(project, start=start, end=end, period_params={"usvs": usvs})
+        create_periods(project, start=start, end=end, period_params=period_data(i))
         end = start
-        usvs -= 10

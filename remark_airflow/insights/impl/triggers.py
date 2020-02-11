@@ -66,3 +66,7 @@ def trigger_kpi_not_mitigated(
 
 def trigger_kpi_trend_change_health(predicting_health):
     return predicting_health is not None
+
+
+def trigger_usvs_on_track(weeks):
+    return weeks != 0
