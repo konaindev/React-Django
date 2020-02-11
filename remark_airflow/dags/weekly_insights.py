@@ -21,6 +21,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
     from remark.lib.time_series.query import select
     from remark.projects.models import Project, Period
     from remark.insights.models import WeeklyInsights, Insight
+    from remark.projects.signals import update_performance_report
     from remark_airflow.insights.impl.projects.projects import (
         get_project_facts,
         get_project_insights,
@@ -92,7 +93,6 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
                 projects_with_data.append(project)
 
         logging.info(f"REMARK_METRIC::PROJECTS WITH DATA COUNT {len(projects_with_data)}")
-
         return projects_with_data
 
 
@@ -114,16 +114,29 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
             weekly_ins.save()
             logging.info(f"REMARK_METRIC::WEEKLY INSIGHT OVERWRITTEN for PROJECT {project_id}")
         except WeeklyInsights.DoesNotExist:
-            WeeklyInsights.objects.create(
-                project_id=project_id,
-                start=start,
-                end=end,
-                facts=project_facts,
-                insights=insights,
-            )
-            logging.info(f"REMARK_METRIC::NEW WEEKLY INSIGHT CREATED for PROJECT {project_id}")
+            try:
+                weekly_ins = WeeklyInsights.objects.create(
+                    project_id=project_id,
+                    start=start,
+                    end=end,
+                    facts=project_facts,
+                    insights=insights,
+                )
+                logging.info(f"REMARK_METRIC::NEW WEEKLY INSIGHT CREATED for PROJECT {project_id}")
+            except:
+                logging.error("UNABLE TO FOLLOW THROUGH ON CREATION")
 
-        return insights
+        serialized_weekly_ins = serialize('json', [weekly_ins,])
+        response = json.loads(serialized_weekly_ins)
+
+        return response[0]
+
+
+    def create_performance_email(task_id, **context):
+        weekly_insight = context['task_instance'].xcom_pull(task_ids=task_id)
+        response = update_performance_report(weekly_insight["pk"])
+        return response
+
 
     start_weekly_insights = DummyOperator(task_id="start_weekly_insights_task", dag=dag)
     get_current_insights = PythonOperator(task_id="get_current_insights_task", python_callable=get_list_of_current_insights, dag=dag)
@@ -134,7 +147,8 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
     get_current_insights >> verify_project_insights >> get_projects >> start_weekly_insights
 
     for project in get_projects_for_today():
-        process_weekly_insight = PythonOperator(task_id="weekly_insights_" + project['pk'], python_callable=weekly_insights, provide_context=True, op_kwargs={'project_id': project['pk']}, dag=dag)
-        start_weekly_insights >> process_weekly_insight >> complete_weekly_insights
+        process_weekly_insight = PythonOperator(task_id="weekly_insights_" + project['pk'], python_callable=weekly_insights, provide_context=True, op_kwargs={'project_id': project['pk']}, execution_timeout=timedelta(minutes=1), dag=dag)
+        create_perf_email = PythonOperator(task_id="create_email_" + project['pk'], python_callable=create_performance_email, provide_context=True, op_kwargs={'task_id': "weekly_insights_" + project['pk']}, dag=dag)
+        start_weekly_insights >> process_weekly_insight >> create_perf_email >> complete_weekly_insights
 
     complete_weekly_insights

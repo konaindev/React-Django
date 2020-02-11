@@ -15,6 +15,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_have_benchmark_kpi,
     trigger_kpi_not_mitigated,
     trigger_kpi_trend_change_health,
+    trigger_usvs_on_track,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -324,9 +325,10 @@ kpi_off_track_not_mitigated = Insight(
         ),
         cop(
             var_kpi_health_weeks,
-            "var_kpi_off_track_not_mitigated",
             "project",
             "start",
+            "end",
+            "var_kpi_off_track_not_mitigated",
             name="var_kpi_off_track_not_mitigated_weeks",
             params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
         ),
@@ -358,9 +360,10 @@ kpi_at_risk_not_mitigated = Insight(
         ),
         cop(
             var_kpi_health_weeks,
-            "var_kpi_at_risk_not_mitigated",
             "project",
             "start",
+            "end",
+            "var_kpi_at_risk_not_mitigated",
             name="var_kpi_at_risk_not_mitigated_weeks",
             params={"health_target": HEALTH_STATUS["AT_RISK"]},
         ),
@@ -395,5 +398,25 @@ kpi_trend_change_health = Insight(
         cop(var_predicting_change_health, var_kpis_trends, var_kpis_healths_statuses),
         cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
         cop(trigger_kpi_trend_change_health, var_predicted_kpi),
+    ],
+)
+
+
+usvs_on_track = Insight(
+    name="usvs_on_track",
+    template="{{ 'usvs' | kpi_humanize }} has been On Track for {{ var_usvs_on_track_weeks }} week(s).",
+    triggers=["trigger_usvs_on_track"],
+    graph=[
+        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_targets, "project", "start", "end"),
+        cop(
+            var_kpi_health_weeks,
+            "project",
+            "start",
+            "end",
+            name="var_usvs_on_track_weeks",
+            params={"health_target": HEALTH_STATUS["ON_TRACK"], "kpi_name": "usvs"},
+        ),
+        cop(trigger_usvs_on_track, "var_usvs_on_track_weeks"),
     ],
 )

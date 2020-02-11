@@ -26,6 +26,7 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_off_track_not_mitigated,
     kpi_at_risk_not_mitigated,
     kpi_trend_change_health,
+    usvs_on_track,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -266,7 +267,9 @@ class RetentionRateInsightTestCase(TestCase):
             expected["trigger_retention_rate_health"],
         )
         result = retention_rate_health.evaluate(project_facts)
-        expected_text = "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
+        expected_text = (
+            "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
+        )
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
 
@@ -1030,7 +1033,9 @@ class KPITrendChangeHealthTestCase(TestCase):
         self.args = {"start": self.start, "end": self.end, "project": self.project}
 
     def test_triggered(self):
-        generate_weekly_periods(8, self.project, self.end)
+        generate_weekly_periods(
+            8, self.project, self.end, lambda i: {"usvs": 460 - i * 10}
+        )
 
         project_facts = kpi_trend_change_health.graph(self.args)
 
@@ -1059,4 +1064,48 @@ class KPITrendChangeHealthTestCase(TestCase):
         project_facts = kpi_trend_change_health.graph(self.args)
         self.assertFalse(project_facts["trigger_kpi_trend_change_health"])
         result = kpi_trend_change_health.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class USVsOnTrackTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_triggered(self):
+        generate_weekly_periods(3, self.project, self.end, lambda i: {"usvs": 480})
+        project_facts = usvs_on_track.graph(self.args)
+        self.assertTrue(project_facts["trigger_usvs_on_track"])
+
+        result = usvs_on_track.evaluate(project_facts)
+        expected_text = "Volume of USV has been On Track for 3 week(s)."
+        self.assertEqual(result[0], "usvs_on_track")
+        self.assertEqual(result[1], expected_text)
+
+    def test_usvs_not_on_track(self):
+        generate_weekly_periods(3, self.project, self.start, lambda i: {"usvs": 480})
+        create_periods(self.project, self.start, self.end)
+
+        project_facts = usvs_on_track.graph(self.args)
+        self.assertFalse(project_facts["trigger_usvs_on_track"])
+
+        result = usvs_on_track.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        project_facts = usvs_on_track.graph(self.args)
+        self.assertFalse(project_facts["trigger_usvs_on_track"])
+
+        result = usvs_on_track.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_not_triggered(self):
+        create_periods(self.project, self.start, self.end)
+
+        project_facts = usvs_on_track.graph(self.args)
+        self.assertFalse(project_facts["trigger_usvs_on_track"])
+
+        result = usvs_on_track.evaluate(project_facts)
         self.assertIsNone(result)

@@ -51,9 +51,10 @@ graph_kpi_off_track_mitigated = compose(name="kpi_off_track_mitigated", merge=Tr
     ),
     cop(
         var_kpi_health_weeks,
-        "kpi_off_track_a",
         "project",
         "start",
+        "end",
+        "kpi_off_track_a",
         name="var_kpi_off_track_weeks",
         params={"health_target": HEALTH_STATUS["OFF_TRACK"]},
     ),
@@ -100,9 +101,10 @@ graph_kpi_at_risk_mitigated = compose(name="kpi_at_risk_mitigated", merge=True)(
     ),
     cop(
         var_kpi_health_weeks,
-        "kpi_at_risk_a",
         "project",
         "start",
+        "end",
+        "kpi_at_risk_a",
         name="var_kpi_at_risk_weeks",
         params={"health_target": HEALTH_STATUS["AT_RISK"]},
     ),

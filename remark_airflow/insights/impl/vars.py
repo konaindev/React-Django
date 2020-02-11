@@ -122,7 +122,7 @@ def var_kpi_usv_exe_healths(project, weeks, end):
         "INQ>TOU": health_standard(
             computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
         ),
-        "TOU": health_standard(computed_kpis["tous"], target_computed_kpis["tous"]),
+        "TOU": health_standard(computed_kpis["tours"], target_computed_kpis["tours"]),
         "TOU>APP": health_standard(
             computed_kpis["tou_app"], target_computed_kpis["tou_app"]
         ),
@@ -455,11 +455,13 @@ def var_kpi_without_mitigated(
     return min(kpis, key=lambda kpi: kpi["health"])["kpi_name"]
 
 
-def var_kpi_health_weeks(kpi_name, project, start, health_target):
+def var_kpi_health_weeks(project, start, end, kpi_name, health_target):
     weeks = 0
     if kpi_name is None:
         return weeks
-    is_off = health_target != -1
+    args = {"start": start, "end": end, "project": project, "kpi_name": kpi_name}
+    health = kpi_healths_graph(args)["var_kpi_health"]
+    is_off = health == health_target and health_target != -1
     while is_off:
         weeks += 1
         end = start
