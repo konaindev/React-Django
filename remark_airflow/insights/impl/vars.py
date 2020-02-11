@@ -122,7 +122,7 @@ def var_kpi_usv_exe_healths(project, weeks, end):
         "INQ>TOU": health_standard(
             computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
         ),
-        "TOU": health_standard(computed_kpis["tous"], target_computed_kpis["tous"]),
+        "TOU": health_standard(computed_kpis["tours"], target_computed_kpis["tours"]),
         "TOU>APP": health_standard(
             computed_kpis["tou_app"], target_computed_kpis["tou_app"]
         ),
