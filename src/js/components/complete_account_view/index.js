@@ -273,7 +273,6 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   onChangeCompany = company => {
-    this.formik.current.setFieldValue("company", company);
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
       data: { address: "", business_id: company.value }
