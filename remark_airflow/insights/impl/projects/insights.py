@@ -122,7 +122,7 @@ change_health_status = Insight(
 usv_exe_off_track = Insight(
     name="usv_exe_off_track",
     template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
-    " has been Off Track for {{ var_weeks_usv_exe_off_track }} Weeks and"
+    " has been Off Track for {{ var_weeks_usv_exe_off_track }} week(s) and"
     " your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
     triggers=["trigger_usv_exe_off_track"],
     graph=[
@@ -142,7 +142,7 @@ usv_exe_off_track = Insight(
 usv_exe_at_risk = Insight(
     name="usv_exe_at_risk",
     template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} of Weeks"
+    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} of week(s"
     " your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
     triggers=["trigger_usv_exe_at_risk"],
     graph=[
@@ -162,7 +162,7 @@ usv_exe_at_risk = Insight(
 usv_exe_on_track = Insight(
     name="usv_exe_on_track",
     template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been On Track for {{ var_weeks_usv_exe_on_track }} of Weeks"
+    " has been On Track for {{ var_weeks_usv_exe_on_track }} week(s)"
     " your {{ var_kpi_usv_exe_on_track }} has positively impacted it most.",
     triggers=["trigger_usv_exe_on_track"],
     graph=[
@@ -293,7 +293,7 @@ kpi_above_average = Insight(
 
 kpi_off_track_mitigated = Insight(
     name="kpi_off_track_mitigated",
-    template="While {{ kpi_off_track_a | kpi_humanize }} is Off Track for {{ var_kpi_off_track_weeks }} of Weeks, {{ kpi_off_track_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_off_track_c | kpi_humanize }}.",
+    template="While {{ kpi_off_track_a | kpi_humanize }} is Off Track for {{ var_kpi_off_track_weeks }} week(s), {{ kpi_off_track_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_off_track_c | kpi_humanize }}.",
     triggers=["trigger_kpi_off_track_mitigated"],
     graph=[graph_kpi_off_track_mitigated],
 )
@@ -301,7 +301,7 @@ kpi_off_track_mitigated = Insight(
 
 kpi_at_risk_mitigated = Insight(
     name="kpi_at_risk_mitigated",
-    template="While {{ kpi_at_risk_a | kpi_humanize }} is At Risk for {{ var_kpi_at_risk_weeks }} of Weeks, {{ kpi_at_risk_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_at_risk_c | kpi_humanize }}.",
+    template="While {{ kpi_at_risk_a | kpi_humanize }} is At Risk for {{ var_kpi_at_risk_weeks }} week(s), {{ kpi_at_risk_b | kpi_humanize }} is exceeding performance target, resulting in On Track {{ kpi_at_risk_c | kpi_humanize }}.",
     triggers=["trigger_kpi_at_risk_mitigated"],
     graph=[graph_kpi_at_risk_mitigated],
 )
@@ -309,7 +309,7 @@ kpi_at_risk_mitigated = Insight(
 
 kpi_off_track_not_mitigated = Insight(
     name="kpi_off_track_not_mitigated",
-    template="{{ var_kpi_off_track_not_mitigated | kpi_humanize }} has been Off Track for {{ var_kpi_off_track_not_mitigated_weeks }} weeks.",
+    template="{{ var_kpi_off_track_not_mitigated | kpi_humanize }} has been Off Track for {{ var_kpi_off_track_not_mitigated_weeks }} week(s).",
     triggers=["trigger_kpi_off_track_not_mitigated"],
     graph=[
         graph_kpi_off_track_mitigated,
@@ -343,7 +343,7 @@ kpi_off_track_not_mitigated = Insight(
 
 kpi_at_risk_not_mitigated = Insight(
     name="kpi_at_risk_not_mitigated",
-    template="{{ var_kpi_at_risk_not_mitigated | kpi_humanize }} has been At Risk for {{ var_kpi_at_risk_not_mitigated_weeks }} weeks.",
+    template="{{ var_kpi_at_risk_not_mitigated | kpi_humanize }} has been At Risk for {{ var_kpi_at_risk_not_mitigated_weeks }} week(s).",
     triggers=["trigger_kpi_at_risk_not_mitigated"],
     graph=[
         graph_kpi_off_track_mitigated,
@@ -377,7 +377,7 @@ kpi_at_risk_not_mitigated = Insight(
 kpi_trend_change_health = Insight(
     name="kpi_trend_change_health",
     template="{{ var_predicted_kpi['name'] | kpi_humanize }} has been trending {{ var_predicted_kpi['trend'] }}"
-    " for {{ var_predicted_kpi['weeks'] }} of weeks;"
+    " for {{ var_predicted_kpi['weeks'] }} week(s);"
     " if it continues for {{ var_predicted_kpi['predicted_weeks'] }} weeks,"
     " performance health is expected to change to {{ var_predicted_kpi['predicted_health'] | health_status_to_str }}.",
     triggers=["trigger_kpi_trend_change_health"],
