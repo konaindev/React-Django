@@ -247,7 +247,7 @@ export class CompleteAccountView extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  onSubmit = (values, actions) => {
+  onSubmit = values => {
     const data = { ...values };
     data.company = values.company.value;
     data.company_roles = values.company_roles.map(type => type.value);
