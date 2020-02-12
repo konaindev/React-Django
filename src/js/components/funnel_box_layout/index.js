@@ -40,29 +40,31 @@ export class FunnelBaseBox extends Component {
     } = this.props;
     return (
       <div className="funnel-box-layout">
-        <div className="funnel-box-layout__left">
-          <div className="funnel-box-layout__name">
-            {name}
-            <InfoTooltip transKey={infoTooltip} />
+        <div className=".funnel-box-layout__wrapper">
+          <div className="funnel-box-layout__left">
+            <div className="funnel-box-layout__name">
+              {name}
+              <InfoTooltip transKey={infoTooltip} />
+            </div>
+            {target != null && (
+              <div className="funnel-box-layout__target">
+                {targetFormatter(target)}
+              </div>
+            )}
           </div>
-          {target != null && (
-            <div className="funnel-box-layout__target">
-              {targetFormatter(target)}
-            </div>
-          )}
-        </div>
-        <div className="funnel-box-layout__right">
-          <div className="funnel-box-layout__value">{formatter(value)}</div>
-          {delta != null && (
-            <div className="funnel-box-layout__delta">
-              <DeltaIndicator
-                delta={delta}
-                direction={getDeltaDirection(delta)}
-                indicatorPos="right"
-                formatter={deltaFormatter}
-              />
-            </div>
-          )}
+          <div className="funnel-box-layout__right">
+            <div className="funnel-box-layout__value">{formatter(value)}</div>
+            {delta != null && (
+              <div className="funnel-box-layout__delta">
+                <DeltaIndicator
+                  delta={delta}
+                  direction={getDeltaDirection(delta)}
+                  indicatorPos="right"
+                  formatter={deltaFormatter}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

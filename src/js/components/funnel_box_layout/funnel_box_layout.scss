@@ -7,7 +7,14 @@
     align-items: center;
     padding: $s5 $s8;
     border-bottom: 1px solid $table-border-color;
-
+    &:hover {
+        z-index: 999; // hovered item is always moved to the top of the stack
+        transform: translateY(-23px);// scaleY(1.5333);
+        transform-origin: 0 50% 0;
+        background-color: inherit;
+        border-color: blue;
+        border-width: 1px;
+    }
     &:first-child {
         border-top: 1px solid $table-border-color;
     }
@@ -55,4 +62,12 @@
         text-align: right;
         width: 70px;
     }
+}
+
+.funnel-box-layout__wrapper {
+    flex: 1;
+    width: 100%;
+    flex-direction: row;
+    bottom: 0;
+    position: absolute;
 }
