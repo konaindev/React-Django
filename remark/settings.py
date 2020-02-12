@@ -46,6 +46,7 @@ ENV = os.getenv("ENVIRONMENT", DEV)
 DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
 LOCAL_AIRFLOW = os.getenv("LOCAL_AIRFLOW", False)
 TESTING = sys.argv[1:2] == ['test']
+GCLOUD_SERVICE_KEY = os.getenv('GCLOUD_SERVICE_KEY', '{}')
 PATH_REF = "."
 if os.getenv("COMPOSER_AIRFLOW_ENV", False):
     PATH_REF = "/home/airflow/gcs/dags"
