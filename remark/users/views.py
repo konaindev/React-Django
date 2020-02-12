@@ -224,34 +224,29 @@ class ChangePasswordView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-
 class ResetPasswordView(APIView):
     """
     Send password reset email
     Reset urls are defined in "remark/users/templates/users/emails/password_reset_email.<html|txt>"
     @param email
     """
-    authentication_classes = []
-    permission_classes = [AllowAny]
 
     def post(self, request):
         if not request.user.is_anonymous:
             raise exceptions.APIException
-    
-        opts = {
-            "email_template_name": "users/emails/password_reset_email.txt",
-            "subject_template_name": "users/emails/password_reset_subject.txt",
-            "html_email_template_name": "users/emails/password_reset_email.html",
-            "domain_override": "Remarkably",
-            "extra_email_context": {
+
+        opts = dict(
+            email_template_name="users/emails/password_reset_email.txt",
+            subject_template_name="users/emails/password_reset_subject.txt",
+            html_email_template_name="users/emails/password_reset_email.html",
+            domain_override="Remarkably",
+            extra_email_context={
                 "BASE_URL": FRONTEND_URL,
                 "title": "Password reset",
                 "subject": "Set your Remarkably password",
-            }
-        }
-        email = request.data['email']
-        params = { "email": email }
+            },
+        )
+        params = json.loads(request.body)
         form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
             form.save(**opts)
@@ -274,7 +269,8 @@ class ResetPasswordConfirmView(APIView):
         if not request.user.is_anonymous:
             raise exceptions.APIException        
 
-        params = request.data
+        params = json.loads(request.body)
+        
         user = self.get_user(params["uid"])
         if user is None:
             raise exceptions.APIException
