@@ -2,6 +2,7 @@ import _isObject from "lodash/isObject";
 
 import {
   createPassword,
+  createResendEmail,
   completeAccount,
   uiStrings,
   accountSettings,
@@ -110,14 +111,31 @@ export const fetchCreatePassword = store => next => action => {
   }
 };
 
-export const fetchResetPassword = store => next => action => {
-  if (action.type === "API_RESET_PASSWORD") {
-    const url = createAPIUrl(`/users/reset-password-confirm/`);
-    console.log("--------action.data", action.data);
+export const sendPasswordResetEmail = store => next => action => {
+  if (action.type === "SEND_PASSWORD_RESET_EMAIL") {
+    const url = createAPIUrl(`/users/reset-password/`);
+    console.log(action.data);
     if (action.data) {
       axiosPost(url, action.data)
         .then(response => {
-          if (response.status === 200) {
+          const resendEmail = action.data;
+          const redirect_url = createFEUrl("/users/password-resend");
+          next(createResendEmail.set({ resendEmail, redirect_url }));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchResetPassword = store => next => action => {
+  if (action.type === "API_RESET_PASSWORD") {
+    const url = createAPIUrl(`/users/reset-password-confirm/`);
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 204) {
             console.log("password has been reset");
           } else {
             throw response;

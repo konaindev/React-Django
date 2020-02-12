@@ -7,6 +7,7 @@ import reducers from "./reducers";
 import {
   fetchCreatePassword,
   fetchResetPassword,
+  sendPasswordResetEmail,
   fetchPasswordRules,
   fetchCompany,
   fetchCompleteAccount,
@@ -29,7 +30,7 @@ import rootSaga from "./sagas";
 const cfg = {
   key: "rmb",
   storage,
-  whitelist: ["token", "nav", "uiStrings"] // NOTE: this is where we elect what to persist
+  whitelist: ["token", "nav", "uiStrings", "resendEmail"] // NOTE: this is where we elect what to persist
 };
 
 // TODO: contextually enable devtools based on prod or not
@@ -47,6 +48,7 @@ export default () => {
         segmentMiddleware,
         fetchCreatePassword,
         fetchResetPassword,
+        sendPasswordResetEmail,
         fetchCompany,
         fetchCompleteAccount,
         sendGaEvent,

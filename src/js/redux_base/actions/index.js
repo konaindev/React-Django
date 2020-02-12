@@ -137,6 +137,14 @@ export const auth = {
   })
 };
 
+export const createResendEmail = {
+  set: ({ resendEmail, redirect_url }) => ({
+    type: "SEND_EMAIL_SET_STATE",
+    newState: resendEmail,
+    url: redirect_url
+  })
+};
+
 export const nav = {
   updateLinks: navLinks => ({
     type: "UPDATE_NAVLINKS",

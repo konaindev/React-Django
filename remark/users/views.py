@@ -274,8 +274,7 @@ class ResetPasswordConfirmView(APIView):
         if not request.user.is_anonymous:
             raise exceptions.APIException        
 
-        params = json.loads(request.body)
-
+        params = request.data
         user = self.get_user(params["uid"])
         if user is None:
             raise exceptions.APIException
