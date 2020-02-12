@@ -134,7 +134,12 @@ export class CompleteAccountView extends React.PureComponent {
     company_roles: MultiSelect.optionsType.isRequired,
     office_address: PropTypes.string,
     office_countries: Select.optionsType,
-    is_completed: PropTypes.bool
+    is_completed: PropTypes.bool,
+    dispatch: PropTypes.func
+  };
+
+  static defaultProps = {
+    dispatch() {}
   };
 
   constructor(props) {

@@ -6,7 +6,7 @@ exports[`AddressModal renders AddressModal correctly 1`] = `
   classNames={
     Object {
       "closeButton": "modal-window__close",
-      "modal": "modal-window modal-window--small address-modal address-modal--theme-dark",
+      "modal": "modal-window modal-window--small address-modal address-modal--theme-gray",
       "overlay": "modal-overlay",
     }
   }
@@ -48,7 +48,7 @@ exports[`AddressModal renders AddressModal correctly 1`] = `
       className="address-modal__footer"
     >
       <button
-        className="button button--uppercase button--secondary"
+        className="button button--uppercase button--secondary address-modal__back-btn address-modal__back-btn--gray"
         onClick={[Function]}
       >
         Go Back
