@@ -309,9 +309,9 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
-      - run:
-          name: Check SSL Cert expiry, update if needed
-          command: bash check-cert.sh
+      #- run:
+      #    name: Check SSL Cert expiry, update if needed
+      #    command: bash check-cert.sh
 
   deploy-production:
     docker:
