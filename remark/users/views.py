@@ -83,15 +83,16 @@ class CompleteAccountView(APIView):
             form = AccountCompleteForm(params)
         else:
             form = AccountCompanyForm(params)
+
         if form.is_valid():
             data = form.data
             try:
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-            for role in data["company_roles"]:
-                setattr(business, BUSINESS_TYPE[role], True)
-            business.save()
+                for role in data["company_roles"]:
+                    setattr(business, BUSINESS_TYPE[role], True)
+                business.save()
 
             if "office_address" in data:
                 office_address = geocode(data["office_address"])
@@ -100,11 +101,12 @@ class CompleteAccountView(APIView):
                     street_address_1=office_address.street_address,
                     city=office_address.city,
                     state=office_address.state,
+                    full_state=office_address.full_state,
                     zip_code=office_address.zip5,
                     country=office_address.country,
                     geocode_json=office_address.geocode_json,
                 )[0]
-                office = Office.objects.get_or_create(
+                office = Office(
                     office_type=data["office_type"],
                     name=data["office_name"],
                     address=address,
@@ -113,7 +115,13 @@ class CompleteAccountView(APIView):
             else:
                 offices = list(business.office_set.all())
                 if offices:
-                    office = offices[0]
+                    office_source = offices[0]
+                    office = Office(
+                        office_type=office_source.office_type,
+                        name=office_source.name,
+                        address=office_source.address,
+                        business=business,
+                    )
                 else:
                     office = Office(business=business)
             office.save()
@@ -399,11 +407,18 @@ class CompanyProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def make_office(self, person, business):
-        office = Office(business=business)
         offices = list(business.office_set.all())
         # Get the first office in the business
         if len(offices):
-            office = offices[0]
+            office_source = offices[0]
+            office = Office(
+                office_type=office_source.office_type,
+                name=office_source.name,
+                address=office_source.address,
+                business=business,
+            )
+        else:
+            office = Office(business=business)
         person.office = office
         office.save()
         person.save()
@@ -416,7 +431,7 @@ class CompanyProfileView(APIView):
         data = form.cleaned_data
 
         try:
-            business = Business.objects.get(name=data["company"])
+            business = Business.objects.get(public_id=data["company"])
         except Business.DoesNotExist:
             business = Business(name=data["company"])
             for role in data["company_roles"]:
@@ -442,20 +457,12 @@ class CompanyProfileView(APIView):
 class OfficeProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def make_office(self, person, address):
-        office = Office(address=address)
-        # Get the first by given address
-        offices = list(address.office_set.all())
-        if len(offices):
-            office = offices[0]
-        person.office = office
-        return office
-
     def post(self, request):
         params = json.loads(request.body)
         form = OfficeProfileForm(params)
         if not form.is_valid():
             return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         data = form.cleaned_data
         user = request.user
         office_address = geocode(data["office_address"])
@@ -474,15 +481,17 @@ class OfficeProfileView(APIView):
             person = user.person
             office = person.office
             if not office:
-                office = self.make_office(person, address)
+                office = Office()
         except Person.DoesNotExist:
             person = Person(user=user, email=user.email)
-            office = self.make_office(person, address)
+            office = Office()
 
         office.address = address
         office.name = data["office_name"]
         office.office_type = data["office_type"]
         office.save()
+
+        person.office = office
         person.save()
 
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)

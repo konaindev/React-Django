@@ -7,7 +7,7 @@ import renderWrapper from "../shared/base_container";
 class SettingsCompanyModalContainer extends React.PureComponent {
   onSave = (onSuccess, onError) => values => {
     const data = {
-      company: values.company.label,
+      company: values.company.value,
       company_roles: values.company_roles.map(i => i.value)
     };
     this.props.dispatch({

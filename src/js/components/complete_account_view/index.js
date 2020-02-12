@@ -247,36 +247,6 @@ export class CompleteAccountView extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  onSubmit = values => {
-    const data = { ...values };
-    data.company = values.company.value;
-    data.company_roles = values.company_roles.map(type => type.value);
-    const office = this.getOfficeValues();
-    if (isTrueValues(office)) {
-      data.office_type = values.office_type.value;
-      data.office_state = values.office_state.value;
-      validateAddress(office).then(response => {
-        if (response.data.error) {
-          this.setState({ invalid_address: true });
-          this.formik.current.setErrors({
-            office_street: "see below",
-            office_city: "*",
-            office_state: "*",
-            office_zip: "*"
-          });
-        } else {
-          this.setState({
-            addresses: response.data,
-            invalid_address: false
-          });
-          this.props.dispatch(addressModal.open(data, response.data));
-        }
-      });
-    } else {
-      this.props.dispatch(completeAccount.post(data, this.setErrorMessages));
-    }
-  };
-
   onChangeCompany = company => {
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
@@ -356,6 +326,36 @@ export class CompleteAccountView extends React.PureComponent {
     const data = { ...this.formik.current.state.values, ...values };
     this.formik.current.setValues(data);
     this.onCloseOfficeModal();
+  };
+
+  onSubmit = values => {
+    const data = { ...values };
+    data.company = values.company.value;
+    data.company_roles = values.company_roles.map(type => type.value);
+    const office = this.getOfficeValues();
+    if (isTrueValues(office)) {
+      data.office_type = values.office_type.value;
+      data.office_state = values.office_state.value;
+      validateAddress(office).then(response => {
+        if (response.data.error) {
+          this.setState({ invalid_address: true });
+          this.formik.current.setErrors({
+            office_street: "see below",
+            office_city: "*",
+            office_state: "*",
+            office_zip: "*"
+          });
+        } else {
+          this.setState({
+            addresses: response.data,
+            invalid_address: false
+          });
+          this.props.dispatch(addressModal.open(data, response.data));
+        }
+      });
+    } else {
+      this.props.dispatch(completeAccount.post(data, this.setErrorMessages));
+    }
   };
 
   render() {

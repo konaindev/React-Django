@@ -199,7 +199,7 @@ export default class Profile extends React.PureComponent {
   onChangeCompany = company => {
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
-      data: { address: "", business_id: company.label }
+      data: { address: "", business_id: company.value }
     });
   };
 
@@ -285,16 +285,6 @@ export default class Profile extends React.PureComponent {
   showCompanyMessage = () => this.showSuccessMessage(this.state.companyMessage);
 
   showOfficeMessage = () => this.showSuccessMessage(this.state.officeMessage);
-
-  updateValues = values => {
-    this.formik.setFieldValue("office_street", values.office_street);
-    this.formik.setFieldValue("office_city", values.office_city);
-    this.formik.setFieldValue("office_state", {
-      label: values.full_state,
-      value: values.full_state
-    });
-    this.formik.setFieldValue("office_zip", values.office_zip);
-  };
 
   setErrorMessages = errors => {
     this.formik.setSubmitting(false);
