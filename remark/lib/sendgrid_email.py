@@ -28,6 +28,7 @@ def process_response(response, msg, ignore_response=False):
     try:
         result = json.loads(response.body)
     except:
+        print(f"This sendgrid response was of a non-json type `{response}`")
         raise Exception(f"Invalid JSON Response: `{response.body}`")
     return result
 
