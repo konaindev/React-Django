@@ -34,8 +34,10 @@ const CompanyInfoEmpty = ({ onOpenCompanyModal, showErrorMessage }) => (
     <Button
       className="complete-account__edit-button"
       color="secondary-gray"
-      onClick={onOpenCompanyModal}
       asDiv={true}
+      onClick={onOpenCompanyModal}
+      onKeyPress={onOpenCompanyModal}
+      tabIndex="0"
     >
       Enter Company info
     </Button>
@@ -52,6 +54,8 @@ const CompanyInfo = ({ data, onOpenCompanyModal, showErrorMessage }) => (
         color="secondary-gray"
         asDiv={true}
         onClick={onOpenCompanyModal}
+        onKeyPress={onOpenCompanyModal}
+        tabIndex="0"
       >
         Enter Company info
       </Button>
@@ -77,6 +81,8 @@ const OfficeInfoEmpty = ({ onOpenOfficeModal }) => (
       color="secondary-gray"
       asDiv={true}
       onClick={onOpenOfficeModal}
+      onKeyPress={onOpenOfficeModal}
+      tabIndex="0"
     >
       Enter Office info
     </Button>
@@ -92,6 +98,8 @@ const OfficeInfo = ({ onOpenOfficeModal, data }) => (
         color="secondary-gray"
         asDiv={true}
         onClick={onOpenOfficeModal}
+        onKeyPress={onOpenOfficeModal}
+        tabIndex="0"
       >
         Edit Office Info
       </Button>
