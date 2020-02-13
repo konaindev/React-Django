@@ -26,26 +26,31 @@ import { isTrueValues } from "../../utils/misc";
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
 
-const CompanyInfoEmpty = ({ onOpenCompanyModal }) => (
+const CompanyInfoEmpty = ({ onOpenCompanyModal, showErrorMessage }) => (
   <div>
-    <div className="complete-account__section-label">Company Info</div>
+    <div className="complete-account__section-label">
+      Company Info {showErrorMessage()}
+    </div>
     <Button
       className="complete-account__edit-button"
       color="secondary-gray"
       onClick={onOpenCompanyModal}
+      asDiv={true}
     >
       Enter Company info
     </Button>
   </div>
 );
 
-const CompanyInfo = ({ onOpenCompanyModal, data }) => (
+const CompanyInfo = ({ data, onOpenCompanyModal, showErrorMessage }) => (
   <div>
     <div className="complete-account__section-label">
       Company Info
+      {showErrorMessage()}
       <Button
         className="complete-account__edit-button complete-account__edit-button--in-box"
         color="secondary-gray"
+        asDiv={true}
         onClick={onOpenCompanyModal}
       >
         Enter Company info
@@ -70,6 +75,7 @@ const OfficeInfoEmpty = ({ onOpenOfficeModal }) => (
     <Button
       className="complete-account__edit-button"
       color="secondary-gray"
+      asDiv={true}
       onClick={onOpenOfficeModal}
     >
       Enter Office info
@@ -84,6 +90,7 @@ const OfficeInfo = ({ onOpenOfficeModal, data }) => (
       <Button
         className="complete-account__edit-button complete-account__edit-button--in-box"
         color="secondary-gray"
+        asDiv={true}
         onClick={onOpenOfficeModal}
       >
         Edit Office Info
@@ -252,6 +259,16 @@ export class CompleteAccountView extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
+  showCompanyError = () => {
+    const state = this.formik.current?.state || { errors: {}, touched: {} };
+    const { errors, touched } = state;
+    if (errors.company && touched.company) {
+      return (
+        <div className="account-settings__general-error">is required.</div>
+      );
+    }
+  };
+
   onChangeCompany = company => {
     this.props.dispatch({
       type: "API_COMPANY_ADDRESS",
@@ -269,8 +286,7 @@ export class CompleteAccountView extends React.PureComponent {
     this.props.dispatch(addressModal.close);
   };
 
-  onOpenCompanyModal = e => {
-    e.preventDefault();
+  onOpenCompanyModal = () => {
     this.setState({ isCompanyOpen: true });
   };
 
@@ -278,8 +294,7 @@ export class CompleteAccountView extends React.PureComponent {
     this.setState({ isCompanyOpen: false });
   };
 
-  onOpenOfficeModal = e => {
-    e.preventDefault();
+  onOpenOfficeModal = () => {
     this.setState({ isOfficeOpen: true });
   };
 
@@ -478,10 +493,12 @@ export class CompleteAccountView extends React.PureComponent {
                   <CompanyInfo
                     data={company}
                     onOpenCompanyModal={this.onOpenCompanyModal}
+                    showErrorMessage={this.showCompanyError}
                   />
                 ) : (
                   <CompanyInfoEmpty
                     onOpenCompanyModal={this.onOpenCompanyModal}
+                    showErrorMessage={this.showCompanyError}
                   />
                 )}
                 {isTrueValues(office) ? (

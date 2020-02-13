@@ -11,6 +11,12 @@ $gray-button-line-height: 1.25rem;
     font-size: $text-sm;
     text-decoration: none;
 
+    &--div {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+
     &--block {
         width: 100%;
         display: block;
