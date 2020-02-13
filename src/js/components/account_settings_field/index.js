@@ -66,6 +66,7 @@ AccountSettingsField.propTypes = {
 AccountSettingsField.defaultProps = {
   name: "",
   label: "",
+  theme: "gray",
   errors: {},
   touched: {},
   modifiers: []
