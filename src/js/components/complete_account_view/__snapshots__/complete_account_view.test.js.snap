@@ -341,14 +341,16 @@ exports[`CompleteAccountView renders correctly 1`] = `
             <div
               className="complete-account__section-label"
             >
-              Company Info
+              Company Info 
             </div>
-            <button
-              className="button button--secondary-gray complete-account__edit-button"
+            <div
+              className="button button--div button--secondary-gray complete-account__edit-button"
               onClick={[Function]}
+              onKeyPress={[Function]}
+              tabIndex="0"
             >
               Enter Company info
-            </button>
+            </div>
           </div>
           <div>
             <div
@@ -356,12 +358,14 @@ exports[`CompleteAccountView renders correctly 1`] = `
             >
               Office Info
             </div>
-            <button
-              className="button button--secondary-gray complete-account__edit-button"
+            <div
+              className="button button--div button--secondary-gray complete-account__edit-button"
               onClick={[Function]}
+              onKeyPress={[Function]}
+              tabIndex="0"
             >
               Enter Office info
-            </button>
+            </div>
           </div>
           <div
             className="complete-account__terms"
