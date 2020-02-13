@@ -38,7 +38,9 @@ KPI_DATA = {
 
     KPI.average_monthly_rent: Decimal(1000.0),
     KPI.lowest_monthly_rent: Decimal(500.0),
-    KPI.highest_monthly_rent: Decimal(1200.0)
+    KPI.highest_monthly_rent: Decimal(1200.0),
+
+    KPI.total_units: 220,
 }
 
 
@@ -61,7 +63,7 @@ class ComputeTestCase(TestCase):
 
         self.assertEqual(g(KPI.delta_leases), 5)
         self.assertEqual(g(KPI.leased_units), 110)
-        self.assertEqual(g(KPI.leased_rate), 110.0/200.0)
+        self.assertEqual(g(KPI.leased_rate), 110.0/220.0)
         self.assertEqual(g(KPI.occupancy_rate), 101.0/200.0)
         self.assertEqual(g(KPI.usv_exe), 10.0 / 1000.0)
         self.assertEqual(g(KPI.app_cost), 1650.0 / 5.0)

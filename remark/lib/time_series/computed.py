@@ -92,7 +92,6 @@ def op(name, needs, fun):
 
 leased_rate_graph = compose(name="leased_rate_graph")(
     op(KPI.delta_leases, [KPI.leases_executed, KPI.leases_ended], sub),
-    op(KPI.occupiable_units, [KPI.occupiable_units_start], identity),
     op(
         KPI.leased_units,
         [KPI.leased_units_end, KPI.leased_units_start, KPI.delta_leases],
@@ -100,7 +99,7 @@ leased_rate_graph = compose(name="leased_rate_graph")(
     ),
     op(
         KPI.leased_rate,
-        [KPI.leased_units, KPI.occupiable_units],
+        [KPI.leased_units, KPI.total_units],
         trace_calc(KPI.leased_rate, div_or_0),
     ),
 )
@@ -115,7 +114,7 @@ kpi_graph = compose(name="kpi_graph")(
         KPI.leased_units_start,
         KPI.delta_leases
     ], leased_units_calc),
-    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], trace_calc(KPI.leased_rate, div_or_0)),
+    op(KPI.leased_rate, [KPI.leased_units, KPI.total_units], trace_calc(KPI.leased_rate, div_or_0)),
     op(KPI.resident_decisions, [KPI.lease_renewal_notices, KPI.lease_vacation_notices], sum_or_0),
     op(KPI.renewal_rate, [KPI.lease_renewal_notices, KPI.resident_decisions], div_or_0),
     op(KPI.lease_cd_rate, [KPI.lease_cds, KPI.lease_applications], div_or_0),

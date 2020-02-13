@@ -51,7 +51,7 @@ def var_campaign_health_status(leased_rate, target_leased_rate):
 
 def var_prev_health_status(project, start):
     prev_period = (
-        Period.objects.filter(project=project, end__lte=start).order_by("end").first()
+        Period.objects.filter(project=project, end__lte=start).order_by("-end").first()
     )
     if prev_period:
         prev_kpi = leased_rate_graph(prev_period.get_values())

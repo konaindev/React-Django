@@ -11,7 +11,7 @@ from graphkit import operation
 from remark.factories.analytics import create_google_provider
 from remark.factories.benchmarks import generate_benchmarks
 from remark.factories.periods import create_periods, generate_weekly_periods
-from remark.factories.projects import create_project
+from remark.factories.projects import create_project, create_project_property
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
 from remark_airflow.insights.impl.projects.insights import (
@@ -27,6 +27,7 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_at_risk_not_mitigated,
     kpi_trend_change_health,
     usvs_on_track,
+    change_health_status,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -115,6 +116,194 @@ class GetProjectInsightsTestCase(TestCase):
         result = get_project_insights(project_facts, self.project_insights)
         expected = {}
         self.assertEqual(result, expected)
+
+
+class ChangeHealthStatusTestCase(TestCase):
+    def setUp(self) -> None:
+        project_property = create_project_property(total_units=196)
+        self.project = create_project(
+            baseline_start=datetime.date(year=2019, month=8, day=1),
+            baseline_end=datetime.date(year=2019, month=10, day=14),
+            project_property=project_property,
+        )
+        start = datetime.date(year=2020, month=2, day=3)
+        end = datetime.date(year=2020, month=2, day=10)
+        self.args = {"start": start, "end": end, "project": self.project}
+
+    def test_not_triggered(self):
+        create_periods(
+            self.project,
+            start=datetime.date(year=2020, month=2, day=3),
+            end=datetime.date(year=2020, month=2, day=10),
+            period_params={
+                "lease_stage_id": 2,
+                "start": datetime.date(2020, 2, 3),
+                "end": datetime.date(2020, 2, 10),
+                "includes_remarkably_effect": True,
+                "leased_units_start": 188,
+                "leased_units_end": 191,
+                "leases_ended": 0,
+                "lease_applications": 3,
+                "leases_executed": 3,
+                "lease_cds": 0,
+                "lease_renewal_notices": 1,
+                "lease_renewals": 1,
+                "lease_vacation_notices": 0,
+                "occupiable_units_start": 252,
+                "occupied_units_start": 166,
+                "occupied_units_end": 167,
+                "move_ins": 1,
+                "move_outs": 0,
+                "acq_reputation_building": decimal.Decimal("0.00"),
+                "acq_demand_creation": decimal.Decimal("2075.55"),
+                "acq_leasing_enablement": decimal.Decimal("74.75"),
+                "acq_market_intelligence": decimal.Decimal("0.00"),
+                "ret_reputation_building": decimal.Decimal("0.00"),
+                "ret_demand_creation": decimal.Decimal("0.00"),
+                "ret_leasing_enablement": decimal.Decimal("94.50"),
+                "ret_market_intelligence": decimal.Decimal("0.00"),
+                "usvs": 932,
+                "inquiries": 36,
+                "tours": 14,
+            },
+            target_period_params={
+                "start": datetime.date(2020, 2, 3),
+                "end": datetime.date(2020, 2, 10),
+                "target_leased_rate": decimal.Decimal("0.995"),
+                "target_lease_applications": 2,
+                "target_leases_executed": 2,
+                "target_lease_renewal_notices": 3,
+                "target_lease_renewals": 1,
+                "target_lease_vacation_notices": 2,
+                "target_lease_cds": 0,
+                "target_delta_leases": 2,
+                "target_move_ins": 1,
+                "target_move_outs": 0,
+                "target_occupied_units": 179,
+                "target_acq_investment": decimal.Decimal("4345.15"),
+                "target_ret_investment": decimal.Decimal("341.53"),
+                "target_usvs": 310,
+                "target_inquiries": 17,
+                "target_tours": 7,
+            },
+        )
+        create_periods(
+            self.project,
+            start=datetime.date(year=2020, month=1, day=27),
+            end=datetime.date(year=2020, month=2, day=3),
+            period_params={
+                "lease_stage_id": 2,
+                "start": datetime.date(2020, 1, 27),
+                "end": datetime.date(2020, 2, 3),
+                "includes_remarkably_effect": True,
+                "leased_units_start": 185,
+                "leased_units_end": 188,
+                "leases_ended": 0,
+                "lease_applications": 3,
+                "leases_executed": 3,
+                "lease_cds": 0,
+                "lease_renewal_notices": 1,
+                "lease_renewals": 1,
+                "lease_vacation_notices": 0,
+                "occupiable_units_start": 252,
+                "occupied_units_start": 165,
+                "occupied_units_end": 166,
+                "move_ins": 1,
+                "move_outs": 0,
+                "acq_reputation_building": decimal.Decimal("0.00"),
+                "acq_demand_creation": decimal.Decimal("2075.55"),
+                "acq_leasing_enablement": decimal.Decimal("74.75"),
+                "acq_market_intelligence": decimal.Decimal("0.00"),
+                "ret_reputation_building": decimal.Decimal("0.00"),
+                "ret_demand_creation": decimal.Decimal("0.00"),
+                "ret_leasing_enablement": decimal.Decimal("94.50"),
+                "ret_market_intelligence": decimal.Decimal("0.00"),
+                "usvs": 932,
+                "inquiries": 36,
+                "tours": 14,
+            },
+            target_period_params={
+                "start": datetime.date(2020, 1, 27),
+                "end": datetime.date(2020, 2, 3),
+                "target_leased_rate": decimal.Decimal("0.985"),
+                "target_lease_applications": 2,
+                "target_leases_executed": 1,
+                "target_lease_renewal_notices": 2,
+                "target_lease_renewals": 1,
+                "target_lease_vacation_notices": 2,
+                "target_lease_cds": 1,
+                "target_delta_leases": -1,
+                "target_move_ins": 2,
+                "target_move_outs": 2,
+                "target_occupied_units": 178,
+                "target_acq_investment": decimal.Decimal("4345.15"),
+                "target_ret_investment": decimal.Decimal("341.53"),
+                "target_usvs": 365,
+                "target_inquiries": 20,
+                "target_tours": 8,
+            },
+        )
+        create_periods(
+            self.project,
+            start=datetime.date(year=2020, month=1, day=20),
+            end=datetime.date(year=2020, month=1, day=27),
+            period_params={
+                "lease_stage_id": 2,
+                "start": datetime.date(2020, 1, 20),
+                "end": datetime.date(2020, 1, 27),
+                "includes_remarkably_effect": True,
+                "leased_units_start": 181,
+                "leased_units_end": 185,
+                "leases_ended": 0,
+                "lease_applications": 5,
+                "leases_executed": 4,
+                "lease_cds": 1,
+                "lease_renewal_notices": 0,
+                "lease_renewals": 0,
+                "lease_vacation_notices": 0,
+                "occupiable_units_start": 252,
+                "occupied_units_start": 163,
+                "occupied_units_end": 165,
+                "move_ins": 2,
+                "move_outs": 0,
+                "acq_reputation_building": decimal.Decimal("0.00"),
+                "acq_demand_creation": decimal.Decimal("2075.55"),
+                "acq_leasing_enablement": decimal.Decimal("74.75"),
+                "acq_market_intelligence": decimal.Decimal("0.00"),
+                "ret_reputation_building": decimal.Decimal("0.00"),
+                "ret_demand_creation": decimal.Decimal("0.00"),
+                "ret_leasing_enablement": decimal.Decimal("94.50"),
+                "ret_market_intelligence": decimal.Decimal("0.00"),
+                "usvs": 999,
+                "inquiries": 37,
+                "tours": 12,
+            },
+            target_period_params={
+                "start": datetime.date(2020, 1, 20),
+                "end": datetime.date(2020, 1, 27),
+                "target_leased_rate": decimal.Decimal("0.990"),
+                "target_lease_applications": 1,
+                "target_leases_executed": 1,
+                "target_lease_renewal_notices": 0,
+                "target_lease_renewals": 1,
+                "target_lease_vacation_notices": 1,
+                "target_lease_cds": 0,
+                "target_delta_leases": 0,
+                "target_move_ins": 1,
+                "target_move_outs": 1,
+                "target_occupied_units": 178,
+                "target_acq_investment": decimal.Decimal("4345.15"),
+                "target_ret_investment": decimal.Decimal("341.53"),
+                "target_usvs": 183,
+                "target_inquiries": 10,
+                "target_tours": 4,
+            },
+        )
+
+        project_facts = change_health_status.graph(self.args)
+        self.assertFalse(project_facts["trigger_health_status_is_changed"])
+        result = change_health_status.evaluate(project_facts)
+        self.assertIsNone(result)
 
 
 class RetentionRateInsightTestCase(TestCase):
