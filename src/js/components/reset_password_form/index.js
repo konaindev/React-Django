@@ -16,6 +16,9 @@ const ResetPasswordFormSchema = Yup.object().shape({
     .required("Required")
 });
 class ResetPasswordForm extends React.PureComponent {
+  componentDidMount() {
+    console.log("==============", this.props);
+  }
   onSubmit = (values, actions) => {
     actions.setSubmitting(false);
     const data = { ...values };
@@ -39,6 +42,9 @@ class ResetPasswordForm extends React.PureComponent {
           <Formik
             onSubmit={this.onSubmit}
             validationSchema={ResetPasswordFormSchema}
+            initialValues={{
+              email: ""
+            }}
           >
             {({
               errors,

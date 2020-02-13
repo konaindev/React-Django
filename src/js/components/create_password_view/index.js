@@ -39,10 +39,10 @@ export class CreatePasswordView extends React.PureComponent {
   }
 
   componentDidMount() {
-    let params = this.props.match.params;
-    let uid = params.uid;
-    let token = params.token;
-    let hash = params.hash;
+    console.log("---------------", this.props);
+    const {
+      params: { uid, token }
+    } = this.props.match;
     if (uid && token) {
       this.setState({ isCreateForm: false });
     }
@@ -90,9 +90,10 @@ export class CreatePasswordView extends React.PureComponent {
   };
 
   onSubmit = (values, actions) => {
-    let params = this.props.match.params;
-    let uid = params.uid;
-    let token = params.token;
+    const {
+      params: { uid, token }
+    } = this.props.match;
+
     if (this.state.isCreateForm) {
       this.props.dispatch({
         type: "API_CREATE_PASSWORD",

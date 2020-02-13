@@ -114,7 +114,6 @@ export const fetchCreatePassword = store => next => action => {
 export const sendPasswordResetEmail = store => next => action => {
   if (action.type === "SEND_PASSWORD_RESET_EMAIL") {
     const url = createAPIUrl(`/users/reset-password/`);
-    console.log(action.data);
     if (action.data) {
       axiosPost(url, action.data)
         .then(response => {
@@ -132,11 +131,13 @@ export const sendPasswordResetEmail = store => next => action => {
 export const fetchResetPassword = store => next => action => {
   if (action.type === "API_RESET_PASSWORD") {
     const url = createAPIUrl(`/users/reset-password-confirm/`);
+    const successUrl = createFEUrl("/users/password-success/");
     if (action.data) {
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 204) {
             console.log("password has been reset");
+            window.location.replace(successUrl);
           } else {
             throw response;
           }
