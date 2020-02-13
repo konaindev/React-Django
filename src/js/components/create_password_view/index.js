@@ -39,7 +39,6 @@ export class CreatePasswordView extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log("---------------", this.props);
     const {
       params: { uid, token }
     } = this.props.match;
@@ -134,6 +133,10 @@ export class CreatePasswordView extends React.PureComponent {
             <Formik
               validate={isCreateForm ? this.validate : null}
               onSubmit={this.onSubmit}
+              initialValues={{
+                password_1: "",
+                password_2: ""
+              }}
             >
               {({
                 errors,
