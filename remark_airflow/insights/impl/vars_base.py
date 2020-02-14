@@ -5,13 +5,15 @@ from remark.lib.time_series.computed import (
 from remark.portfolio.api.strategy import (
     get_base_kpis_for_project,
     get_targets_for_project,
+    is_have_period_for_end,
 )
 from remark_airflow.insights.impl.utils import health_standard
 
 
 def var_base_kpis(project, start, end):
-    base_kpis = get_base_kpis_for_project(project, start, end)
-    return base_kpis
+    if not is_have_period_for_end(project, end):
+        return None
+    return get_base_kpis_for_project(project, start, end)
 
 
 def var_base_targets(project, start, end):
