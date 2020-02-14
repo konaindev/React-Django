@@ -1,6 +1,7 @@
 import subprocess
 import shlex
 import os
+import json
 
 list_dag_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_dags"
 list_dag_test_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_dags -- -sd /home/airflow/gcs/data/test"
@@ -102,24 +103,54 @@ def unpause_all_dags():
     return
 
 
-env_vars = ["BASE_URL", "CERTBOT_ACCESS_ID", "CERTBOT_SECRET_KEY", "CERT_ARN",
+string_env_vars = ["BASE_URL", "CERTBOT_ACCESS_ID", "CERTBOT_SECRET_KEY", "CERT_ARN",
             "CHROMATIC_APP_CODE", "CLOUDFRONT_DIST_ID", "COMPOSER_AIRFLOW_ENV",
             "DATABASE_URL", "DEBUG", "DEBUG_PRINT_LOGGER", "DEFAULT_FILE_STORAGE",
             "EMAIL_BACKEND", "FRONTEND_URL", "GOOGLE_GEOCODE_API_KEY",
             "GOOGLE_MAP_API_KEY", "LOADER_TIMEOUT", "MEDIA_ROOT", "MEDIA_URL", "REDIS_URL",
-            "SECURE_SSL_REDIRECT", "SENDGRID_API_KEY", "AIRFLOW_URL", "GCLOUD_SERVICE_KEY", "GOOGLE_WEBSERVER_ID", "GOOGLE_CLIENT_ID"]
+            "SECURE_SSL_REDIRECT", "SENDGRID_API_KEY", "AIRFLOW_URL", "GOOGLE_WEBSERVER_ID", "GOOGLE_CLIENT_ID"]
+
+dict_env_vars = ["GCLOUD_SERVICE_KEY"]
 
 def export_environment_variables():
     key_value_list=[]
-    for env_var in env_vars:
+    for env_var in string_env_vars:
         key_value_list.append(f'{env_var}={os.environ.get(env_var)}')
+    if dict_env_vars:
+        for env_var in dict_env_vars:
+            values_string = export_dict_environment_variables(env_var)
+            key_value_list.append(f'{env_var}={values_string}')
     key_value_string = ",".join(key_value_list)
     print(key_value_string)
     add_env_vars_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --location us-central1 --update-env-variables={key_value_string}"
     add_env_vars_response = run_command(add_env_vars_command).communicate()
     add_env_vars = add_env_vars_response[1].decode("utf-8")
     print(add_env_vars)
+
     return
+
+#This only works if there are no nested dictionaries.
+def export_dict_environment_variables(env_var):
+    values_string = ""
+    value=os.environ.get(env_var)
+    json_value = json.loads(value)
+    for k, v in json_value.items():
+        if k == 'private_key':
+            v = json.dumps(v)
+        string_value = f'{k}={v}:'
+        values_string = values_string + string_value
+    response = f"^:^{values_string[:-1]}"
+    return response
+
+
+
+
+
+
+
+
+
+
 
 
 def check_dag_syntax_errors():
