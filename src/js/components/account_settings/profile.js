@@ -10,7 +10,10 @@ import CompanyModal from "../../containers/settings_company_modal";
 import OfficeModal from "../../containers/settings_office_modal";
 import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
-import { accountSettings as actions } from "../../redux_base/actions";
+import {
+  accountSettings as actions,
+  companyActions
+} from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
 import Input from "../input";
@@ -170,11 +173,7 @@ export default class Profile extends React.PureComponent {
   loadCompany = (inputValue, callback) => {
     clearTimeout(this.loadCompanyTimeOut);
     this.loadCompanyTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_SEARCH",
-        data: { company: inputValue },
-        callback
-      });
+      this.props.dispatch(companyActions.searchCompany(inputValue, callback));
     }, 300);
   };
 
@@ -188,19 +187,14 @@ export default class Profile extends React.PureComponent {
     }
     clearTimeout(this.loadAddressTimeOut);
     this.loadAddressTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_ADDRESS",
-        data,
-        callback
-      });
+      this.props.dispatch(companyActions.fetchAddresses(data, callback));
     }, 300);
   };
 
   onChangeCompany = company => {
-    this.props.dispatch({
-      type: "API_COMPANY_ADDRESS",
-      data: { address: "", business_id: company.value }
-    });
+    this.props.dispatch(
+      companyActions.fetchAddresses({ address: "", business_id: company.value })
+    );
   };
 
   getCompanyValues = () => {
@@ -343,12 +337,9 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE_USER",
-      callback: this.setUserDataSuccess,
-      onError: this.setErrorMessages,
-      data
-    });
+    this.props.dispatch(
+      actions.postUserData(data, this.setUserDataSuccess, this.setErrorMessages)
+    );
   };
 
   render() {
