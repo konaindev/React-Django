@@ -15,7 +15,7 @@ from jsonfield import JSONField
 from stdimage.models import StdImageField
 from image_cropping.utils import get_backend
 
-from remark.lib.airflow import trigger_dag
+from remark.lib.gcp.trigger_dag import trigger_dag
 from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
@@ -633,7 +633,9 @@ class Project(models.Model):
         if not self.pk:
             self.__assign_blank_groups()
         super().save(*args, **kwargs)
-        self.__trigger_dag()
+
+        # Commenting out temporarily pending finalization of baseline dags (currently set to trigger macro_baseline dag
+        # self.__trigger_dag()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
