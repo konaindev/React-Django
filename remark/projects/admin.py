@@ -5,6 +5,8 @@ from django.utils.safestring import mark_safe
 
 from adminsortable2.admin import SortableInlineAdminMixin
 
+from remark.lib.gcp.trigger_dag import trigger_dag
+
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import (
@@ -459,6 +461,13 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
             return export_periods_to_csv(periods_ids, obj.public_id)
         if "_export_periods_to_excel" in request.POST:
             return export_periods_to_excel(obj.public_id)
+        if "_generate_insights_and_email" in request.POST:
+            dag_id = 'weekly_insights'
+            params = {'project_id': obj.public_id}
+            trigger_dag(dag_id, params)
+            # TODO - find a way to properly display response in django admin rather than going back to project home page
+            # response = HttpResponse(content="Request to update weekly insights and performance email sent")
+            # return response
         return super().response_change(request, obj)
 
     def number_of_periods(self, obj):
