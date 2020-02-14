@@ -18,8 +18,8 @@ class AddressModal extends React.PureComponent {
     callback: PropTypes.func,
     onError: PropTypes.func,
     updateValues: PropTypes.func,
-    dispatch_type: PropTypes.string.isRequired,
-    theme: PropTypes.oneOf(["gray", "highlight"])
+    theme: PropTypes.oneOf(["gray", "highlight"]),
+    submitAction: PropTypes.func
   };
 
   static defaultProps = {
@@ -28,6 +28,7 @@ class AddressModal extends React.PureComponent {
     updateValues: () => {},
     callback: () => {},
     onError: () => {},
+    submitAction: () => {},
     title: "Confirm Office Address",
     theme: "gray"
   };
@@ -64,12 +65,9 @@ class AddressModal extends React.PureComponent {
     } catch (TypeError) {
       data.office_address = formattedAddress;
     }
-    this.props.dispatch({
-      type: this.props.dispatch_type,
-      callback: this.parentCallback,
-      onError: this.parentOnError,
-      data
-    });
+    this.props.dispatch(
+      this.props.submitAction(data, this.parentCallback, this.parentOnError)
+    );
 
     this.closeModal();
   };

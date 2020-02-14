@@ -20,7 +20,11 @@ import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
 import { COUNTRY_FIELDS } from "../../constants";
 import LoaderContainer from "../../containers/loader";
-import { addressModal, completeAccount } from "../../redux_base/actions";
+import {
+  addressModal,
+  companyActions,
+  completeAccount
+} from "../../redux_base/actions";
 import { isTrueValues } from "../../utils/misc";
 
 import { propertySchema } from "./validators";
@@ -218,22 +222,14 @@ export class CompleteAccountView extends React.PureComponent {
     }
     clearTimeout(this.loadAddressTimeOut);
     this.loadAddressTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_ADDRESS",
-        data,
-        callback
-      });
+      this.props.dispatch(companyActions.fetchAddresses(data, callback));
     }, 300);
   };
 
   loadCompany = (inputValue, callback) => {
     clearTimeout(this.loadCompanyTimeOut);
     this.loadCompanyTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_SEARCH",
-        data: { company: inputValue },
-        callback
-      });
+      this.props.dispatch(companyActions.searchCompany(inputValue, callback));
     }, 300);
   };
 
@@ -278,10 +274,9 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   onChangeCompany = company => {
-    this.props.dispatch({
-      type: "API_COMPANY_ADDRESS",
-      data: { address: "", business_id: company.value }
-    });
+    this.props.dispatch(
+      companyActions.fetchAddresses({ address: "", business_id: company.value })
+    );
   };
 
   onChangeTerms = () => {
@@ -382,7 +377,9 @@ export class CompleteAccountView extends React.PureComponent {
         }
       });
     } else {
-      this.props.dispatch(completeAccount.post(data, this.setErrorMessages));
+      this.props.dispatch(
+        completeAccount.post(data, null, this.setErrorMessages)
+      );
     }
   };
 
@@ -392,12 +389,13 @@ export class CompleteAccountView extends React.PureComponent {
     const office = this.getOfficeValues();
     return (
       <PageAuth backLink="/">
+        <LoaderContainer />
         <AddressModal
           title="Confirm Office Address"
           onClose={this.onCloseModal}
           theme="highlight"
           onError={this.setErrorMessages}
-          dispatch_type="API_COMPLETE_ACCOUNT"
+          submitAction={completeAccount.post}
         />
         <CompanyModal
           theme="highlight"
@@ -422,7 +420,6 @@ export class CompleteAccountView extends React.PureComponent {
           onSuccess={this.setOfficeSuccess}
           onSave={this.putOfficeValues}
         />
-        <LoaderContainer />
         <AccountForm
           className="complete-account"
           steps={this.steps}

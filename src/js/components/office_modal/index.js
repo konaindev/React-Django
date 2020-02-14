@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { COUNTRY_FIELDS } from "../../constants";
+import { accountSettings } from "../../redux_base/actions";
 
 import AccountSettingsField from "../account_settings_field";
 import AddressModal from "../address_modal";
@@ -168,8 +169,8 @@ class OfficeModal extends React.PureComponent {
                 title="Confirm Office Address"
                 callback={onSuccess}
                 onError={onError}
-                dispatch_type="API_ACCOUNT_PROFILE_OFFICE"
                 updateValues={this.updateValues}
+                submitAction={accountSettings.postOfficeData}
               />
             ) : null}
             <AccountSettingsField
