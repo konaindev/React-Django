@@ -9,7 +9,9 @@ import {
   differenceInCalendarMonths,
   differenceInCalendarYears
 } from "date-fns";
+import _isBoolean from "lodash/isBoolean";
 import _isEmpty from "lodash/isEmpty";
+import _isNumber from "lodash/isNumber";
 import _mapValues from "lodash/mapValues";
 
 export const convertToKebabCase = (string = "") => {
@@ -109,11 +111,18 @@ export const stripURL = url => {
 };
 
 /*
- * Checks if all values in object are true
+ * Checks if all values in object are not blank
  */
-export const isTrueValues = obj => {
+export const isNotBlankValues = obj => {
   if (_isEmpty(obj)) {
     return false;
   }
-  return !Object.values(obj).filter(item => !item).length;
+  for (let v of Object.values(obj)) {
+    if (!_isBoolean(v) && !_isNumber(v)) {
+      if (_isEmpty(v)) {
+        return false;
+      }
+    }
+  }
+  return true;
 };

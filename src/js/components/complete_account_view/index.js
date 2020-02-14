@@ -25,7 +25,7 @@ import {
   companyActions,
   completeAccount
 } from "../../redux_base/actions";
-import { isTrueValues } from "../../utils/misc";
+import { isNotBlankValues } from "../../utils/misc";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
@@ -356,7 +356,7 @@ export class CompleteAccountView extends React.PureComponent {
     data.company = values.company.value;
     data.company_roles = values.company_roles.map(type => type.value);
     const office = this.getOfficeValues();
-    if (isTrueValues(office)) {
+    if (isNotBlankValues(office)) {
       data.office_type = values.office_type.value;
       data.office_state = values.office_state.value;
       validateAddress(office).then(response => {
@@ -494,7 +494,7 @@ export class CompleteAccountView extends React.PureComponent {
                     onBlur={handleBlur}
                   />
                 </FormField>
-                {isTrueValues(company) ? (
+                {isNotBlankValues(company) ? (
                   <CompanyInfo
                     data={company}
                     onOpenCompanyModal={this.onOpenCompanyModal}
@@ -506,7 +506,7 @@ export class CompleteAccountView extends React.PureComponent {
                     showErrorMessage={this.showCompanyError}
                   />
                 )}
-                {isTrueValues(office) ? (
+                {isNotBlankValues(office) ? (
                   <OfficeInfo
                     data={office}
                     onOpenOfficeModal={this.onOpenOfficeModal}
