@@ -309,9 +309,9 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
-      - run:
-          name: Check SSL Cert expiry, update if needed
-          command: bash check-cert.sh
+      #- run:
+      #    name: Check SSL Cert expiry, update if needed
+      #    command: bash check-cert.sh
 
   deploy-production:
     docker:
@@ -335,6 +335,9 @@ jobs:
             make
             sudo cp src/redis-cli /usr/local/bin/
             sudo chmod 755 /usr/local/bin/redis-cli
+      - run:
+          name: Install Sentry CLI Tools
+          command: yarn add @sentry/cli
       - run:
           name: Install Frontend deps
           command: yarn install
@@ -372,7 +375,9 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably
-
+      - run:
+          name: Sync release with Sentry
+          command: bash ./scripts/sentry-release.sh
 
   deploy-storybook:
     docker:
