@@ -44,6 +44,15 @@ from .models import User
 INTERNAL_RESET_URL_TOKEN = 'set-password'
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 
+def get_user(uidb64):
+    try:
+        # urlsafe_base64_decode() decodes to bytestring
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
+        user = None
+    return user
+
 
 class GetIsAnonEverythingElseAuthenticated(BasePermission):
     def has_permission(self, request, view):
@@ -183,14 +192,13 @@ class PasswordRulesView(APIView):
 
     def post(self, request):
         params = json.loads(request.body)
-        user_id = params["user_id"]
+        user_id_or_uid = params["user_id"]
         password = params["password"]
 
         try:
-            user = User.objects.get(public_id=user_id)
+            user = User.objects.get(public_id=user_id_or_uid)
         except User.DoesNotExist:
-            raise exceptions.APIException
-
+            user = get_user(user_id_or_uid)
         errors = {}
         for v in VALIDATION_RULES:
             try:
@@ -270,8 +278,7 @@ class ResetPasswordConfirmView(APIView):
             raise exceptions.APIException        
 
         params = json.loads(request.body)
-        
-        user = self.get_user(params["uid"])
+        user = get_user(params["uid"])
         if user is None:
             raise exceptions.APIException
         if not self.token_generator.check_token(user, params["token"]):
@@ -285,15 +292,6 @@ class ResetPasswordConfirmView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-    def get_user(self, uidb64):
-        try:
-            # urlsafe_base64_decode() decodes to bytestring
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User._default_manager.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
-            user = None
-        return user
 
 
 class ResendInviteView(APIView):

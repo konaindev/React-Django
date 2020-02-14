@@ -64,23 +64,24 @@ export class CreatePasswordView extends React.PureComponent {
     new Promise(res => {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => res(), 300);
-    }).then(() =>
-      this.props
-        .validate(values.password_1, this.props.hash)
-        .then(fieldError => {
-          let errors = {};
-          if (Object.keys(fieldError).length) {
-            errors.rules_validation = fieldError;
-            errors.password_1 = this.errorMessages.password_1;
-          }
-          if (!values.password_2 || values.password_2 !== values.password_1) {
-            errors.password_2 = this.errorMessages.password_2;
-          }
-          if (Object.keys(errors).length) {
-            throw errors;
-          }
-        })
-    );
+    }).then(() => {
+      const userId = this.props.hash
+        ? this.props.hash
+        : this.props.match.params.uid;
+      return this.props.validate(values.password_1, userId).then(fieldError => {
+        let errors = {};
+        if (Object.keys(fieldError).length) {
+          errors.rules_validation = fieldError;
+          errors.password_1 = this.errorMessages.password_1;
+        }
+        if (!values.password_2 || values.password_2 !== values.password_1) {
+          errors.password_2 = this.errorMessages.password_2;
+        }
+        if (Object.keys(errors).length) {
+          throw errors;
+        }
+      });
+    });
 
   getButtonColor = isValid => {
     if (isValid) {
@@ -132,7 +133,7 @@ export class CreatePasswordView extends React.PureComponent {
             subtitle={subtitlePrefix}
           >
             <Formik
-              validate={isCreateForm ? this.validate : null}
+              validate={this.validate}
               onSubmit={this.onSubmit}
               initialValues={{
                 password_1: "",
