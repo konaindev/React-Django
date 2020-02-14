@@ -11,6 +11,7 @@ import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
+import { createPassword } from "../../redux_base/actions";
 import "./create_password_view.scss";
 
 export class CreatePasswordView extends React.PureComponent {
@@ -94,23 +95,23 @@ export class CreatePasswordView extends React.PureComponent {
     } = this.props.match;
 
     if (this.state.isCreateForm) {
-      this.props.dispatch({
-        type: "API_CREATE_PASSWORD",
-        hash: this.props.hash,
-        data: {
-          password: values.password_1
-        }
-      });
+      this.props.dispatch(
+        createPassword.setPassword({
+          hash: this.props.hash,
+          data: {
+            password: values.password_1
+          }
+        })
+      );
     } else {
-      this.props.dispatch({
-        type: "API_RESET_PASSWORD",
-        data: {
+      this.props.dispatch(
+        createPassword.resetPassword({
           uid: uid,
           token: token,
           new_password1: values.password_1,
           new_password2: values.password_2
-        }
-      });
+        })
+      );
     }
   };
 

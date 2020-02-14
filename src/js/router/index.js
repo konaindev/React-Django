@@ -23,7 +23,10 @@ export function RemarkableRouter() {
           path="/users/create-password/:hash"
           component={CreatePasswordContainer}
         />
-        <Route path="/users/reset/:uid/:token" component={CreatePasswordView} />
+        <Route
+          path="/users/reset/:uid/:token"
+          component={CreatePasswordContainer}
+        />
         <Route path="/users/password-reset/" component={ResetPasswordForm} />
         <Route path="/users/password-resend/" component={ResetPasswordDone} />
         <Route

@@ -8,6 +8,7 @@ import AccountForm from "../account_form";
 import PageAuth from "../page_auth";
 import FormField from "../form_field";
 import Yup from "../../yup";
+import { resendSetPasswordEmail } from "../../redux_base/actions";
 
 import "./reset_password_form.scss";
 const ResetPasswordFormSchema = Yup.object().shape({
@@ -20,12 +21,11 @@ class ResetPasswordForm extends React.PureComponent {
     actions.setSubmitting(false);
     const data = { ...values };
     let email = values.email;
-    this.props.dispatch({
-      type: "SEND_PASSWORD_RESET_EMAIL",
-      data: {
-        email: email
-      }
-    });
+    this.props.dispatch(
+      resendSetPasswordEmail.set({
+        email
+      })
+    );
   };
 
   render() {

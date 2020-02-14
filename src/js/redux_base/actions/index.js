@@ -74,6 +74,21 @@ export const createPassword = {
   getRules: newState => ({
     type: "CREATE_PASSWORD_FETCH_RULES",
     newState
+  }),
+  setPassword: newState => ({
+    type: "API_CREATE_PASSWORD",
+    ...newState
+  }),
+  resetPassword: newState => ({
+    type: "API_RESET_PASSWORD",
+    data: newState
+  })
+};
+
+export const resendSetPasswordEmail = {
+  set: newState => ({
+    type: "SEND_PASSWORD_RESET_EMAIL",
+    data: newState
   })
 };
 

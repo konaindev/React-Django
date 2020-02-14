@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 
 import AccountForm from "../account_form";
 import PageAuth from "../page_auth";
+import { resendSetPasswordEmail } from "../../redux_base/actions";
 
 import "./reset_password_done.scss";
 
 export class ResetPasswordDone extends React.Component {
   resendResetPassword = () => {
-    let email = this.props.resendEmail;
-    this.props.dispatch({
-      type: "SEND_PASSWORD_RESET_EMAIL",
-      data: {
-        email: email
-      }
-    });
+    let email = this.props.resendEmail.email;
+    this.props.dispatch(
+      resendSetPasswordEmail.set({
+        email
+      })
+    );
   };
   render() {
     return (
