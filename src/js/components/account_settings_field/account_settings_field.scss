@@ -4,6 +4,8 @@ $error-color: $orange-6;
 $label-color: $gray-6;
 $input-label-line-height: 1.25rem;
 
+$light-label-color: $gray-9;
+
 .account-settings-field {
     &--max-width {
         max-width: 315px;
@@ -52,6 +54,11 @@ $input-label-line-height: 1.25rem;
             opacity: .5;
         }
     }
+    &--highlight {
+        .account-settings-field__label {
+            color: $light-label-color;
+        }
+    }
 }
 
 .account-settings-field__label {
@@ -66,6 +73,10 @@ $input-label-line-height: 1.25rem;
 
 .account-settings-field__input {
     height: 44px;
+
+    &.select {
+        display: block;
+    }
 }
 
 .account-settings-field__error {

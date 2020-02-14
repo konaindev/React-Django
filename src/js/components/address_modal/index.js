@@ -18,8 +18,8 @@ class AddressModal extends React.PureComponent {
     callback: PropTypes.func,
     onError: PropTypes.func,
     updateValues: PropTypes.func,
-    dispatch_type: PropTypes.string.isRequired,
-    theme: PropTypes.oneOf(["dark", "light"])
+    theme: PropTypes.oneOf(["gray", "highlight"]),
+    submitAction: PropTypes.func
   };
 
   static defaultProps = {
@@ -28,8 +28,9 @@ class AddressModal extends React.PureComponent {
     updateValues: () => {},
     callback: () => {},
     onError: () => {},
+    submitAction: () => {},
     title: "Confirm Office Address",
-    theme: "dark"
+    theme: "gray"
   };
 
   parentCallback = () => {
@@ -64,12 +65,9 @@ class AddressModal extends React.PureComponent {
     } catch (TypeError) {
       data.office_address = formattedAddress;
     }
-    this.props.dispatch({
-      type: this.props.dispatch_type,
-      callback: this.parentCallback,
-      onError: this.parentOnError,
-      data
-    });
+    this.props.dispatch(
+      this.props.submitAction(data, this.parentCallback, this.parentOnError)
+    );
 
     this.closeModal();
   };
@@ -78,6 +76,7 @@ class AddressModal extends React.PureComponent {
     const { title, isOpen, theme } = this.props;
     const address = _get(this.props, "addresses.suggested_address");
     const modalClass = cx("address-modal", `address-modal--theme-${theme}`);
+    const backBtnClasses = `address-modal__back-btn address-modal__back-btn--${theme}`;
     //
     // @TODO: if we want to support dark/light themes in all modals,
     //           prop names should be changed a bit
@@ -100,7 +99,12 @@ class AddressModal extends React.PureComponent {
             <p>{address?.office_country}</p>
           </div>
           <div className="address-modal__footer">
-            <Button color="secondary" uppercase onClick={this.closeModal}>
+            <Button
+              className={backBtnClasses}
+              color="secondary"
+              uppercase
+              onClick={this.closeModal}
+            >
               Go Back
             </Button>
             <Button color="primary" uppercase onClick={this.onSubmit}>

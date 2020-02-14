@@ -1,3 +1,4 @@
+import cn from "classnames";
 import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
@@ -14,6 +15,7 @@ import "./company_modal.scss";
 class CompanyModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
+    theme: PropTypes.oneOf(["gray", "highlight"]),
     data: PropTypes.shape({
       company: PropTypes.object,
       company_roles: PropTypes.array
@@ -24,15 +26,16 @@ class CompanyModal extends React.PureComponent {
     onClose: PropTypes.func,
     onSuccess: PropTypes.func,
     onError: PropTypes.func,
-    onSave: PropTypes.func,
-    dispatch: PropTypes.func
+    onSave: PropTypes.func
   };
 
   static defaultProps = {
+    theme: "gray",
     companyRolesOptions: [],
     loadCompany() {},
     onChangeCompany() {},
-    onSave() {}
+    onSave() {},
+    onSuccess() {}
   };
 
   constructor(props) {
@@ -70,22 +73,10 @@ class CompanyModal extends React.PureComponent {
     this.props.onChangeCompany(company);
   };
 
-  onSave = (onSuccess, onError) => values => {
-    const data = {
-      company: values.company.label,
-      company_roles: values.company_roles.map(i => i.value)
-    };
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE_COMPANY",
-      callback: onSuccess,
-      onError: onError,
-      data
-    });
-  };
-
   render() {
     return (
       <ModalForm
+        theme={this.props.theme}
         title="Company Info"
         initialData={this.props.data}
         validationSchema={companySchema}
@@ -94,7 +85,7 @@ class CompanyModal extends React.PureComponent {
         onClose={this.props.onClose}
         onSuccess={this.props.onSuccess}
         onError={this.props.onError}
-        onSave={this.onSave}
+        onSave={this.props.onSave}
       >
         {({
           errors,
@@ -106,6 +97,7 @@ class CompanyModal extends React.PureComponent {
         }) => (
           <>
             <AccountSettingsField
+              theme={this.props.theme}
               name="company"
               label="Company"
               errorKey="company.value"
@@ -113,11 +105,11 @@ class CompanyModal extends React.PureComponent {
               touched={touched}
             >
               <SelectSearch
+                className="account-settings-field__input"
+                theme={this.props.theme}
                 name="company"
-                theme="gray"
                 placeholder=""
                 components={{ DropdownIndicator: () => null }}
-                className="account-settings-field__input"
                 loadOptions={this.props.loadCompany}
                 defaultOptions={[]}
                 isCreatable={true}
@@ -128,6 +120,7 @@ class CompanyModal extends React.PureComponent {
               />
             </AccountSettingsField>
             <AccountSettingsField
+              theme={this.props.theme}
               name="company_roles"
               label="Company Role"
               errorKey="company_roles"
@@ -137,9 +130,9 @@ class CompanyModal extends React.PureComponent {
             >
               <div className="modal-form__inputs-wrap">
                 <MultiSelect
+                  theme={this.props.theme}
                   className="account-settings-field__input company-modal__company-roles"
                   name="company_roles"
-                  theme="gray"
                   isShowControls={false}
                   isShowAllOption={false}
                   isDisabled={this.state.rolesLocked}

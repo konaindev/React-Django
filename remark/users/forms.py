@@ -55,18 +55,21 @@ class UserForm(forms.ModelForm):
 company_roles_values = [(role["value"], role["label"]) for role in COMPANY_ROLES]
 
 
-class AccountCompleteForm(forms.Form):
+class AccountCompanyForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True)
     last_name = forms.CharField(max_length=255, required=True)
     title = forms.CharField(max_length=255, required=False)
     company = forms.CharField(max_length=255, required=False)
-    company_role = forms.MultipleChoiceField(
+    company_roles = forms.MultipleChoiceField(
         choices=company_roles_values, required=True
     )
+    terms = forms.BooleanField(required=True)
+
+
+class AccountCompleteForm(AccountCompanyForm):
     office_address = forms.CharField(max_length=255, required=True)
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
-    terms = forms.BooleanField(required=True)
 
 
 class AccountSecurityForm(forms.Form):

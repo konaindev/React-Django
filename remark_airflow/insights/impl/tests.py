@@ -46,17 +46,18 @@ class VarPrevHealthStatusTestCase(TestCase):
             project,
             start=datetime.date(year=2019, month=5, day=31),
             end=datetime.date(year=2019, month=6, day=7),
+            period_params={"leased_units_end": 215},
         )
         create_periods(
             project,
             start=datetime.date(year=2019, month=6, day=7),
             end=datetime.date(year=2019, month=6, day=14),
+            period_params={"leased_units_end": 215},
         )
         create_periods(
             project,
             start=datetime.date(year=2019, month=6, day=14),
             end=datetime.date(year=2019, month=6, day=21),
-            period_params={"leased_units_end": 160},
         )
         self.project = project
 
@@ -78,7 +79,7 @@ class VarPrevHealthStatusTestCase(TestCase):
     def test_after_period(self):
         start = datetime.date(year=2019, month=6, day=21)
         result = var_prev_health_status(self.project, start)
-        self.assertEqual(result, 2)
+        self.assertEqual(result, 1)
 
     def test_health_not_changes(self):
         start = datetime.date(year=2019, month=6, day=7)
@@ -142,7 +143,7 @@ class VarBenchmarkKPIsTestCase(TestCase):
         for kpi in benchmark_kpis:
             del kpi["last_updated"]
             del kpi["public_id"]
-        
+
         # @Alexey I need you to fix this test
         # self.assertListEqual(benchmark_kpis, expected)
 
@@ -545,11 +546,9 @@ class VarKPIHealthWeeksTestCase(TestCase):
         self.assertEqual(result, 0)
 
     def test_two_week(self):
-        start = self.start
-        end = self.start - datetime.timedelta(weeks=1)
-        create_periods(self.project, start=start, end=end)
-        start = end
-        end = start - datetime.timedelta(weeks=1)
+        create_periods(self.project, start=self.start, end=self.end)
+        start = self.start - datetime.timedelta(weeks=1)
+        end = self.start
         create_periods(self.project, start=start, end=end)
         result = var_kpi_health_weeks(self.project, self.start, self.end, "usv_inq", 2)
         self.assertEqual(result, 2)

@@ -62,4 +62,11 @@ describe("Button", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders button as div tag correctly", () => {
+    const tree = renderer
+      .create(<Button asDiv={true}>It's a div tag</Button>)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -19,12 +19,12 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_MET
 from rest_framework.response import Response
 
 from remark.crm.models import Business, Office, Person
-from remark.crm.constants import OFFICE_OPTIONS, OFFICE_TYPES
+from remark.crm.constants import OFFICE_OPTIONS
 from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
-from remark.settings import BASE_URL
+from remark.settings import BASE_URL, FRONTEND_URL
 from remark.email_app.invites.added_to_property import (
     send_invite_email,
     send_welcome_email,
@@ -33,6 +33,7 @@ from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
 from .forms import (
+    AccountCompanyForm,
     AccountCompleteForm,
     AccountSecurityForm,
     CompanyProfileForm,
@@ -43,6 +44,15 @@ from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+def get_user(uidb64):
+    try:
+        # urlsafe_base64_decode() decodes to bytestring
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
+        user = None
+    return user
 
 
 class GetIsAnonEverythingElseAuthenticated(BasePermission):
@@ -61,60 +71,82 @@ class CompleteAccountView(APIView):
     """
     permission_classes = [IsAuthenticated]
 
-    office_options = [{"label": type[1], "value": type[0]} for type in OFFICE_TYPES]
-
     def get(self, request):
         data = {
-            "office_types": self.office_options,
+            "office_types": OFFICE_OPTIONS,
             "company_roles": COMPANY_ROLES,
             "office_countries": COUNTRY_LIST,
             "us_state_list": US_STATE_LIST,
-            "gb_county_list": GB_COUNTY_LIST
+            "gb_county_list": GB_COUNTY_LIST,
+            "is_completed": hasattr(request.user, "person")
         }
-        return self.render_success(data=data)
+        return Response(data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        user = request.user
+        if hasattr(user, "person"):
+            return Response(status=status.HTTP_200_OK)
+
         params = json.loads(request.body)
-        form = AccountCompleteForm(params)
+        if "office_address" in params:
+            form = AccountCompleteForm(params)
+        else:
+            form = AccountCompanyForm(params)
+
         if form.is_valid():
             data = form.data
-            office_address = geocode(data["office_address"])
-            address = Address.objects.get_or_create(
-                formatted_address=office_address.formatted_address,
-                street_address_1=office_address.street_address,
-                city=office_address.city,
-                state=office_address.state,
-                zip_code=office_address.zip5,
-                country=office_address.country,
-                geocode_json=office_address.geocode_json,
-            )[0]
             try:
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-            for role in data["company_role"]:
-                setattr(business, BUSINESS_TYPE[role], True)
-            business.save()
+                for role in data["company_roles"]:
+                    setattr(business, BUSINESS_TYPE[role], True)
+                business.save()
 
-            office = Office(
-                office_type=data["office_type"],
-                name=data["office_name"],
-                address=address,
-                business=business,
-            )
+            if "office_address" in data:
+                office_address = geocode(data["office_address"])
+                address = Address.objects.get_or_create(
+                    formatted_address=office_address.formatted_address,
+                    street_address_1=office_address.street_address,
+                    city=office_address.city,
+                    state=office_address.state,
+                    full_state=office_address.full_state,
+                    zip_code=office_address.zip5,
+                    country=office_address.country,
+                    geocode_json=office_address.geocode_json,
+                )[0]
+                office = Office(
+                    office_type=data["office_type"],
+                    name=data["office_name"],
+                    address=address,
+                    business=business,
+                )
+            else:
+                offices = list(business.office_set.all())
+                if offices:
+                    office_source = offices[0]
+                    office = Office(
+                        office_type=office_source.office_type,
+                        name=office_source.name,
+                        address=office_source.address,
+                        business=business,
+                    )
+                else:
+                    office = Office(business=business)
             office.save()
+
             person = Person(
                 first_name=data["first_name"],
                 last_name=data["last_name"],
                 role=data["title"],
-                email=request.user.email,
-                user=request.user,
+                email=user.email,
+                user=user,
                 office=office,
             )
             person.save()
-            send_welcome_email.apply_async(args=(request.user.email,), countdown=2)
-            return self.render_success(status=status.HTTP_204_NO_CONTENT)
-        return self.render_failure(errors=form.errors.get_json_data(), status=500)
+            send_welcome_email.apply_async(args=(user.email,), countdown=2)
+            return Response(status=status.HTTP_200_OK)
+        return Response({"errors": form.errors.get_json_data()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class CreatePasswordView(APIView):
@@ -183,14 +215,13 @@ class PasswordRulesView(APIView):
 
     def post(self, request):
         params = json.loads(request.body)
-        user_id = params["user_id"]
+        user_id_or_uid = params["user_id"]
         password = params["password"]
 
         try:
-            user = User.objects.get(public_id=user_id)
+            user = User.objects.get(public_id=user_id_or_uid)
         except User.DoesNotExist:
-            raise exceptions.APIException
-
+            user = get_user(user_id_or_uid)
         errors = {}
         for v in VALIDATION_RULES:
             try:
@@ -224,8 +255,6 @@ class ChangePasswordView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-
 class ResetPasswordView(APIView):
     """
     Send password reset email
@@ -243,7 +272,7 @@ class ResetPasswordView(APIView):
             html_email_template_name="users/emails/password_reset_email.html",
             domain_override="Remarkably",
             extra_email_context={
-                "BASE_URL": BASE_URL,
+                "BASE_URL": FRONTEND_URL,
                 "title": "Password reset",
                 "subject": "Set your Remarkably password",
             },
@@ -272,8 +301,7 @@ class ResetPasswordConfirmView(APIView):
             raise exceptions.APIException        
 
         params = json.loads(request.body)
-
-        user = self.get_user(params["uid"])
+        user = get_user(params["uid"])
         if user is None:
             raise exceptions.APIException
         if not self.token_generator.check_token(user, params["token"]):
@@ -287,15 +315,6 @@ class ResetPasswordConfirmView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-    def get_user(self, uidb64):
-        try:
-            # urlsafe_base64_decode() decodes to bytestring
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User._default_manager.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
-            user = None
-        return user
 
 
 class ResendInviteView(APIView):
@@ -384,11 +403,18 @@ class CompanyProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def make_office(self, person, business):
-        office = Office(business=business)
         offices = list(business.office_set.all())
         # Get the first office in the business
         if len(offices):
-            office = offices[0]
+            office_source = offices[0]
+            office = Office(
+                office_type=office_source.office_type,
+                name=office_source.name,
+                address=office_source.address,
+                business=business,
+            )
+        else:
+            office = Office(business=business)
         person.office = office
         office.save()
         person.save()
@@ -401,7 +427,7 @@ class CompanyProfileView(APIView):
         data = form.cleaned_data
 
         try:
-            business = Business.objects.get(name=data["company"])
+            business = Business.objects.get(public_id=data["company"])
         except Business.DoesNotExist:
             business = Business(name=data["company"])
             for role in data["company_roles"]:
@@ -427,20 +453,12 @@ class CompanyProfileView(APIView):
 class OfficeProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def make_office(self, person, address):
-        office = Office(address=address)
-        # Get the first by given address
-        offices = list(address.office_set.all())
-        if len(offices):
-            office = offices[0]
-        person.office = office
-        return office
-
     def post(self, request):
         params = json.loads(request.body)
         form = OfficeProfileForm(params)
         if not form.is_valid():
             return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         data = form.cleaned_data
         user = request.user
         office_address = geocode(data["office_address"])
@@ -459,15 +477,17 @@ class OfficeProfileView(APIView):
             person = user.person
             office = person.office
             if not office:
-                office = self.make_office(person, address)
+                office = Office()
         except Person.DoesNotExist:
             person = Person(user=user, email=user.email)
-            office = self.make_office(person, address)
+            office = Office()
 
         office.address = address
         office.name = data["office_name"]
         office.office_type = data["office_type"]
         office.save()
+
+        person.office = office
         person.save()
 
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)

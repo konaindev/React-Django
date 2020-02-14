@@ -7,13 +7,13 @@ import AddressModal from "./index";
 import props from "./props";
 
 storiesOf("AddressModal", module)
-  .add("dark theme", () => (
+  .add("gray theme", () => (
     <Provider store={createStore(() => ({ addressModal: props }))}>
-      <AddressModal {...props} theme="dark" />
+      <AddressModal {...props} theme="gray" />
     </Provider>
   ))
-  .add("light theme", () => (
+  .add("highlight theme", () => (
     <Provider store={createStore(() => ({ addressModal: props }))}>
-      <AddressModal {...props} theme="light" />
+      <AddressModal {...props} theme="highlight" />
     </Provider>
   ));

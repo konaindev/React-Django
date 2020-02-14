@@ -9,6 +9,9 @@ import {
   differenceInCalendarMonths,
   differenceInCalendarYears
 } from "date-fns";
+import _isBoolean from "lodash/isBoolean";
+import _isEmpty from "lodash/isEmpty";
+import _isNumber from "lodash/isNumber";
 import _mapValues from "lodash/mapValues";
 
 export const convertToKebabCase = (string = "") => {
@@ -105,4 +108,21 @@ export const qsStringify = (queryParams, appendLeadingPrefix = true) => {
 export const stripURL = url => {
   const r = /^(\w+:\/\/)(www\.)?/i;
   return url.replace(r, "").replace(/\/$/, "");
+};
+
+/*
+ * Checks if all values in object are not blank
+ */
+export const isNotBlankValues = obj => {
+  if (_isEmpty(obj)) {
+    return false;
+  }
+  for (let v of Object.values(obj)) {
+    if (!_isBoolean(v) && !_isNumber(v)) {
+      if (_isEmpty(v)) {
+        return false;
+      }
+    }
+  }
+  return true;
 };

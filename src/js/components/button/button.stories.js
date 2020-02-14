@@ -54,4 +54,5 @@ storiesOf("Button", module)
     <Button color="warning" onClick={clickHandler}>
       Warning Button
     </Button>
-  ));
+  ))
+  .add("as div", () => <Button onClick={clickHandler}>It's a div tag</Button>);

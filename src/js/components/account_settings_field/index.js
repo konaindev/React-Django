@@ -1,10 +1,14 @@
 import cn from "classnames";
 import { ErrorMessage } from "formik";
+import PropTypes from "prop-types";
 import React from "react";
 
 import "./account_settings_field.scss";
 
-const getFieldClasses = (name, errors, touched, modifiers = []) => {
+const getFieldClasses = (name, theme, errors, touched, modifiers = []) => {
+  if (theme !== "gray") {
+    modifiers = [theme, ...modifiers];
+  }
   const classes = modifiers.map(m => `account-settings-field--${m}`);
   const error_dict = {
     "account-settings-field--error": errors[name] && touched[name]
@@ -18,6 +22,7 @@ const getFieldClasses = (name, errors, touched, modifiers = []) => {
 
 const AccountSettingsField = ({
   className,
+  theme,
   name,
   label,
   errorKey,
@@ -28,7 +33,10 @@ const AccountSettingsField = ({
   ...props
 }) => (
   <div
-    className={cn(getFieldClasses(name, errors, touched, modifiers), className)}
+    className={cn(
+      getFieldClasses(name, theme, errors, touched, modifiers),
+      className
+    )}
     {...props}
   >
     <div className="account-settings-field__label">{label}</div>
@@ -45,10 +53,20 @@ const AccountSettingsField = ({
     ) : null}
   </div>
 );
-AccountSettingsField.propTypes = {};
+AccountSettingsField.propTypes = {
+  className: PropTypes.string,
+  theme: PropTypes.oneOf(["gray", "highlight"]),
+  name: PropTypes.string,
+  errorKey: PropTypes.string,
+  label: PropTypes.string,
+  errors: PropTypes.object,
+  touched: PropTypes.object,
+  modifiers: PropTypes.array
+};
 AccountSettingsField.defaultProps = {
   name: "",
   label: "",
+  theme: "gray",
   errors: {},
   touched: {},
   modifiers: []
