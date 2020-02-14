@@ -405,3 +405,8 @@ def get_targets_for_group(group_targets, start, end, average=False):
         return merge(GROUP_AGGREGATE_TARGET_MERGE_DOC, GROUP_TARGET_SPLIT_DOC, group_targets, start, end)
 
     return merge(GROUP_AVERAGE_TARGET_MERGE_DOC, GROUP_TARGET_SPLIT_DOC, group_targets, start, end)
+
+
+def is_have_period_for_end(project, end):
+    periods = Period.objects.filter(project=project, end__gte=end)
+    return periods.exists()

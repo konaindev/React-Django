@@ -142,7 +142,7 @@ class VarBenchmarkKPIsTestCase(TestCase):
         for kpi in benchmark_kpis:
             del kpi["last_updated"]
             del kpi["public_id"]
-        
+
         # @Alexey I need you to fix this test
         # self.assertListEqual(benchmark_kpis, expected)
 
@@ -545,11 +545,9 @@ class VarKPIHealthWeeksTestCase(TestCase):
         self.assertEqual(result, 0)
 
     def test_two_week(self):
-        start = self.start
-        end = self.start - datetime.timedelta(weeks=1)
-        create_periods(self.project, start=start, end=end)
-        start = end
-        end = start - datetime.timedelta(weeks=1)
+        create_periods(self.project, start=self.start, end=self.end)
+        start = self.start - datetime.timedelta(weeks=1)
+        end = self.start
         create_periods(self.project, start=start, end=end)
         result = var_kpi_health_weeks(self.project, self.start, self.end, "usv_inq", 2)
         self.assertEqual(result, 2)
