@@ -94,6 +94,9 @@ class KPI(BaseKPI):
     app_cost = "app_cost"
     exe_cost = "exe_cost"
 
+    # Property
+    total_units = "total_units"
+
 
 class KPITitle:
     '''

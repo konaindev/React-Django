@@ -129,6 +129,9 @@ PROPERTY_MERGE_DOCUMENT = {
     "average_monthly_rent": "last",
     "lowest_monthly_rent": "last",
     "highest_monthly_rent": "last",
+
+    # Property
+    "total_units": "last",
 }
 
 PROPERTY_SPLIT_DOCUMENT = {
@@ -170,6 +173,9 @@ PROPERTY_SPLIT_DOCUMENT = {
     "average_monthly_rent": "noop",
     "lowest_monthly_rent": "noop",
     "highest_monthly_rent": "noop",
+
+    # Property
+    "total_units": "noop",
 }
 
 GROUP_AGGREGATE_MERGE_DOC = {
@@ -211,6 +217,9 @@ GROUP_AGGREGATE_MERGE_DOC = {
     "average_monthly_rent": weighted_average_by_unit_count,
     "lowest_monthly_rent": weighted_average_by_unit_count,
     "highest_monthly_rent": weighted_average_by_unit_count,
+
+    # Property
+    "total_units": "last",
 }
 
 GROUP_AVERAGE_MERGE_DOC = {
@@ -252,6 +261,9 @@ GROUP_AVERAGE_MERGE_DOC = {
     "average_monthly_rent": weighted_average_by_unit_count,
     "lowest_monthly_rent": weighted_average_by_unit_count,
     "highest_monthly_rent": weighted_average_by_unit_count,
+
+    # Property
+    "total_units": "last",
 }
 
 GROUP_SPLIT_DOC = {
@@ -293,6 +305,9 @@ GROUP_SPLIT_DOC = {
     "average_monthly_rent": "noop",
     "lowest_monthly_rent": "noop",
     "highest_monthly_rent": "noop",
+
+    # Property
+    "total_units": "noop",
 }
 
 GROUP_AGGREGATE_TARGET_MERGE_DOC = {

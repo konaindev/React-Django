@@ -46,17 +46,18 @@ class VarPrevHealthStatusTestCase(TestCase):
             project,
             start=datetime.date(year=2019, month=5, day=31),
             end=datetime.date(year=2019, month=6, day=7),
+            period_params={"leased_units_end": 215},
         )
         create_periods(
             project,
             start=datetime.date(year=2019, month=6, day=7),
             end=datetime.date(year=2019, month=6, day=14),
+            period_params={"leased_units_end": 215},
         )
         create_periods(
             project,
             start=datetime.date(year=2019, month=6, day=14),
             end=datetime.date(year=2019, month=6, day=21),
-            period_params={"leased_units_end": 160},
         )
         self.project = project
 
@@ -78,7 +79,7 @@ class VarPrevHealthStatusTestCase(TestCase):
     def test_after_period(self):
         start = datetime.date(year=2019, month=6, day=21)
         result = var_prev_health_status(self.project, start)
-        self.assertEqual(result, 2)
+        self.assertEqual(result, 1)
 
     def test_health_not_changes(self):
         start = datetime.date(year=2019, month=6, day=7)

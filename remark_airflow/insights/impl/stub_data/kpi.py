@@ -33,6 +33,7 @@ all_base_kpis = [
         "start": datetime.date(2019, 9, 21),
         "tours": 14,
         "usvs": 414,
+        "total_units": 220,
     },
     {
         "acq_demand_creation": Decimal("0.00"),
@@ -65,6 +66,7 @@ all_base_kpis = [
         "start": datetime.date(2019, 9, 14),
         "tours": 14,
         "usvs": 414,
+        "total_units": 220,
     },
 ]
 
@@ -140,7 +142,7 @@ all_computed_kpis = [
         "lease_renewal_notices": 1,
         "lease_renewals": 0,
         "lease_vacation_notices": 5,
-        "leased_rate": 0.8994974874371859,
+        "leased_rate": 0.8136363636363636,
         "leased_units": 179,
         "leased_units_end": 179,
         "leased_units_start": 172,
@@ -172,6 +174,7 @@ all_computed_kpis = [
         "usv_exe": 0.00966183574879227,
         "usv_inq": 0.08695652173913043,
         "usvs": 414,
+        "total_units": 220,
     },
     {
         "acq_demand_creation": Decimal("0.00"),
@@ -201,7 +204,7 @@ all_computed_kpis = [
         "lease_renewal_notices": 1,
         "lease_renewals": 0,
         "lease_vacation_notices": 5,
-        "leased_rate": 0.8994974874371859,
+        "leased_rate": 0.8136363636363636,
         "leased_units": 179,
         "leased_units_end": 179,
         "leased_units_start": 172,
@@ -233,6 +236,7 @@ all_computed_kpis = [
         "usv_exe": 0.00966183574879227,
         "usv_inq": 0.08695652173913043,
         "usvs": 414,
+        "total_units": 220,
     },
 ]
 
@@ -296,6 +300,7 @@ all_target_computed_kpis = [
         "usv_exe": 0.0125,
         "usv_inq": 0.07291666666666667,
         "usvs": 480,
+        "total_units": 220,
     },
     {
         "acq_demand_creation": Decimal("0.00"),
@@ -356,6 +361,7 @@ all_target_computed_kpis = [
         "usv_exe": 0.0125,
         "usv_inq": 0.07291666666666667,
         "usvs": 480,
+        "total_units": 220,
     },
 ]
 
