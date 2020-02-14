@@ -243,6 +243,7 @@ exports[`AddTagField renders input with suggestions 1`] = `
                 className="add-tag-field__suggestion-controls"
               >
                 <Button
+                  asDiv={false}
                   color="primary"
                   disabled={false}
                   onClick={[Function]}

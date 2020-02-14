@@ -197,7 +197,13 @@ class User(PermissionsMixin, AbstractBaseUser):
                 return None
         except Person.DoesNotExist:
             return None
-        return p.office.business.name
+        office = p.office
+        if not office:
+            return None
+        business = office.business
+        if not business:
+            return None
+        return business.name
 
     def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {

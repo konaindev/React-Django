@@ -194,7 +194,7 @@ export const fetchCompany = store => next => action => {
 
 export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
-    const url = `${URLS.base}/users/complete-account/`;
+    const url = `${API_URL_PREFIX}/users/complete-account/`;
     if (action.data) {
       startFetchingState(store);
       axiosPost(url, action.data)

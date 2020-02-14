@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { Form, Formik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
@@ -10,6 +11,7 @@ import "./modal_form.scss";
 class ModalForm extends React.PureComponent {
   static propTypes = {
     children: PropTypes.func.isRequired,
+    theme: PropTypes.oneOf(["gray", "highlight"]),
     title: PropTypes.string.isRequired,
     initialData: PropTypes.object,
     validationSchema: PropTypes.object,
@@ -22,6 +24,7 @@ class ModalForm extends React.PureComponent {
   };
 
   static defaultProps = {
+    theme: "gray",
     isOpen: false,
     initialData: {},
     setFormik() {},
@@ -50,9 +53,13 @@ class ModalForm extends React.PureComponent {
   };
 
   render() {
+    const { theme } = this.props;
+    const classes = cn("modal-form", {
+      [`modal-form--${theme}`]: theme !== "gray"
+    });
     return (
       <ModalWindow
-        className="modal-form"
+        className={classes}
         open={this.props.isOpen}
         onClose={this.props.onClose}
       >

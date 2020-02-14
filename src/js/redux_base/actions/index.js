@@ -9,6 +9,7 @@ export { default as projectReports } from "./project_reports";
 export { default as insights } from "./insights";
 export { default as inviteModal } from "./invite_modal";
 export { default as viewMembersModal } from "./view_members";
+export { companyActions } from "./crm";
 
 export const tutorial = {
   set: newState => ({
@@ -93,6 +94,13 @@ export const resendSetPasswordEmail = {
 };
 
 export const completeAccount = {
+  fetch: () => ({ type: "API_COMPLETE_ACCOUNT" }),
+  post: (data, callback, onError) => ({
+    type: "API_COMPLETE_ACCOUNT",
+    data,
+    callback,
+    onError
+  }),
   redirect: url => ({
     type: "COMPLETE_ACCOUNT_REDIRECT",
     url

@@ -3,13 +3,14 @@
 $modal-width: 35rem;
 $modal-padding: 1.25rem;
 
-$dark-theme-background: $gray-3;
-$dark-theme-text-color: $highlight-gray-3;
-$dark-theme-border-color: $gray-4;
+$gray-theme-background: $gray-3;
+$gray-theme-text-color: $highlight-gray-3;
+$gray-theme-border-color: $gray-4;
 
 $light-theme-background: $white;
 $light-theme-text-color: $gray-3;
 $light-theme-border-color: $gray-10;
+$light-button-border: 1px solid #ccd0d6;
 
 .address-modal.modal-window {
     width: $modal-width;
@@ -60,20 +61,20 @@ $light-theme-border-color: $gray-10;
         }
     }
 
-    &.address-modal--theme-dark {
-        background-color: $dark-theme-background;
+    &.address-modal--theme-gray {
+        background-color: $gray-theme-background;
 
         .modal-window__head,
         .address-modal__body {
-            color: $dark-theme-text-color;
-            border-color: $dark-theme-border-color;
+            color: $gray-theme-text-color;
+            border-color: $gray-theme-border-color;
         }
         .modal-window__close > svg {
-            fill: $dark-theme-text-color;
+            fill: $gray-theme-text-color;
         }
     }
 
-    &.address-modal--theme-light {
+    &.address-modal--theme-highlight {
         background-color: $light-theme-background;
 
         .modal-window__head,
@@ -86,6 +87,20 @@ $light-theme-border-color: $gray-10;
         }
         .button--outline {
             color: $light-theme-text-color;
+        }
+    }
+}
+
+.address-modal__back-btn {
+    &--highlight {
+        color: $gray-9;
+        background-color: #fff;
+        border: $light-button-border;
+        &:hover, &:focus {
+            background-color: darken(#fff, 3%);
+        }
+        &:active {
+            background-color: darken(#fff, 6%);
         }
     }
 }

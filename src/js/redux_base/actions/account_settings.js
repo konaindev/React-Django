@@ -16,5 +16,23 @@ export default {
   clear: data => ({
     type: "CLEAR_ACCOUNT_REPORTS_PROPERTIES",
     data
+  }),
+  postUserData: (data, callback, onError) => ({
+    type: "API_ACCOUNT_PROFILE_USER",
+    data,
+    callback,
+    onError
+  }),
+  postOfficeData: (data, callback, onError) => ({
+    type: "API_ACCOUNT_PROFILE_OFFICE",
+    data,
+    callback,
+    onError
+  }),
+  postCompanyData: (data, callback, onError) => ({
+    type: "API_ACCOUNT_PROFILE_COMPANY",
+    data,
+    callback,
+    onError
   })
 };

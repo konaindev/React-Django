@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button renders button as div tag correctly 1`] = `
+<div
+  className="button button--div button--default"
+  onClick={[Function]}
+>
+  It's a div tag
+</div>
+`;
+
 exports[`Button renders default button correctly 1`] = `
 <button
   className="button button--default"

@@ -4,17 +4,20 @@ import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import { COUNTRY_FIELDS } from "../../constants";
 
+import { COUNTRY_FIELDS } from "../../constants";
+import CompanyModal from "../../containers/settings_company_modal";
+import OfficeModal from "../../containers/settings_office_modal";
 import AccountSettingsField from "../account_settings_field";
 import { Tick, Upload } from "../../icons";
-import { accountSettings as actions } from "../../redux_base/actions";
+import {
+  accountSettings as actions,
+  companyActions
+} from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
-import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
-import OfficeModal from "../office_modal";
 import Select from "../select";
 import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 
@@ -170,16 +173,8 @@ export default class Profile extends React.PureComponent {
   loadCompany = (inputValue, callback) => {
     clearTimeout(this.loadCompanyTimeOut);
     this.loadCompanyTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_SEARCH",
-        data: { company: inputValue },
-        callback
-      });
+      this.props.dispatch(companyActions.searchCompany(inputValue, callback));
     }, 300);
-  };
-
-  selectSearchComponents = {
-    DropdownIndicator: () => null
   };
 
   loadAddress = (inputValue, callback) => {
@@ -192,19 +187,14 @@ export default class Profile extends React.PureComponent {
     }
     clearTimeout(this.loadAddressTimeOut);
     this.loadAddressTimeOut = setTimeout(() => {
-      this.props.dispatch({
-        type: "API_COMPANY_ADDRESS",
-        data,
-        callback
-      });
+      this.props.dispatch(companyActions.fetchAddresses(data, callback));
     }, 300);
   };
 
   onChangeCompany = company => {
-    this.props.dispatch({
-      type: "API_COMPANY_ADDRESS",
-      data: { address: "", business_id: company.label }
-    });
+    this.props.dispatch(
+      companyActions.fetchAddresses({ address: "", business_id: company.value })
+    );
   };
 
   getCompanyValues = () => {
@@ -290,16 +280,6 @@ export default class Profile extends React.PureComponent {
 
   showOfficeMessage = () => this.showSuccessMessage(this.state.officeMessage);
 
-  updateValues = values => {
-    this.formik.setFieldValue("office_street", values.office_street);
-    this.formik.setFieldValue("office_city", values.office_city);
-    this.formik.setFieldValue("office_state", {
-      label: values.full_state,
-      value: values.full_state
-    });
-    this.formik.setFieldValue("office_zip", values.office_zip);
-  };
-
   setErrorMessages = errors => {
     this.formik.setSubmitting(false);
     const formikErrors = {};
@@ -357,12 +337,9 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE_USER",
-      callback: this.setUserDataSuccess,
-      onError: this.setErrorMessages,
-      data
-    });
+    this.props.dispatch(
+      actions.postUserData(data, this.setUserDataSuccess, this.setErrorMessages)
+    );
   };
 
   render() {
@@ -553,10 +530,9 @@ export default class Profile extends React.PureComponent {
                     onChangeCompany={this.onChangeCompany}
                     onClose={this.closeCompanyModal}
                     onSuccess={this.setCompanySuccess}
-                    dispatch={this.props.dispatch}
                   />
                 </div>
-                <div className="account-settings__field-grid  account-settings__field-grid--col-3">
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
                   <div className="account-settings__value-field">
                     <div className="account-settings__label">Company</div>
                     <div className="account-settings__value">
@@ -586,6 +562,7 @@ export default class Profile extends React.PureComponent {
                   </Button>
                   <OfficeModal
                     isOpen={this.state.isOfficeOpen}
+                    isConfirmModal={true}
                     data={this.getOfficeValues()}
                     office_options={this.props.office_options}
                     office_countries={this.props.office_countries}
@@ -594,7 +571,6 @@ export default class Profile extends React.PureComponent {
                     loadAddress={this.loadAddress}
                     onClose={this.closeOfficeModal}
                     onSuccess={this.setOfficeSuccess}
-                    dispatch={this.props.dispatch}
                   />
                 </div>
                 <div className="account-settings__value-field">
