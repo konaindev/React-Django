@@ -18,12 +18,8 @@
 # https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/iap/make_iap_request.py
 # [START iap_make_request]
 import google.auth
-# import google.auth.app_engine
-# import google.auth.compute_engine.credentials
-# import google.auth.iam
 from google.auth.transport.requests import Request
 import google.oauth2.credentials
-# import google.oauth2.service_account
 import requests
 from google.oauth2 import service_account
 
