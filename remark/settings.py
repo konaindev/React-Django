@@ -53,9 +53,9 @@ if LOCAL_AIRFLOW and os.getenv("AIRFLOW_PATHING", False):
     PATH_REF = "/usr/local/airflow/dags"
 
 # Google Cloud Services Variables
-GCLOUD_SERVICE_KEY = os.getenv('GCLOUD_SERVICE_KEY', '{}')
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
-GOOGLE_WEBSERVER_ID = os.getenv("GOOGLE_WEBSERVER_ID", "")
+GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
+GOOGLE_CLIENT_ID = required_env("GOOGLE_CLIENT_ID")
+GOOGLE_WEBSERVER_ID = required_env("GOOGLE_WEBSERVER_ID")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
