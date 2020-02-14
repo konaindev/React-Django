@@ -2,6 +2,7 @@ import _isObject from "lodash/isObject";
 
 import {
   createPassword,
+  createResendEmail,
   completeAccount,
   uiStrings,
   accountSettings,
@@ -102,6 +103,44 @@ export const fetchCreatePassword = store => next => action => {
       axiosGet(url)
         .then(response => {
           next(createPassword.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const sendPasswordResetEmail = store => next => action => {
+  if (action.type === "SEND_PASSWORD_RESET_EMAIL") {
+    const url = createAPIUrl(`/users/reset-password/`);
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          const resendEmail = action.data;
+          const redirect_url = createFEUrl("/users/password-resend");
+          next(createResendEmail.set({ resendEmail, redirect_url }));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchResetPassword = store => next => action => {
+  if (action.type === "API_RESET_PASSWORD") {
+    const url = createAPIUrl(`/users/reset-password-confirm/`);
+    const successUrl = createFEUrl("/users/password-success/");
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 204) {
+            console.log("password has been reset");
+            window.location.replace(successUrl);
+          } else {
+            throw response;
+          }
         })
         .catch(e => console.log("-----> ERROR", e));
     }

@@ -11,19 +11,18 @@ import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
-import { axiosPost } from "../../utils/api";
-
+import { createPassword } from "../../redux_base/actions";
 import "./create_password_view.scss";
 
 export class CreatePasswordView extends React.PureComponent {
   static propTypes = {
-    hash: PropTypes.string.isRequired,
+    hash: PropTypes.string,
     rules: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired
       })
-    ).isRequired,
+    ),
     back_link: PropTypes.string,
     validate: PropTypes.func
   };
@@ -35,6 +34,18 @@ export class CreatePasswordView extends React.PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isCreateForm: true
+    };
+  }
+
+  componentDidMount() {
+    const {
+      params: { uid, token }
+    } = this.props.match;
+    if (uid && token) {
+      this.setState({ isCreateForm: false });
+    }
   }
 
   timeoutId;
@@ -53,23 +64,24 @@ export class CreatePasswordView extends React.PureComponent {
     new Promise(res => {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => res(), 300);
-    }).then(() =>
-      this.props
-        .validate(values.password_1, this.props.hash)
-        .then(fieldError => {
-          let errors = {};
-          if (Object.keys(fieldError).length) {
-            errors.rules_validation = fieldError;
-            errors.password_1 = this.errorMessages.password_1;
-          }
-          if (!values.password_2 || values.password_2 !== values.password_1) {
-            errors.password_2 = this.errorMessages.password_2;
-          }
-          if (Object.keys(errors).length) {
-            throw errors;
-          }
-        })
-    );
+    }).then(() => {
+      const userId = this.props.hash
+        ? this.props.hash
+        : this.props.match.params.uid;
+      return this.props.validate(values.password_1, userId).then(fieldError => {
+        let errors = {};
+        if (Object.keys(fieldError).length) {
+          errors.rules_validation = fieldError;
+          errors.password_1 = this.errorMessages.password_1;
+        }
+        if (!values.password_2 || values.password_2 !== values.password_1) {
+          errors.password_2 = this.errorMessages.password_2;
+        }
+        if (Object.keys(errors).length) {
+          throw errors;
+        }
+      });
+    });
 
   getButtonColor = isValid => {
     if (isValid) {
@@ -79,25 +91,55 @@ export class CreatePasswordView extends React.PureComponent {
   };
 
   onSubmit = (values, actions) => {
-    this.props.dispatch({
-      type: "API_CREATE_PASSWORD",
-      hash: this.props.hash,
-      data: {
-        password: values.password_1
-      }
-    });
+    const {
+      params: { uid, token }
+    } = this.props.match;
+
+    if (this.state.isCreateForm) {
+      this.props.dispatch(
+        createPassword.setPassword({
+          hash: this.props.hash,
+          data: {
+            password: values.password_1
+          }
+        })
+      );
+    } else {
+      this.props.dispatch(
+        createPassword.resetPassword({
+          uid: uid,
+          token: token,
+          new_password1: values.password_1,
+          new_password2: values.password_2
+        })
+      );
+    }
   };
 
   render() {
+    const { isCreateForm } = this.state;
+    const titlePrefix = isCreateForm
+      ? "Set your password"
+      : "Reset my password";
+    const subtitlePrefix = isCreateForm
+      ? "Enter a password to gain access to your account."
+      : "Enter your new password  to regain  entry.";
     return (
       <PageAuth backLink={this.props.back_link}>
         <div className="create-password">
           <AccountForm
-            steps={this.steps}
-            title="Set your password"
-            subtitle="Enter a password to gain access to your account."
+            steps={isCreateForm ? this.steps : null}
+            title={titlePrefix}
+            subtitle={subtitlePrefix}
           >
-            <Formik validate={this.validate} onSubmit={this.onSubmit}>
+            <Formik
+              validate={this.validate}
+              onSubmit={this.onSubmit}
+              initialValues={{
+                password_1: "",
+                password_2: ""
+              }}
+            >
               {({
                 errors,
                 touched,

@@ -82,6 +82,20 @@ const createPassword = (state = {}, action) => {
   return newState;
 };
 
+const resendEmail = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "SEND_EMAIL_SET_STATE": {
+      newState = { ...state, ...action.newState };
+      window.location.replace(action.url);
+      break;
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 const completeAccount = (
   state = {
     companyAddresses: [],
@@ -312,6 +326,7 @@ export default combineReducers({
   inviteModal,
   tutorial,
   createPassword,
+  resendEmail,
   completeAccount,
   token,
   pageMeta,

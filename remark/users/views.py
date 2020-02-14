@@ -24,7 +24,7 @@ from remark.email_app.reports.weekly_performance import update_project_contacts
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
-from remark.settings import BASE_URL
+from remark.settings import BASE_URL, FRONTEND_URL
 from remark.email_app.invites.added_to_property import (
     send_invite_email,
     send_welcome_email,
@@ -43,6 +43,15 @@ from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+def get_user(uidb64):
+    try:
+        # urlsafe_base64_decode() decodes to bytestring
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
+        user = None
+    return user
 
 
 class GetIsAnonEverythingElseAuthenticated(BasePermission):
@@ -183,14 +192,13 @@ class PasswordRulesView(APIView):
 
     def post(self, request):
         params = json.loads(request.body)
-        user_id = params["user_id"]
+        user_id_or_uid = params["user_id"]
         password = params["password"]
 
         try:
-            user = User.objects.get(public_id=user_id)
+            user = User.objects.get(public_id=user_id_or_uid)
         except User.DoesNotExist:
-            raise exceptions.APIException
-
+            user = get_user(user_id_or_uid)
         errors = {}
         for v in VALIDATION_RULES:
             try:
@@ -224,8 +232,6 @@ class ChangePasswordView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-
 class ResetPasswordView(APIView):
     """
     Send password reset email
@@ -243,7 +249,7 @@ class ResetPasswordView(APIView):
             html_email_template_name="users/emails/password_reset_email.html",
             domain_override="Remarkably",
             extra_email_context={
-                "BASE_URL": BASE_URL,
+                "BASE_URL": FRONTEND_URL,
                 "title": "Password reset",
                 "subject": "Set your Remarkably password",
             },
@@ -272,8 +278,7 @@ class ResetPasswordConfirmView(APIView):
             raise exceptions.APIException        
 
         params = json.loads(request.body)
-
-        user = self.get_user(params["uid"])
+        user = get_user(params["uid"])
         if user is None:
             raise exceptions.APIException
         if not self.token_generator.check_token(user, params["token"]):
@@ -287,15 +292,6 @@ class ResetPasswordConfirmView(APIView):
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return response
-
-    def get_user(self, uidb64):
-        try:
-            # urlsafe_base64_decode() decodes to bytestring
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User._default_manager.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
-            user = None
-        return user
 
 
 class ResendInviteView(APIView):
