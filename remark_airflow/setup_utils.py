@@ -110,16 +110,16 @@ string_env_vars = ["BASE_URL", "CERTBOT_ACCESS_ID", "CERTBOT_SECRET_KEY", "CERT_
             "GOOGLE_MAP_API_KEY", "LOADER_TIMEOUT", "MEDIA_ROOT", "MEDIA_URL", "REDIS_URL",
             "SECURE_SSL_REDIRECT", "SENDGRID_API_KEY", "AIRFLOW_URL", "GOOGLE_WEBSERVER_ID", "GOOGLE_CLIENT_ID"]
 
-dict_env_vars = ["GCLOUD_SERVICE_KEY"]
+# these represent variables that need to exist in gcp to run, but shouldn't be actual values
+placeholder_vars = ["GCLOUD_SERVICE_KEY"]
+
 
 def export_environment_variables():
     key_value_list=[]
     for env_var in string_env_vars:
         key_value_list.append(f'{env_var}={os.environ.get(env_var)}')
-    if dict_env_vars:
-        for env_var in dict_env_vars:
-            values_string = export_dict_environment_variables(env_var)
-            key_value_list.append(f'{env_var}={values_string}')
+    for env_var in placeholder_vars:
+        key_value_list.append(f'{env_var}="FAKE"')
     key_value_string = ",".join(key_value_list)
     print(key_value_string)
     add_env_vars_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --location us-central1 --update-env-variables={key_value_string}"
@@ -128,29 +128,6 @@ def export_environment_variables():
     print(add_env_vars)
 
     return
-
-#This only works if there are no nested dictionaries.
-def export_dict_environment_variables(env_var):
-    values_string = ""
-    value=os.environ.get(env_var)
-    json_value = json.loads(value)
-    for k, v in json_value.items():
-        if k == 'private_key':
-            v = json.dumps(v)
-        string_value = f'{k}={v}:'
-        values_string = values_string + string_value
-    response = f"^:^{values_string[:-1]}"
-    return response
-
-
-
-
-
-
-
-
-
-
 
 
 def check_dag_syntax_errors():

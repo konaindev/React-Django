@@ -50,7 +50,8 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
     # used to calculate start date for weekly reports using reporting_day
     def get_start_date(reporting_day):
         today = datetime.today().date()
-        start = today - timedelta(weeks=1)
+        # cut off is day before reporting day since report run at 2:00 AM
+        start = today - timedelta(days=8)
         finished = False
         while not finished:
             if start.strftime('%A') != reporting_day:
@@ -94,7 +95,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
             serialized = serialize('json', get_project)
             response = json.loads(serialized)
             project_var = [{"pk": response[0]['pk'], "reporting_day": response[0]["fields"]["reporting_day"]}]
-            Variable.set("weekly_insights_list", project_var)
+            Variable.set("weekly_insights_list", json.dumps(project_var))
             return response
 
         response = get_projects_for_today()
@@ -126,7 +127,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
                 projects_with_data.append(project_object)
 
         logging.info(f"REMARK_METRIC::PROJECTS WITH DATA COUNT {len(projects_with_data)}")
-        Variable.set("weekly_insights_list", projects_with_data)
+        Variable.set("weekly_insights_list", json.dumps(projects_with_data))
         return projects_with_data
 
 
