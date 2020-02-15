@@ -185,7 +185,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
 
     get_current_insights >> verify_project_insights >> get_projects_task >> start_weekly_insights >> complete_weekly_insights >> cleanup_variable_task
 
-    projects_list = json.loads(Variable.get("weekly_insights_list", default_var=[]))
+    projects_list = json.loads(Variable.get("weekly_insights_list", default_var=json.dumps([])))
 
     for project in projects_list:
         process_weekly_insight = PythonOperator(task_id="weekly_insights_" + project['pk'], python_callable=weekly_insights, provide_context=True, op_kwargs={'project': project}, execution_timeout=timedelta(minutes=1), dag=dag)
