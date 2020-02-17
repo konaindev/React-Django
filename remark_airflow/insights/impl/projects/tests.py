@@ -29,6 +29,7 @@ from remark_airflow.insights.impl.projects.insights import (
     usvs_on_track,
     change_health_status,
     kpi_trend,
+    lease_rate_against_target
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -117,6 +118,50 @@ class GetProjectInsightsTestCase(TestCase):
         result = get_project_insights(project_facts, self.project_insights)
         expected = {}
         self.assertEqual(result, expected)
+
+
+class LeaseRateAgainstTarget(TestCase):
+    def setUp(self) -> None:
+        project_property = create_project_property(total_units=195)
+        self.project = create_project(project_property=project_property)
+        self.start = datetime.date(year=2020, month=2, day=3)
+        self.end = datetime.date(year=2020, month=2, day=10)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"leased_units_end": 156},
+            target_period_params={"target_leased_rate": decimal.Decimal("0.83")},
+        )
+
+    def test_triggered(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = lease_rate_against_target.graph(args)
+        self.assertEqual(project_facts["var_campaign_health_status"], 2)
+        self.assertEqual(project_facts["var_current_period_leased_rate"], 0.8)
+        self.assertEqual(
+            project_facts["var_target_leased_rate"], decimal.Decimal("0.83")
+        )
+        self.assertTrue(project_facts["trigger_is_active_campaign"])
+
+        result = lease_rate_against_target.evaluate(project_facts)
+        expected_text = (
+            "Property is 80% Leased against period target of 83%, assessed as On Track."
+        )
+        self.assertEqual(result[0], "lease_rate_against_target")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        args = {
+            "start": self.start - datetime.timedelta(weeks=1),
+            "end": self.end - datetime.timedelta(weeks=1),
+            "project": self.project,
+        }
+        project_facts = lease_rate_against_target.graph(args)
+        self.assertFalse(project_facts["trigger_is_active_campaign"])
+
+        result = lease_rate_against_target.evaluate(project_facts)
+        self.assertIsNone(result)
 
 
 class ChangeHealthStatusTestCase(TestCase):

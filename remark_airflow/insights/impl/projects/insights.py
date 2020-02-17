@@ -74,7 +74,6 @@ lease_rate_against_target = Insight(
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
-        cop(var_prev_health_status, "project", "start"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_current_period_leased_rate, var_computed_kpis),
         cop(var_target_leased_rate, var_base_targets),
@@ -88,7 +87,6 @@ lease_rate_against_target = Insight(
             "project",
             "start",
             var_campaign_health_status,
-            var_prev_health_status,
             var_current_period_leased_rate,
             var_target_leased_rate,
         ),
@@ -144,8 +142,8 @@ usv_exe_off_track = Insight(
 
 usv_exe_at_risk = Insight(
     name="usv_exe_at_risk",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} of week(s"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} week(s)"
     " your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
     triggers=["trigger_usv_exe_at_risk"],
     graph=[

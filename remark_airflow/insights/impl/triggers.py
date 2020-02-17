@@ -2,12 +2,11 @@ from remark.projects.constants import HEALTH_STATUS
 
 
 def trigger_is_active_campaign(
-    project, start, health_status, prev_health_status, leased_rate, target_leased_rate
+    project, start, health_status, leased_rate, target_leased_rate
 ):
     if (
         health_status is None
-        or health_status != HEALTH_STATUS["PENDING"]
-        or prev_health_status is None
+        or health_status == HEALTH_STATUS["PENDING"]
         or leased_rate is None
         or target_leased_rate is None
     ):
