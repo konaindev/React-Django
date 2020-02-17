@@ -54,6 +54,16 @@ def get_user(uidb64):
         user = None
     return user
 
+class GetEmailView(APIView):
+    def post(self, request):
+        params = json.loads(request.body)
+        user_id_or_uid = params["data"]
+        try:
+            user = User.objects.get(public_id=user_id_or_uid)
+        except User.DoesNotExist:
+            user = get_user(user_id_or_uid)
+        return Response({"email": user.email}, status=status.HTTP_200_OK)
+
 
 class GetIsAnonEverythingElseAuthenticated(BasePermission):
     def has_permission(self, request, view):
