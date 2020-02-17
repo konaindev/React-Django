@@ -27,3 +27,8 @@ export const getPropertiesData = data => {
   }
   return axiosGet(`${API_URL_PREFIX}/account-reports${q}`);
 };
+
+export const getEmail = data =>
+  axiosPost(`${API_URL_PREFIX}/users/get-email/`, {
+    data
+  }).then(response => response.data.email);

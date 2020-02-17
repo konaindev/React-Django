@@ -18,6 +18,7 @@ from .views import (
     UserProfileView,
     CompanyProfileView,
     OfficeProfileView,
+    GetEmailView,
 )
 
 app_name = "users"
@@ -36,6 +37,11 @@ urlpatterns = [
         "users/password-rules/",
         PasswordRulesView.as_view(),
         name="users_password_rules",
+    ),
+    path(
+        "users/get-email/",
+        GetEmailView.as_view(),
+        name="users_get_email",
     ),
     path(
         "users/change-password/",
