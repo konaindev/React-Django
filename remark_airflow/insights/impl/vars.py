@@ -637,3 +637,13 @@ def var_predicted_kpi(predicting_change_health, kpis_trends):
         "predicted_weeks": prediction["weeks"],
         "predicted_health": prediction["health"],
     }
+
+
+def var_kpi_trend(kpis_trends):
+    if not kpis_trends:
+        return None
+    kpis_trends = filter(lambda t: t["trend"] != TRENDS["FLAT"], kpis_trends)
+    kpis_trends = sorted(kpis_trends, key=lambda t: t["weeks"], reverse=True)
+    if not kpis_trends:
+        return None
+    return kpis_trends[0]

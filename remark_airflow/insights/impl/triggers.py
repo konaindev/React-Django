@@ -69,3 +69,7 @@ def trigger_kpi_trend_change_health(predicting_health):
 
 def trigger_usvs_on_track(weeks):
     return weeks != 0
+
+
+def trigger_kpi_trend(predicting_health, var_kpi_trend):
+    return predicting_health is None and var_kpi_trend is not None

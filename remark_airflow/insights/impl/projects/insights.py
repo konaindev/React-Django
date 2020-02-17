@@ -16,6 +16,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_kpi_not_mitigated,
     trigger_kpi_trend_change_health,
     trigger_usvs_on_track,
+    trigger_kpi_trend,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -52,6 +53,7 @@ from remark_airflow.insights.impl.vars import (
     var_kpis_healths_statuses,
     var_predicting_change_health,
     var_predicted_kpi,
+    var_kpi_trend,
 )
 from remark_airflow.insights.impl.vars_base import (
     var_base_kpis,
@@ -416,5 +418,29 @@ usvs_on_track = Insight(
             params={"health_target": HEALTH_STATUS["ON_TRACK"], "kpi_name": "usvs"},
         ),
         cop(trigger_usvs_on_track, "var_usvs_on_track_weeks"),
+    ],
+)
+
+
+kpi_trend = Insight(
+    name="kpi_trend",
+    template="{{ var_kpi_trend['name'] | kpi_humanize  }} has been trending "
+    "{{ var_kpi_trend['trend'] }} for {{ var_kpi_trend['weeks'] }} weeks.",
+    triggers=["trigger_kpi_trend"],
+    graph=[
+        cop(var_all_base_kpis, "project", "start", "end"),
+        cop(var_all_target_kpis, "project", "start", "end"),
+        cop(var_all_computed_kpis, var_all_base_kpis),
+        cop(var_all_target_computed_kpis, var_all_base_kpis, var_all_target_kpis),
+        cop(var_kpis_trends, var_all_computed_kpis, var_all_target_computed_kpis),
+        cop(
+            var_kpis_healths_statuses,
+            var_all_computed_kpis,
+            var_all_target_computed_kpis,
+        ),
+        cop(var_predicting_change_health, var_kpis_trends, var_kpis_healths_statuses),
+        cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
+        cop(var_kpi_trend, var_kpis_trends),
+        cop(trigger_kpi_trend, var_predicted_kpi, var_kpi_trend),
     ],
 )
