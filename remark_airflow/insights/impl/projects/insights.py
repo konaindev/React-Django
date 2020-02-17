@@ -140,8 +140,8 @@ usv_exe_off_track = Insight(
 
 usv_exe_at_risk = Insight(
     name="usv_exe_at_risk",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} of week(s"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} week(s)"
     " your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
     triggers=["trigger_usv_exe_at_risk"],
     graph=[
