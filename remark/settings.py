@@ -52,17 +52,17 @@ if os.getenv("COMPOSER_AIRFLOW_ENV", False):
 if LOCAL_AIRFLOW and os.getenv("AIRFLOW_PATHING", False):
     PATH_REF = "/usr/local/airflow/dags"
 
-# Google Cloud Services Variables
-GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
-GOOGLE_CLIENT_ID = required_env("GOOGLE_CLIENT_ID")
-GOOGLE_WEBSERVER_ID = required_env("GOOGLE_WEBSERVER_ID")
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Load dotenv, if available. Override extant environment variables.
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"), override=True)
+
+# Google Cloud Services Variables
+GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
+GOOGLE_CLIENT_ID = required_env("GOOGLE_CLIENT_ID")
+GOOGLE_WEBSERVER_ID = required_env("GOOGLE_WEBSERVER_ID")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/

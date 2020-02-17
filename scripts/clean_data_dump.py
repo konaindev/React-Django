@@ -13,6 +13,7 @@ MACRO_INSIGHTS_PRIORITY = ["lease_rate_against_target", "change_health_status", 
 @click.argument("output_file", required=True, type=click.File(mode="w"))
 def command(input_file, output_file):
     print("Start.")
+
     input_json = json.load(input_file)
     result = []
     for model in input_json:
@@ -21,12 +22,11 @@ def command(input_file, output_file):
         elif model["model"] == "projects.property":
             model["fields"]["building_image"] = None
             model["fields"]["building_logo"] = None
-        elif model["model"] == "projects.project":
-            model["fields"]["reporting_day"] = random.choice(DAY_LIST)
         result.append(model)
 
     json.dump(result, output_file)
     print("Done.")
+
 
 if __name__ == "__main__":
     command()
