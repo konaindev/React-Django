@@ -28,6 +28,8 @@ from remark_airflow.insights.impl.projects.insights import (
     kpi_trend_change_health,
     usvs_on_track,
     change_health_status,
+    kpi_trend,
+    lease_rate_against_target
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -116,6 +118,50 @@ class GetProjectInsightsTestCase(TestCase):
         result = get_project_insights(project_facts, self.project_insights)
         expected = {}
         self.assertEqual(result, expected)
+
+
+class LeaseRateAgainstTarget(TestCase):
+    def setUp(self) -> None:
+        project_property = create_project_property(total_units=195)
+        self.project = create_project(project_property=project_property)
+        self.start = datetime.date(year=2020, month=2, day=3)
+        self.end = datetime.date(year=2020, month=2, day=10)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={"leased_units_end": 156},
+            target_period_params={"target_leased_rate": decimal.Decimal("0.83")},
+        )
+
+    def test_triggered(self):
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = lease_rate_against_target.graph(args)
+        self.assertEqual(project_facts["var_campaign_health_status"], 2)
+        self.assertEqual(project_facts["var_current_period_leased_rate"], 0.8)
+        self.assertEqual(
+            project_facts["var_target_leased_rate"], decimal.Decimal("0.83")
+        )
+        self.assertTrue(project_facts["trigger_is_active_campaign"])
+
+        result = lease_rate_against_target.evaluate(project_facts)
+        expected_text = (
+            "Property is 80% Leased against period target of 83%, assessed as On Track."
+        )
+        self.assertEqual(result[0], "lease_rate_against_target")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        args = {
+            "start": self.start - datetime.timedelta(weeks=1),
+            "end": self.end - datetime.timedelta(weeks=1),
+            "project": self.project,
+        }
+        project_facts = lease_rate_against_target.graph(args)
+        self.assertFalse(project_facts["trigger_is_active_campaign"])
+
+        result = lease_rate_against_target.evaluate(project_facts)
+        self.assertIsNone(result)
 
 
 class ChangeHealthStatusTestCase(TestCase):
@@ -1297,4 +1343,83 @@ class USVsOnTrackTestCase(TestCase):
         self.assertFalse(project_facts["trigger_usvs_on_track"])
 
         result = usvs_on_track.evaluate(project_facts)
+        self.assertIsNone(result)
+
+
+class KPITrendTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_trend_up(self):
+        generate_weekly_periods(4, self.project, self.end, lambda i: {"usvs": 460 - i})
+
+        project_facts = kpi_trend.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_trend"])
+        expected = {
+            "name": "usvs",
+            "target_values": [480, 480, 480, 480],
+            "trend": "up",
+            "values": [457, 458, 459, 460],
+            "weeks": 4,
+        }
+        self.assertDictEqual(project_facts["var_kpi_trend"], expected)
+
+        result = kpi_trend.evaluate(project_facts)
+        expected_text = "Volume of USV has been trending up for 4 weeks."
+        self.assertEqual(result[0], "kpi_trend")
+        self.assertEqual(result[1], expected_text)
+
+    def test_trend_down(self):
+        generate_weekly_periods(4, self.project, self.end, lambda i: {"usvs": 460 + i})
+
+        project_facts = kpi_trend.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_trend"])
+        expected = {
+            "name": "usvs",
+            "target_values": [480, 480, 480, 480],
+            "trend": "down",
+            "values": [463, 462, 461, 460],
+            "weeks": 4,
+        }
+        self.assertDictEqual(project_facts["var_kpi_trend"], expected)
+
+        result = kpi_trend.evaluate(project_facts)
+        expected_text = "Volume of USV has been trending down for 4 weeks."
+        self.assertEqual(result[0], "kpi_trend")
+        self.assertEqual(result[1], expected_text)
+
+    def test_not_triggered(self):
+        generate_weekly_periods(4, self.project, self.end)
+        create_periods(self.project, start=self.start, end=self.end)
+
+        project_facts = kpi_trend.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend"])
+        result = kpi_trend.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_one_week(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        project_facts = kpi_trend.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend"])
+        result = kpi_trend.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        project_facts = kpi_trend.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend"])
+        result = kpi_trend.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_kpi_trend_change_health_triggered(self):
+        generate_weekly_periods(
+            8, self.project, self.end, lambda i: {"usvs": 460 - i * 10}
+        )
+
+        project_facts = kpi_trend.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend"])
+
+        result = kpi_trend.evaluate(project_facts)
         self.assertIsNone(result)

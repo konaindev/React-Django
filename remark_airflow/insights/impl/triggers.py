@@ -2,12 +2,11 @@ from remark.projects.constants import HEALTH_STATUS
 
 
 def trigger_is_active_campaign(
-    project, start, health_status, prev_health_status, leased_rate, target_leased_rate
+    project, start, health_status, leased_rate, target_leased_rate
 ):
     if (
         health_status is None
-        or health_status != HEALTH_STATUS["PENDING"]
-        or prev_health_status is None
+        or health_status == HEALTH_STATUS["PENDING"]
         or leased_rate is None
         or target_leased_rate is None
     ):
@@ -70,3 +69,7 @@ def trigger_kpi_trend_change_health(predicting_health):
 
 def trigger_usvs_on_track(weeks):
     return weeks != 0
+
+
+def trigger_kpi_trend(predicting_health, var_kpi_trend):
+    return predicting_health is None and var_kpi_trend is not None

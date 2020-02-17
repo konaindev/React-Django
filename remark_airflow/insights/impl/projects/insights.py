@@ -16,6 +16,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_kpi_not_mitigated,
     trigger_kpi_trend_change_health,
     trigger_usvs_on_track,
+    trigger_kpi_trend,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -52,6 +53,7 @@ from remark_airflow.insights.impl.vars import (
     var_kpis_healths_statuses,
     var_predicting_change_health,
     var_predicted_kpi,
+    var_kpi_trend,
 )
 from remark_airflow.insights.impl.vars_base import (
     var_base_kpis,
@@ -72,7 +74,6 @@ lease_rate_against_target = Insight(
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
-        cop(var_prev_health_status, "project", "start"),
         cop(var_computed_kpis, var_base_kpis),
         cop(var_current_period_leased_rate, var_computed_kpis),
         cop(var_target_leased_rate, var_base_targets),
@@ -86,7 +87,6 @@ lease_rate_against_target = Insight(
             "project",
             "start",
             var_campaign_health_status,
-            var_prev_health_status,
             var_current_period_leased_rate,
             var_target_leased_rate,
         ),
@@ -142,8 +142,8 @@ usv_exe_off_track = Insight(
 
 usv_exe_at_risk = Insight(
     name="usv_exe_at_risk",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
-    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} of week(s"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    " has been At Risk for {{ var_weeks_usv_exe_at_risk }} week(s)"
     " your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
     triggers=["trigger_usv_exe_at_risk"],
     graph=[
@@ -418,5 +418,29 @@ usvs_on_track = Insight(
             params={"health_target": HEALTH_STATUS["ON_TRACK"], "kpi_name": "usvs"},
         ),
         cop(trigger_usvs_on_track, "var_usvs_on_track_weeks"),
+    ],
+)
+
+
+kpi_trend = Insight(
+    name="kpi_trend",
+    template="{{ var_kpi_trend['name'] | kpi_humanize  }} has been trending "
+    "{{ var_kpi_trend['trend'] }} for {{ var_kpi_trend['weeks'] }} weeks.",
+    triggers=["trigger_kpi_trend"],
+    graph=[
+        cop(var_all_base_kpis, "project", "start", "end"),
+        cop(var_all_target_kpis, "project", "start", "end"),
+        cop(var_all_computed_kpis, var_all_base_kpis),
+        cop(var_all_target_computed_kpis, var_all_base_kpis, var_all_target_kpis),
+        cop(var_kpis_trends, var_all_computed_kpis, var_all_target_computed_kpis),
+        cop(
+            var_kpis_healths_statuses,
+            var_all_computed_kpis,
+            var_all_target_computed_kpis,
+        ),
+        cop(var_predicting_change_health, var_kpis_trends, var_kpis_healths_statuses),
+        cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
+        cop(var_kpi_trend, var_kpis_trends),
+        cop(trigger_kpi_trend, var_predicted_kpi, var_kpi_trend),
     ],
 )
