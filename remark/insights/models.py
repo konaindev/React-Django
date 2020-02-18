@@ -103,6 +103,9 @@ class SuggestedActionTactic(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=160)
 
+    def __str__(self):
+        return self.name
+
 
 class SuggestedActionManager(models.Manager):
     pass
@@ -115,7 +118,12 @@ class SuggestedAction(models.Model):
 
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=160)
-    tactics = models.ManyToManyField(SuggestedActionTactic, blank=True, through='ActionAndTacticsJunction')
+    tactics = models.ManyToManyField(
+        SuggestedActionTactic, blank=True, through="ActionAndTacticsJunction"
+    )
+
+    def __str__(self):
+        return self.title
 
 
 class ActionAndTacticsJunction(models.Model):
@@ -123,12 +131,13 @@ class ActionAndTacticsJunction(models.Model):
     Required for 'django-admin-sortable2' package
     Junction table model which connects SuggestedActionTactic <=> SuggestedAction
     """
+
     suggested_action = models.ForeignKey(SuggestedAction, on_delete=models.CASCADE)
     tactic = models.ForeignKey(SuggestedActionTactic, on_delete=models.CASCADE)
     tactic_order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ('tactic_order',)
+        ordering = ("tactic_order",)
 
 
 class KPIManager(models.Manager):
@@ -156,7 +165,6 @@ class KPI(models.Model):
         verbose_name="On Track - Category 1",
         help_text="Suggested Action",
     )
-
     on_track_category_2_action = models.OneToOneField(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
@@ -176,7 +184,6 @@ class KPI(models.Model):
         verbose_name="Off Track/At Risk - Category 1",
         help_text="Suggested Action",
     )
-
     off_track_category_2_action = models.OneToOneField(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
@@ -196,7 +203,6 @@ class KPI(models.Model):
         verbose_name="Baseline - Category 1",
         help_text="Suggested Action",
     )
-
     baseline_category_2_action = models.OneToOneField(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
@@ -206,6 +212,9 @@ class KPI(models.Model):
         verbose_name="Baseline - Category 2",
         help_text="Suggested Action",
     )
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = "KPI"
