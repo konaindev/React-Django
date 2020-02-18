@@ -105,10 +105,10 @@ SHOW_CAMPAIGN = {
     "retention_rate" : True,
     "occupied_rate" : False,
     "cds" : True,
-    "renew" : True,
+    "renew" : False,
     "vacate" : True,
-    "move_ins" : True,
-    "move_outs" : True,
+    "move_ins" : False,
+    "move_outs" : False,
     "usv" : True,
     "inq" : True,
     "tou" : True,
@@ -117,13 +117,13 @@ SHOW_CAMPAIGN = {
     "usv_inq" : True,
     "inq_tou" : True,
     "tou_app" : True,
-    "app_exe" : True,
+    "app_exe" : False,
     "usv_exe" : True,
-    "cost_per_usv" : True,
-    "cost_per_inq" : True,
-    "cost_per_tou" : True,
-    "cost_per_app" : True,
-    "cost_per_exe" : True
+    "cost_per_usv" : False,
+    "cost_per_inq" : False,
+    "cost_per_tou" : False,
+    "cost_per_app" : False,
+    "cost_per_exe" : False
 }
 
 # KPIs that should be included in Email Reports
@@ -172,6 +172,7 @@ KPI_POSITIVE_DIRECTION = {
 }
 
 KPIS = SHOW_CAMPAIGN.keys()
+KPI_NAMES_TO_SHOW = {i[0]: KPI_NAMES[i[0]] for i in SHOW_CAMPAIGN.items() if i[1]}
 KPI_CATEGORIES = {
     "top": "Top",
     "risk": "Risk",
