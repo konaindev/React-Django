@@ -143,7 +143,8 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for On Track - Category 1",
+        verbose_name="On Track - Category 1",
+        help_text="Suggested Action",
     )
 
     on_track_category_2_action = models.OneToOneField(
@@ -152,7 +153,8 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for On Track - Category 2",
+        verbose_name="On Track - Category 2",
+        help_text="Suggested Action",
     )
 
     off_track_category_1_action = models.OneToOneField(
@@ -161,7 +163,8 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for Off Track/At Risk - Category 1",
+        verbose_name="Off Track/At Risk - Category 1",
+        help_text="Suggested Action",
     )
 
     off_track_category_2_action = models.OneToOneField(
@@ -170,7 +173,8 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for Off Track/At Risk - Category 2",
+        verbose_name="Off Track/At Risk - Category 2",
+        help_text="Suggested Action",
     )
 
     baseline_category_1_action = models.OneToOneField(
@@ -179,7 +183,8 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for Baseline - Category 1",
+        verbose_name="Baseline - Category 1",
+        help_text="Suggested Action",
     )
 
     baseline_category_2_action = models.OneToOneField(
@@ -188,5 +193,6 @@ class KPI(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        help_text="Suggested Action for Baseline - Category 2",
+        verbose_name="Baseline - Category 2",
+        help_text="Suggested Action",
     )
