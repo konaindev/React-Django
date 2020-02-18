@@ -17,4 +17,6 @@ class Migration(migrations.Migration):
 
     dependencies = [("insights", "0006_add_kpi_suggested_action_tactics")]
 
-    operations = [migrations.RunPython(create_pre_existing_kpis)]
+    operations = [
+        migrations.RunPython(create_pre_existing_kpis, reverse_code=migrations.RunPython.noop)
+    ]
