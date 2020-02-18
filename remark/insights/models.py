@@ -116,6 +116,10 @@ class SuggestedActionTactic(models.Model):
     suggested_action = models.ForeignKey(
         SuggestedAction, on_delete=models.CASCADE, related_name="tactics"
     )
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
 
 
 class KPIManager(models.Manager):
