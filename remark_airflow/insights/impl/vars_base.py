@@ -1,4 +1,3 @@
-from remark.lib.metrics import BareMultiPeriod
 from remark.lib.time_series.computed import (
     generate_computed_kpis,
     generate_computed_targets,
