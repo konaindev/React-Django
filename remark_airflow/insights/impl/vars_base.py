@@ -1,3 +1,4 @@
+from remark.lib.metrics import BareMultiPeriod
 from remark.lib.time_series.computed import (
     generate_computed_kpis,
     generate_computed_targets,
@@ -17,8 +18,16 @@ def var_base_kpis(project, start, end):
 
 
 def var_base_targets(project, start, end):
-    base_targets = get_targets_for_project(project, start, end)
-    return base_targets
+    multiperiod = BareMultiPeriod.from_periods(project.get_target_periods())
+    break_times = [start, end]
+    period = multiperiod.get_periods(*break_times)[0]
+    values = period.get_values()
+    keys = list(values.keys())
+    for key in keys:
+        if "target_" in key:
+            values[key[7:]] = values[key]
+            del values[key]
+    return values
 
 
 def var_computed_kpis(base_kpis):
