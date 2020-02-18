@@ -123,8 +123,8 @@ change_health_status = Insight(
 usv_exe_off_track = Insight(
     name="usv_exe_off_track",
     template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
-    " has been Off Track for {{ var_weeks_usv_exe_off_track }} week(s) and"
-    " your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
+    " has been Off Track for {{ var_weeks_usv_exe_off_track }} week(s)"
+    " and your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
     triggers=["trigger_usv_exe_off_track"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -142,9 +142,9 @@ usv_exe_off_track = Insight(
 
 usv_exe_at_risk = Insight(
     name="usv_exe_at_risk",
-    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate,"
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
     " has been At Risk for {{ var_weeks_usv_exe_at_risk }} week(s)"
-    " your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
+    " and your {{ var_kpi_usv_exe_at_risk }} has negatively impacted it most. ",
     triggers=["trigger_usv_exe_at_risk"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
@@ -164,7 +164,7 @@ usv_exe_on_track = Insight(
     name="usv_exe_on_track",
     template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
     " has been On Track for {{ var_weeks_usv_exe_on_track }} week(s)"
-    " your {{ var_kpi_usv_exe_on_track }} has positively impacted it most.",
+    " and your {{ var_kpi_usv_exe_on_track }} has positively impacted it most.",
     triggers=["trigger_usv_exe_on_track"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
