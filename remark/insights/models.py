@@ -88,14 +88,13 @@ class Insight(models.Model):
         ordering = ["priority_order"]
 
 
-
 class SuggestedActionManager(models.Manager):
     pass
 
 
 class SuggestedAction(models.Model):
     public_id = models.CharField(
-        primary_key=True, max_length=32, default=get_suggested_action_id
+        primary_key=True, max_length=32, default=get_suggested_action_id, editable=False
     )
 
     title = models.CharField(max_length=50)
@@ -108,7 +107,7 @@ class SuggestedActionTacticManager(models.Manager):
 
 class SuggestedActionTactic(models.Model):
     public_id = models.CharField(
-        primary_key=True, max_length=32, default=get_suggested_action_tactic_id
+        primary_key=True, max_length=32, default=get_suggested_action_tactic_id, editable=False
     )
 
     name = models.CharField(max_length=50)
@@ -131,11 +130,11 @@ class KPI(models.Model):
         primary_key=True, max_length=24, default=get_kpi_id, editable=False,
     )
 
-    name = models.Field(
+    name = models.TextField(
         choices=KPI_NAMES.items(), help_text="KPI name, user cannot edit"
     )
     definition = models.CharField(
-        max_length=255, help_text="KPI Definition"
+        max_length=255, null=True, blank=True, help_text="KPI Definition"
     )
 
     on_track_category_1_action = models.OneToOneField(
