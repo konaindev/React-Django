@@ -1,11 +1,10 @@
 from django.contrib import admin
+
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
+
 from remark.admin import admin_site
-
 from remark.lib.logging import error_text, getLogger
-
-from .models import Insight, SuggestedAction, SuggestedActionTactic, KPI
-
-from adminsortable2.admin import SortableAdminMixin
+from remark.insights.models import Insight, SuggestedAction, SuggestedActionTactic, KPI
 
 logger = getLogger(__name__)
 
@@ -14,9 +13,22 @@ class InsightAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ["name", "include_in_email"]
 
 
+class SuggestedActionTacticTableInline(SortableInlineAdminMixin, admin.TabularInline):
+    verbose_name = "Suggested Action Tactic"
+
+    model = SuggestedActionTactic
+    # fields = [ "name" ]
+    # readonly_fields = [ ]
+    show_change_link = True
+    extra = 0
+    max_num = 0
+    ordering = ["sort_order"]
+
+
 @admin.register(SuggestedAction, site=admin_site)
 class SuggestedActionAdmin(admin.ModelAdmin):
     list_display = ["title", "description"]
+    inlines = (SuggestedActionTacticTableInline,)
 
 
 @admin.register(SuggestedActionTactic, site=admin_site)
