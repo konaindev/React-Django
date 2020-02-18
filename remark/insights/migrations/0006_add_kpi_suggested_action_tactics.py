@@ -13,38 +13,34 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='SuggestedAction',
+            name='SuggestedActionTactic',
             fields=[
-                ('public_id', models.CharField(default=remark.insights.models.get_suggested_action_id, max_length=32, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=50)),
+                ('public_id', models.CharField(default=remark.insights.models.get_suggested_action_tactic_id, editable=False, max_length=32, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=50)),
                 ('description', models.TextField(max_length=160)),
             ],
         ),
         migrations.CreateModel(
-            name='SuggestedActionTactic',
+            name='SuggestedAction',
             fields=[
-                ('public_id', models.CharField(default=remark.insights.models.get_suggested_action_tactic_id, max_length=32, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=50)),
+                ('public_id', models.CharField(default=remark.insights.models.get_suggested_action_id, editable=False, max_length=32, primary_key=True, serialize=False)),
+                ('title', models.CharField(max_length=50)),
                 ('description', models.TextField(max_length=160)),
-                ('sort_order', models.PositiveIntegerField(default=0)),
-                ('suggested_action', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tactics', to='insights.SuggestedAction')),
+                ('tactics', models.ManyToManyField(blank=True, to='insights.SuggestedActionTactic')),
             ],
-            options={
-                'ordering': ['sort_order'],
-            },
         ),
         migrations.CreateModel(
             name='KPI',
             fields=[
                 ('public_id', models.CharField(default=remark.insights.models.get_kpi_id, editable=False, max_length=24, primary_key=True, serialize=False)),
                 ('name', models.TextField(choices=[('leased', 'Leased'), ('retention', 'Retention'), ('occupied', 'Occupied'), ('app', 'Lease Applications / Volume of APP'), ('cds', 'Cancellations & Denials'), ('renew', 'Notices to Renew'), ('vacate', 'Notices to Vacate'), ('move_ins', 'Move Ins'), ('move_outs', 'Move Outs'), ('investment', 'Campaign Investment'), ('acq_investment', 'Acquisition Investment'), ('acq_romi', 'Acquisition ROMI'), ('lease_renewals', 'Lease Renewals'), ('ret_investment', 'Retention Investment'), ('ret_romi', 'Retention ROMI'), ('usv_exe', 'USV > EXE'), ('lowest_monthly_rent', 'Cost Per EXE / Lowest Monthly Rent'), ('usv', 'Volume of USV'), ('inq', 'Volume of INQ'), ('tou', 'Volume of TOU'), ('exe', 'Volume of EXE'), ('usv_inq', 'USV > INQ'), ('inq_tou', 'INQ > TOU'), ('tou_app', 'TOU > APP'), ('app_exe', 'APP > EXE'), ('cost_per_usv', 'Cost per USV'), ('cost_per_inq', 'Cost per INQ'), ('cost_per_tou', 'Cost per TOU'), ('cost_per_app', 'Cost per APP'), ('cost_per_exe', 'Cost per EXE')], help_text='KPI name, user cannot edit')),
-                ('definition', models.CharField(help_text='KPI Definition', max_length=255)),
-                ('baseline_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action for Baseline - Category 1', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
-                ('baseline_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action for Baseline - Category 2', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
-                ('off_track_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action for Off Track/At Risk - Category 1', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
-                ('off_track_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action for Off Track/At Risk - Category 2', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
-                ('on_track_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action for On Track - Category 1', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
-                ('on_track_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action for On Track - Category 2', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction')),
+                ('definition', models.CharField(blank=True, help_text='KPI Definition', max_length=255, null=True)),
+                ('baseline_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='Baseline - Category 1')),
+                ('baseline_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='Baseline - Category 2')),
+                ('off_track_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='Off Track/At Risk - Category 1')),
+                ('off_track_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='Off Track/At Risk - Category 2')),
+                ('on_track_category_1_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='On Track - Category 1')),
+                ('on_track_category_2_action', models.OneToOneField(blank=True, help_text='Suggested Action', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='insights.SuggestedAction', verbose_name='On Track - Category 2')),
             ],
         ),
     ]

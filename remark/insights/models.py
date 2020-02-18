@@ -21,11 +21,11 @@ def get_performance_insights_id():
 
 
 def get_suggested_action_id():
-    return public_id("suggested_action")
+    return public_id("action")
 
 
 def get_suggested_action_tactic_id():
-    return public_id("action_tactic")
+    return public_id("tactic")
 
 
 def get_kpi_id():
@@ -88,19 +88,6 @@ class Insight(models.Model):
         ordering = ["priority_order"]
 
 
-class SuggestedActionManager(models.Manager):
-    pass
-
-
-class SuggestedAction(models.Model):
-    public_id = models.CharField(
-        primary_key=True, max_length=32, default=get_suggested_action_id, editable=False
-    )
-
-    title = models.CharField(max_length=50)
-    description = models.TextField(max_length=160)
-
-
 class SuggestedActionTacticManager(models.Manager):
     pass
 
@@ -112,13 +99,24 @@ class SuggestedActionTactic(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=160)
-    suggested_action = models.ForeignKey(
-        SuggestedAction, on_delete=models.CASCADE, related_name="tactics"
-    )
-    sort_order = models.PositiveIntegerField(default=0)
+    # sort_order = models.PositiveIntegerField(default=0)
 
-    class Meta:
-        ordering = ["sort_order"]
+    # class Meta:
+    #     ordering = ["sort_order"]
+
+
+class SuggestedActionManager(models.Manager):
+    pass
+
+
+class SuggestedAction(models.Model):
+    public_id = models.CharField(
+        primary_key=True, max_length=32, default=get_suggested_action_id, editable=False
+    )
+
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=160)
+    tactics = models.ManyToManyField(SuggestedActionTactic, blank=True)
 
 
 class KPIManager(models.Manager):
