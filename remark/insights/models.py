@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import JSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 
+from .constants import KPI_NAMES
 from remark.lib.tokens import public_id
 
 
@@ -126,8 +127,8 @@ class KPI(models.Model):
         primary_key=True, max_length=24, default=get_kpi_id, editable=False,
     )
 
-    name = models.CharField(
-        max_length=255, help_text="KPI name, user cannot edit"
+    name = models.Field(
+        choices=KPI_NAMES.items(), help_text="KPI name, user cannot edit"
     )
     definition = models.CharField(
         max_length=255, help_text="KPI Definition"
