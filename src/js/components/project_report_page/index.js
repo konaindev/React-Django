@@ -64,7 +64,7 @@ export class ProjectReportPage extends Component {
 
   get isShowInsightsButton() {
     const { reportType } = this.props;
-    return reportType === "performance" || reportType === "baseline";
+    return reportType === "performance"; // || reportType === "baseline";
   }
 
   getBuildingImage = () => {
