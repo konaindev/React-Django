@@ -14,13 +14,14 @@ class InsightAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 
 class TacticTablularInline(SortableInlineAdminMixin, admin.TabularInline):
-    # verbose_name = "Suggested Action Tactic"
+    MAX_TACTICS_COUNT = 8
 
     model = SuggestedAction.tactics.through
-    # readonly_fields = [ ]
-    # show_change_link = True
-    # extra = 0
-    # max_num = 0
+    verbose_name = "Suggested Action Tactic"
+
+    show_change_link = True
+    extra = 1
+    max_num = MAX_TACTICS_COUNT
 
 
 @admin.register(SuggestedAction, site=admin_site)
