@@ -94,15 +94,14 @@ class SuggestedActionTacticManager(models.Manager):
 
 class SuggestedActionTactic(models.Model):
     public_id = models.CharField(
-        primary_key=True, max_length=32, default=get_suggested_action_tactic_id, editable=False
+        primary_key=True,
+        max_length=32,
+        default=get_suggested_action_tactic_id,
+        editable=False,
     )
 
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=160)
-    # sort_order = models.PositiveIntegerField(default=0)
-
-    # class Meta:
-    #     ordering = ["sort_order"]
 
 
 class SuggestedActionManager(models.Manager):
@@ -116,7 +115,20 @@ class SuggestedAction(models.Model):
 
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=160)
-    tactics = models.ManyToManyField(SuggestedActionTactic, blank=True)
+    tactics = models.ManyToManyField(SuggestedActionTactic, blank=True, through='ActionAndTacticsJunction')
+
+
+class ActionAndTacticsJunction(models.Model):
+    """
+    Required for 'django-admin-sortable2' package
+    Junction table model which connects SuggestedActionTactic <=> SuggestedAction
+    """
+    suggested_action = models.ForeignKey(SuggestedAction, on_delete=models.CASCADE)
+    tactic = models.ForeignKey(SuggestedActionTactic, on_delete=models.CASCADE)
+    tactic_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('tactic_order',)
 
 
 class KPIManager(models.Manager):
