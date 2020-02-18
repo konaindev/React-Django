@@ -2,33 +2,53 @@
 
 .funnel-box-layout {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     min-height: $s20;
-    align-items: center;
-    padding: $s5 $s8;
+    padding: $s5 1.875rem;
     border-bottom: 1px solid $table-border-color;
     &:hover {
-        z-index: 999; // hovered item is always moved to the top of the stack
-        transform: translateY(-23px);// scaleY(1.5333);
-        transform-origin: 0 50% 0;
-        background-color: inherit;
-        border-color: blue;
-        border-width: 1px;
+        // z-index: 999; // hovered item is always moved to the top of the stack
+        // transform: translateY(-23px);// scaleY(1.5333);
+        // transform-origin: 0 50% 0;
+        // background-color: inherit;
+        // border-color: blue;
+        // border-width: 1px;
     }
     &:first-child {
         border-top: 1px solid $table-border-color;
     }
 
+    &__badge{ // Replace / Remove with dynamic badge
+        background: transparent;
+        border: 1px solid #89FF45;
+        border-radius: 2px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: #89FF45;
+        font-size: 11px;
+        line-height: 20px;
+        padding: 0 6px;
+        position: absolute;
+        left: 30px;
+        top: 10px;
+        opacity: 1;
+        transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
     &__left {
-        flex: 1;
+        //flex: 1;
+        margin-right: auto;
     }
 
     &__right {
-        flex: 1;
+        //flex: 1;
         text-align: right;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: flex-end;
+        margin-left: auto;
     }
 
     &__name {
@@ -65,9 +85,10 @@
 }
 
 .funnel-box-layout__wrapper {
-    flex: 1;
+    display: flex;
+    // flex: 1;
     width: 100%;
     flex-direction: row;
     bottom: 0;
-    position: absolute;
+    // position: absolute;
 }
