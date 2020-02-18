@@ -46,30 +46,14 @@ class VarBaseTargetsTestCase(TestCase):
 
     def test_no_kpi(self):
         result = var_base_targets(self.project, self.start, self.end)
-        expected = {
-            "acq_investment": None,
-            "delta_leases": None,
-            "inquiries": None,
-            "lease_applications": None,
-            "lease_cds": None,
-            "lease_renewal_notices": None,
-            "lease_renewals": None,
-            "lease_vacation_notices": None,
-            "leased_rate": None,
-            "leases_executed": None,
-            "move_ins": None,
-            "move_outs": None,
-            "occupied_units": None,
-            "ret_investment": None,
-            "tours": None,
-            "usvs": None,
-        }
-        self.assertDictEqual(result, expected)
+        self.assertIsNone(result)
 
     def test_have_kpi(self):
         create_periods(self.project, start=self.start, end=self.end)
         result = var_base_targets(self.project, self.start, self.end)
         expected = {
+            "start": self.start,
+            "end": self.end,
             "acq_investment": Decimal("1998.43"),
             "delta_leases": 4,
             "inquiries": 35,
@@ -96,22 +80,4 @@ class VarBaseTargetsTestCase(TestCase):
             end=self.end - datetime.timedelta(weeks=1),
         )
         result = var_base_targets(self.project, self.start, self.end)
-        expected = {
-            "acq_investment": None,
-            "delta_leases": None,
-            "inquiries": None,
-            "lease_applications": None,
-            "lease_cds": None,
-            "lease_renewal_notices": None,
-            "lease_renewals": None,
-            "lease_vacation_notices": None,
-            "leased_rate": Decimal("0.940"),
-            "leases_executed": None,
-            "move_ins": None,
-            "move_outs": None,
-            "occupied_units": 150,
-            "ret_investment": None,
-            "tours": None,
-            "usvs": None,
-        }
-        self.assertDictEqual(result, expected)
+        self.assertIsNone(result)

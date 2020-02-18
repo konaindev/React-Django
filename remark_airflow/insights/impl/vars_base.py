@@ -18,16 +18,8 @@ def var_base_kpis(project, start, end):
 
 
 def var_base_targets(project, start, end):
-    multiperiod = BareMultiPeriod.from_periods(project.get_target_periods())
-    break_times = [start, end]
-    period = multiperiod.get_periods(*break_times)[0]
-    values = period.get_values()
-    keys = list(values.keys())
-    for key in keys:
-        if "target_" in key:
-            values[key[7:]] = values[key]
-            del values[key]
-    return values
+    base_targets = get_targets_for_project(project, start, end)
+    return base_targets
 
 
 def var_computed_kpis(base_kpis):
