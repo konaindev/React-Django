@@ -194,3 +194,6 @@ class KPI(models.Model):
         verbose_name="Baseline - Category 2",
         help_text="Suggested Action",
     )
+
+    class Meta:
+        verbose_name = "KPI"
