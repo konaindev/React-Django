@@ -138,6 +138,7 @@ class ActionAndTacticsJunction(models.Model):
 
     class Meta:
         ordering = ("tactic_order",)
+        unique_together = (("suggested_action", "tactic",),)
 
 
 class KPIManager(models.Manager):

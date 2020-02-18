@@ -17,7 +17,8 @@ class TacticTablularInline(SortableInlineAdminMixin, admin.TabularInline):
     MAX_TACTICS_COUNT = 8
 
     model = SuggestedAction.tactics.through
-    verbose_name = "Suggested Action Tactic"
+    verbose_name = "Tactic"
+    verbose_name_plural = "Tactics"
 
     show_change_link = True
     extra = 1
