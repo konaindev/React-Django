@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from .reports.constants import KPI_NAMES, KPI_CATEGORIES, MACRO_INSIGHTS_OPTIONS
+from .reports.constants import KPI_CATEGORIES, KPI_NAMES_TO_SHOW
 
 
 class PerformanceEmailManager(models.Manager):
@@ -44,11 +44,11 @@ class PerformanceEmail(models.Model):
     top_macro_insight_2 = models.TextField(null=True, blank=True, help_text="Second Highest Priority Macro Insight")
     top_macro_insight_3 = models.TextField(null=True, blank=True, help_text="Third Highest Priority Macro Insight")
 
-    top_performing_kpi = models.TextField(choices=KPI_NAMES.items())
+    top_performing_kpi = models.TextField(choices=KPI_NAMES_TO_SHOW.items())
     top_performing_insight = models.TextField(
         null=True, blank=True, help_text="Optional text for Highest Performer"
     )
-    low_performing_kpi = models.TextField(choices=KPI_NAMES.items())
+    low_performing_kpi = models.TextField(choices=KPI_NAMES_TO_SHOW.items())
     low_performing_insight = models.TextField(
         null=True, blank=True, help_text="Optional text for Lowest Performer"
     )
@@ -92,6 +92,5 @@ class PerformanceEmailKPI(models.Model):
         PerformanceEmail, on_delete=models.CASCADE, related_name="performance_kpis"
     )
 
-    name = models.TextField(choices=KPI_NAMES.items())
+    name = models.TextField(choices=KPI_NAMES_TO_SHOW.items())
     category = models.TextField(choices=KPI_CATEGORIES.items())
-
