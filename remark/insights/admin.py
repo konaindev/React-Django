@@ -13,23 +13,20 @@ class InsightAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ["name", "include_in_email"]
 
 
-# class SuggestedActionTacticTableInline(SortableInlineAdminMixin, admin.TabularInline):
-class SuggestedActionTacticTableInline(admin.TabularInline):
-    verbose_name = "Suggested Action Tactic"
+class TacticTablularInline(SortableInlineAdminMixin, admin.TabularInline):
+    # verbose_name = "Suggested Action Tactic"
 
-    model = SuggestedActionTactic
-    # fields = [ "name" ]
+    model = SuggestedAction.tactics.through
     # readonly_fields = [ ]
-    show_change_link = True
-    extra = 0
-    max_num = 0
-    # ordering = ["sort_order"]
+    # show_change_link = True
+    # extra = 0
+    # max_num = 0
 
 
 @admin.register(SuggestedAction, site=admin_site)
 class SuggestedActionAdmin(admin.ModelAdmin):
     list_display = ["title", "description"]
-    # inlines = (SuggestedActionTacticTableInline,)
+    inlines = (TacticTablularInline,)
 
 
 @admin.register(SuggestedActionTactic, site=admin_site)
