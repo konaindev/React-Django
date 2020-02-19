@@ -2,7 +2,13 @@
     "Paths": {
         "Quantity": 1,
         "Items": [
-            "/*"
+            "/index.html",
+            "/index.cs",
+            "/index.js",
+            "/favicon.ico",
+            "/*.otf",
+            "/*.svg",
+            "/*.png"
         ]
     },
     "CallerReference": "rmb-frontend-build"
