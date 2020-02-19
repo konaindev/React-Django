@@ -2874,301 +2874,326 @@ exports[`ProjectReportPage renders baseline report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Volume of USV
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Volume of USV
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            4-Week Average: 1,509
+                          </div>
                         </div>
                         <div
-                          className="funnel-box-layout__target"
+                          className="funnel-box-layout__right"
                         >
-                          4-Week Average: 1,509
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          19,621
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            19,621
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Volume of INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Volume of INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            4-Week Average: 60
+                          </div>
                         </div>
                         <div
-                          className="funnel-box-layout__target"
+                          className="funnel-box-layout__right"
                         >
-                          4-Week Average: 60
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          785
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            785
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Volume of TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Volume of TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            4-Week Average: 20
+                          </div>
                         </div>
                         <div
-                          className="funnel-box-layout__target"
+                          className="funnel-box-layout__right"
                         >
-                          4-Week Average: 20
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          259
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            259
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Volume of APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Volume of APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            4-Week Average: 7
+                          </div>
                         </div>
                         <div
-                          className="funnel-box-layout__target"
+                          className="funnel-box-layout__right"
                         >
-                          4-Week Average: 7
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          96
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            96
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Volume of EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Volume of EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            4-Week Average: 5
+                          </div>
                         </div>
                         <div
-                          className="funnel-box-layout__target"
+                          className="funnel-box-layout__right"
                         >
-                          4-Week Average: 5
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          68
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            68
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -3191,221 +3216,241 @@ exports[`ProjectReportPage renders baseline report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          USV → INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            USV → INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          4%
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            4%
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          INQ → TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            INQ → TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          33%
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            33%
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          TOU → APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            TOU → APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          37%
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            37%
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          APP → EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            APP → EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          71%
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            71%
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -3428,276 +3473,301 @@ exports[`ProjectReportPage renders baseline report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Cost per USV
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Cost per USV
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          $3
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $3
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Cost per INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Cost per INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          $87
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $87
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Cost per TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Cost per TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          $262
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $262
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Cost per APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Cost per APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          $708
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $708
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
+                          className="funnel-box-layout__left"
                         >
-                          Cost per EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
+                          <div
+                            className="funnel-box-layout__name"
                           >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
+                            Cost per EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
                         <div
-                          className="funnel-box-layout__value"
+                          className="funnel-box-layout__right"
                         >
-                          $1,000
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $1,000
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -16421,465 +16491,490 @@ exports[`ProjectReportPage renders performance report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Volume of USV
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 2,136
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          3,008
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Volume of USV
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              423
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 2,136
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            3,008
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                423
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Volume of INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 128
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          150
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Volume of INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -19
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 128
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            150
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -19
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Volume of TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 52
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          57
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Volume of TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              2
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 52
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            57
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                2
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Volume of APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 19
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          16
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Volume of APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -2
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 19
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            16
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -2
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Volume of EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 16
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          13
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Volume of EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -1
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 16
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            13
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -1
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -16903,372 +16998,392 @@ exports[`ProjectReportPage renders performance report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          USV → INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 6%
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          5%
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            USV → INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -1pt
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 6%
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            5%
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -1pt
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          INQ → TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 40%
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          38%
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            INQ → TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              1pt
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 40%
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            38%
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                1pt
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          TOU → APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 36%
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          28%
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            TOU → APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -2pts
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 36%
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            28%
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -2pts
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          APP → EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: 80%
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          80%
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            APP → EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              2pts
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: 80%
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            80%
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                2pts
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -17292,465 +17407,490 @@ exports[`ProjectReportPage renders performance report 1`] = `
                   >
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Cost per USV
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: $10
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          $4
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Cost per USV
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              $2
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: $10
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $4
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                $2
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Cost per INQ
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: $165
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          $87
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Cost per INQ
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              $25
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-up"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: $165
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $87
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 0l5 5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                $25
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-up"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 0l5 5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Cost per TOU
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: $413
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          $246
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Cost per TOU
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -$120
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: $413
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $246
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -$120
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Cost per APP
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: $1,515
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          $875
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Cost per APP
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -$202
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: $1,515
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $875
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -$202
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
                       className="funnel-box-layout"
+                      onClick={[Function]}
                     >
                       <div
-                        className="funnel-box-layout__left"
+                        className="funnel-box-layout__wrapper"
                       >
                         <div
-                          className="funnel-box-layout__name"
-                        >
-                          Cost per EXE
-                          <svg
-                            className="rmb-tooltip-anchor"
-                            fill="none"
-                            height="20"
-                            onMouseEnter={[Function]}
-                            onMouseLeave={[Function]}
-                            viewBox="0 0 20 20"
-                            width="20"
-                          >
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#181D23"
-                              r="10"
-                            />
-                            <circle
-                              cx="10"
-                              cy="10"
-                              fill="#2B343D"
-                              r="10"
-                            />
-                            <rect
-                              fill="#798796"
-                              height="10"
-                              width="5"
-                              x="8"
-                              y="5"
-                            />
-                            <path
-                              d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
-                              fill="#181D23"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="funnel-box-layout__target"
-                        >
-                          Target: $1,909
-                        </div>
-                      </div>
-                      <div
-                        className="funnel-box-layout__right"
-                      >
-                        <div
-                          className="funnel-box-layout__value"
-                        >
-                          $1,077
-                        </div>
-                        <div
-                          className="funnel-box-layout__delta"
+                          className="funnel-box-layout__left"
                         >
                           <div
-                            className="delta-indicator"
+                            className="funnel-box-layout__name"
                           >
-                            <span
-                              className="delta-indicator__delta"
+                            Cost per EXE
+                            <svg
+                              className="rmb-tooltip-anchor"
+                              fill="none"
+                              height="20"
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              viewBox="0 0 20 20"
+                              width="20"
                             >
-                              -$539
-                            </span>
-                             
-                            <span
-                              className="delta-indicator__arrow delta-indicator__trend-down"
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#181D23"
+                                r="10"
+                              />
+                              <circle
+                                cx="10"
+                                cy="10"
+                                fill="#2B343D"
+                                r="10"
+                              />
+                              <rect
+                                fill="#798796"
+                                height="10"
+                                width="5"
+                                x="8"
+                                y="5"
+                              />
+                              <path
+                                d="M10 1C5.0293 1 1 5.0293 1 10C1 14.9707 5.0293 19 10 19C14.9707 19 19 14.9707 19 10C19 5.0293 14.9707 1 10 1ZM10.9 14.5H9.1V9.1H10.9V14.5ZM10.9 7.3H9.1V5.5H10.9V7.3Z"
+                                fill="#181D23"
+                              />
+                            </svg>
+                          </div>
+                          <div
+                            className="funnel-box-layout__target"
+                          >
+                            Target: $1,909
+                          </div>
+                        </div>
+                        <div
+                          className="funnel-box-layout__right"
+                        >
+                          <div
+                            className="funnel-box-layout__value"
+                          >
+                            $1,077
+                          </div>
+                          <div
+                            className="funnel-box-layout__delta"
+                          >
+                            <div
+                              className="delta-indicator"
                             >
-                              <svg
-                                aria-hidden="true"
-                                color="inherit"
-                                focusable="false"
-                                height={5}
-                                role="presentation"
-                                viewBox="0 0 10 5"
-                                width={10}
+                              <span
+                                className="delta-indicator__delta"
                               >
-                                <path
-                                  d="M5 5l5-5H0z"
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                />
-                              </svg>
-                            </span>
+                                -$539
+                              </span>
+                               
+                              <span
+                                className="delta-indicator__arrow delta-indicator__trend-down"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  color="inherit"
+                                  focusable="false"
+                                  height={5}
+                                  role="presentation"
+                                  viewBox="0 0 10 5"
+                                  width={10}
+                                >
+                                  <path
+                                    d="M5 5l5-5H0z"
+                                    fill="currentColor"
+                                    fillRule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>

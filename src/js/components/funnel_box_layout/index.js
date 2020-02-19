@@ -25,7 +25,9 @@ export class FunnelBaseBox extends Component {
     delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     formatter: PropTypes.func.isRequired,
     targetFormatter: PropTypes.func.isRequired,
-    deltaFormatter: PropTypes.func.isRequired
+    deltaFormatter: PropTypes.func.isRequired,
+    ctaCallback: PropTypes.func,
+    performanceRating: PropTypes.number
   };
 
   render() {
