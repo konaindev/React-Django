@@ -116,8 +116,9 @@ class SuggestedAction(models.Model):
         primary_key=True, max_length=32, default=get_suggested_action_id, editable=False
     )
 
-    title = models.CharField(max_length=50)
-    description = models.TextField(max_length=160)
+    title = models.CharField(max_length=50, default="")
+    internal_name = models.TextField(max_length=100, default="")
+    description = models.TextField(max_length=160, default="")
     tactics = models.ManyToManyField(
         SuggestedActionTactic, blank=True, through="ActionAndTacticsJunction"
     )
@@ -131,7 +132,6 @@ class ActionAndTacticsJunction(models.Model):
     Required for 'django-admin-sortable2' package
     Junction table model which connects SuggestedActionTactic <=> SuggestedAction
     """
-
     suggested_action = models.ForeignKey(SuggestedAction, on_delete=models.CASCADE)
     tactic = models.ForeignKey(SuggestedActionTactic, on_delete=models.CASCADE)
     tactic_order = models.PositiveIntegerField(default=0)
