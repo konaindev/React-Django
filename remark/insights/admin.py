@@ -27,7 +27,7 @@ class TacticTablularInline(SortableInlineAdminMixin, admin.TabularInline):
 
 @admin.register(SuggestedAction, site=admin_site)
 class SuggestedActionAdmin(admin.ModelAdmin):
-    list_display = ["title", "description"]
+    list_display = ["title", "internal_name", "description"]
     inlines = (TacticTablularInline,)
 
 
