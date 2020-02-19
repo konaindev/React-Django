@@ -41,6 +41,7 @@ export class FunnelBaseBox extends Component {
     return (
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__badge">On Track</div>
+        <div className="funnel-box-layout__cta">View Details &rarr;</div>
         <div className="funnel-box-layout__wrapper">
           <div className="funnel-box-layout__left">
             <div className="funnel-box-layout__name">
