@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSettingsField renders AccountSettingsField correctly 1`] = `
+<div
+  className="account-settings-field"
+  errorName="field"
+>
+  <div
+    className="account-settings-field__label"
+  >
+    Test Field
+  </div>
+  <input
+    className="input account-settings-field__input input--gray"
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;

@@ -1,10 +1,10 @@
 import renderer from "react-test-renderer";
 import { MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import { CompleteAccountView } from "./index";
 import { props } from "./props";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
 
 const _ = x =>
   createStore(() => ({

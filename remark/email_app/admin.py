@@ -23,11 +23,11 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "start",
         "campaign_health",
         "email_campaign_id",
-        "lease_rate_text",
+        "top_macro_insight_1",
+        "top_macro_insight_2",
+        "top_macro_insight_3",
         "top_performing_kpi",
-        "top_performing_insight",
         "low_performing_kpi",
-        "low_performing_insight",
         "risk_kpi_insight_text",
         "low_kpi_insight_text",
     ]
@@ -53,3 +53,4 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
             logger.error(error_text(e))
 
         logger.info("PerformanceEmailAdmin::save_model:bottom")
+

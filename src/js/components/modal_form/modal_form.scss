@@ -1,0 +1,87 @@
+@import "css/base.scss";
+
+$body-border: 1px solid $gray-4;
+$modal-spacing: 1.25rem;
+$close-size: 1.25rem;
+$button-line-height: 1.25rem;
+
+$light-title-color: $gray-3;
+$light-body-border: 1px solid $gray-10;
+$light-close-color: $gray-6;
+
+.modal-form {
+    width: 560px;
+    padding: 0;
+    border-radius: 4px;
+
+    &--highlight {
+        background-color: #fff;
+        .modal-form__title {
+            color: $light-title-color;
+        }
+        .modal-form__content {
+            border-top: $light-body-border;
+            border-bottom: $light-body-border;
+        }
+        .modal-window__close > svg {
+            fill: $light-close-color;
+        }
+    }
+}
+
+.modal-form.modal-window {
+    .modal-window__close {
+        width: $close-size;
+        height: $close-size;
+        top: $modal-spacing;
+        right: $modal-spacing;
+    }
+}
+
+.modal-form__title {
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: $modal-spacing;
+    box-sizing: border-box;
+    line-height: 1.25rem;
+    color: $title-large-color;
+    font-size: $text-base;
+}
+
+.modal-form__content {
+    padding: $modal-spacing;
+    padding-bottom: 0;
+    border-top: $body-border;
+    border-bottom: $body-border;
+}
+
+.modal-form__controls {
+    display: flex;
+    justify-content: flex-end;
+    padding: $modal-spacing;
+}
+
+.modal-form__save {
+    padding: 12px 32px;
+    font-size: $text-xs;
+    font-weight: $weight-semibold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: $button-line-height;
+}
+
+.modal-form__inputs-wrap {
+    display: flex;
+}
+
+.modal-form__grid {
+    display: grid;
+    grid-column-gap: $modal-spacing;
+    grid-row-gap: $modal-spacing;
+    grid-template-columns: 1fr 1fr;
+    &--col-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

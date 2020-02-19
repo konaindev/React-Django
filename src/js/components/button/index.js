@@ -12,10 +12,12 @@ export default class Button extends Component {
     selected: PropTypes.bool,
     fullWidth: PropTypes.bool,
     uppercase: PropTypes.bool,
+    asDiv: PropTypes.bool,
     color: PropTypes.oneOf([
       "default",
       "primary",
       "secondary",
+      "secondary-gray",
       "outline",
       "disabled",
       "disabled-light",
@@ -29,13 +31,14 @@ export default class Button extends Component {
   static defaultProps = {
     color: "default",
     disabled: false,
+    asDiv: false,
     onClick: () => {}
   };
 
-  handleClick = () => {
+  handleClick = e => {
     const { disabled, onClick } = this.props;
     if (!disabled) {
-      onClick();
+      onClick(e);
     }
   };
 
@@ -49,14 +52,17 @@ export default class Button extends Component {
       selected,
       fullWidth,
       uppercase,
+      asDiv,
       ...buttonProps
     } = this.props;
 
+    const Component = asDiv ? "div" : "button";
     return (
-      <button
+      <Component
         className={cx(
           "button",
           {
+            "button--div": asDiv,
             "button--disabled": disabled,
             "button--selected": selected,
             "button--block": fullWidth,
@@ -69,7 +75,7 @@ export default class Button extends Component {
         {...buttonProps}
       >
         {children}
-      </button>
+      </Component>
     );
   }
 }

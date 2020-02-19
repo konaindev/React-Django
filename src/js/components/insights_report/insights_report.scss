@@ -1,0 +1,58 @@
+@import "css/base.scss";
+
+.insights-report {
+    font-family: $font-sans;
+}
+
+.insights-report__title {
+    display: flex;
+    align-items: center;
+}
+
+.insights-report__icon {
+    width: $s2;
+    height: $s4;
+    margin-right: $s2;
+}
+
+.insights-report__close {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.insights-report__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+    grid-row-gap: 50px;
+    grid-auto-rows: 300px;
+}
+
+.insights-panel {
+    padding: 30px;
+}
+
+.insights-panel__title {
+    font-size: $text-xs;
+    font-weight: $weight-medium;
+    line-height: 24px;
+    letter-spacing: $letter-spacing-wider;
+    color: #798796;
+    text-transform: uppercase;
+}
+
+.insights-panel__text {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: $weight-normal;
+    line-height: 26px;
+    color: #f5faf7;
+}
+
+.insights-panel__no_insights {
+    font-size: 20px;
+    line-height: 34px;
+    color: #f5faf7;
+    text-align: center;
+}

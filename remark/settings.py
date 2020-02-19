@@ -43,6 +43,14 @@ DEV = "development"
 STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
+DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
+LOCAL_AIRFLOW = os.getenv("LOCAL_AIRFLOW", False)
+TESTING = sys.argv[1:2] == ['test']
+PATH_REF = "."
+if os.getenv("COMPOSER_AIRFLOW_ENV", False):
+    PATH_REF = "/home/airflow/gcs/dags"
+if LOCAL_AIRFLOW and os.getenv("AIRFLOW_PATHING", False):
+    PATH_REF = "/usr/local/airflow/dags"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,6 +58,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Load dotenv, if available. Override extant environment variables.
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"), override=True)
+
+# Google Cloud Services Variables
+GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
+GOOGLE_CLIENT_ID = required_env("GOOGLE_CLIENT_ID")
+GOOGLE_WEBSERVER_ID = required_env("GOOGLE_WEBSERVER_ID")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -215,7 +228,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Allow all host headers
 CSRF_TRUSTED_ORIGINS = ["staging.remarkably.io", "app.remarkably.io"]
+
 ALLOWED_HOSTS = ["app.remarkably.io", "staging.remarkably.io", "localhost"]
+if DOCKER_COMPOSE or LOCAL_AIRFLOW:
+    ALLOWED_HOSTS = ["*"]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Use our custom User class
@@ -231,7 +247,7 @@ LOGOUT_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = ["./dist"]
+STATICFILES_DIRS = ['./dist']
 
 #
 # Storages for all other files
@@ -293,7 +309,7 @@ CACHES = {
 #
 
 GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
-GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
+# GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
 
 #
 # Analytics (hey, we might want these down the road).
@@ -310,6 +326,11 @@ CELERY_BROKER_URL = REDIS_URL
 CELERY_IGNORE_RESULT = True
 
 #
+# AIRFLOW
+#
+AIRFLOW_URL = os.getenv("AIRFLOW_URL", "http://localhost:8080")
+
+#
 # MJML
 #
 MJML_EXEC_CMD = "./node_modules/.bin/mjml"
@@ -324,6 +345,30 @@ django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
 ssl_require = ENV == PROD
 locals()['DATABASES']['default'] = dj_database_url.config(
     conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
+
+if DOCKER_COMPOSE and LOCAL_AIRFLOW:
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'airflow',
+            'USER': 'airflow',
+            'PASSWORD': 'airflow',
+            'HOST': 'postgres',
+            'PORT': 5432,
+        }
+    }
+elif DOCKER_COMPOSE and not LOCAL_AIRFLOW:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
+
 
 # Configure Sentry -jc 11-jul-19
 

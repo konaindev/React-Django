@@ -5,8 +5,14 @@ import { API_URL_PREFIX } from "../redux_base/actions/helpers";
 export const updateSecurityData = data =>
   axiosPost(`${API_URL_PREFIX}/account-security`, data);
 
-export const updateProfileData = data =>
-  axiosPost(`${API_URL_PREFIX}/account-profile`, data);
+export const updateUserProfileData = data =>
+  axiosPost(`${API_URL_PREFIX}/account-user`, data);
+
+export const updateCompanyData = data =>
+  axiosPost(`${API_URL_PREFIX}/account-company`, data);
+
+export const updateOfficeData = data =>
+  axiosPost(`${API_URL_PREFIX}/account-office`, data);
 
 export const updateReportsSettingsData = data =>
   axiosPost(`${API_URL_PREFIX}/account-reports`, data);
@@ -21,3 +27,8 @@ export const getPropertiesData = data => {
   }
   return axiosGet(`${API_URL_PREFIX}/account-reports${q}`);
 };
+
+export const getEmail = data =>
+  axiosPost(`${API_URL_PREFIX}/users/get-email/`, {
+    data
+  }).then(response => response.data.email);

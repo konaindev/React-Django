@@ -1,10 +1,13 @@
 import datetime
 import decimal
 
+from django.contrib.auth.models import Group
+
 from remark.crm.models import Business
+from remark.factories.geo import create_address
 from remark.geo.models import Address
 from remark.projects.models import Project, Fund, Property
-from remark.users.models import Account
+from remark.users.models import Account, User
 
 
 def create_project(
@@ -18,15 +21,10 @@ def create_project(
     fund=None,
     project_property=None,
     address=None,
+    **kwargs,
 ):
     if address is None:
-        address = Address.objects.create(
-            street_address_1="2284 W. Commodore Way, Suite 200",
-            city="Seattle",
-            state="WA",
-            zip_code=98199,
-            country="US",
-        )
+        address = create_address()
 
     if account is None:
         account = Account.objects.create(
@@ -70,5 +68,32 @@ def create_project(
         property_owner=property_owner,
         fund=fund,
         property=project_property,
+        **kwargs,
     )
     return project
+
+
+def create_project_with_user(
+    project_name="Test project 1", email="test@remarkably.io", **kwargs
+):
+    group = Group.objects.create(name=f"{project_name} view group")
+    user, _ = User.objects.get_or_create(email=email)
+    group.user_set.add(user)
+    project = create_project(project_name, view_group=group, **kwargs)
+    return project, user
+
+
+def create_project_property(name="property 1", address=None, **kwargs):
+    if address is None:
+        address = create_address()
+
+    params = {
+        "name": name,
+        "average_monthly_rent": decimal.Decimal("1948"),
+        "lowest_monthly_rent": decimal.Decimal("1400"),
+        "geo_address": address,
+        "total_units": 220,
+        **kwargs,
+    }
+
+    return Property.objects.create(**params)

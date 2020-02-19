@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { InviteModalReport } from "../../containers/invite_modal";
 import { ViewMembersReport } from "../../containers/view_members";
-import { Add } from "../../icons";
+import { Add, Lightning } from "../../icons";
 import {
   inviteModal as inviteModalActions,
   projectActions,
@@ -14,6 +14,8 @@ import Loader from "../loader";
 import ReportLinks from "../report_links";
 import ShareToggle from "../share_toggle";
 import ProjectLink from "../project_link";
+import ButtonLabel from "../button_label";
+import Collapsible from "../collapsible";
 // date range picker
 import ReportDateSpan from "../report_date_span";
 import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
@@ -22,6 +24,7 @@ import CommonReport from "../common_report";
 import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
+import InsightsReport from "../insights_report";
 import UserIconList from "../user_icon_list";
 import PropertyOverview from "../property_overview";
 
@@ -40,12 +43,29 @@ export class ProjectReportPage extends Component {
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
     historyPush: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    performanceInsights: PropTypes.array,
+    baselineInsights: PropTypes.array
   };
 
   static defaultProps = {
     backUrl: "/dashboard"
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showInsights: {
+        performance: false,
+        baseline: false
+      }
+    };
+  }
+
+  get isShowInsightsButton() {
+    const { reportType } = this.props;
+    return reportType === "performance"; // || reportType === "baseline";
+  }
 
   getBuildingImage = () => {
     const { project } = this.props;
@@ -81,21 +101,33 @@ export class ProjectReportPage extends Component {
                 health={project.health}
               />
             </div>
-            {/* <div className="project-report-page__members">
-              <InviteModalReport />
-              <ViewMembersReport />
-              <Add
-                className="project-report-page__add-member"
-                onClick={this.onOpenInviteModal}
-              />
-              <UserIconList
-                theme="project"
-                tooltipPlacement="bottom"
-                tooltipTheme="dark"
-                users={project.members}
-                onClick={this.onOpenMembersView}
-              />
-            </div> */}
+            <div className="project-report-page__subnav-right">
+              {this.isShowInsightsButton && (
+                <ButtonLabel
+                  className="insights-button"
+                  label="beta"
+                  onClick={this.toggleInsights}
+                >
+                  <Lightning className="insights-button__icon" />
+                  insights
+                </ButtonLabel>
+              )}
+              {/* <div className="project-report-page__members">
+                <InviteModalReport />
+                <ViewMembersReport />
+                <Add
+                  className="project-report-page__add-member"
+                  onClick={this.onOpenInviteModal}
+                />
+                <UserIconList
+                  theme="project"
+                  tooltipPlacement="bottom"
+                  tooltipTheme="dark"
+                  users={project.members}
+                  onClick={this.onOpenMembersView}
+                />
+              </div> */}
+            </div>
           </div>
           <div className="subheader-report-tabs">
             <ReportLinks
@@ -136,12 +168,20 @@ export class ProjectReportPage extends Component {
     switch (reportType) {
       case "baseline":
         return (
-          <CommonReport
-            type="baseline"
-            report={report}
-            reportType="baseline"
-            dateSpan={<ReportDateSpan name="Baseline" dates={report.dates} />}
-          />
+          <div>
+            <Collapsible isOpen={this.state.showInsights.baseline}>
+              <InsightsReport
+                insights={this.props.baselineInsights}
+                onClose={this.onCloseInsights}
+              />
+            </Collapsible>
+            <CommonReport
+              type="baseline"
+              report={report}
+              reportType="baseline"
+              dateSpan={<ReportDateSpan name="Baseline" dates={report.dates} />}
+            />
+          </div>
         );
       case "market":
         return <TotalAddressableMarket {...report} />;
@@ -151,22 +191,30 @@ export class ProjectReportPage extends Component {
         return <CampaignPlan {...report} />;
       case "performance":
         return (
-          <CommonReport
-            type="performance"
-            report={report}
-            dateSpan={
-              <PerformanceReportSpanDropdown
-                start_date={report.dates.start}
-                end_date={report.dates.end}
-                preset={reportSpan}
-                campaignRange={{
-                  campaign_start: project.campaign_start,
-                  campaign_end: project.campaign_end
-                }}
-                onChange={this.handleReportSpanChange}
+          <div>
+            <Collapsible isOpen={this.state.showInsights.performance}>
+              <InsightsReport
+                insights={this.props.performanceInsights}
+                onClose={this.onCloseInsights}
               />
-            }
-          />
+            </Collapsible>
+            <CommonReport
+              type="performance"
+              report={report}
+              dateSpan={
+                <PerformanceReportSpanDropdown
+                  start_date={report.dates.start}
+                  end_date={report.dates.end}
+                  preset={reportSpan}
+                  campaignRange={{
+                    campaign_start: project.campaign_start,
+                    campaign_end: project.campaign_end
+                  }}
+                  onChange={this.handleReportSpanChange}
+                />
+              }
+            />
+          </div>
         );
       default:
         return null;
@@ -184,6 +232,20 @@ export class ProjectReportPage extends Component {
   onOpenInviteModal = () => this.props.dispatch(inviteModalActions.open);
 
   onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
+
+  onCloseInsights = () => {
+    const { reportType } = this.props;
+    const showInsights = { ...this.state.showInsights };
+    showInsights[reportType] = false;
+    this.setState({ showInsights });
+  };
+
+  toggleInsights = () => {
+    const { reportType } = this.props;
+    const showInsights = { ...this.state.showInsights };
+    showInsights[reportType] = !this.state.showInsights[reportType];
+    this.setState({ showInsights });
+  };
 
   render() {
     const { fetchingReports, project } = this.props;

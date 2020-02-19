@@ -31,7 +31,7 @@ export default class LeasingPerformanceReport extends Component {
    * @name LeasingPerformanceReport.HeadlineNumbers
    * @description Component that renders the most important leasing performance numbers.
    */
-  static HeadlineNumbers = ({ report: r }) => {
+  static HeadlineNumbers = ({ report: r, type }) => {
     const leasedCount = formatNumber(r.property.leasing.units);
     const leasedTotal = formatNumber(r.property.occupancy.occupiable);
     const retentionCount = formatNumber(r.property.leasing.renewal_notices);
@@ -45,6 +45,7 @@ export default class LeasingPerformanceReport extends Component {
     return (
       <BoxRow>
         <PercentageGraphBox
+          type={type}
           name="Leased"
           infoTooltip="leased_rate"
           value={r.property.leasing.rate}
@@ -54,20 +55,21 @@ export default class LeasingPerformanceReport extends Component {
           extraContent={
             <>
               <span>{`${leasedCount} Executed Leases (Out of ${leasedTotal})`}</span>
-              {renderTotalUnits()}
             </>
           }
         />
         <PercentageGraphBox
+          type={type}
           name="Retention"
           infoTooltip="retention_rate"
           value={r.property.leasing.renewal_rate}
           delta={r.deltas?.property?.leasing?.renewal_rate}
           series={r.whiskers?.renewal_rate}
           target={r.targets?.property?.leasing?.renewal_rate}
-          extraContent={`${retentionCount} Notices to Renew (Out of ${retentionTotal} Resident Decisions)`}
+          extraContent={`${retentionCount} Notices to Renew (Out of ${retentionTotal})`}
         />
         <PercentageGraphBox
+          type={type}
           name="Occupied"
           infoTooltip="occupied_rate"
           value={r.property.occupancy.rate}
@@ -77,7 +79,6 @@ export default class LeasingPerformanceReport extends Component {
           extraContent={
             <>
               <span>{`${occupiedCount} Occupied Units (Out of ${occupiedTotal})`}</span>
-              {renderTotalUnits()}
             </>
           }
         />
@@ -150,7 +151,10 @@ export default class LeasingPerformanceReport extends Component {
         sectionItems={this.props.sectionItems}
         smallMarginTop
       >
-        <LeasingPerformanceReport.HeadlineNumbers report={this.props.report} />
+        <LeasingPerformanceReport.HeadlineNumbers
+          type={this.props?.type}
+          report={this.props.report}
+        />
         <LeasingPerformanceReport.DetailNumbers report={this.props.report} />
       </ReportSection>
     );

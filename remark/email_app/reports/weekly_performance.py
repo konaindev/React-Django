@@ -132,7 +132,9 @@ def generate_template_vars(perf_email):
 
     address = project.property.geo_address
     health = perf_email.campaign_health
-    lease_rate_text = perf_email.lease_rate_text
+    top_macro_insight_1 = perf_email.top_macro_insight_1
+    top_macro_insight_2 = perf_email.top_macro_insight_2
+    top_macro_insight_3 = perf_email.top_macro_insight_3
     best_kpi = perf_email.top_performing_kpi
     best_kpi_text = perf_email.top_performing_insight
     worst_kpi = perf_email.low_performing_kpi
@@ -153,7 +155,9 @@ def generate_template_vars(perf_email):
         "city": address.city,
         "state": address.state,
         "campaign_health": int(health),
-        "campaign_insight": lease_rate_text,
+        "top_macro_insight_1": top_macro_insight_1,
+        "top_macro_insight_2": top_macro_insight_2,
+        "top_macro_insight_3": top_macro_insight_3,
         "lease_rate": top_kpi("lease_rate", this_week),
         "best_kpi": top_kpi(best_kpi, this_week, prev_week, best_kpi_text),
         "worst_kpi": top_kpi(worst_kpi, this_week, prev_week, worst_kpi_text),

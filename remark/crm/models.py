@@ -110,15 +110,15 @@ class Office(models.Model):
     is_home_office = models.BooleanField(default=False, help_text="Is the home office?")
 
     name = models.CharField(
-        default="", max_length=255, blank=False, help_text="Office Name"
+        default="", max_length=255, null=True, blank=False, help_text="Office Name"
     )
 
     address = models.ForeignKey(
-        "geo.Address", on_delete=models.CASCADE, blank=False, help_text="Address"
+        "geo.Address", on_delete=models.CASCADE, null=True, blank=False, help_text="Address"
     )
 
     business = models.ForeignKey(
-        "crm.Business", on_delete=models.CASCADE, blank=False, help_text="Business"
+        "crm.Business", on_delete=models.CASCADE, null=True, blank=False, help_text="Business"
     )
 
     office_type = models.IntegerField(
@@ -128,7 +128,11 @@ class Office(models.Model):
     objects = OfficeManager()
 
     def __str__(self):
-        return "{}: {} ({})".format(self.business.name, self.name, self.public_id)
+        if self.business:
+            s = "{}: {} ({})".format(self.business.name, self.name, self.public_id)
+        else:
+            s = "{} ({})".format(self.name, self.public_id)
+        return s
 
 
 class PeopleManager(models.Manager):
@@ -166,6 +170,7 @@ class Person(models.Model):
     office = models.ForeignKey(
         "crm.Office",
         on_delete=models.CASCADE,
+        null=True,
         blank=False,
         help_text="Office the person works at",
     )
@@ -194,6 +199,12 @@ class Person(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
-        return "{}: {} {} ({})".format(
-            self.office.business.name, self.first_name, self.last_name, self.public_id
-        )
+        if self.office:
+            s = "{}: {} {} ({})".format(
+                self.office.business.name, self.first_name, self.last_name, self.public_id
+            )
+        else:
+            s = "{} {} ({})".format(
+                self.first_name, self.last_name, self.public_id
+            )
+        return s

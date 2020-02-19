@@ -1,9 +1,6 @@
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import json
-import os
-from remark.settings import GCLOUD_SERVICE_KEY
-
 
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
@@ -22,7 +19,8 @@ def initialize_analytics_reporting():
     Returns:
     An authorized Analytics Reporting API V4 service object.
     """
-    service_account_info = json.loads(GCLOUD_SERVICE_KEY)
+    # passing an empty json object for now. this code will be removed and logic will be placed in remark_airflow
+    service_account_info = json.loads({})
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
     # Build the service object.
@@ -108,3 +106,56 @@ def get_project_usvs(project):
         except:
             pass
     return get_blank_usvs()
+
+
+def get_usv_report(analytics, site_id, start="365daysAgo", end="today"):
+    response = (
+        analytics.reports()
+        .batchGet(
+            body={
+                "reportRequests": [
+                    {
+                        "viewId": site_id,
+                        "dateRanges": [{"startDate": start, "endDate": end}],
+                        "metrics": [{"expression": "ga:sessions"}],
+                        "dimensions": [{"name": "ga:userType"}, {"name": "ga:source"}],
+                        "filtersExpression": "ga:userType==New Visitor",
+                        "orderBys": [
+                            {"fieldName": "ga:sessions", "sortOrder": "DESCENDING"}
+                        ],
+                    }
+                ]
+            }
+        )
+        .execute()
+    )
+    rows = response.get("reports", [{}])[0].get("data", {}).get("rows", [])
+    totals = (
+        response.get("reports", [{}])[0]
+        .get("data", {})
+        .get("totals", [{}])[0]
+        .get("values", [""])[0]
+    )
+    data = [
+        {
+            "source": r.get("dimensions", [None, ""])[1],
+            "visitors": int(r.get("metrics", [{}])[0].get("values", ["0"])[0]),
+        }
+        for r in rows
+    ]
+    return {"stat": data, "totals": int(totals)}
+
+
+def get_project_usv_sources(project, start, end):
+    google_provider = project.analytics_providers.google()
+    if google_provider is not None:
+        try:
+            analytics = initialize_analytics_reporting()
+            start_str = start.strftime("%Y-%m-%d")
+            end_str = end.strftime("%Y-%m-%d")
+            return get_usv_report(
+                analytics, google_provider.identifier, start_str, end_str
+            )
+        except:
+            pass
+    return {"stat": [], "totals": 0}

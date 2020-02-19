@@ -61,7 +61,7 @@ exports[`ShareToggle renders share toggle correctly 1`] = `
     <span
       className="copy-to-clipboard__label"
     >
-      Copy Link
+      Share Link
     </span>
   </button>
 </div>

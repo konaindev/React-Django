@@ -10,4 +10,12 @@ export COMPOSER_ENV=$(git symbolic-ref --short HEAD | sed s/_/-/g)
 
 # Create environment (takes up to 30 minutes)
 gcloud composer environments delete $COMPOSER_ENV \
-    --location us-central1 
+    --location us-central1
+
+
+# Delete bucket associated with environment
+get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+              --location us-central1 \
+              --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+
+gsutil rm -r $get_bucket

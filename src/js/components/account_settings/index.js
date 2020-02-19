@@ -1,23 +1,20 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
 import LoaderContainer from "../../containers/loader/index";
-import { accountSettings as actions } from "../../redux_base/actions";
 import AccountSecurity from "./account_security";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
 
 const menuItemsData = {
-  /*
   profile: {
     name: "Profile",
     iconComponent: Profile,
     component: ProfileTab
-  },*/
+  },
   lock: {
     name: "Security",
     iconComponent: Lock,
@@ -62,8 +59,8 @@ export default class AccountSettings extends React.PureComponent {
   };
 
   static defaultProps = {
-    initialItem: "lock", //"profile",
-    itemsOrder: ["lock", "email"] //["profile", "lock", "email"]
+    initialItem: "profile",
+    itemsOrder: ["profile", "lock", "email"]
   };
 
   constructor(props) {
@@ -71,10 +68,6 @@ export default class AccountSettings extends React.PureComponent {
     this.state = {
       item: props.initialItem
     };
-  }
-
-  componentDidMount() {
-    this.props.dispatch(actions.requestSettings());
   }
 
   selectItem = item => this.setState({ item });

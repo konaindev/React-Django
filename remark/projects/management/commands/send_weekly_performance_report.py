@@ -315,7 +315,8 @@ def command(project_id, start, client, health, leaseratetext, bestkpi, bestkpite
         "lease_rate" : top_kpi("lease_rate", campaign_to_date, this_week, prev_week, leaseratetext),
         "best_kpi" : top_kpi(bestkpi, campaign_to_date, this_week, prev_week, bestkpitext),
         "worst_kpi" : top_kpi(worstkpi, campaign_to_date, this_week, prev_week, worstkpitext),
-        "email" : email
+        "email" : email,
+        "year": datetime.datetime.now().year
     }
 
     create_list_kpi(template_vars, campaign_to_date, "top", topkpis, 2)

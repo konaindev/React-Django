@@ -4,7 +4,7 @@
   "private": true,
   "license": "copyright",
   "scripts": {
-    "build": "webpack --progress --colors --hide-modules --config=webpack.dev.js",
+    "build": "SEGMENT_KEY=${SEGMENT_STAGING} webpack --progress --colors --hide-modules --config=webpack.dev.js",
     "build:prod": "SEGMENT_KEY=${SEGMENT_PROD} webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
     "storybook": "start-storybook -p 6006 --ci",
@@ -21,9 +21,9 @@
     "chromatic": "./node_modules/.bin/chromatic test",
     "deploy-frontend-staging": "aws s3 sync dist/ s3://app-staging.remarkably.io",
     "deploy-frontend-production": "aws s3 sync dist/ s3://app.remarkably.io",
-    "run-build-ui": "yarn build && ./node_modules/.bin/webpack-dev-server --open --mode development --config webpack.dev.js --history-api-fallback",
-    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --invalidation-batch file://inv-batch.json",
-    "invalidate-cdn-production": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_PRODUCTION} --invalidation-batch file://inv-batch.json"
+    "run-build-ui": "yarn build && ./node_modules/.bin/webpack-dev-server --open --host 0.0.0.0 --mode development --config webpack.dev.js --history-api-fallback",
+    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths \"/index.html\" \"/index.cs\" \"/index.js\" \"/favicon.ico\" \"/*.otf\" \"/*.svg\" \"/*.png\"",
+    "invalidate-cdn-production": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_PRODUCTION} --paths \"/index.html\" \"/index.cs\" \"/index.js\" \"/favicon.ico\" \"/*.otf\" \"/*.svg\" \"/*.png\""
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",

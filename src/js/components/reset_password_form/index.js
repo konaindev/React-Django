@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import Button from "../button";
 import Input from "../input";
@@ -7,20 +8,24 @@ import AccountForm from "../account_form";
 import PageAuth from "../page_auth";
 import FormField from "../form_field";
 import Yup from "../../yup";
+import { resendSetPasswordEmail } from "../../redux_base/actions";
 
 import "./reset_password_form.scss";
-
 const ResetPasswordFormSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Required")
 });
-
-export default class ResetPasswordForm extends React.Component {
-  onSubmit = () => {
+class ResetPasswordForm extends React.PureComponent {
+  onSubmit = (values, actions) => {
     actions.setSubmitting(false);
     const data = { ...values };
-    data.email = values.email;
+    let email = values.email;
+    this.props.dispatch(
+      resendSetPasswordEmail.set({
+        email
+      })
+    );
   };
 
   render() {
@@ -34,6 +39,9 @@ export default class ResetPasswordForm extends React.Component {
           <Formik
             onSubmit={this.onSubmit}
             validationSchema={ResetPasswordFormSchema}
+            initialValues={{
+              email: ""
+            }}
           >
             {({
               errors,
@@ -65,7 +73,7 @@ export default class ResetPasswordForm extends React.Component {
                   uppercase={true}
                   type="submit"
                 >
-                  Set Password
+                  Send Link
                 </Button>
               </Form>
             )}
@@ -75,3 +83,5 @@ export default class ResetPasswordForm extends React.Component {
     );
   }
 }
+
+export default connect()(ResetPasswordForm);

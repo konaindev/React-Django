@@ -1,5 +1,6 @@
 import React from "react";
 import dateFnformat from "date-fns/format";
+import dateFnParse from "date-fns/parse";
 import _isNil from "lodash/isNil";
 import _isNumber from "lodash/isNumber";
 
@@ -178,6 +179,15 @@ export const formatDateWithTokens = (v, tokens) => {
     return v;
   }
   return result;
+};
+
+export const formatDateString = (
+  dateStr,
+  targetFormat = "MM/DD/YY",
+  formatString = "YYYY-MM-DD"
+) => {
+  const date = dateFnParse(dateStr, formatString);
+  return dateFnformat(date, targetFormat);
 };
 
 /**

@@ -427,7 +427,7 @@ class LincolnTowerPeriodTestCase(TestCase):
         self.assertTrue(report.to_jsonable())
 
 
-from .signals import model_percent, get_ctd_top_kpis, sort_kpis, get_ctd_rest
+from .signals import model_percent, get_ctd_top_kpis, sort_kpis, get_ctd_rest, rank_kpis
 
 
 class PerformanceEmailSignalTestCase(TestCase):
@@ -436,10 +436,8 @@ class PerformanceEmailSignalTestCase(TestCase):
     def setUp(self):
         pass
 
-    def generate_mp_json(self, selectors, value, target):
-        tl_values = {}
+    def generate_mp_json(self, selectors, value, target, tl_values={}, tl_targets={}):
         values = tl_values
-        tl_targets = {}
         targets = tl_targets
         for x in range(len(selectors)):
             if x >= len(selectors) - 1:
@@ -493,6 +491,14 @@ class PerformanceEmailSignalTestCase(TestCase):
         result = model_percent("move_outs", json_report)
         self.assertEqual(result, 1.25)
 
+    def test_model_percent_usv_inq_greater(self):
+        selectors = ["funnel", "conversions", "usv_inq"]
+        target = 0.04
+        value = 0.08
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("usv_inq", json_report)
+        self.assertEqual(result, 2.0)
+
     def test_get_ctd_top_kpis(self):
         ctd_model_percent = {"move_ins": 1.0, "move_outs": 0.6}
         ctd_sorted = sort_kpis(ctd_model_percent)
@@ -525,7 +531,31 @@ class PerformanceEmailSignalTestCase(TestCase):
         result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
         self.assertEqual(len(result), 0)
 
-    def test_get_ctd_rest(self):
+    def test_get_ctd_rest_large(self):
+        ctd_model_percent = {
+            "move_ins": 0.95,
+            "usv": 0.20,
+            "inq": 0.40,
+            "move_outs": 0.8,
+            "usv_inq": 2.00,
+            "exe": 0.951,
+            "vacate": 0.05,
+            "renew": 1.10,
+            "app_exe": 0.85
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        risk, low = get_ctd_rest(ctd_model_percent, ctd_sorted)
+
+        self.assertEqual(len(risk), 2)
+        self.assertEqual(risk[0], "move_outs")
+        self.assertEqual(risk[1], "app_exe")
+
+        self.assertEqual(len(low), 3)
+        self.assertEqual(low[0], "vacate")
+        self.assertEqual(low[1], "usv")
+        self.assertEqual(low[2], "inq")
+
+    def test_get_ctd_rest_small(self):
         ctd_model_percent = {
             "move_ins": 0.95,
             "usv": 0.20,
@@ -539,6 +569,15 @@ class PerformanceEmailSignalTestCase(TestCase):
         self.assertEqual(len(low), 2)
         self.assertEqual(low[0], "usv")
         self.assertEqual(low[1], "inq")
+
+    def test_rank_kpis(self):
+        json_report = self.generate_mp_json(["funnel", "conversions", "usv_inq"],  0.50, 1.00)
+        json_report = self.generate_mp_json(["property", "leasing", "cd_rate"], 0.20, 0.10, json_report, json_report["targets"])
+
+        result = rank_kpis(json_report)
+
+        self.assertEqual(result["usv_inq"], 0.50)
+        self.assertEqual(result["cd_rate"], 2.00)
 
 
 class ExportTestCase(TestCase):
@@ -1617,3 +1656,32 @@ class SubscribedEmailsTestCase(TestCase):
         self.assertEqual(
             {"test2@example.com", "view2@test.com", "admin@test.com"},
             project.get_subscribed_emails())
+
+
+class UpdatePerformanceReportTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="admin@remarkably.io", password="password")
+        tags = [
+            Tag.objects.create(word="Tag 1"),
+            Tag.objects.create(word="Tag 2"),
+            Tag.objects.create(word="Tag 3"),
+        ]
+        project, _ = create_project()
+        project.custom_tags.set(tags)
+        admin_group = project.admin_group
+        admin_group.user_set.add(user)
+        project.save()
+        token_url = reverse("token_obtain_pair")
+        data = {
+            "email": "admin@remarkably.io",
+            "password": "password",
+        }
+        token = self.client.post(token_url, json.dumps(data), "application/json").json()
+        self.auth = f"Bearer {token['access']}"
+        self.project = project
+        self.user = user
+
+    def test_basic(self):
+        pass
+
+

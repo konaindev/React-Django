@@ -28,6 +28,7 @@ def process_response(response, msg, ignore_response=False):
     try:
         result = json.loads(response.body)
     except:
+        print(f"This sendgrid response was of a non-json type `{response}`")
         raise Exception(f"Invalid JSON Response: `{response.body}`")
     return result
 
@@ -83,8 +84,6 @@ def get_recipients_on_list(list_id, page_size=1000):
         return result["recipients"]
     except Exception as e:
         raise Exception(f"Error fetching contact list `{list_id}` from sendgrid")
-   
-
 
 
 def delete_recipient_from_list(list_id, recipient_id):

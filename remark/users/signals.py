@@ -31,18 +31,6 @@ def update_contacts_when_group_changed(sender, instance, action, **kwargs):
                         update_project_contacts.apply_async(args=(p.get_project_public_id(),), countdown=2)
 
 
-@receiver(m2m_changed, sender=User.unsubscribed_projects.through)
-def update_contacts_when_email_reports_changed(sender, instance, action, **kwargs):
-    if action in ["post_add", "post_remove", "post_clear"]:
-        if isinstance(instance, User):
-            if kwargs["pk_set"]:
-                projects = Project.objects.filter(pk__in=kwargs["pk_set"])
-                for p in projects:
-                    update_project_contacts.apply_async(args=(p.get_project_public_id(),), countdown=2)
-        else:
-            update_project_contacts.apply_async(args=(instance.get_project_public_id(),), countdown=2)
-
-
 @receiver(post_save, sender=User)
 def update_contacts_when_activation_changed(sender, instance, **kwargs):
     if instance.is_subscription_changed:

@@ -1,20 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SmallBoxLayout renders correctly 1`] = `
-"<Panel className=\\"small-box\\" component=\\"div\\" size=\\"default\\">
-  <div className=\\"small-box__labels\\">
-    <span className=\\"small-box__labels__name\\">
-      Test name
-    </span>
-    <span className=\\"small-box__labels__detail\\">
-      This is details
-    </span>
+"<Panel className=\\"small-box\\" onClick={[Function: onClick]} component=\\"div\\" size=\\"default\\">
+  <div className=\\"small-box__wrapper\\">
+    <div className=\\"small-box__row\\">
+      <div className=\\"small-box__labels\\">
+        <span className=\\"small-box__labels__name\\">
+          Test name
+        </span>
+        <span className=\\"small-box__labels__detail\\">
+          This is details
+        </span>
+      </div>
+      <div className=\\"small-box__outer-content\\">
+        <span className=\\"small-box__inner-content\\">
+          Test content
+        </span>
+      </div>
+    </div>
+    <Connect(InfoTooltipBase) transKey={[undefined]} />
   </div>
-  <div className=\\"small-box__outer-content\\">
-    <span className=\\"small-box__inner-content\\">
-      Test content
-    </span>
-  </div>
-  <Connect(InfoTooltipBase) transKey={[undefined]} />
 </Panel>"
 `;

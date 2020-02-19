@@ -68,3 +68,10 @@ def create_periods(
         project=project, lease_stage=stage, **default_period_params
     )
     return target_period, period
+
+
+def generate_weekly_periods(count, project, end, period_data=lambda i: {}):
+    for i in range(count):
+        start = end - datetime.timedelta(weeks=1)
+        create_periods(project, start=start, end=end, period_params=period_data(i))
+        end = start

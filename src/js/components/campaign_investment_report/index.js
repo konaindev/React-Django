@@ -73,12 +73,7 @@ export default class CampaignInvestmentReport extends Component {
           symbolType="sign"
         />
         <LargeNumberBox
-          name={
-            <>
-              Campaign Return on <br />
-              Marketing Investment (ROMI)
-            </>
-          }
+          name={<>Campaign Return on Marketing Investment (ROMI)</>}
           infoTooltip="campaign_return_on_marketing_investment"
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}

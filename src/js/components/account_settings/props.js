@@ -7,8 +7,6 @@ const user = {
   user_id: "usr_jjzpeyfeshzpaha5"
 };
 
-const itemsOrder = ["lock"]; //["profile", "lock", "email"];
-
 const rules = [
   {
     label: "Be at least 8 characters",
@@ -88,7 +86,6 @@ export const props = {
   user,
   company_roles,
   office_options,
-  itemsOrder,
   tabsOrder,
   initialTab,
   office_countries,

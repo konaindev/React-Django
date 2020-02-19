@@ -1,0 +1,46 @@
+{
+  "rootUrl": "",
+  "servicePath": "",
+  "reports": [
+    {
+      "columnHeader": {
+        "dimensions": ["ga:userType", "ga:source"],
+        "metricHeader": {"metricHeaderEntries": [{"name": "ga:sessions", "type": "INTEGER"}]
+        }
+      },
+      "data": {
+        "isDataGolden": "True",
+        "maximums": [{"values": ["137"]}],
+        "minimums": [{"values": ["1"]}],
+        "rowCount": 6,
+        "rows": [
+          {
+            "dimensions": ["New Visitor", "google"],
+            "metrics": [{"values": ["137"]}]
+          },
+          {
+            "dimensions": ["New Visitor", "(direct)"],
+            "metrics": [{"values": ["52"]}]
+          },
+          {
+            "dimensions": ["New Visitor", "yahoo"],
+            "metrics": [{"values": ["26"]}]
+          },
+          {
+            "dimensions": ["New Visitor", "linkedin.com"],
+            "metrics": [{"values": ["6"]}]
+          },
+          {
+            "dimensions": ["New Visitor", "facebook.com"],
+            "metrics": [{"values": ["4"]}]
+          },
+          {
+            "dimensions": ["New Visitor", "bing"],
+            "metrics": [{"values": ["2"]}]
+          }
+        ],
+        "totals": [{"values": ["227"]}]
+      }
+    }
+  ]
+}

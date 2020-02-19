@@ -1,4 +1,4 @@
-import { qsParse, qsStringify, stripURL } from "./misc";
+import { isNotBlankValues, qsParse, qsStringify, stripURL } from "./misc";
 
 describe("utils > query strings", () => {
   it("qsParse()", () => {
@@ -27,5 +27,17 @@ describe("strip URL protocol", () => {
     expect(stripURL("ftp://www.test.com")).toBe("test.com");
     expect(stripURL("http://test.com/")).toBe("test.com");
     expect(stripURL("http://test.com/test")).toBe("test.com/test");
+  });
+});
+
+describe("is not blank values in object", () => {
+  it("isNotBlankValues", () => {
+    expect(isNotBlankValues({ a: 1, b: 2 })).toBe(true);
+    expect(isNotBlankValues({ a: "1", b: "2" })).toBe(true);
+    expect(isNotBlankValues({ a: "1", b: "" })).toBe(false);
+    expect(isNotBlankValues({ a: "1", b: 0 })).toBe(true);
+    expect(isNotBlankValues({ a: "1", b: null })).toBe(false);
+    expect(isNotBlankValues({ a: false })).toBe(true);
+    expect(isNotBlankValues({})).toBe(false);
   });
 });
