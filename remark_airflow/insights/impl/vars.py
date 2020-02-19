@@ -533,34 +533,46 @@ def var_all_target_computed_kpis(all_base_kpis, all_target_kpis):
 
 
 def var_kpis_trends(
-    all_computed_kpis, all_target_computed_kpis, kpis_names=KPIS_NAMES.keys()
+    all_computed_kpis,
+    all_target_computed_kpis,
+    kpis_names=KPIS_NAMES.keys(),
+    include_last=True,
 ):
+    if include_last:
+        start_index = 0
+    else:
+        start_index = 1
+
     if (
         all_computed_kpis is None
-        or len(all_computed_kpis) < 3
+        or len(all_computed_kpis) < 3 + start_index
         or all_target_computed_kpis is None
-        or len(all_target_computed_kpis) < 3
+        or len(all_target_computed_kpis) < 3 + start_index
     ):
         return None
 
     kpis_trends = {}
-    for kpi_name in kpis_names:
-        if kpi_name in all_computed_kpis[0] and kpi_name in all_target_computed_kpis[0]:
-            kpis_trends[kpi_name] = {
-                "values": [all_computed_kpis[0][kpi_name]],
-                "target_values": [all_target_computed_kpis[0][kpi_name]],
-                "weeks": 1,
-                "trend": None,
-            }
-
-    for computed_kpi, target_computed_kpi in zip(
-        all_computed_kpis[1:], all_target_computed_kpis[1:]
-    ):
+    for i in range(0, start_index + 1):
         for kpi_name in kpis_names:
-            if kpi_name not in kpis_trends:
-                continue
+            if (
+                kpi_name in all_computed_kpis[i]
+                and kpi_name in all_target_computed_kpis[i]
+            ):
+                values = kpis_trends.get(kpi_name, {}).get("values", [])
+                target_values = kpis_trends.get(kpi_name, {}).get("target_values", [])
+                kpis_trends[kpi_name] = {
+                    "values": [all_computed_kpis[i][kpi_name]] + values,
+                    "target_values": [all_target_computed_kpis[i][kpi_name]]
+                    + target_values,
+                    "weeks": 1,
+                    "trend": None,
+                }
 
-            data = kpis_trends[kpi_name]
+    start_index += 1
+    for computed_kpi, target_computed_kpi in zip(
+        all_computed_kpis[start_index:], all_target_computed_kpis[start_index:]
+    ):
+        for kpi_name, data in kpis_trends.items():
             if not data:
                 continue
             value = data["values"][0]
@@ -651,3 +663,41 @@ def var_kpi_trend(kpis_trends):
     if not kpis_trends:
         return None
     return kpis_trends[0]
+
+
+def var_kpi_new_direction(kpis_trends):
+    if not kpis_trends:
+        return None
+
+    kpi_new_direction = []
+    for kpi_trend in kpis_trends:
+        kpi_name = kpi_trend["name"]
+        value = kpi_trend["values"][-1]
+        prev_value = kpi_trend["values"][-2]
+        if kpi_trend["trend"] == "up":
+            if value < prev_value:
+                kpi_new_direction.append(
+                    {
+                        "kpi_name": kpi_name,
+                        "prev_trend": kpi_trend["trend"],
+                        "weeks": kpi_trend["weeks"],
+                        "trend": "down",
+                        "quotient": prev_value / value,
+                    }
+                )
+        elif kpi_trend["trend"] == "down":
+            if value > prev_value:
+                kpi_new_direction.append(
+                    {
+                        "kpi_name": kpi_name,
+                        "prev_trend": kpi_trend["trend"],
+                        "weeks": kpi_trend["weeks"],
+                        "trend": "up",
+                        "quotient": prev_value / value,
+                    }
+                )
+    result = sorted(kpi_new_direction, key=lambda data: data["quotient"], reverse=True)
+    if not result:
+        return None
+    del result[0]["quotient"]
+    return result[0]

@@ -73,3 +73,7 @@ def trigger_usvs_on_track(weeks):
 
 def trigger_kpi_trend(predicting_health, var_kpi_trend):
     return predicting_health is None and var_kpi_trend is not None
+
+
+def trigger_kpi_trend_new_direction(kpi_new_direction):
+    return kpi_new_direction is not None
