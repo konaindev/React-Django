@@ -40,7 +40,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
                 "recipients": [{"id": r} for r in self.recipients_ids],
             }
         ]
-        recipients = get_recipients_on_list("id",  page_size=20)
+        recipients = get_recipients_on_list("id", page_size=20)
         recipients_ids = [r["id"] for r in recipients]
         self.assertCountEqual(recipients_ids, self.recipients_ids)
 
@@ -75,7 +75,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
     #             "recipients": [{"id": r} for r in self.recipients_ids[10:]],
     #         },
     #     ]
-    #     recipients = get_recipients_on_list("id", page_size=10)
+    #     recipients = get_recipients_on_list("id", page=1, page_size=10)
     #     recipients_ids = [r["id"] for r in recipients]
     #     self.assertCountEqual(recipients_ids, self.recipients_ids)
 
@@ -97,7 +97,7 @@ class GetRecipientsOnListTestCase(SimpleTestCase):
     #             "recipients": [{"id": r} for r in self.recipients_ids[8:]],
     #         },
     #     ]
-    #     recipients = get_recipients_on_list("id", page_size=page_size)
+    #     recipients = get_recipients_on_list("id", page=1, page_size=page_size)
     #     recipients_ids = [r["id"] for r in recipients]
     #     self.assertCountEqual(recipients_ids, self.recipients_ids)
 

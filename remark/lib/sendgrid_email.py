@@ -84,7 +84,7 @@ def get_recipients_on_list(list_id, page_size=1000):
         return result["recipients"]
     except Exception as e:
         raise Exception(f"Error fetching contact list `{list_id}` from sendgrid")
-   
+
 
 def delete_recipient_from_list(list_id, recipient_id):
     params = {'recipient_id': recipient_id, 'list_id': list_id}
