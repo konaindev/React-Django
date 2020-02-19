@@ -481,6 +481,7 @@ workflows:
             branches:
               only: master
       - airflow-deploy:
+          context: deploy-production
           requires:
             - airflow-setup
           filters:
