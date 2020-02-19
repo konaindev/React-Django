@@ -10,6 +10,5 @@
             "/*.svg",
             "/*.png"
         ]
-    },
-    "CallerReference": "rmb-frontend-build"
+    }
 }
