@@ -27,6 +27,7 @@ SELECTORS = {
     "retention_rate" : lambda x : x["property"]["leasing"]["renewal_rate"],
     "occupied_rate" : lambda x : x["property"]["leasing"]["rate"],
     "cds" : lambda x : x["property"]["leasing"]["cds"],
+    "cd_rate" : lambda x : x["property"]["leasing"]["cd_rate"],
     "renew" : lambda x : x["property"]["leasing"]["renewal_rate"],
     "vacate" : lambda x : x["property"]["leasing"]["vacation_notices"],
     "move_ins" : lambda x : x["property"]["occupancy"]["move_ins"],
@@ -52,6 +53,7 @@ FORMATTERS = {
     "lease_rate" : percent_formatter,
     "retention_rate" : percent_formatter,
     "occupied_rate" : percent_formatter,
+    "cd_rate": percent_formatter,
     "cds" : int_formatter,
     "renew" : int_formatter,
     "vacate" : int_formatter,
@@ -78,6 +80,7 @@ KPI_NAMES = {
     "lease_rate" : "Leased Rate",
     "retention_rate" : "Retained Rate",
     "occupied_rate" : "Occupancy Rate",
+    "cd_rate": "Cancellations and Denials Rate",
     "cds" : "Cancellations and Denials",
     "renew" : "Number of Notices to Renew",
     "vacate" : "Number of Notices to Vacate",
@@ -100,11 +103,15 @@ KPI_NAMES = {
     "cost_per_exe" : "Cost per Lease Execution"
 }
 
+# Do we want to highlight the performance of these campaign KPIs?
+# Yes - to highlight
+# No - to no hightlight
 SHOW_CAMPAIGN = {
     "lease_rate" : False,
     "retention_rate" : True,
     "occupied_rate" : False,
-    "cds" : True,
+    "cd_rate": True,
+    "cds" : False,
     "renew" : False,
     "vacate" : True,
     "move_ins" : False,
@@ -126,29 +133,11 @@ SHOW_CAMPAIGN = {
     "cost_per_exe" : False
 }
 
-# KPIs that should be included in Email Reports
-# These came from Sergey - TPC
-KPIS_INCLUDE_IN_EMAIL = [
-    "retention_rate",
-    "occupied_rate",
-    # "cds", We should add this back in when we have a better modeling system - TPC
-    "renew",
-    "vacate",
-    "usv",
-    "inq",
-    "tou",
-    "app",
-    "exe",
-    "usv_inq",
-    "inq_tou",
-    "tou_app",
-    "app_exe"
-]
-
 KPI_POSITIVE_DIRECTION = {
     "lease_rate" : True,
     "retention_rate" : True,
     "occupied_rate" : True,
+    "cd_rate": True,
     "cds" : False,
     "renew" : True,
     "vacate" : False,
@@ -178,6 +167,14 @@ KPI_CATEGORIES = {
     "risk": "Risk",
     "low": "Low"
 }
+
+# KPIs that should be included in Email Reports
+# These came from https://www.pivotaltracker.com/n/projects/2240283/stories/169880283
+# - TPC
+KPIS_INCLUDE_IN_EMAIL = []
+for kpi in SHOW_CAMPAIGN.keys():
+    if SHOW_CAMPAIGN[kpi]:
+        KPIS_INCLUDE_IN_EMAIL.append(kpi)
 
 MACRO_INSIGHTS_OPTIONS = [
     ("lease_rate_against_target", "lease_rate_against_target"),

@@ -54,35 +54,18 @@ def model_percent(name, report):
         value = float(selector(report))
         target = float(selector(report["targets"]))
 
-        if target == 0.0:
-            return None
-
         if dir:
+            if target == 0.0:
+                return None
             return value / target
         else:
+            if value == 0.0:
+                return None
             return target / value
     except:
         pass
 
     return None
-
-
-def campaign_insight(campaign_health):
-    if campaign_health == 2:
-        return "Overall, your campaign is on track, and very likely to hit your goal by deadline."
-    elif campaign_health == 1:
-        return "Overall, your campaign is at risk, and becoming unlikely to hit your goal by deadline."
-    return "Overall, your campaign is off track, and very unlikely to hit your goal by deadline."
-
-
-def top_kpi_insight(name):
-    human_name = KPI_NAMES[name]
-    return f"Congratulations on your {human_name} last week! Gold star performance."
-
-
-def low_kpi_insight(name):
-    human_name = KPI_NAMES[name]
-    return f"Disappointing {human_name} last week. Let's make this old news quickly."
 
 
 def rank_kpis(report):
@@ -234,9 +217,7 @@ def update_performance_report(weekly_insight_id):
     pe.end = end
     pe.campaign_health = str(campaign_health)
     pe.top_performing_kpi = top_kpi
-    pe.top_performing_insight = top_kpi_insight(top_kpi)
     pe.low_performing_kpi = low_kpi
-    pe.low_performing_insight = low_kpi_insight(low_kpi)
     set_macro_insights(pe, weekly_insight.insights)
     pe.save()
 
