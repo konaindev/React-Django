@@ -337,7 +337,7 @@ jobs:
             sudo chmod 755 /usr/local/bin/redis-cli
       - run:
           name: Install Sentry CLI Tools
-          command: yarn add @sentry/cli
+          command: yarn global add @sentry/cli
       - run:
           name: Install Frontend deps
           command: yarn install
