@@ -375,10 +375,7 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably
-      - run:
-          name: Sync release with Sentry
-          command: bash ./scripts/sentry-release.sh
-
+          
   deploy-storybook:
     docker:
       - image: circleci/python:3.7.2-node
