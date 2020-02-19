@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     position: relative;
     width: 100%;
-    min-height: $s20;
+    min-height: 5.625rem;
     padding: $s5 1.875rem;
     border-bottom: 1px solid $table-border-color;
 
