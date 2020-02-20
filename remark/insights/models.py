@@ -118,7 +118,7 @@ class SuggestedAction(models.Model):
 
     title = models.CharField(max_length=50, default="")
     internal_name = models.TextField(max_length=100, default="")
-    description = models.TextField(max_length=160, default="")
+    description = models.TextField(max_length=160, default="", blank=True)
     tactics = models.ManyToManyField(
         SuggestedActionTactic, blank=True, through="ActionAndTacticsJunction"
     )
