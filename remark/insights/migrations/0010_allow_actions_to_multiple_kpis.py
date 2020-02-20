@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('insights', '0008_add_internal_name_to_action'),
+        ('insights', '0009_auto_20200220_0001'),
     ]
 
     operations = [
