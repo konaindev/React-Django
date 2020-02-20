@@ -144,8 +144,7 @@ class VarBenchmarkKPIsTestCase(TestCase):
             del kpi["last_updated"]
             del kpi["public_id"]
 
-        # @Alexey I need you to fix this test
-        # self.assertListEqual(benchmark_kpis, expected)
+        self.assertListEqual(benchmark_kpis, expected)
 
     def test_no_kpi(self):
         kpis = {}
@@ -184,13 +183,13 @@ class KPIForBenchmarkTestCase(TestCase):
             "retention_rate": 9,
         }
         computed_kpis = {
-            "usv_cost": 1,
+            "usvs": 1,
             "usv_inq": 2,
-            "inq_cost": 3,
+            "inquiries": 3,
             "inq_tou": 4,
-            "tou_cost": 5,
+            "tours": 5,
             "tou_app": 6,
-            "app_cost": 7,
+            "lease_applications": 7,
             "app_exe": 8,
             "renewal_rate": 9,
             "exe_cost": 10,
@@ -211,12 +210,12 @@ class KPIForBenchmarkTestCase(TestCase):
             "retention_rate": 9,
         }
         computed_kpis = {
-            "usv_cost": 1,
+            "usvs": 1,
             "usv_inq": 2,
-            "inq_cost": 3,
+            "inquiries": 3,
             "inq_tou": 4,
-            "tou_cost": 5,
-            "app_cost": 7,
+            "tours": 5,
+            "lease_applications": 7,
             "app_exe": 8,
             "renewal_rate": 9,
             "exe_cost": 10,
