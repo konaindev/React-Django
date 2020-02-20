@@ -1,4 +1,5 @@
 import decimal
+import math
 from datetime import timedelta
 
 from django.db.models import Q
@@ -672,8 +673,8 @@ def var_kpi_new_direction(kpis_trends):
     kpi_new_direction = []
     for kpi_trend in kpis_trends:
         kpi_name = kpi_trend["name"]
-        value = kpi_trend["values"][-1]
-        prev_value = kpi_trend["values"][-2]
+        value = kpi_trend["values"][-1] or 0
+        prev_value = kpi_trend["values"][-2] or 0
         if kpi_trend["trend"] == "up":
             if value < prev_value:
                 kpi_new_direction.append(
@@ -682,7 +683,7 @@ def var_kpi_new_direction(kpis_trends):
                         "prev_trend": kpi_trend["trend"],
                         "weeks": kpi_trend["weeks"],
                         "trend": "down",
-                        "quotient": prev_value / value,
+                        "quotient": value / prev_value,
                     }
                 )
         elif kpi_trend["trend"] == "down":
@@ -696,7 +697,7 @@ def var_kpi_new_direction(kpis_trends):
                         "quotient": prev_value / value,
                     }
                 )
-    result = sorted(kpi_new_direction, key=lambda data: data["quotient"], reverse=True)
+    result = sorted(kpi_new_direction, key=lambda data: data["quotient"])
     if not result:
         return None
     del result[0]["quotient"]

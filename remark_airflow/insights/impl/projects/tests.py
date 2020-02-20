@@ -30,6 +30,7 @@ from remark_airflow.insights.impl.projects.insights import (
     change_health_status,
     kpi_trend,
     lease_rate_against_target,
+    kpi_trend_new_direction,
 )
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 
@@ -1816,3 +1817,88 @@ class KPITrendTestCase(TestCase):
 
         result = kpi_trend.evaluate(project_facts)
         self.assertIsNone(result)
+
+
+class KPITrendingNewDirectionTestCase(TestCase):
+    def setUp(self) -> None:
+        self.project = create_project()
+        self.start = datetime.date(year=2019, month=9, day=21)
+        self.end = datetime.date(year=2019, month=9, day=28)
+        self.args = {"start": self.start, "end": self.end, "project": self.project}
+
+    def test_trend_up(self):
+        generate_weekly_periods(4, self.project, self.end, lambda i: {"usvs": 460 - i})
+
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_new_direction"])
+
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_trend_down(self):
+        generate_weekly_periods(4, self.project, self.end, lambda i: {"usvs": 460 + i})
+
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_new_direction"])
+
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_trend_flat(self):
+        generate_weekly_periods(4, self.project, self.end)
+        create_periods(self.project, start=self.start, end=self.end)
+
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_new_direction"])
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_one_week(self):
+        create_periods(self.project, start=self.start, end=self.end)
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_new_direction"])
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_no_kpi(self):
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertFalse(project_facts["trigger_kpi_trend_new_direction"])
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_trend_changed_to_up(self):
+        generate_weekly_periods(
+            4, self.project, self.start, lambda i: {"usvs": 460 + i}
+        )
+        create_periods(
+            self.project,
+            self.start,
+            self.end,
+            period_params={"usvs": 465, "leases_executed": 6, "inquiries": 40},
+        )
+
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_trend_new_direction"])
+        expected = {"kpi_name": "usvs", "prev_trend": "down", "trend": "up", "weeks": 4}
+        self.assertDictEqual(project_facts["var_kpi_new_direction"], expected)
+
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        expected_text = "While Volume of USV has been trending down for 4 weeks, it is now trending up."
+        self.assertEqual(result[0], "kpi_trending_new_direction")
+        self.assertEqual(result[1], expected_text)
+
+    def test_trend_changed_to_down(self):
+        generate_weekly_periods(
+            4, self.project, self.start, lambda i: {"usvs": 460 - i}
+        )
+        create_periods(self.project, self.start, self.end, period_params={"usvs": 450})
+
+        project_facts = kpi_trend_new_direction.graph(self.args)
+        self.assertTrue(project_facts["trigger_kpi_trend_new_direction"])
+        expected = {"kpi_name": "usvs", "prev_trend": "up", "trend": "down", "weeks": 4}
+        self.assertDictEqual(project_facts["var_kpi_new_direction"], expected)
+
+        result = kpi_trend_new_direction.evaluate(project_facts)
+        expected_text = "While Volume of USV has been trending up for 4 weeks, it is now trending down."
+        self.assertEqual(result[0], "kpi_trending_new_direction")
+        self.assertEqual(result[1], expected_text)
