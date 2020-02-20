@@ -351,7 +351,7 @@ class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
 class CampaignInline(admin.TabularInline):
     model = Campaign
     list_display = ["name", "selected_campaign_model"]
-    readonly_fields = ["selected_campaign_model"]
+    readonly_fields = ["active", "selected_campaign_model"]
     show_change_link = True
     extra = 0
     ordering = ["name"]
