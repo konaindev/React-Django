@@ -7,6 +7,7 @@ from scipy.interpolate import UnivariateSpline
 from remark.analytics.google_analytics import get_project_usv_sources
 from remark.geo.models import Country
 from remark.lib.stats import health_check
+from remark.lib.time_series.common import KPI
 from remark.lib.time_series.computed import (
     leased_rate_graph,
     generate_computed_targets,
@@ -111,30 +112,33 @@ def var_kpi_usv_exe_healths(project, weeks, end):
         return None
     kpi_health = {
         "Volume of USV": health_standard(
-            computed_kpis["usvs"], target_computed_kpis["usvs"]
+            computed_kpis[KPI.usvs], target_computed_kpis[KPI.usvs]
         ),
         "USV>INQ": health_standard(
-            computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]
+            computed_kpis[KPI.usv_inq], target_computed_kpis[KPI.usv_inq]
         ),
         "INQ": health_standard(
-            computed_kpis["inquiries"], target_computed_kpis["inquiries"]
+            computed_kpis[KPI.inquiries], target_computed_kpis[KPI.inquiries]
         ),
         "INQ>TOU": health_standard(
-            computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
+            computed_kpis[KPI.inq_tou], target_computed_kpis[KPI.inq_tou]
         ),
-        "TOU": health_standard(computed_kpis["tours"], target_computed_kpis["tours"]),
+        "TOU": health_standard(
+            computed_kpis[KPI.tours], target_computed_kpis[KPI.tours]
+        ),
         "TOU>APP": health_standard(
-            computed_kpis["tou_app"], target_computed_kpis["tou_app"]
+            computed_kpis[KPI.tou_app], target_computed_kpis[KPI.tou_app]
         ),
         "APP": health_standard(
-            computed_kpis["lease_applications"],
-            target_computed_kpis["lease_applications"],
+            computed_kpis[KPI.lease_applications],
+            target_computed_kpis[KPI.lease_applications],
         ),
         "C&D Rate": health_standard(
-            computed_kpis["lease_cd_rate"], target_computed_kpis["lease_cds"]
+            computed_kpis[KPI.lease_cds], target_computed_kpis[KPI.lease_cds]
         ),
         "EXE": health_standard(
-            computed_kpis["leases_executed"], target_computed_kpis["leases_executed"]
+            computed_kpis[KPI.leases_executed],
+            target_computed_kpis[KPI.leases_executed],
         ),
     }
     return kpi_health
@@ -238,15 +242,15 @@ def var_kpi_for_benchmark(computed_kpis):
     if not computed_kpis:
         return None
     kpis = {
-        "usvs": computed_kpis.get("usv_cost"),  # "Volume of USV"
-        "usv_inq": computed_kpis.get("usv_inq"),  # "USV>INQ"
-        "inqs": computed_kpis.get("inq_cost"),  # "Volume of INQ"
-        "inq_tou": computed_kpis.get("inq_tou"),  # "INQ>TOU"
-        "tous": computed_kpis.get("tou_cost"),  # "Volume of TOU"
-        "tou_app": computed_kpis.get("tou_app"),  # "TOU>APP"
-        "apps": computed_kpis.get("app_cost"),  # "Volume of APP"
-        "app_exe": computed_kpis.get("app_exe"),  # "APP > EXE"
-        "retention_rate": computed_kpis.get("renewal_rate"),  # "Retention Rate"
+        "usvs": computed_kpis.get(KPI.usvs),  # "Volume of USV"
+        "usv_inq": computed_kpis.get(KPI.usv_inq),  # "USV>INQ"
+        "inqs": computed_kpis.get(KPI.inquiries),  # "Volume of INQ"
+        "inq_tou": computed_kpis.get(KPI.inq_tou),  # "INQ>TOU"
+        "tous": computed_kpis.get(KPI.tours),  # "Volume of TOU"
+        "tou_app": computed_kpis.get(KPI.tou_app),  # "TOU>APP"
+        "apps": computed_kpis.get(KPI.lease_applications),  # "Volume of APP"
+        "app_exe": computed_kpis.get(KPI.app_exe),  # "APP > EXE"
+        "retention_rate": computed_kpis.get(KPI.renewal_rate),  # "Retention Rate"
     }
     return {k: v for k, v in kpis.items() if v is not None}
 

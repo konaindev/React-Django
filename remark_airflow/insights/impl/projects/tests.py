@@ -597,7 +597,11 @@ class LowPerformingTestCase(TestCase):
             self.project,
             start=self.start,
             end=self.end,
-            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 5},
+            period_params={
+                "lease_renewal_notices": 1,
+                "lease_vacation_notices": 5,
+                "lease_applications": 0,
+            },
             target_period_params={
                 "target_lease_renewal_notices": 3,
                 "target_lease_vacation_notices": 2,
@@ -781,23 +785,33 @@ class KPIHighPerformingTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_high_performing.graph(args)
 
-        self.assertEqual(project_facts["var_high_performing_kpi"], "apps")
+        self.assertEqual(project_facts["var_high_performing_kpi"], "usvs")
         self.assertEqual(project_facts["trigger_high_performing"], True)
 
         result = kpi_high_performing.evaluate(project_facts)
-        expected_text = "Volume of APP is your best performing metric compared to your Remarkably customer peer set average, this period."
+        expected_text = "Volume of USV is your best performing metric compared to your Remarkably customer peer set average, this period."
         self.assertEqual(result[0], "kpi_high_performing")
         self.assertEqual(result[1], expected_text)
 
     def test_not_triggered(self):
         generate_benchmarks(stub_benchmark_kpis)
-        create_periods(self.project, start=self.start, end=self.end)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "lease_applications": 0,
+                "usvs": 0,
+                "tours": 0,
+                "inquiries": 6,
+            },
+        )
 
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_high_performing.graph(args)
 
-        self.assertEqual(project_facts["var_high_performing_kpi"], None)
-        self.assertEqual(project_facts["trigger_high_performing"], False)
+        self.assertIsNone(project_facts["var_high_performing_kpi"])
+        self.assertFalse(project_facts["trigger_high_performing"])
 
         result = kpi_high_performing.evaluate(project_facts)
         self.assertIsNone(result)
@@ -839,7 +853,17 @@ class KPIAboveAverageTestCase(TestCase):
         self.end = datetime.date(year=2019, month=9, day=28)
 
     def generate_kpi(self):
-        create_periods(self.project, start=self.start, end=self.end)
+        create_periods(
+            self.project,
+            start=self.start,
+            end=self.end,
+            period_params={
+                "inquiries": 8,
+                "tours": 0,
+                "usvs": 0,
+                "lease_applications": 0,
+            },
+        )
 
     def test_triggered(self):
         generate_benchmarks(stub_benchmark_kpis)
@@ -847,11 +871,11 @@ class KPIAboveAverageTestCase(TestCase):
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = kpi_above_average.graph(args)
 
-        self.assertEqual(project_facts["var_above_average_kpi"], "usv_inq")
+        self.assertEqual(project_facts["var_above_average_kpi"], "inqs")
         self.assertEqual(project_facts["trigger_above_average"], True)
 
         result = kpi_above_average.evaluate(project_facts)
-        expected_text = "USV > INQ is your best performing metric compared to your Remarkably customer peer set average, this period."
+        expected_text = "Volume of INQ is your best performing metric compared to your Remarkably customer peer set average, this period."
         self.assertEqual(result[0], "kpi_above_average")
         self.assertEqual(result[1], expected_text)
 
