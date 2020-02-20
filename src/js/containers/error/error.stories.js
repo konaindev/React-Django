@@ -1,9 +1,18 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-
-import { ErrorContainer } from "./index";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import ErrorContainer from "./index";
 import props from "./props";
 
+const storeObject = {
+  nav: { navLinks: null },
+  dashboard: {}
+};
+const tempStore = createStore(() => storeObject);
+
 storiesOf("ErrorContainer", module).add("default", () => (
-  <ErrorContainer {...props} />
+  <Provider store={tempStore}>
+    <ErrorContainer {...props} />
+  </Provider>
 ));

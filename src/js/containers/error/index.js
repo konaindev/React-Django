@@ -3,26 +3,26 @@ import { connect } from "react-redux";
 
 import Container from "../../components/container";
 import { qsParse } from "../../utils/misc";
-import renderWrapper from "../shared/base_container";
+import NavWrapper from "../shared/nav_wrapper";
 
-export class ErrorContainer extends PureComponent {
+class ErrorContainer extends PureComponent {
   render() {
     const { search } = this.props.location;
     const { code = "", title = "", description = "" } = qsParse(search);
 
-    return renderWrapper(
-      <Container>
-        <div style={{ paddingTop: "4rem" }}>
-          <h3>
-            {code} {title}
-          </h3>
-          <p style={{ marginTop: "1rem" }}>{description}</p>
-        </div>
-      </Container>
+    return (
+      <NavWrapper>
+        <Container>
+          <div style={{ paddingTop: "4rem" }}>
+            <h3>
+              {code} {title}
+            </h3>
+            <p style={{ marginTop: "1rem" }}>{description}</p>
+          </div>
+        </Container>
+      </NavWrapper>
     );
   }
 }
 
-const mapState = () => ({});
-
-export default connect(mapState)(ErrorContainer);
+export default ErrorContainer;
