@@ -157,7 +157,7 @@ class KPI(models.Model):
         max_length=255, null=True, blank=True, help_text="KPI Definition"
     )
 
-    on_track_category_1_action = models.OneToOneField(
+    on_track_category_1_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
@@ -166,7 +166,7 @@ class KPI(models.Model):
         verbose_name="On Track - Category 1",
         help_text="Suggested Action",
     )
-    on_track_category_2_action = models.OneToOneField(
+    on_track_category_2_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
@@ -176,7 +176,7 @@ class KPI(models.Model):
         help_text="Suggested Action",
     )
 
-    off_track_category_1_action = models.OneToOneField(
+    off_track_category_1_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
@@ -185,7 +185,7 @@ class KPI(models.Model):
         verbose_name="Off Track/At Risk - Category 1",
         help_text="Suggested Action",
     )
-    off_track_category_2_action = models.OneToOneField(
+    off_track_category_2_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
@@ -195,7 +195,7 @@ class KPI(models.Model):
         help_text="Suggested Action",
     )
 
-    baseline_category_1_action = models.OneToOneField(
+    baseline_category_1_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
@@ -204,7 +204,7 @@ class KPI(models.Model):
         verbose_name="Baseline - Category 1",
         help_text="Suggested Action",
     )
-    baseline_category_2_action = models.OneToOneField(
+    baseline_category_2_action = models.ForeignKey(
         "insights.SuggestedAction",
         on_delete=models.CASCADE,
         null=True,
