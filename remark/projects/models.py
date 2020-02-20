@@ -1356,6 +1356,7 @@ class Campaign(models.Model):
         primary_key=True, default=campaign_public_id, max_length=50, editable=False
     )
     name = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
     project = models.ForeignKey(
         "projects.Project",
         on_delete=models.CASCADE,
