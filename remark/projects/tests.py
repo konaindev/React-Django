@@ -571,13 +571,13 @@ class PerformanceEmailSignalTestCase(TestCase):
         self.assertEqual(low[1], "inq")
 
     def test_rank_kpis(self):
-        json_report = self.generate_mp_json(["funnel", "conversions", "usv_inq"],  0.50, 1.00)
+        json_report = self.generate_mp_json(["funnel", "conversions", "usv_inq"],  0.10, 0.05)
         json_report = self.generate_mp_json(["property", "leasing", "cd_rate"], 0.20, 0.10, json_report, json_report["targets"])
 
         result = rank_kpis(json_report)
 
-        self.assertEqual(result["usv_inq"], 0.50)
-        self.assertEqual(result["cd_rate"], 2.00)
+        self.assertEqual(result["usv_inq"], 2.00)
+        self.assertEqual(result["cd_rate"], 0.50)
 
 
 class ExportTestCase(TestCase):
