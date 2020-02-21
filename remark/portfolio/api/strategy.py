@@ -136,7 +136,7 @@ PROPERTY_MERGE_DOCUMENT = {
 
 PROPERTY_SPLIT_DOCUMENT = {
     "leases_ended": "linear",
-    "leased_units_end": "linear",
+    "leased_units_end": "noop",
     "leased_units_start": "linear",
     "lease_renewal_notices": "linear",
     "lease_renewals": "linear",

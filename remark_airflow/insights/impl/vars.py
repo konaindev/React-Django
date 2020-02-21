@@ -62,7 +62,7 @@ def var_prev_health_status(project, start):
 
     prev_target_period = (
         TargetPeriod.objects.filter(project=project, end__lte=start)
-        .order_by("end")
+        .order_by("-end")
         .first()
     )
     if prev_target_period:
