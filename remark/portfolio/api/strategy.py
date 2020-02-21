@@ -53,7 +53,8 @@ def calc_occupied_units(item, prop, when):
 
 
 PROPERTY_TARGET_MERGE_DOC = {
-    'leased_rate': weighted_average_by_unit_count,
+    # 'leased_rate': weighted_average_by_unit_count,
+    'leased_rate': "last",
     'lease_applications': "sum",
     'leases_executed': "sum",
     'lease_renewal_notices': "sum",
@@ -136,7 +137,7 @@ PROPERTY_MERGE_DOCUMENT = {
 
 PROPERTY_SPLIT_DOCUMENT = {
     "leases_ended": "linear",
-    "leased_units_end": "linear",
+    "leased_units_end": "noop",
     "leased_units_start": "linear",
     "lease_renewal_notices": "linear",
     "lease_renewals": "linear",
