@@ -1356,6 +1356,7 @@ class Campaign(models.Model):
         primary_key=True, default=campaign_public_id, max_length=50, editable=False
     )
     name = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
     project = models.ForeignKey(
         "projects.Project",
         on_delete=models.CASCADE,
@@ -1383,6 +1384,10 @@ class Campaign(models.Model):
         if old and old.selected_campaign_model != self.selected_campaign_model:
             self.handle_change_selected_model()
 
+        if self.active:
+            if not old or old.active != self.active:
+                self._deactivate_other_campaigns()
+
     @staticmethod
     def _get_model_targets(campaign_model):
         if campaign_model is None:
@@ -1402,6 +1407,9 @@ class Campaign(models.Model):
             setattr(target_period, k, v)
         target_period.save()
         return target_period
+
+    def _deactivate_other_campaigns(self):
+        self.project.campaigns.exclude(public_id=self.public_id).update(active=False)
 
     def handle_change_selected_model(self):
         """
