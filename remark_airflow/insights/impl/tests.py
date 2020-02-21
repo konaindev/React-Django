@@ -99,9 +99,10 @@ class VarBenchmarkKPIsTestCase(TestCase):
         self.start = datetime.date(year=2019, month=9, day=21)
         self.end = datetime.date(year=2019, month=9, day=28)
         self.project = create_project(baseline_start=self.start, baseline_end=self.end)
+        self.maxDiff = None
 
     def test_default(self):
-        kpis = {"inqs": 24.21, "inq_tou": 0.6}
+        kpis = {"inqs": 24.21}
         benchmark_kpis = var_benchmark_kpis(kpis, self.project, self.start, self.end)
 
         expected = [
@@ -122,6 +123,18 @@ class VarBenchmarkKPIsTestCase(TestCase):
                 "property_count_4": 21,
                 "total_property_count": 28,
             },
+        ]
+        for kpi in benchmark_kpis:
+            del kpi["last_updated"]
+            del kpi["public_id"]
+
+        self.assertListEqual(benchmark_kpis, expected)
+
+    def test_conversion(self):
+        kpis = {"inq_tou": 0.6}
+        benchmark_kpis = var_benchmark_kpis(kpis, self.project, self.start, self.end)
+
+        expected = [
             {
                 "start": datetime.date(year=2019, month=9, day=21),
                 "end": datetime.date(year=2019, month=9, day=28),

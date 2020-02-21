@@ -137,7 +137,7 @@ KPI_POSITIVE_DIRECTION = {
     "lease_rate" : True,
     "retention_rate" : True,
     "occupied_rate" : True,
-    "cd_rate": True,
+    "cd_rate": False,
     "cds" : False,
     "renew" : True,
     "vacate" : False,

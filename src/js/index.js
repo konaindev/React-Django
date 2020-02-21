@@ -98,7 +98,14 @@ const ready = cb => {
 /* Run our page. */
 ready(() => {
   Sentry.init({
-    dsn: process.env.SENTRY_DSN
+    dsn: process.env.SENTRY_DSN,
+    beforeSend(event, hint) {
+      // Check if it is an exception, and if so, show the report dialog
+      if (event.exception) {
+        Sentry.showReportDialog({ eventId: event.event_id });
+      }
+      return event;
+    }
   });
   // detect what environment we are running in
 
