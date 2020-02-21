@@ -51,7 +51,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, max_active_r
     def get_start_date(reporting_day):
         today = datetime.today().date()
         # cut off is day before reporting day since report run at 2:00 AM
-        start = today - timedelta(days=8)
+        start = today - timedelta(weeks=1)
         finished = False
         while not finished:
             if start.strftime('%A') != reporting_day:
