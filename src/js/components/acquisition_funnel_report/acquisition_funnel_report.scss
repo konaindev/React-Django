@@ -20,12 +20,19 @@
     &__column {
         width: 33.33%;
         padding: $s4;
+        &:nth-child(odd) { // removes bottom border of funnel children except the middle one
+            .funnel-box-layout{
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
 
         &-inner {
             height: 100%;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            border: 1px solid $table-border-color;
         }
 
         &-header {
@@ -46,7 +53,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin: -1px 0;
         }
     }
 }
