@@ -28,7 +28,7 @@ class ErrorContainer extends PureComponent {
             fullWidth={false}
             uppercase={true}
             onClick={() => {
-              throw new Error();
+              throw new Error("User Feedback Button Press");
             }}
           >
             Provide Feedback
