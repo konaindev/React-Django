@@ -199,3 +199,5 @@ dump.rdb
 
 *-storybook/
 *_storybook/
+
+*.zip
