@@ -1,9 +1,12 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import * as Sentry from "@sentry/browser";
 
 import Container from "../../components/container";
+import Button from "../../components/button";
 import { qsParse } from "../../utils/misc";
 import NavWrapper from "../shared/nav_wrapper";
+
+import "./error.scss";
 
 class ErrorContainer extends PureComponent {
   render() {
@@ -19,6 +22,17 @@ class ErrorContainer extends PureComponent {
             </h3>
             <p style={{ marginTop: "1rem" }}>{description}</p>
           </div>
+          <Button
+            className="provide-feedback__button"
+            color="warning"
+            fullWidth={false}
+            uppercase={true}
+            onClick={() => {
+              throw new Error();
+            }}
+          >
+            Provide Feedback
+          </Button>
         </Container>
       </NavWrapper>
     );
