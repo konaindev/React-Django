@@ -128,7 +128,7 @@ class PortfolioTableView(APIView):
         if "p" in request.GET:
             period_group = request.GET["p"]
         else:
-            period_group = PERIOD_GROUP[0]
+            period_group = PERIOD_GROUP[2]
 
         if period_group not in PERIOD_GROUP:
             raise Exception("Period group is not a valid value")
