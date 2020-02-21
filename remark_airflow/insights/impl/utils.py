@@ -1,4 +1,6 @@
 import functools
+import math
+import decimal
 
 from graphkit import operation
 
@@ -18,6 +20,13 @@ def health_status_to_str(health_status):
 def format_percent(value):
     if value is None:
         return "-"
+    value_type = type(value)
+    if value_type is decimal.Decimal:
+        with decimal.localcontext() as ctx:
+            ctx.rounding = decimal.ROUND_HALF_UP
+            value = value.quantize(decimal.Decimal("0.00"))
+    elif value_type is float:
+        value = math.floor(100 * value + 0.5) / 100
     return f"{value:.0%}"
 
 

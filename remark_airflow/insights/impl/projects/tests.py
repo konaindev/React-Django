@@ -163,6 +163,128 @@ class LeaseRateAgainstTarget(TestCase):
         result = lease_rate_against_target.evaluate(project_facts)
         self.assertIsNone(result)
 
+    def test_rounding(self):
+        project_property = create_project_property(total_units=252)
+        project = create_project(
+            baseline_start=datetime.date(year=2018, month=8, day=1),
+            baseline_end=datetime.date(year=2019, month=10, day=14),
+            project_property=project_property,
+        )
+        create_periods(
+            project,
+            start=datetime.date(year=2020, month=2, day=3),
+            end=datetime.date(year=2020, month=2, day=10),
+            period_params={
+                "leased_units_start": 188,
+                "leases_ended": 0,
+                "lease_applications": 7,
+                "leases_executed": 6,
+                "lease_cds": 1,
+                "lease_renewal_notices": 0,
+                "lease_renewals": 0,
+                "lease_vacation_notices": 0,
+                "occupiable_units_start": 252,
+                "occupied_units_start": 166,
+                "move_ins": 1,
+                "move_outs": 0,
+                "acq_reputation_building": 0.0,
+                "acq_demand_creation": 2075.55,
+                "acq_leasing_enablement": 74.75,
+                "acq_market_intelligence": 0.0,
+                "ret_reputation_building": 0.0,
+                "ret_demand_creation": 0.0,
+                "ret_leasing_enablement": 94.50,
+                "ret_market_intelligence": 0.0,
+                "usvs": 951,
+                "inquiries": 45,
+                "tours": 18,
+                "leased_units_end": 194,
+                "occupied_units_end": 167,
+            },
+            target_period_params={
+                "target_leased_rate": 0.853,
+                "target_lease_applications": 6,
+                "target_leases_executed": 5,
+                "target_lease_renewal_notices": 0,
+                "target_lease_renewals": 1,
+                "target_lease_vacation_notices": 0,
+                "target_lease_cds": 1,
+                "target_delta_leases": 5,
+                "target_move_ins": 5,
+                "target_move_outs": 0,
+                "target_occupied_units": 198,
+                "target_acq_investment": 4591.17,
+                "target_ret_investment": 1169.76,
+                "target_usvs": 700,
+                "target_inquiries": 54,
+                "target_tours": 21,
+            },
+        )
+        create_periods(
+            project,
+            start=datetime.date(year=2020, month=2, day=10),
+            end=datetime.date(year=2020, month=2, day=17),
+            period_params={
+                "leased_units_start": 194,
+                "leases_ended": 1,
+                "lease_applications": 3,
+                "leases_executed": 3,
+                "lease_cds": 0,
+                "lease_renewal_notices": 1,
+                "lease_renewals": 1,
+                "lease_vacation_notices": 3,
+                "occupiable_units_start": 252,
+                "occupied_units_start": 167,
+                "move_ins": 2,
+                "move_outs": 1,
+                "acq_reputation_building": 0.0,
+                "acq_demand_creation": 2075.55,
+                "acq_leasing_enablement": 74.75,
+                "acq_market_intelligence": 0.0,
+                "ret_reputation_building": 0.0,
+                "ret_demand_creation": 0.0,
+                "ret_leasing_enablement": 94.50,
+                "ret_market_intelligence": 0.0,
+                "usvs": 911,
+                "inquiries": 35,
+                "tours": 13,
+                "leased_units_end": 196,
+                "occupied_units_end": 168,
+            },
+            target_period_params={
+                "target_leased_rate": 0.865,
+                "target_lease_applications": 6,
+                "target_leases_executed": 4,
+                "target_lease_renewal_notices": 0,
+                "target_lease_renewals": 1,
+                "target_lease_vacation_notices": 2,
+                "target_lease_cds": 2,
+                "target_delta_leases": 3,
+                "target_move_ins": 5,
+                "target_move_outs": 1,
+                "target_occupied_units": 202,
+                "target_acq_investment": 4591.17,
+                "target_ret_investment": 1169.76,
+                "target_usvs": 700,
+                "target_inquiries": 54,
+                "target_tours": 22,
+            },
+        )
+
+        start = datetime.date(year=2020, month=2, day=7)
+        end = datetime.date(year=2020, month=2, day=14)
+        args = {"start": start, "end": end, "project": project}
+
+        project_facts = lease_rate_against_target.graph(args)
+        self.assertTrue(project_facts["trigger_is_active_campaign"])
+
+        result = lease_rate_against_target.evaluate(project_facts)
+        expected_text = (
+            "Property is 78% Leased against period target of 87%, assessed as At Risk."
+        )
+        self.assertEqual(result[0], "lease_rate_against_target")
+        self.assertEqual(result[1], expected_text)
+
 
 class ChangeHealthStatusTestCase(TestCase):
     def setUp(self) -> None:
