@@ -64,7 +64,8 @@ urlpatterns = [
     # used in project admin page to generate links
     path("projects/<project_id>/", TemplateView.as_view(), name="project_detail_page"),
 
+    path("favicon.ico/", RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     # no home page so forward to django admin
-    path("", RedirectView.as_view(url="admin/", permanent=True))
+    path("", RedirectView.as_view(url = "admin/", permanent = True))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
