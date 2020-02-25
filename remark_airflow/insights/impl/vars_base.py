@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from remark.lib.time_series.computed import (
     generate_computed_kpis,
     generate_computed_targets,
@@ -7,6 +9,7 @@ from remark.portfolio.api.strategy import (
     get_targets_for_project,
     is_have_period_for_end,
 )
+from remark.projects.models import LeaseStage
 from remark_airflow.insights.impl.utils import health_standard
 
 
@@ -62,3 +65,17 @@ def var_target_kpi(computed_kpis, kpi_name):
 
 def var_kpi_health(kpi, target_kpi):
     return health_standard(kpi, target_kpi)
+
+
+def var_base_kpis_without_pre_leasing_stage(project, start, end):
+    lease_stage = get_pre_lease_stage()
+    period_filter = [~Q(lease_stage=lease_stage)]
+    return get_base_kpis_for_project(project, start, end, period_filter=period_filter)
+
+
+def get_pre_lease_stage():
+    try:
+        lease_stage = LeaseStage.objects.get(short_name="pre-lease")
+    except LeaseStage.DoesNotExist:
+        return None
+    return lease_stage
