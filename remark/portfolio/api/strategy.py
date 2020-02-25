@@ -369,8 +369,10 @@ GROUP_TARGET_SPLIT_DOC = {
 }
 
 
-def get_merged_timeseries(cls, merge_doc, split_doc, project, start, end):
-    periods = select(cls.objects.filter(project=project), start, end)
+def get_merged_timeseries(cls, merge_doc, split_doc, project, start, end, period_filter=None):
+    if period_filter is None:
+        period_filter = []
+    periods = select(cls.objects.filter(project=project, *period_filter), start, end)
     stripped_periods = []
     for period in periods:
         values = period.get_values()
@@ -395,10 +397,10 @@ def get_merged_timeseries(cls, merge_doc, split_doc, project, start, end):
 
 
 @remark_cache("remark.portfolio.api.strategy.get_base_kpis_for_project", TIMEOUT_1_WEEK)
-def get_base_kpis_for_project(project, start, end, skip_select=False):
+def get_base_kpis_for_project(project, start, end, skip_select=False, period_filter=None):
     # Added for ease of testing
     if not skip_select:
-        return get_merged_timeseries(Period, PROPERTY_MERGE_DOCUMENT, PROPERTY_SPLIT_DOCUMENT, project, start, end)
+        return get_merged_timeseries(Period, PROPERTY_MERGE_DOCUMENT, PROPERTY_SPLIT_DOCUMENT, project, start, end, period_filter)
     return merge(PROPERTY_MERGE_DOCUMENT, PROPERTY_SPLIT_DOCUMENT, project, start, end)
 
 

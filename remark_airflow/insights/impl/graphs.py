@@ -12,6 +12,7 @@ from remark_airflow.insights.impl.vars_base import (
     var_kpi,
     var_target_kpi,
     var_kpi_health,
+    var_base_kpis_without_pre_leasing_stage,
 )
 
 projects_kpi_graph = compose(name="projects_kpi_graph")(
@@ -31,6 +32,14 @@ usv_exe_health_graph = compose(name="usv_exe_health", merge=True)(
 kpi_graph = compose(name="kpi_graph")(
     cop(var_base_kpis, "project", "start", "end"),
     cop(var_computed_kpis, var_base_kpis),
+    cop(var_kpi, var_computed_kpis, "kpi_name"),
+)
+
+kpi_graph_without_pre_leasing_stage = compose(
+    name="kpi_graph_without_pre_leasing_stage"
+)(
+    cop(var_base_kpis_without_pre_leasing_stage, "project", "start", "end"),
+    cop(var_computed_kpis, var_base_kpis_without_pre_leasing_stage),
     cop(var_kpi, var_computed_kpis, "kpi_name"),
 )
 
