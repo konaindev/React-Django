@@ -597,6 +597,11 @@ class Project(models.Model):
         unsubscribed_emails = [u.email for u in self.unsubscribed_users.all()]
         return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
+    def get_active_campaign(self):
+        for c in self.campaigns:
+            if c.active:
+                return c
+
     def _cache_subscription_fields(self):
         self._email_distribution_list = self.email_distribution_list
 
