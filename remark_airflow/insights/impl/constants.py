@@ -1,3 +1,5 @@
+from enum import Enum, auto
+
 MITIGATED_KPIS = [
     ("usvs", "usv_inq", "inquiries"),
     ("usv_inq", "usvs", "inquiries"),
@@ -41,4 +43,7 @@ KPIS_NAMES = {
 }
 
 
-TRENDS = {"FLAT": "flat", "UP": "up", "DOWN": "down"}
+class TRENDS:
+    FLAT = "flat"
+    UP = "up"
+    DOWN = "down"

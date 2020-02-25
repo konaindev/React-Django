@@ -101,14 +101,14 @@ def health_standard(stat, stat_target):
 
 def get_trend(perv_value, value):
     if perv_value is None and value is None:
-        return TRENDS["FLAT"]
+        return TRENDS.FLAT
     elif perv_value is None:
-        return TRENDS["UP"]
+        return TRENDS.UP
     elif value is None:
-        return TRENDS["DOWN"]
+        return TRENDS.DOWN
     elif perv_value == value:
-        return TRENDS["FLAT"]
+        return TRENDS.FLAT
     elif perv_value < value:
-        return TRENDS["UP"]
+        return TRENDS.UP
     else:
-        return TRENDS["DOWN"]
+        return TRENDS.DOWN
