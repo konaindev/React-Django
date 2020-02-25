@@ -8,7 +8,7 @@ def create_periods(
     project,
     start=datetime.date(year=2019, month=6, day=7),
     end=datetime.date(year=2019, month=6, day=14),
-    stage=None,
+    stage="performance",
     target_period_params=None,
     period_params=None,
 ):
@@ -58,8 +58,8 @@ def create_periods(
     if period_params is not None:
         default_period_params.update(period_params)
 
-    if stage is None:
-        stage = LeaseStage.objects.get(short_name="performance")
+    if type(stage) is str:
+        stage = LeaseStage.objects.get(short_name=stage)
 
     target_period = TargetPeriod.objects.create(
         project=project, **default_target_period_params

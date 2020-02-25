@@ -63,6 +63,7 @@ from remark_airflow.insights.impl.vars_base import (
     var_usv_exe,
     var_target_usv_exe,
     var_usv_exe_health_status,
+    var_base_kpis_without_pre_leasing_stage,
 )
 
 lease_rate_against_target = Insight(
@@ -188,11 +189,15 @@ retention_rate_health = Insight(
     " and is trending {{ var_retention_rate_trend }}.",
     triggers=["trigger_retention_rate_health"],
     graph=[
-        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_kpis_without_pre_leasing_stage, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
         cop(var_prev_retention_rate, "project", "start"),
-        cop(var_computed_kpis, var_base_kpis),
-        cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+        cop(var_computed_kpis, var_base_kpis_without_pre_leasing_stage),
+        cop(
+            var_target_computed_kpis,
+            var_base_kpis_without_pre_leasing_stage,
+            var_base_targets,
+        ),
         cop(var_retention_rate, var_computed_kpis),
         cop(var_target_retention_rate, var_target_computed_kpis),
         cop(var_retention_rate_health, var_retention_rate, var_target_retention_rate),

@@ -64,7 +64,7 @@ export class LargeBoxLayout extends Component {
     const ctaId = staticData ? "large-box__cta-static" : "large-box__cta";
 
     return (
-      <div id={wrapperId} onClick={x => ctaCallback(x)}>
+      <div id={wrapperId} onClick={x => (ctaCallback ? ctaCallback(x) : false)}>
         <Panel className="large-box">
           {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
