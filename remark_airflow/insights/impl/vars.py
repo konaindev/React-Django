@@ -663,28 +663,21 @@ def var_kpi_new_direction(kpis_trends):
         kpi_name = kpi_trend["name"]
         value = kpi_trend["values"][-1] or 0
         prev_value = kpi_trend["values"][-2] or 0
+        kpi = {
+            "kpi_name": kpi_name,
+            "prev_trend": kpi_trend["trend"],
+            "weeks": kpi_trend["weeks"],
+        }
         if kpi_trend["trend"] == TRENDS.UP:
             if value < prev_value:
-                kpi_new_direction.append(
-                    {
-                        "kpi_name": kpi_name,
-                        "prev_trend": kpi_trend["trend"],
-                        "weeks": kpi_trend["weeks"],
-                        "trend": TRENDS.DOWN,
-                        "quotient": value / prev_value,
-                    }
-                )
+                kpi["trend"] = TRENDS.DOWN
+                kpi["quotient"] = value / prev_value
+                kpi_new_direction.append(kpi)
         elif kpi_trend["trend"] == TRENDS.DOWN:
             if value > prev_value:
-                kpi_new_direction.append(
-                    {
-                        "kpi_name": kpi_name,
-                        "prev_trend": kpi_trend["trend"],
-                        "weeks": kpi_trend["weeks"],
-                        "trend": TRENDS.UP,
-                        "quotient": prev_value / value,
-                    }
-                )
+                kpi["trend"] = TRENDS.UP
+                kpi["quotient"] = prev_value / value
+                kpi_new_direction.append(kpi)
     result = sorted(kpi_new_direction, key=lambda data: data["quotient"])
     if not result:
         return None
