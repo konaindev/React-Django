@@ -660,11 +660,10 @@ def var_kpi_new_direction(kpis_trends):
 
     kpi_new_direction = []
     for kpi_trend in kpis_trends:
-        kpi_name = kpi_trend["name"]
         value = kpi_trend["values"][-1] or 0
         prev_value = kpi_trend["values"][-2] or 0
         kpi = {
-            "kpi_name": kpi_name,
+            "kpi_name": kpi_trend["name"],
             "prev_trend": kpi_trend["trend"],
             "weeks": kpi_trend["weeks"],
         }
