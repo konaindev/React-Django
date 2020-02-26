@@ -6,6 +6,7 @@ from django.test import TestCase, SimpleTestCase
 
 from remark.portfolio.api.strategy import calc_occupied_units
 from remark.projects.models import (
+    Campaign,
     Project,
     Period,
     Fund,
@@ -55,10 +56,9 @@ class PortfolioTestCase(TestCase):
             name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
+        project_name = "test"
         self.project = Project.objects.create(
-            name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
+            name=project_name,
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
             account=account,
@@ -87,7 +87,12 @@ class PortfolioTestCase(TestCase):
             acq_leasing_enablement=decimal.Decimal("11000"),
             acq_market_intelligence=decimal.Decimal("7000"),
         )
-        self.raw_period.save()
+        Campaign.objects.create(
+            name=f"Campaign for {project_name}",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            project=self.project,
+        )
 
     def tearDown(self):
         pass
@@ -121,6 +126,12 @@ class GetTableStructureTestCase(TestCase):
             fund=self.fund,
             property=project_property,
             view_group=group,
+        )
+        Campaign.objects.create(
+            name=f"Campaign for {name}",
+            baseline_start=date(year=2019, month=2, day=12),
+            baseline_end=date(year=2019, month=4, day=16),
+            project=project,
         )
         return project
 

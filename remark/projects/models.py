@@ -323,7 +323,6 @@ class Project(models.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cache_subscription_fields()
-        self._cache_baseline_fields()
 
     def _target_periods(self, qs, start, end):
         """
@@ -357,26 +356,29 @@ class Project(models.Model):
         else:
             qs = self.target_periods.all()
 
+        campaign = self.get_active_campaign()
         return self._target_periods(
             qs,
-            start=self.baseline_start,
-            end=self.get_campaign_end() or self.baseline_end,
+            start=campaign.baseline_start,
+            end=self.get_campaign_end() or campaign.baseline_end,
         )
 
     def get_baseline_periods(self):
         """
         Return the baseline periods for this project.
         """
-        return self.periods.filter(end__lte=self.baseline_end)
+        campaign = self.get_active_campaign()
+        return self.periods.filter(end__lte=campaign.baseline_end)
 
     def get_baseline_target_periods(self):
         """
         Return target periods within the baseline.
         """
+        campaign = self.get_active_campaign()
         return self._target_periods(
-            self.target_periods.filter(end__lte=self.baseline_end),
-            start=self.baseline_start,
-            end=self.baseline_end,
+            self.target_periods.filter(end__lte=campaign.baseline_end),
+            start=campaign.baseline_start,
+            end=campaign.baseline_end,
         )
 
     def get_campaign_periods(self):
@@ -384,7 +386,7 @@ class Project(models.Model):
         Return the campaign periods for this project -- aka all periods except
         the baseline.
         """
-        return self.periods.filter(start__gte=self.baseline_end)
+        return self.periods.filter(start__gte=self.get_active_campaign().baseline_end)
 
     def get_campaign_period_dates(self):
         """
@@ -396,7 +398,7 @@ class Project(models.Model):
         """
         Return the start date (inclusive) of the campaign.
         """
-        return self.baseline_end
+        return self.get_active_campaign().baseline_end
 
     def get_campaign_end(self):
         """
@@ -598,16 +600,23 @@ class Project(models.Model):
         return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
     def get_active_campaign(self):
-        for c in self.campaigns:
-            if c.active:
-                return c
+        return self.campaigns.get(active=True)
+
+    def get_baseline_start(self):
+        return self.get_active_campaign().baseline_start
+
+    def get_baseline_end(self):
+        return self.get_active_campaign().baseline_end
+
+    def get_baseline_dates(self):
+        campaign = self.get_active_campaign()
+        return {
+            "start": campaign.baseline_start,
+            "end": campaign.baseline_end,
+        }
 
     def _cache_subscription_fields(self):
         self._email_distribution_list = self.email_distribution_list
-
-    def _cache_baseline_fields(self):
-        self._baseline_start = self.baseline_start
-        self._baseline_end = self.baseline_end
 
     def __assign_blank_groups(self):
         """
@@ -620,27 +629,10 @@ class Project(models.Model):
         self.view_group = view_group
         self.admin_group = admin_group
 
-    def __trigger_dag(self):
-        if (
-            self._baseline_start is None
-            or self._baseline_end is None
-            or self._baseline_start == self.baseline_start
-            or self._baseline_end == self.baseline_end
-        ) and not TESTING:
-            params = {
-                "start": self.baseline_start.strftime("%Y-%m-%d"),
-                "end": self.baseline_end.strftime("%Y-%m-%d"),
-                "project_id": self.public_id,
-            }
-            trigger_dag("macro_baseline", params)
-
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_groups()
         super().save(*args, **kwargs)
-
-        # Commenting out temporarily pending finalization of baseline dags (currently set to trigger macro_baseline dag
-        # self.__trigger_dag()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
