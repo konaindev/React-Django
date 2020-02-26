@@ -1378,11 +1378,9 @@ class Campaign(models.Model):
         help_text="All target values will be replaced by those in the newly selected model.",
     )
     baseline_start = models.DateField(
-        null=True,
         help_text="The first date, inclusive, for the baseline period.",
     )
     baseline_end = models.DateField(
-        null=True,
         help_text="The final date, exclusive, for the baseline period.",
     )
 
