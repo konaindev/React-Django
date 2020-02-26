@@ -43,7 +43,13 @@ KPIS_NAMES = {
 }
 
 
-class TRENDS:
-    FLAT = "flat"
-    UP = "up"
-    DOWN = "down"
+class Trend(Enum):
+    def _generate_next_value_(name, start, count, last_values):
+        return name
+
+    def __str__(self):
+        return self.name
+
+    flat = auto()
+    up = auto()
+    down = auto()

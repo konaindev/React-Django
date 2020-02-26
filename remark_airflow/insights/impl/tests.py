@@ -7,6 +7,7 @@ from remark.factories.geo import create_us
 from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
 from remark.projects.constants import HEALTH_STATUS
+from remark_airflow.insights.impl.constants import Trend
 from remark_airflow.insights.impl.stub_data.benchmark import stub_benchmark_kpis
 from remark_airflow.insights.impl.stub_data.kpi import (
     all_base_kpis,
@@ -873,7 +874,7 @@ class VarPredictedKPITestCase(TestCase):
         result = var_predicted_kpi(self.predicting_change_health, kpis_trends)
         expected = {
             "name": "usvs",
-            "trend": "up",
+            "trend": Trend.up,
             "weeks": 3,
             "predicted_weeks": 2,
             "predicted_health": 1,
@@ -886,7 +887,7 @@ class VarPredictedKPITestCase(TestCase):
         result = var_predicted_kpi(predicting_change_health, kpis_trends)
         expected = {
             "name": "usv_inq",
-            "trend": "down",
+            "trend": Trend.down,
             "weeks": 3,
             "predicted_weeks": 1,
             "predicted_health": 0,
@@ -940,24 +941,44 @@ class VarKPINewDirectionTestCase(TestCase):
     def test_new_direction_down(self):
         kpis_trends_new_direction = self.kpis_trends.copy()
         kpis_trends_new_direction.append(
-            {"name": "romi", "trend": "up", "weeks": 3, "values": [74, 75, 76, None]}
+            {
+                "name": "romi",
+                "trend": Trend.up,
+                "weeks": 3,
+                "values": [74, 75, 76, None],
+            }
         )
         kpis_trends_new_direction.append(
-            {"name": "ret_romi", "trend": "up", "weeks": 3, "values": [88, 89, 90, 86]}
+            {
+                "name": "ret_romi",
+                "trend": Trend.up,
+                "weeks": 3,
+                "values": [88, 89, 90, 86],
+            }
         )
         result = var_kpi_new_direction(kpis_trends_new_direction)
-        expected = {"kpi_name": "romi", "prev_trend": "up", "trend": "down", "weeks": 3}
+        expected = {
+            "kpi_name": "romi",
+            "prev_trend": Trend.up,
+            "trend": Trend.down,
+            "weeks": 3,
+        }
         self.assertDictEqual(result, expected)
 
     def test_new_direction_up(self):
         kpis_trends_new_direction = self.kpis_trends.copy()
         kpis_trends_new_direction.append(
-            {"name": "romi", "trend": "down", "weeks": 3, "values": [77, 76, 75, 78]}
+            {
+                "name": "romi",
+                "trend": Trend.down,
+                "weeks": 3,
+                "values": [77, 76, 75, 78],
+            }
         )
         kpis_trends_new_direction.append(
             {
                 "name": "ret_romi",
-                "trend": "down",
+                "trend": Trend.down,
                 "weeks": 3,
                 "values": [90, 89, None, 86],
             }
@@ -965,8 +986,8 @@ class VarKPINewDirectionTestCase(TestCase):
         result = var_kpi_new_direction(kpis_trends_new_direction)
         expected = {
             "kpi_name": "ret_romi",
-            "prev_trend": "down",
-            "trend": "up",
+            "prev_trend": Trend.down,
+            "trend": Trend.up,
             "weeks": 3,
         }
         self.assertDictEqual(result, expected)

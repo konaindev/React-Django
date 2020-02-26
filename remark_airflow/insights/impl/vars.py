@@ -19,7 +19,7 @@ from remark.portfolio.api.strategy import (
 )
 from remark.projects.constants import HEALTH_STATUS
 from remark.projects.models import Period, TargetPeriod, Project, CountryBenchmark
-from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS, TRENDS
+from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS, Trend
 from remark_airflow.insights.impl.graphs import (
     projects_kpi_graph,
     usv_exe_health_graph,
@@ -595,10 +595,8 @@ def var_predicting_change_health(kpis_trends, kpis_healths, weeks_predict=8):
         health = kpis_healths.get(kpi_name)
         if health is None:
             continue
-        if (
-            kpi_trend["trend"] == TRENDS.UP and health != HEALTH_STATUS["ON_TRACK"]
-        ) or (
-            kpi_trend["trend"] == TRENDS.DOWN and health == HEALTH_STATUS["ON_TRACK"]
+        if (kpi_trend["trend"] == Trend.up and health != HEALTH_STATUS["ON_TRACK"]) or (
+            kpi_trend["trend"] == Trend.down and health == HEALTH_STATUS["ON_TRACK"]
         ):
 
             value = kpi_trend["values"]
@@ -647,7 +645,7 @@ def var_predicted_kpi(predicting_change_health, kpis_trends):
 def var_kpi_trend(kpis_trends):
     if not kpis_trends:
         return None
-    kpis_trends = filter(lambda t: t["trend"] != TRENDS.FLAT, kpis_trends)
+    kpis_trends = filter(lambda t: t["trend"] != Trend.flat, kpis_trends)
     kpis_trends = sorted(kpis_trends, key=lambda t: t["weeks"], reverse=True)
     if not kpis_trends:
         return None
@@ -667,14 +665,14 @@ def var_kpi_new_direction(kpis_trends):
             "prev_trend": kpi_trend["trend"],
             "weeks": kpi_trend["weeks"],
         }
-        if kpi_trend["trend"] == TRENDS.UP:
+        if kpi_trend["trend"] == Trend.up:
             if value < prev_value:
-                kpi["trend"] = TRENDS.DOWN
+                kpi["trend"] = Trend.down
                 kpi["quotient"] = value / prev_value
                 kpi_new_direction.append(kpi)
-        elif kpi_trend["trend"] == TRENDS.DOWN:
+        elif kpi_trend["trend"] == Trend.down:
             if value > prev_value:
-                kpi["trend"] = TRENDS.UP
+                kpi["trend"] = Trend.up
                 kpi["quotient"] = prev_value / value
                 kpi_new_direction.append(kpi)
     result = sorted(kpi_new_direction, key=lambda data: data["quotient"])

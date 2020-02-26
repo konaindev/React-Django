@@ -14,6 +14,7 @@ from remark.factories.periods import create_periods, generate_weekly_periods
 from remark.factories.projects import create_project, create_project_property
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
+from remark_airflow.insights.impl.constants import Trend
 from remark_airflow.insights.impl.projects.insights import (
     retention_rate_health,
     top_usv_referral,
@@ -778,7 +779,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["OFF_TRACK"],
             "var_retention_rate_health_weeks": 2,
-            "var_retention_rate_trend": "flat",
+            "var_retention_rate_trend": Trend.flat,
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
@@ -815,7 +816,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["OFF_TRACK"],
             "var_retention_rate_health_weeks": 1,
-            "var_retention_rate_trend": "down",
+            "var_retention_rate_trend": Trend.down,
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
@@ -852,7 +853,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["AT_RISK"],
             "var_retention_rate_health_weeks": 1,
-            "var_retention_rate_trend": "up",
+            "var_retention_rate_trend": Trend.up,
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
@@ -1673,7 +1674,7 @@ class KPITrendChangeHealthTestCase(TestCase):
             "name": "usvs",
             "predicted_health": 2,
             "predicted_weeks": 2,
-            "trend": "up",
+            "trend": Trend.up,
             "weeks": 8,
         }
         self.assertDictEqual(project_facts["var_predicted_kpi"], expected)
@@ -1755,7 +1756,7 @@ class KPITrendTestCase(TestCase):
         expected = {
             "name": "usvs",
             "target_values": [480, 480, 480, 480],
-            "trend": "up",
+            "trend": Trend.up,
             "values": [457, 458, 459, 460],
             "weeks": 4,
         }
@@ -1774,7 +1775,7 @@ class KPITrendTestCase(TestCase):
         expected = {
             "name": "usvs",
             "target_values": [480, 480, 480, 480],
-            "trend": "down",
+            "trend": Trend.down,
             "values": [463, 462, 461, 460],
             "weeks": 4,
         }
@@ -1879,7 +1880,12 @@ class KPITrendingNewDirectionTestCase(TestCase):
 
         project_facts = kpi_trend_new_direction.graph(self.args)
         self.assertTrue(project_facts["trigger_kpi_trend_new_direction"])
-        expected = {"kpi_name": "usvs", "prev_trend": "down", "trend": "up", "weeks": 4}
+        expected = {
+            "kpi_name": "usvs",
+            "prev_trend": Trend.down,
+            "trend": Trend.up,
+            "weeks": 4,
+        }
         self.assertDictEqual(project_facts["var_kpi_new_direction"], expected)
 
         result = kpi_trend_new_direction.evaluate(project_facts)
@@ -1895,7 +1901,12 @@ class KPITrendingNewDirectionTestCase(TestCase):
 
         project_facts = kpi_trend_new_direction.graph(self.args)
         self.assertTrue(project_facts["trigger_kpi_trend_new_direction"])
-        expected = {"kpi_name": "usvs", "prev_trend": "up", "trend": "down", "weeks": 4}
+        expected = {
+            "kpi_name": "usvs",
+            "prev_trend": Trend.up,
+            "trend": Trend.down,
+            "weeks": 4,
+        }
         self.assertDictEqual(project_facts["var_kpi_new_direction"], expected)
 
         result = kpi_trend_new_direction.evaluate(project_facts)

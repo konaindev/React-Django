@@ -1,6 +1,8 @@
 import datetime
 from decimal import Decimal
 
+from remark_airflow.insights.impl.constants import Trend
+
 all_base_kpis = [
     {
         "acq_demand_creation": Decimal("0.00"),
@@ -368,28 +370,28 @@ all_target_computed_kpis = [
 kpis_trends = [
     {
         "name": "usvs",
-        "trend": "up",
+        "trend": Trend.up,
         "weeks": 3,
         "values": [4, 5, 6],
         "target_values": [6, 7, 8],
     },
     {
         "name": "usv_inq",
-        "trend": "down",
+        "trend": Trend.down,
         "weeks": 3,
         "values": [4, 1, None],
         "target_values": [5, 6, 3],
     },
     {
         "name": "inquiries",
-        "trend": "flat",
+        "trend": Trend.flat,
         "weeks": 3,
         "values": [0, 0, 0],
         "target_values": [3, 3, 3],
     },
     {
         "name": "inq_tou",
-        "trend": "down",
+        "trend": Trend.down,
         "weeks": 3,
         "values": [4, 3, 2],
         "target_values": [5, 3, 4],

@@ -4,7 +4,7 @@ import decimal
 
 from graphkit import operation
 
-from remark_airflow.insights.impl.constants import KPIS_NAMES, TRENDS
+from remark_airflow.insights.impl.constants import KPIS_NAMES, Trend
 
 
 def to_percentage(value):
@@ -101,14 +101,14 @@ def health_standard(stat, stat_target):
 
 def get_trend(perv_value, value):
     if perv_value is None and value is None:
-        return TRENDS.FLAT
+        return Trend.flat
     elif perv_value is None:
-        return TRENDS.UP
+        return Trend.up
     elif value is None:
-        return TRENDS.DOWN
+        return Trend.down
     elif perv_value == value:
-        return TRENDS.FLAT
+        return Trend.flat
     elif perv_value < value:
-        return TRENDS.UP
+        return Trend.up
     else:
-        return TRENDS.DOWN
+        return Trend.down
