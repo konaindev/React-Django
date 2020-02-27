@@ -377,7 +377,8 @@ class Project(models.Model):
         Return the campaign periods for this project -- aka all periods except
         the baseline.
         """
-        return self.periods.filter(start__gte=self.get_active_campaign().baseline_end)
+        import debug
+        return self.periods.filter(start__gte=self.get_baseline_end())
 
     def get_campaign_period_dates(self):
         """
