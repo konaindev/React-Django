@@ -359,7 +359,11 @@ class Project(models.Model):
         """
         Return the baseline periods for this project.
         """
-        return self.periods.filter(end__lte=self.get_baseline_end())
+        try:
+            end = self.get_baseline_end()
+        except Campaign.DoesNotExist:
+            return self.periods.none()
+        return self.periods.filter(end__lte=end)
 
     def get_baseline_target_periods(self):
         """
@@ -377,8 +381,11 @@ class Project(models.Model):
         Return the campaign periods for this project -- aka all periods except
         the baseline.
         """
-        import debug
-        return self.periods.filter(start__gte=self.get_baseline_end())
+        try:
+            end = self.get_baseline_end()
+        except Campaign.DoesNotExist:
+            return self.periods.none()
+        return self.periods.filter(start__gte=end)
 
     def get_campaign_period_dates(self):
         """
@@ -390,7 +397,7 @@ class Project(models.Model):
         """
         Return the start date (inclusive) of the campaign.
         """
-        return self.get_active_campaign().baseline_end
+        return self.get_baseline_end()
 
     def get_campaign_end(self):
         """
