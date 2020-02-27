@@ -264,7 +264,7 @@ GROUP_AVERAGE_MERGE_DOC = {
     "highest_monthly_rent": weighted_average_by_unit_count,
 
     # Property
-    "total_units": "last",
+    "total_units": "average",
 }
 
 GROUP_SPLIT_DOC = {
