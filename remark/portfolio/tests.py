@@ -117,8 +117,6 @@ class GetTableStructureTestCase(TestCase):
         )
         project = Project.objects.create(
             name=name,
-            baseline_start=date(year=2019, month=2, day=12),
-            baseline_end=date(year=2019, month=4, day=16),
             account=self.account,
             asset_manager=self.asset_manager,
             property_manager=self.property_manager,

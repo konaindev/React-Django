@@ -230,14 +230,6 @@ class Project(models.Model):
     # This is for the SendGrid recipients list.
     email_list_id = models.CharField(max_length=256, null=True, default=None)
 
-    baseline_start = models.DateField(
-        help_text="The first date, inclusive, for the baseline period."
-    )
-
-    baseline_end = models.DateField(
-        help_text="The final date, exclusive, for the baseline period."
-    )
-
     # A temporary field, for the current sprint, that holds our computed
     # TAM reporting data.
     tmp_market_report_json = JSONField(

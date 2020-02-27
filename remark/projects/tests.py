@@ -59,8 +59,6 @@ def create_project(project_name="project 1"):
     admin_group = Group.objects.create(name=f"{project_name} admin group")
     project = Project.objects.create(
         name=project_name,
-        baseline_start=datetime.date(year=2018, month=11, day=19),
-        baseline_end=datetime.date(year=2018, month=12, day=26),
         account=account,
         asset_manager=asset_manager,
         property_manager=property_manager,
@@ -320,8 +318,6 @@ class LincolnTowerPeriodTestCase(TestCase):
         )
         self.project = Project.objects.create(
             name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,

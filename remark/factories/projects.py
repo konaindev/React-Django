@@ -60,8 +60,6 @@ def create_project(
 
     project = Project.objects.create(
         name=project_name,
-        baseline_start=baseline_start,
-        baseline_end=baseline_end,
         account=account,
         asset_manager=asset_manager,
         property_manager=property_manager,

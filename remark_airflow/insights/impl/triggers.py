@@ -11,7 +11,7 @@ def trigger_is_active_campaign(
         or target_leased_rate is None
     ):
         return False
-    return project.get_active_campaign().baseline_end <= start
+    return project.get_baseline_end() <= start
 
 
 def trigger_campaign_health_status_off_track(health_status):

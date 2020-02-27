@@ -462,8 +462,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "customer_name",
         "include_in_remarkably_averages",
         "number_of_periods",
-        "baseline_start",
-        "baseline_end",
     ]
 
     readonly_fields = ["customer_name"]
