@@ -359,18 +359,17 @@ class Project(models.Model):
         """
         Return the baseline periods for this project.
         """
-        campaign = self.get_active_campaign()
-        return self.periods.filter(end__lte=campaign.baseline_end)
+        return self.periods.filter(end__lte=self.get_baseline_end())
 
     def get_baseline_target_periods(self):
         """
         Return target periods within the baseline.
         """
-        campaign = self.get_active_campaign()
+        baseline_dates = self.get_baseline_dates()
         return self._target_periods(
-            self.target_periods.filter(end__lte=campaign.baseline_end),
-            start=campaign.baseline_start,
-            end=campaign.baseline_end,
+            self.target_periods.filter(end__lte=baseline_dates["end"]),
+            start=baseline_dates["start"],
+            end=baseline_dates["end"],
         )
 
     def get_campaign_periods(self):
