@@ -308,7 +308,7 @@ GROUP_SPLIT_DOC = {
     "highest_monthly_rent": "noop",
 
     # Property
-    "total_units": "noop",
+    "total_units": "linear",
 }
 
 GROUP_AGGREGATE_TARGET_MERGE_DOC = {

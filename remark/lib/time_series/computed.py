@@ -184,7 +184,7 @@ target_graph = compose(name="target_graph")(
         KPI.delta_leases
     ], leased_units_calc),
     op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], trace_calc("leased rate targets", div_or_0)),
-    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units_start], trace_calc("occupancy rate targets", div_or_0)),
+    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.total_units], trace_calc("occupancy rate targets", div_or_0)),
 
     # Revenue
     op(KPI.estimated_acq_revenue_gain, [KPI.leases_executed, KPI.average_monthly_rent], twelve_mo_mult_or_0),
