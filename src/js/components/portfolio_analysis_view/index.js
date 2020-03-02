@@ -72,6 +72,12 @@ export class PortfolioAnalysisView extends React.PureComponent {
     display_average: PropTypes.oneOf(["1", "0"])
   };
 
+  static showAveragesOnly = [
+    "leasing_performance",
+    "acquisition_conversion",
+    "acquisition_cost"
+  ];
+
   get kpiOptions() {
     return this.props.kpi_bundles.map(kpi => ({
       label: kpi.name,
