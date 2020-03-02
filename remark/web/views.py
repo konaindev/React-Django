@@ -56,10 +56,10 @@ class DashboardView(APIView):
 
     def get_owned_projects(self, user):
         """ return QuerySet<Project> accessible by the specified user """
-        if user.is_superuser:
+        if user.is_superuser or user.is_staff:
             project_query = Project.objects.all()
         else:
-            project_query = Project.objects.get_all_for_user(user)
+            project_query = Project.objects.get_all_for_user(user).filter(is_active=True)
         return project_query
 
     def get_user_filter_options(self, request):

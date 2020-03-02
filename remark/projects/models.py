@@ -158,6 +158,10 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    is_active = models.BooleanField(
+        verbose_name="activate property?", default=True
+    )
+
     @property
     def customer_name(self):
         return self.account.company_name
