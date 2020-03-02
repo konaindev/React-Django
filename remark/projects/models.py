@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
@@ -30,6 +29,7 @@ from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spre
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
+    CAMPAIGN_OBJECTIVES,
     PROPERTY_STYLES,
     PROPERTY_TYPE,
     BUILDING_CLASS,
@@ -1363,6 +1363,7 @@ class Campaign(models.Model):
         related_name="campaigns",
         null=True,
     )
+    objective = models.IntegerField(choices=CAMPAIGN_OBJECTIVES, null=True, blank=False)
     selected_campaign_model = models.ForeignKey(
         "CampaignModel",
         on_delete=models.SET_NULL,

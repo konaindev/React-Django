@@ -302,7 +302,7 @@ class UploadCampaignModelAdminMixin:
 class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
     list_display = ["name", "active", "project_link", "selected_campaign_model"]
     list_filter = (("project__name", custom_titled_filter("Project")),)
-    fields = ["name", "active", "project", "selected_campaign_model"]
+    fields = ["name", "active", "objective", "project", "selected_campaign_model"]
     readonly_fields_on_create = ("selected_campaign_model",)
     readonly_fields_on_update = ("project",)
     inlines = (CampaignModelUploadInline, CampaignModelTableInline)
