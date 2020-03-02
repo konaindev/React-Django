@@ -159,7 +159,7 @@ class Project(models.Model):
     )
 
     is_active = models.BooleanField(
-        verbose_name="activate property?", default=True
+        verbose_name="is the property active?", default=True
     )
 
     @property
