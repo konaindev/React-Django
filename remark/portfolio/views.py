@@ -132,10 +132,7 @@ class PortfolioTableView(APIView):
         else:
             show_averages = True
 
-        if show_averages:
-            kpi_bundles = AVERAGE_KPI_BUNDLES
-        else:
-            kpi_bundles = TOTAL_KPI_BUNDLES
+        kpi_bundles = AVERAGE_KPI_BUNDLES if show_averages else TOTAL_KPI_BUNDLES
 
         if bundle not in kpi_bundles:
             raise Exception("Could not find KPI Bundle")
