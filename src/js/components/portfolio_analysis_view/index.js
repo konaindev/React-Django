@@ -181,7 +181,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }
     return (
       <RmbNavLinks
-        options={this.getTabOptions()}
+        options={options}
         selected={this.props.display_average}
         onChange={this.handleTabClick}
       />
