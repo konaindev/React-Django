@@ -17,6 +17,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_kpi_trend_change_health,
     trigger_usvs_on_track,
     trigger_kpi_trend,
+    trigger_healths_is_not_pending,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -98,7 +99,7 @@ change_health_status = Insight(
     name="change_health_status",
     template="Campaign health has changed from {{var_prev_health_status | health_status_to_str}}"
     " to {{var_campaign_health_status | health_status_to_str }} during this period.",
-    triggers=["trigger_health_status_is_changed"],
+    triggers=["trigger_health_status_is_changed", "trigger_healths_is_not_pending"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
@@ -110,6 +111,11 @@ change_health_status = Insight(
             var_campaign_health_status,
             var_current_period_leased_rate,
             var_target_leased_rate,
+        ),
+        cop(
+            trigger_healths_is_not_pending,
+            var_campaign_health_status,
+            var_prev_health_status,
         ),
         cop(
             trigger_health_status_is_changed,

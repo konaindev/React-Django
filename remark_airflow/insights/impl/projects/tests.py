@@ -720,6 +720,18 @@ class ChangeHealthStatusTestCase(TestCase):
         self.assertEqual(result[0], "change_health_status")
         self.assertEqual(result[1], expected_text)
 
+    def test_status_change_from_pending(self):
+        create_periods(
+            self.project,
+            start=datetime.date(year=2020, month=2, day=3),
+            end=datetime.date(year=2020, month=2, day=10),
+        )
+        project_facts = change_health_status.graph(self.args)
+        self.assertTrue(project_facts["trigger_health_status_is_changed"])
+
+        result = change_health_status.evaluate(project_facts)
+        self.assertIsNone(result)
+
 
 class RetentionRateInsightTestCase(TestCase):
     def setUp(self):
