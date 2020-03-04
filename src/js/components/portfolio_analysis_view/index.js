@@ -8,7 +8,7 @@ import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
 import PortfolioTable from "../portfolio_table";
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
-import Tooltip from "../rmb_tooltip";
+import Tooltip, { InfoTooltip } from "../rmb_tooltip";
 import Select from "../select";
 import RmbNavLinks from "../rmb_nav_links";
 import Loader from "../loader";
@@ -67,6 +67,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
         health: PropTypes.oneOf([-1, 0, 1, 2])
       })
     ),
+    average_only_kpi: PropTypes.bool,
     table_data: PropTypes.arrayOf(PropTypes.object),
     user: PropTypes.object,
     display_average: PropTypes.oneOf(["1", "0"])
@@ -157,6 +158,36 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }
   };
 
+  getTabOptions = () => {
+    let options = [...tabOptions];
+    if (this.props.average_only_kpi) {
+      options = options.filter(o => o.tooltip === "property_averages");
+    }
+    return options;
+  };
+
+  getNavTitles = () => {
+    const options = this.getTabOptions();
+    if (options.length === 1) {
+      const o = options[0];
+      return (
+        <ul className="rmb-nav-links">
+          <li className="rmb-nav-links-item selected single">
+            {o.label}
+            {o.tooltip && <InfoTooltip transKey={o.tooltip} />}
+          </li>
+        </ul>
+      );
+    }
+    return (
+      <RmbNavLinks
+        options={options}
+        selected={this.props.display_average}
+        onChange={this.handleTabClick}
+      />
+    );
+  };
+
   onChangeKpi = option => {
     this.props.onChange({
       selected_kpi_bundle: option.value,
@@ -229,11 +260,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
           />
         </div>
         <div className="portfolio-analysis__title-bar">
-          <RmbNavLinks
-            options={tabOptions}
-            selected={display_average}
-            onChange={this.handleTabClick}
-          />
+          {this.getNavTitles()}
           <div className="portfolio-analysis__property-count">
             {this.totalProperties} properties
           </div>

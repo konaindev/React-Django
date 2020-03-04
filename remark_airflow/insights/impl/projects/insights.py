@@ -18,6 +18,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_usvs_on_track,
     trigger_kpi_trend,
     trigger_kpi_trend_new_direction,
+    trigger_healths_is_not_pending,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -65,6 +66,7 @@ from remark_airflow.insights.impl.vars_base import (
     var_usv_exe,
     var_target_usv_exe,
     var_usv_exe_health_status,
+    var_base_kpis_without_pre_leasing_stage,
 )
 
 lease_rate_against_target = Insight(
@@ -99,7 +101,7 @@ change_health_status = Insight(
     name="change_health_status",
     template="Campaign health has changed from {{var_prev_health_status | health_status_to_str}}"
     " to {{var_campaign_health_status | health_status_to_str }} during this period.",
-    triggers=["trigger_health_status_is_changed"],
+    triggers=["trigger_health_status_is_changed", "trigger_healths_is_not_pending"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
@@ -111,6 +113,11 @@ change_health_status = Insight(
             var_campaign_health_status,
             var_current_period_leased_rate,
             var_target_leased_rate,
+        ),
+        cop(
+            trigger_healths_is_not_pending,
+            var_campaign_health_status,
+            var_prev_health_status,
         ),
         cop(
             trigger_health_status_is_changed,
@@ -190,11 +197,15 @@ retention_rate_health = Insight(
     " and is trending {{ var_retention_rate_trend }}.",
     triggers=["trigger_retention_rate_health"],
     graph=[
-        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_kpis_without_pre_leasing_stage, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
         cop(var_prev_retention_rate, "project", "start"),
-        cop(var_computed_kpis, var_base_kpis),
-        cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+        cop(var_computed_kpis, var_base_kpis_without_pre_leasing_stage),
+        cop(
+            var_target_computed_kpis,
+            var_base_kpis_without_pre_leasing_stage,
+            var_base_targets,
+        ),
         cop(var_retention_rate, var_computed_kpis),
         cop(var_target_retention_rate, var_target_computed_kpis),
         cop(var_retention_rate_health, var_retention_rate, var_target_retention_rate),

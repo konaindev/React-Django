@@ -23,8 +23,8 @@ from remark_airflow.insights.impl.constants import KPIS_NAMES, MITIGATED_KPIS, T
 from remark_airflow.insights.impl.graphs import (
     projects_kpi_graph,
     usv_exe_health_graph,
-    kpi_graph,
     kpi_healths_graph,
+    kpi_graph_without_pre_leasing_stage,
 )
 from remark_airflow.insights.impl.utils import health_standard, get_trend
 
@@ -208,7 +208,7 @@ def var_prev_retention_rate(project, start):
     end = start
     start = end - timedelta(weeks=1)
     args = {"start": start, "end": end, "project": project, "kpi_name": "renewal_rate"}
-    data = kpi_graph(args)
+    data = kpi_graph_without_pre_leasing_stage(args)
     return data["var_kpi"]
 
 

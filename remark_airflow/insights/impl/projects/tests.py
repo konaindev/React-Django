@@ -722,6 +722,18 @@ class ChangeHealthStatusTestCase(TestCase):
         self.assertEqual(result[0], "change_health_status")
         self.assertEqual(result[1], expected_text)
 
+    def test_status_change_from_pending(self):
+        create_periods(
+            self.project,
+            start=datetime.date(year=2020, month=2, day=3),
+            end=datetime.date(year=2020, month=2, day=10),
+        )
+        project_facts = change_health_status.graph(self.args)
+        self.assertTrue(project_facts["trigger_health_status_is_changed"])
+
+        result = change_health_status.evaluate(project_facts)
+        self.assertIsNone(result)
+
 
 class RetentionRateInsightTestCase(TestCase):
     def setUp(self):
@@ -872,6 +884,66 @@ class RetentionRateInsightTestCase(TestCase):
             project_facts["trigger_retention_rate_health"],
             expected["trigger_retention_rate_health"],
         )
+        result = retention_rate_health.evaluate(project_facts)
+        expected_text = (
+            "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
+        )
+        self.assertEqual(result[0], "retention_rate_health")
+        self.assertEqual(result[1], expected_text)
+
+    def test_one_period(self):
+        start = datetime.date(year=2019, month=11, day=11)
+        end = datetime.date(year=2019, month=11, day=18)
+        args = {"start": start, "end": end, "project": self.project}
+        project_facts = retention_rate_health.graph(args)
+        self.assertTrue(project_facts["trigger_retention_rate_health"])
+
+        result = retention_rate_health.evaluate(project_facts)
+        expected_text = (
+            "Your Retention Rate has been At Risk for 1 week(s) and is trending up."
+        )
+        self.assertEqual(result[0], "retention_rate_health")
+        self.assertEqual(result[1], expected_text)
+
+    def test_period_pre_leasing(self):
+        start = datetime.date(year=2019, month=11, day=4)
+        end = datetime.date(year=2019, month=11, day=11)
+        create_periods(
+            self.project,
+            start=start,
+            end=end,
+            stage="pre-lease",
+            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 1.08},
+            target_period_params={
+                "target_lease_renewal_notices": 3,
+                "target_lease_vacation_notices": 2,
+            },
+        )
+        args = {"start": start, "end": end, "project": self.project}
+        project_facts = retention_rate_health.graph(args)
+        self.assertFalse(project_facts["trigger_retention_rate_health"])
+
+        result = retention_rate_health.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    def test_multi_period_pre_leasing(self):
+        start = datetime.date(year=2019, month=11, day=4)
+        end = datetime.date(year=2019, month=11, day=18)
+        create_periods(
+            self.project,
+            start=start,
+            end=datetime.date(year=2019, month=11, day=11),
+            stage="pre-lease",
+            period_params={"lease_renewal_notices": 1, "lease_vacation_notices": 1.08},
+            target_period_params={
+                "target_lease_renewal_notices": 3,
+                "target_lease_vacation_notices": 2,
+            },
+        )
+        args = {"start": start, "end": end, "project": self.project}
+        project_facts = retention_rate_health.graph(args)
+        self.assertTrue(project_facts["trigger_retention_rate_health"])
+
         result = retention_rate_health.evaluate(project_facts)
         expected_text = (
             "Your Retention Rate has been At Risk for 1 week(s) and is trending up."

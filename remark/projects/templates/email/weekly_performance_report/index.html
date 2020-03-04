@@ -1,46 +1,36 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+  <head>
+    {% include "./includes/head.html" %}
+  </head>
 
-<head>
-  {% include "./includes/head.html" %}
-</head>
-
-<body style="background-color:#ffffff; padding:0">
-  <div style="background-color:#ffffff;">
-
-    {% include "./includes/header.html" %}
-
-    {% include "./includes/campaign_goal.html" with campaign_goal_chart_url=campaign_goal_chart_url only %}
-
-    {% include "./includes/campaign_health.html" %}
-
-    {% if top_macro_insight_1 %}
-      {% include "./includes/campaign_insights.html" %}
-    {% endif %}
-
-    {% include "./includes/this_week_kpi_highlights_header.html" %}
-
-    {% include "./includes/this_week_kpi.html" with kpi=best_kpi health=2 only %}
-
-    {% include "./includes/this_week_kpi.html" with kpi=worst_kpi health=0 only %}
-
-    {% include "./includes/view_report_button.html" with text="View Report" %}
-
-    {% include "./includes/campaign_to_date_highlights_header.html" %}
-
-    {% include "./includes/campaign_to_date_list.html" with kpi_1=low_1 kpi_2=low_2 kpi_3=low_3 kpi_insight_text=low_kpi_insight_text health=0 only %}
-
-    {% include "./includes/campaign_to_date_list.html" with kpi_1=risk_1 kpi_2=risk_2 kpi_3=risk_3 kpi_insight_text=risk_kpi_insight_text health=1 only %}
-
-    {% include "./includes/campaign_to_date_list.html" with kpi_1=top_1 kpi_2=top_2 kpi_3=top_3 health=2 only %}
-
-    {% include "./includes/view_report_button.html" with text="View Report" %}
-
-    {% include "./includes/question_or_feedback.html" %}
-
-    {% include "./includes/footer.html" %}
-
-  </div>
-</body>
-
+  <body style="background-color:#ffffff; padding:0">
+    <div style="background-color:#ffffff;">
+      {% include "./includes/header.html" %} {% include
+      "./includes/campaign_goal.html" with
+      campaign_goal_chart_url=campaign_goal_chart_url only %} {% include
+      "./includes/campaign_health.html" %} {% if top_macro_insight_1 %} {%
+      include "./includes/campaign_insights.html" %} {% endif %} {% include
+      "./includes/contact_us.html" %} {% include
+      "./includes/this_week_kpi_highlights_header.html" %} {% include
+      "./includes/this_week_kpi.html" with kpi=best_kpi health=2 only %} {%
+      include "./includes/this_week_kpi.html" with kpi=worst_kpi health=0 only
+      %} {% include "./includes/view_report_button.html" with text="View Report"
+      %} {% include "./includes/campaign_to_date_highlights_header.html" %} {%
+      include "./includes/campaign_to_date_list.html" with kpi_1=low_1
+      kpi_2=low_2 kpi_3=low_3 kpi_insight_text=low_kpi_insight_text health=0
+      only %} {% include "./includes/campaign_to_date_list.html" with
+      kpi_1=risk_1 kpi_2=risk_2 kpi_3=risk_3
+      kpi_insight_text=risk_kpi_insight_text health=1 only %} {% include
+      "./includes/campaign_to_date_list.html" with kpi_1=top_1 kpi_2=top_2
+      kpi_3=top_3 health=2 only %} {% include
+      "./includes/view_report_button.html" with text="View Report" %} {% include
+      "./includes/question_or_feedback.html" %} {% include
+      "./includes/footer.html" %}
+    </div>
+  </body>
 </html>

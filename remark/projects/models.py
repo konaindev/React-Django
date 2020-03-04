@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
@@ -30,6 +29,7 @@ from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spre
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
+    CAMPAIGN_OBJECTIVES,
     PROPERTY_STYLES,
     PROPERTY_TYPE,
     BUILDING_CLASS,
@@ -230,14 +230,6 @@ class Project(models.Model):
     # This is for the SendGrid recipients list.
     email_list_id = models.CharField(max_length=256, null=True, default=None)
 
-    baseline_start = models.DateField(
-        help_text="The first date, inclusive, for the baseline period."
-    )
-
-    baseline_end = models.DateField(
-        help_text="The final date, exclusive, for the baseline period."
-    )
-
     # A temporary field, for the current sprint, that holds our computed
     # TAM reporting data.
     tmp_market_report_json = JSONField(
@@ -323,7 +315,6 @@ class Project(models.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._cache_subscription_fields()
-        self._cache_baseline_fields()
 
     def _target_periods(self, qs, start, end):
         """
@@ -357,26 +348,32 @@ class Project(models.Model):
         else:
             qs = self.target_periods.all()
 
+        campaign = self.get_active_campaign()
         return self._target_periods(
             qs,
-            start=self.baseline_start,
-            end=self.get_campaign_end() or self.baseline_end,
+            start=campaign.baseline_start,
+            end=self.get_campaign_end() or campaign.baseline_end,
         )
 
     def get_baseline_periods(self):
         """
         Return the baseline periods for this project.
         """
-        return self.periods.filter(end__lte=self.baseline_end)
+        try:
+            end = self.get_baseline_end()
+        except Campaign.DoesNotExist:
+            return self.periods.none()
+        return self.periods.filter(end__lte=end)
 
     def get_baseline_target_periods(self):
         """
         Return target periods within the baseline.
         """
+        baseline_dates = self.get_baseline_dates()
         return self._target_periods(
-            self.target_periods.filter(end__lte=self.baseline_end),
-            start=self.baseline_start,
-            end=self.baseline_end,
+            self.target_periods.filter(end__lte=baseline_dates["end"]),
+            start=baseline_dates["start"],
+            end=baseline_dates["end"],
         )
 
     def get_campaign_periods(self):
@@ -384,7 +381,11 @@ class Project(models.Model):
         Return the campaign periods for this project -- aka all periods except
         the baseline.
         """
-        return self.periods.filter(start__gte=self.baseline_end)
+        try:
+            end = self.get_baseline_end()
+        except Campaign.DoesNotExist:
+            return self.periods.none()
+        return self.periods.filter(start__gte=end)
 
     def get_campaign_period_dates(self):
         """
@@ -396,7 +397,7 @@ class Project(models.Model):
         """
         Return the start date (inclusive) of the campaign.
         """
-        return self.baseline_end
+        return self.get_baseline_end()
 
     def get_campaign_end(self):
         """
@@ -597,12 +598,24 @@ class Project(models.Model):
         unsubscribed_emails = [u.email for u in self.unsubscribed_users.all()]
         return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
+    def get_active_campaign(self):
+        return self.campaigns.get(active=True)
+
+    def get_baseline_start(self):
+        return self.get_active_campaign().baseline_start
+
+    def get_baseline_end(self):
+        return self.get_active_campaign().baseline_end
+
+    def get_baseline_dates(self):
+        campaign = self.get_active_campaign()
+        return {
+            "start": campaign.baseline_start,
+            "end": campaign.baseline_end,
+        }
+
     def _cache_subscription_fields(self):
         self._email_distribution_list = self.email_distribution_list
-
-    def _cache_baseline_fields(self):
-        self._baseline_start = self.baseline_start
-        self._baseline_end = self.baseline_end
 
     def __assign_blank_groups(self):
         """
@@ -615,27 +628,10 @@ class Project(models.Model):
         self.view_group = view_group
         self.admin_group = admin_group
 
-    def __trigger_dag(self):
-        if (
-            self._baseline_start is None
-            or self._baseline_end is None
-            or self._baseline_start == self.baseline_start
-            or self._baseline_end == self.baseline_end
-        ) and not TESTING:
-            params = {
-                "start": self.baseline_start.strftime("%Y-%m-%d"),
-                "end": self.baseline_end.strftime("%Y-%m-%d"),
-                "project_id": self.public_id,
-            }
-            trigger_dag("macro_baseline", params)
-
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_groups()
         super().save(*args, **kwargs)
-
-        # Commenting out temporarily pending finalization of baseline dags (currently set to trigger macro_baseline dag
-        # self.__trigger_dag()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
@@ -1363,6 +1359,7 @@ class Campaign(models.Model):
         related_name="campaigns",
         null=True,
     )
+    objective = models.IntegerField(choices=CAMPAIGN_OBJECTIVES, null=True, blank=False)
     selected_campaign_model = models.ForeignKey(
         "CampaignModel",
         on_delete=models.SET_NULL,
@@ -1370,6 +1367,12 @@ class Campaign(models.Model):
         null=True,
         blank=True,
         help_text="All target values will be replaced by those in the newly selected model.",
+    )
+    baseline_start = models.DateField(
+        help_text="The first date, inclusive, for the baseline period.",
+    )
+    baseline_end = models.DateField(
+        help_text="The final date, exclusive, for the baseline period.",
     )
 
     def save(self, *args, **kwargs):

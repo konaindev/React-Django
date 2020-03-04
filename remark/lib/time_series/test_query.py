@@ -6,7 +6,7 @@ from django.db.models import signals
 
 from .query import select
 
-from remark.projects.models import Fund, LeaseStage, Period, Project, Property
+from remark.projects.models import Campaign, Fund, LeaseStage, Period, Project, Property
 from remark.users.models import Account
 from remark.crm.models import Business
 from remark.geo.models import Address
@@ -38,10 +38,9 @@ def create_project():
         average_monthly_rent=decimal.Decimal("0"),
         lowest_monthly_rent=decimal.Decimal("0"),
     )
+    project_name = "test"
     project = Project.objects.create(
-            name="test",
-            baseline_start=date(year=2018, month=11, day=19),
-            baseline_end=date(year=2018, month=12, day=26),
+            name=project_name,
             property=property,
             account=account,
             asset_manager=asset_manager,
@@ -49,6 +48,12 @@ def create_project():
             property_owner=property_owner,
             fund=fund,
         )
+    Campaign.objects.create(
+        name=f"Campaign for {project_name}",
+        baseline_start=date(year=2018, month=11, day=19),
+        baseline_end=date(year=2018, month=12, day=26),
+        project=project,
+    )
     return project
 
 

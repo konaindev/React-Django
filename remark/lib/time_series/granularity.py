@@ -70,9 +70,8 @@ SUM = "sum"
 
 
 def _merge(merge_document, ts):
-    length = len(ts)
-    if ts == 1:
-        return ts
+    if len(ts) == 1:
+        return ts[0]
 
     result = {
         "start": ts[0]['start'],

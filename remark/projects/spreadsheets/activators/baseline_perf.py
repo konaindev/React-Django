@@ -18,9 +18,10 @@ class BaselinePerfActivator(ActivatorBase):
         self.activate_project()
 
     def activate_project(self):
-        self.project.baseline_start = self.data["baseline_start"]
-        self.project.baseline_end = self.data["baseline_end"]
-        self.project.save()
+        campaign = self.project.get_active_campaign()
+        campaign.baseline_start = self.data["baseline_start"]
+        campaign.baseline_end = self.data["baseline_end"]
+        campaign.save()
 
     def activate_periods(self):
         for data_period in self.data["periods"]:
