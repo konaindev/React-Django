@@ -21,7 +21,7 @@ from remark.email_app.invites.added_to_property import (
     get_template_vars,
 )
 
-from .models import Building, Fund, LeaseStage, Period, Project, Property, Tag, TargetPeriod
+from .models import Building, Campaign, Fund, LeaseStage, Period, Project, Property, Tag, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
@@ -59,8 +59,6 @@ def create_project(project_name="project 1"):
     admin_group = Group.objects.create(name=f"{project_name} admin group")
     project = Project.objects.create(
         name=project_name,
-        baseline_start=datetime.date(year=2018, month=11, day=19),
-        baseline_end=datetime.date(year=2018, month=12, day=26),
         account=account,
         asset_manager=asset_manager,
         property_manager=property_manager,
@@ -69,6 +67,12 @@ def create_project(project_name="project 1"):
         property=property,
         view_group=group,
         admin_group=admin_group
+    )
+    Campaign.objects.create(
+        name=f"Campaign for {project_name}",
+        baseline_start=datetime.date(year=2018, month=11, day=19),
+        baseline_end=datetime.date(year=2018, month=12, day=26),
+        project=project,
     )
     return project, group
 
@@ -314,8 +318,6 @@ class LincolnTowerPeriodTestCase(TestCase):
         )
         self.project = Project.objects.create(
             name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,

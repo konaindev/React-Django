@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from remark.crm.models import Business
 from remark.factories.geo import create_address
 from remark.geo.models import Address
-from remark.projects.models import Project, Fund, Property
+from remark.projects.models import Campaign, Project, Fund, Property
 from remark.users.models import Account, User
 
 
@@ -60,8 +60,6 @@ def create_project(
 
     project = Project.objects.create(
         name=project_name,
-        baseline_start=baseline_start,
-        baseline_end=baseline_end,
         account=account,
         asset_manager=asset_manager,
         property_manager=property_manager,
@@ -70,6 +68,13 @@ def create_project(
         property=project_property,
         **kwargs,
     )
+    Campaign.objects.create(
+        name=f"Campaign for {project_name}",
+        baseline_start=baseline_start,
+        baseline_end=baseline_end,
+        project=project,
+    )
+
     return project
 
 
