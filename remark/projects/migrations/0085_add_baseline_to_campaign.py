@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0083_add_active_to_campaign'),
+        ('projects', '0084_add_objective_to_campaign'),
     ]
 
     operations = [

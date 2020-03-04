@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0086_make_campaign_baseline_not_nullable'),
+        ('projects', '0087_make_campaign_baseline_not_nullable'),
     ]
 
     operations = [

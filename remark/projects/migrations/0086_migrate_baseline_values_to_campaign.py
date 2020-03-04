@@ -18,7 +18,7 @@ def fill_baseline_values(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0084_add_baseline_to_campaign'),
+        ('projects', '0085_add_baseline_to_campaign'),
     ]
 
     operations = [
