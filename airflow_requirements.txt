@@ -1,4 +1,3 @@
-google-cloud-firestore
 oauth2client
 django-heroku
 gunicorn
@@ -12,7 +11,6 @@ python-dateutil
 jsonschema
 jsonfield
 openpyxl
-requests
 django-click
 django-storages
 pillow
