@@ -20,6 +20,7 @@ $navlink-border-color: $blue-3;
     margin-right: -$navlink-x-spacing;
 
     & > li {
+        position: relative;
         cursor: pointer;
         display: inline-block;
         margin: 0 $navlink-x-spacing;
@@ -33,6 +34,10 @@ $navlink-border-color: $blue-3;
         &.selected {
             color: $navlink-selected-color;
             border-bottom: 1px solid $navlink-border-color;
+        }
+
+        &.single {
+            cursor: default;
         }
 
         & > a {
