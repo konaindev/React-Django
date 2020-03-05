@@ -95,7 +95,8 @@ with DjangoDAG(
         ga_response = context["task_instance"].xcom_pull(
             key="return_value", task_ids="get_usv_data_" + project_id
         )
-        print(ga_response)
+        logging.info("ANALYTICS_GOOGLE_TEST_LOG")
+        logging.info(ga_response)
         query_date = context["task_instance"].xcom_pull(
             key="query_date", task_ids="get_usv_data_" + project_id
         )
@@ -133,7 +134,7 @@ with DjangoDAG(
     get_projects_task >> start >> complete
 
     google_analytics_projects = json.loads(
-        Variable.get("analytics_google", default_var=[])
+        Variable.get("analytics_google", default_var=json.dumps([]))
     )
 
     for project in google_analytics_projects:
