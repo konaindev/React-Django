@@ -133,7 +133,7 @@ with DjangoDAG(
     get_projects_task >> start >> complete
 
     google_analytics_projects = json.loads(
-        Variable.get("analytics_google", default_var=[])
+        Variable.get("analytics_google", default_var=json.dumps([]))
     )
 
     for project in google_analytics_projects:
