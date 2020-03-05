@@ -95,8 +95,7 @@ with DjangoDAG(
         ga_response = context["task_instance"].xcom_pull(
             key="return_value", task_ids="get_usv_data_" + project_id
         )
-        logging.info("ANALYTICS_GOOGLE_TEST_LOG")
-        logging.info(ga_response)
+        print(ga_response)
         query_date = context["task_instance"].xcom_pull(
             key="query_date", task_ids="get_usv_data_" + project_id
         )
