@@ -54,6 +54,7 @@ export class ProjectReportPage extends Component {
 
   constructor(props) {
     super(props);
+    console.log("project report page got", props);
     this.state = {
       showInsights: {
         performance: false,

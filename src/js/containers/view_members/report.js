@@ -7,8 +7,8 @@ class ViewMembersModal extends React.PureComponent {
   render() {
     const { project, ...otherProps } = this.props;
     const p = {
-      property_name: project.name,
-      members: project.members
+      property_name: project?.name,
+      members: project?.members
     };
     return <ViewMembersModalUI {...otherProps} property={p} />;
   }
@@ -17,7 +17,7 @@ class ViewMembersModal extends React.PureComponent {
 const mapState = state => {
   return {
     ...state.viewMembersModal,
-    project: state.projectReports.project
+    project: state.projectReports?.project
   };
 };
 

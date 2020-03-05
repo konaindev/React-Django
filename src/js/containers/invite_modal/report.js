@@ -22,7 +22,7 @@ class InviteModal extends React.PureComponent {
 const mapState = state => {
   return {
     ...state.inviteModal,
-    project: state.projectReports.project
+    project: state.projectReports?.project
   };
 };
 
