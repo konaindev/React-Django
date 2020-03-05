@@ -112,7 +112,7 @@ export class ProjectReportPage extends Component {
                   insights
                 </ButtonLabel>
               )}
-              {/* <div className="project-report-page__members">
+              <div className="project-report-page__members">
                 <InviteModalReport />
                 <ViewMembersReport />
                 <Add
@@ -126,7 +126,7 @@ export class ProjectReportPage extends Component {
                   users={project.members}
                   onClick={this.onOpenMembersView}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="subheader-report-tabs">
