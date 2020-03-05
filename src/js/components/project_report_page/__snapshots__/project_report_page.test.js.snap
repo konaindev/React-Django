@@ -48,7 +48,41 @@ exports[`ProjectReportPage renders baseline report 1`] = `
         </div>
         <div
           className="project-report-page__subnav-right"
-        />
+        >
+          <div
+            className="project-report-page__members"
+          >
+            <svg
+              aria-hidden="true"
+              className="project-report-page__add-member"
+              color="inherit"
+              fill="none"
+              focusable="false"
+              height="1em"
+              onClick={[Function]}
+              role="presentation"
+              viewBox="0 0 40 40"
+              width="1em"
+            >
+              <circle
+                cx="20"
+                cy="20"
+                r="19.25"
+                stroke="#404e5c"
+                strokeDasharray="5 5"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M19.126 19.1361H14V20.8639H19.126V26H20.8504V20.8639H26V19.1361H20.8504V14H19.126V19.1361Z"
+                fill="#798796"
+              />
+            </svg>
+            <div
+              className="user-icon-list user-icon-list--project"
+              onClick={[Function]}
+            />
+          </div>
+        </div>
       </div>
       <div
         className="subheader-report-tabs"
@@ -11825,6 +11859,39 @@ exports[`ProjectReportPage renders performance report 1`] = `
             >
               beta
             </div>
+          </div>
+          <div
+            className="project-report-page__members"
+          >
+            <svg
+              aria-hidden="true"
+              className="project-report-page__add-member"
+              color="inherit"
+              fill="none"
+              focusable="false"
+              height="1em"
+              onClick={[Function]}
+              role="presentation"
+              viewBox="0 0 40 40"
+              width="1em"
+            >
+              <circle
+                cx="20"
+                cy="20"
+                r="19.25"
+                stroke="#404e5c"
+                strokeDasharray="5 5"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M19.126 19.1361H14V20.8639H19.126V26H20.8504V20.8639H26V19.1361H20.8504V14H19.126V19.1361Z"
+                fill="#798796"
+              />
+            </svg>
+            <div
+              className="user-icon-list user-icon-list--project"
+              onClick={[Function]}
+            />
           </div>
         </div>
       </div>
