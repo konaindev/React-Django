@@ -411,6 +411,15 @@ workflows:
               ignore:
                 - staging
                 - master
+      - airflow-setup:
+          context: stage-aws
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - staging
+                - master
 
   build-deploy:
     jobs:
