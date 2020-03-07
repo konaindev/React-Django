@@ -35,6 +35,7 @@ with DjangoDAG(
     from remark.projects.models import Project
 
     def get_ga_identifiers(**context):
+        logging.info("TESTING WITHIN GOOGLYGOO")
         if (
             context["dag_run"].external_trigger
             and "project_id" in context["dag_run"].conf
