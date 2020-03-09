@@ -283,7 +283,7 @@ class GetTableStructureTestCase(TestCase):
             table_data[1]["targets"]["occupancy_rate"], 0.92, places=2
         )
         self.assertAlmostEqual(
-            table_data[-1]["targets"]["occupancy_rate"], 0.98, places=2
+            table_data[-1]["targets"]["occupancy_rate"], 0.97, places=2
         )
 
     # TODO: move to remark/projects/reports
