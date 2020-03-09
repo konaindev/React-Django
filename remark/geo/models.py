@@ -4,6 +4,17 @@ from jsonfield import JSONField
 
 from .geocode import geocode, GeocodeResult
 from remark.lib.geo import distance_between_two_geopoints
+from enum import Enum
+
+class Radius(Enum):
+    SMALL = 5
+    MEDIUM = 10
+
+
+class ExpandRate(Enum):
+    SMALL = 2
+    MEDIUM = 3
+    LARGE = 5
 
 
 class Country(models.Model):
@@ -181,6 +192,16 @@ class ZipcodeManager(models.Manager):
 
     def look_up_polygons_in_circle(self, center_coords, radius_in_mile, state):
         zipcodes = []
+        zipcodes_in_expand_radius = []
+
+        if radius_in_mile < Radius.SMALL.value:
+            expand_rate = ExpandRate.LARGE.value
+        elif radius_in_mile < Radius.MEDIUM.value:
+            expand_rate = ExpandRate.MEDIUM.value
+        else:
+            expand_rate = ExpandRate.SMALL.value
+
+        expand_radius_in_mile = radius_in_mile * expand_rate
 
         query = dict()
         if state is not None:
@@ -193,14 +214,45 @@ class ZipcodeManager(models.Manager):
                 zipcode.lon,
                 zipcode.lat,
             )
-            if distance_in_mile < radius_in_mile:
-                zipcodes.append(dict(
+            if distance_in_mile < expand_radius_in_mile:
+                zipcodes_in_expand_radius.append(dict(
                     zip=zipcode.zip_code,
                     outline=zipcode.geometry,
                     properties=dict(center=[zipcode.lon, zipcode.lat]),
                 ))
 
-        return zipcodes
+        for zipcode in zipcodes_in_expand_radius:
+            if zipcode["outline"]["type"] == "Polygon":
+                number_outline_coordinates = len(zipcode["outline"]["coordinates"][0])
+            else: 
+                number_outline_coordinates = len(zipcode["outline"]["coordinates"][-1][0])
+
+            num = 0
+            compared_outline_number = 20
+
+            while num < number_outline_coordinates:
+                if zipcode["outline"]["type"] == "Polygon":
+                    distance_between_outlinepoint_and_center_in_mile = distance_between_two_geopoints(
+                        center_coords[0],
+                        center_coords[1],
+                        zipcode["outline"]["coordinates"][0][num][0],
+                        zipcode["outline"]["coordinates"][0][num][1],
+                    )
+                else:
+                    distance_between_outlinepoint_and_center_in_mile = distance_between_two_geopoints(
+                        center_coords[0],
+                        center_coords[1],
+                        zipcode["outline"]["coordinates"][-1][0][num][0],
+                        zipcode["outline"]["coordinates"][-1][0][num][1],
+                    )
+
+                if distance_between_outlinepoint_and_center_in_mile < radius_in_mile:
+                    zipcodes.append(zipcode)
+                    break
+                else:
+                    num = num + int(number_outline_coordinates / compared_outline_number)
+
+        return zipcodes    
 
 
 class Zipcode(models.Model):
