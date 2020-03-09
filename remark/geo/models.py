@@ -4,6 +4,17 @@ from jsonfield import JSONField
 
 from .geocode import geocode, GeocodeResult
 from remark.lib.geo import distance_between_two_geopoints
+from enum import Enum
+
+class Radius(Enum):
+    SMALL = 5
+    MEDIUM = 10
+
+
+class ExpandRate(Enum):
+    SMALL = 2
+    MEDIUM = 3
+    LARGE = 5
 
 
 class Country(models.Model):
@@ -183,12 +194,12 @@ class ZipcodeManager(models.Manager):
         zipcodes = []
         zipcodes_in_expand_radius = []
 
-        if radius_in_mile < 5:
-            expand_rate = 5
-        elif radius_in_mile < 10:
-            expand_rate = 3
+        if radius_in_mile < Radius.SMALL.value:
+            expand_rate = ExpandRate.LARGE.value
+        elif radius_in_mile < Radius.MEDIUM.value:
+            expand_rate = ExpandRate.MEDIUM.value
         else:
-            expand_rate = 2
+            expand_rate = ExpandRate.SMALL.value
 
         expand_radius_in_mile = radius_in_mile * expand_rate
 
@@ -217,6 +228,7 @@ class ZipcodeManager(models.Manager):
                 number_outline_coordinates = len(zipcode["outline"]["coordinates"][-1][0])
 
             num = 0
+            compared_outline_number = 20
 
             while num < number_outline_coordinates:
                 if zipcode["outline"]["type"] == "Polygon":
@@ -238,7 +250,7 @@ class ZipcodeManager(models.Manager):
                     zipcodes.append(zipcode)
                     break
                 else:
-                    num = num + int(number_outline_coordinates / 20)
+                    num = num + int(number_outline_coordinates / compared_outline_number)
 
         return zipcodes    
 
