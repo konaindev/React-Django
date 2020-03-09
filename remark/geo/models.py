@@ -181,6 +181,16 @@ class ZipcodeManager(models.Manager):
 
     def look_up_polygons_in_circle(self, center_coords, radius_in_mile, state):
         zipcodes = []
+        zipcodes_in_expand_radius = []
+
+        if radius_in_mile < 5:
+            expand_rate = 5
+        elif radius_in_mile < 10:
+            expand_rate = 3
+        else:
+            expand_rate = 2
+
+        expand_radius_in_mile = radius_in_mile * expand_rate
 
         query = dict()
         if state is not None:
@@ -193,14 +203,44 @@ class ZipcodeManager(models.Manager):
                 zipcode.lon,
                 zipcode.lat,
             )
-            if distance_in_mile < radius_in_mile:
-                zipcodes.append(dict(
+            if distance_in_mile < expand_radius_in_mile:
+                zipcodes_in_expand_radius.append(dict(
                     zip=zipcode.zip_code,
                     outline=zipcode.geometry,
                     properties=dict(center=[zipcode.lon, zipcode.lat]),
                 ))
 
-        return zipcodes
+        for zipcode in zipcodes_in_expand_radius:
+            if zipcode["outline"]["type"] == "Polygon":
+                number_outline_coordinates = len(zipcode["outline"]["coordinates"][0])
+            else: 
+                number_outline_coordinates = len(zipcode["outline"]["coordinates"][-1][0])
+
+            num = 0
+
+            while num < number_outline_coordinates:
+                if zipcode["outline"]["type"] == "Polygon":
+                    distance_between_outlinepoint_and_center_in_mile = distance_between_two_geopoints(
+                        center_coords[0],
+                        center_coords[1],
+                        zipcode["outline"]["coordinates"][0][num][0],
+                        zipcode["outline"]["coordinates"][0][num][1],
+                    )
+                else:
+                    distance_between_outlinepoint_and_center_in_mile = distance_between_two_geopoints(
+                        center_coords[0],
+                        center_coords[1],
+                        zipcode["outline"]["coordinates"][-1][0][num][0],
+                        zipcode["outline"]["coordinates"][-1][0][num][1],
+                    )
+
+                if distance_between_outlinepoint_and_center_in_mile < radius_in_mile:
+                    zipcodes.append(zipcode)
+                    break
+                else:
+                    num = num + int(number_outline_coordinates / 20)
+
+        return zipcodes    
 
 
 class Zipcode(models.Model):
