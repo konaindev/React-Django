@@ -96,9 +96,10 @@ with DjangoDAG(
             key="return_value", task_ids="get_usv_data_" + project_id
         )
         print(ga_response)
-        query_date = context["task_instance"].xcom_pull(
+        query_date_string = context["task_instance"].xcom_pull(
             key="query_date", task_ids="get_usv_data_" + project_id
         )
+        query_date = datetime.strptime(query_date_string, "%Y-%m-%d").date()
         usv_metrics = get_usv_counts(ga_response)
         print(usv_metrics)
 
