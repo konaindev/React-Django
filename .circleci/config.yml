@@ -411,22 +411,6 @@ workflows:
               ignore:
                 - staging
                 - master
-      - airflow-setup:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
-      - airflow-deploy:
-          requires:
-            - airflow-setup
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
 
   build-deploy:
     jobs:
