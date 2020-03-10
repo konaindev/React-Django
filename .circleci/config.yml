@@ -299,7 +299,7 @@ jobs:
           command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
       - run:
           name: Load zipcode data
-          comamnd: heroku run -x -a remarkably-staging python manage.py import_zipcodes
+          command: heroku run -x -a remarkably-staging python manage.py import_zipcodes
       - run:
           name: Delete Redis Cache
           command: redis-cli -u `heroku redis:credentials -a remarkably-staging REDIS_URL` flushall
