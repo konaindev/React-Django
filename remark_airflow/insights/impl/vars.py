@@ -1,6 +1,5 @@
 import decimal
 from datetime import timedelta
-import json
 
 from django.db.models import Q
 from scipy.interpolate import UnivariateSpline
