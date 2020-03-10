@@ -298,6 +298,9 @@ jobs:
           name: Load fixture data
           command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
       - run:
+          name: Load zipcode data
+          comamnd: pipenv run python manage.py import_zipcodes
+      - run:
           name: Delete Redis Cache
           command: redis-cli -u `heroku redis:credentials -a remarkably-staging REDIS_URL` flushall
       - run:
