@@ -2,7 +2,7 @@ import collections
 import decimal
 import os.path
 
-from datetime import datetime
+from datetime import datetime, date
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
@@ -1374,9 +1374,11 @@ class Campaign(models.Model):
     )
     baseline_start = models.DateField(
         help_text="The first date, inclusive, for the baseline period.",
+        default=date.today
     )
     baseline_end = models.DateField(
         help_text="The final date, exclusive, for the baseline period.",
+        default=date.today
     )
 
     def save(self, *args, **kwargs):
