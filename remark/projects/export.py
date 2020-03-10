@@ -60,7 +60,7 @@ def export_periods_to_excel(project_id):
     project = Project.objects.get(public_id=project_id)
 
     def _baseline_formatter(end_date):
-        if end_date <= project.baseline_end:
+        if end_date <= project.get_baseline_end():
             return "baseline"
         else:
             return ""

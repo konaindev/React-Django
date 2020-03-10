@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .constants import BUILDING_CLASS_UI, PROPERTY_TYPE, PROPERTY_STYLES, PROPERTY_STYLE_AUTO
-from .models import Project
+from .models import Campaign, Project
 from .reports.selectors import ReportLinks
 
 
@@ -83,7 +83,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         return obj.get_performance_rating()
 
     def get_campaign_start(self, obj):
-        return obj.get_campaign_start()
+        try:
+            return obj.get_campaign_start()
+        except Campaign.DoesNotExist:
+            return None
 
     def get_campaign_end(self, obj):
         return obj.get_campaign_end()

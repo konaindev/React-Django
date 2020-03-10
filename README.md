@@ -101,6 +101,7 @@ API_VER=v1
 - Run a build of the front-end assets: `yarn build`.
 - Set up database: `./manage.py migrate`
 - Load sample data: `./manage.py loaddata data/dumped/latest.json`
+- Load geo-zipcodes: `/manage.py import_zipcodes.py`
 - Run the django dev server: `./manage.py runserver`.
 - Navigate to `http://localhost:8000` (navgating to `127.0.0.1:8000` could encounter CORS issues)
 
@@ -119,6 +120,7 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 `$ yarn run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
 
 ### Airflow Deployment for feature branch
+
 For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
 
 Create a Google Composer Environment for your feature branch:
@@ -129,9 +131,9 @@ Delete the Google Composer Environment for your feature branch:
 
 `./scripts/delete_airflow_env.sh`
 
-May need to run `gcloud auth login` if it's your first time. 
+May need to run `gcloud auth login` if it's your first time.
 
-*GCLOUD_SERVICE_KEY can be found in Remarkably's Dropbox > engineering > credentials. Copy and paste the entire json as the value for GCLOUD_SERVICE_KEY. 
+\*GCLOUD_SERVICE_KEY can be found in Remarkably's Dropbox > engineering > credentials. Copy and paste the entire json as the value for GCLOUD_SERVICE_KEY.
 
 ### Storybook
 

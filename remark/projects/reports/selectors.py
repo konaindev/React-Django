@@ -170,7 +170,8 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
-        dates = DateRange(self.project.baseline_start, self.project.baseline_end)
+        baseline_dates = self.project.get_baseline_dates()
+        dates = DateRange(baseline_dates["start"], baseline_dates["end"])
         return f"Baseline Period ({dates.description()})"
 
     def has_report_data(self):

@@ -300,9 +300,24 @@ class UploadCampaignModelAdminMixin:
 
 @admin.register(Campaign, site=admin_site)
 class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
-    list_display = ["name", "active", "project_link", "selected_campaign_model"]
+    list_display = [
+        "name",
+        "active",
+        "project_link",
+        "selected_campaign_model",
+        "baseline_start",
+        "baseline_end",
+    ]
     list_filter = (("project__name", custom_titled_filter("Project")),)
-    fields = ["name", "active", "project", "selected_campaign_model"]
+    fields = [
+        "name",
+        "active",
+        "baseline_start",
+        "baseline_end",
+        "objective",
+        "project",
+        "selected_campaign_model",
+    ]
     readonly_fields_on_create = ("selected_campaign_model",)
     readonly_fields_on_update = ("project",)
     inlines = (CampaignModelUploadInline, CampaignModelTableInline)
@@ -447,8 +462,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "customer_name",
         "include_in_remarkably_averages",
         "number_of_periods",
-        "baseline_start",
-        "baseline_end",
     ]
 
     readonly_fields = ["customer_name"]

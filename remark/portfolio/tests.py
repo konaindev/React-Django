@@ -6,6 +6,7 @@ from django.test import TestCase, SimpleTestCase
 
 from remark.portfolio.api.strategy import calc_occupied_units
 from remark.projects.models import (
+    Campaign,
     Project,
     Period,
     Fund,
@@ -55,10 +56,9 @@ class PortfolioTestCase(TestCase):
             name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
+        project_name = "test"
         self.project = Project.objects.create(
-            name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
+            name=project_name,
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
             account=account,
@@ -87,7 +87,12 @@ class PortfolioTestCase(TestCase):
             acq_leasing_enablement=decimal.Decimal("11000"),
             acq_market_intelligence=decimal.Decimal("7000"),
         )
-        self.raw_period.save()
+        Campaign.objects.create(
+            name=f"Campaign for {project_name}",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            project=self.project,
+        )
 
     def tearDown(self):
         pass
@@ -101,7 +106,7 @@ class PortfolioTestCase(TestCase):
 
 
 class GetTableStructureTestCase(TestCase):
-    def create_project(self, name):
+    def create_project(self, name, total_units):
         group = Group.objects.create(name=f"{name} view group")
         group.user_set.add(self.user)
         project_property = Property.objects.create(
@@ -109,11 +114,10 @@ class GetTableStructureTestCase(TestCase):
             average_monthly_rent=decimal.Decimal("1948"),
             lowest_monthly_rent=decimal.Decimal("1400"),
             geo_address=self.address,
+            total_units=total_units,
         )
         project = Project.objects.create(
             name=name,
-            baseline_start=date(year=2019, month=2, day=12),
-            baseline_end=date(year=2019, month=4, day=16),
             account=self.account,
             asset_manager=self.asset_manager,
             property_manager=self.property_manager,
@@ -121,6 +125,12 @@ class GetTableStructureTestCase(TestCase):
             fund=self.fund,
             property=project_property,
             view_group=group,
+        )
+        Campaign.objects.create(
+            name=f"Campaign for {name}",
+            baseline_start=date(year=2019, month=2, day=12),
+            baseline_end=date(year=2019, month=4, day=16),
+            project=project,
         )
         return project
 
@@ -213,13 +223,14 @@ class GetTableStructureTestCase(TestCase):
         self.stage = stage
 
         self.user = user
-        self.project = self.create_project("project 1")
+        self.project = self.create_project("project 1", 191)
         self.create_target_period(self.project)
         self.create_target_period(
             self.project,
             start=date(year=2019, month=6, day=18),
             end=date(year=2019, month=6, day=25),
             target_leased_rate=decimal.Decimal("0.955"),
+            target_occupied_units=180,
         )
         self.create_period(self.project)
         self.create_period(
@@ -241,11 +252,11 @@ class GetTableStructureTestCase(TestCase):
         self.assertTrue(table_data[0]["targets"]["occupancy_rate"] <= 1)
 
     def test_multiple_projects(self):
-        project2 = self.create_project("project 2")
+        project2 = self.create_project("project 2", 182)
         self.create_target_period(project2, target_occupied_units=170)
         self.create_period(project2, occupiable_units_start=180)
 
-        project3 = self.create_project("project 3")
+        project3 = self.create_project("project 3", 75)
         self.create_target_period(
             project3,
             start=date(year=2019, month=6, day=4),
@@ -266,13 +277,13 @@ class GetTableStructureTestCase(TestCase):
 
         # TODO: Add more metrics
         self.assertAlmostEqual(
-            table_data[0]["targets"]["occupancy_rate"], 0.94, places=2
+            table_data[0]["targets"]["occupancy_rate"], 0.98, places=2
         )
         self.assertAlmostEqual(
-            table_data[1]["targets"]["occupancy_rate"], 0.93, places=2
+            table_data[1]["targets"]["occupancy_rate"], 0.92, places=2
         )
         self.assertAlmostEqual(
-            table_data[-1]["targets"]["occupancy_rate"], 0.93, places=2
+            table_data[-1]["targets"]["occupancy_rate"], 0.97, places=2
         )
 
     # TODO: move to remark/projects/reports

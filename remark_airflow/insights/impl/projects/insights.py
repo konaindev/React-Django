@@ -17,6 +17,8 @@ from remark_airflow.insights.impl.triggers import (
     trigger_kpi_trend_change_health,
     trigger_usvs_on_track,
     trigger_kpi_trend,
+    trigger_kpi_trend_new_direction,
+    trigger_healths_is_not_pending,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -54,6 +56,7 @@ from remark_airflow.insights.impl.vars import (
     var_predicting_change_health,
     var_predicted_kpi,
     var_kpi_trend,
+    var_kpi_new_direction,
 )
 from remark_airflow.insights.impl.vars_base import (
     var_base_kpis,
@@ -98,7 +101,7 @@ change_health_status = Insight(
     name="change_health_status",
     template="Campaign health has changed from {{var_prev_health_status | health_status_to_str}}"
     " to {{var_campaign_health_status | health_status_to_str }} during this period.",
-    triggers=["trigger_health_status_is_changed"],
+    triggers=["trigger_health_status_is_changed", "trigger_healths_is_not_pending"],
     graph=[
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
@@ -110,6 +113,11 @@ change_health_status = Insight(
             var_campaign_health_status,
             var_current_period_leased_rate,
             var_target_leased_rate,
+        ),
+        cop(
+            trigger_healths_is_not_pending,
+            var_campaign_health_status,
+            var_prev_health_status,
         ),
         cop(
             trigger_health_status_is_changed,
@@ -447,5 +455,29 @@ kpi_trend = Insight(
         cop(var_predicted_kpi, var_predicting_change_health, var_kpis_trends),
         cop(var_kpi_trend, var_kpis_trends),
         cop(trigger_kpi_trend, var_predicted_kpi, var_kpi_trend),
+    ],
+)
+
+
+kpi_trend_new_direction = Insight(
+    name="kpi_trending_new_direction",
+    template="While {{ var_kpi_new_direction['kpi_name'] | kpi_humanize }} has been trending "
+    "{{ var_kpi_new_direction['prev_trend'] }} for {{ var_kpi_new_direction['weeks'] }} weeks,"
+    " it is now trending {{ var_kpi_new_direction['trend'] }}.",
+    triggers=["trigger_kpi_trend_new_direction"],
+    graph=[
+        cop(var_all_base_kpis, "project", "start", "end"),
+        cop(var_all_target_kpis, "project", "start", "end"),
+        cop(var_all_computed_kpis, var_all_base_kpis),
+        cop(var_all_target_computed_kpis, var_all_base_kpis, var_all_target_kpis),
+        cop(
+            var_kpis_trends,
+            var_all_computed_kpis,
+            var_all_target_computed_kpis,
+            params={"include_last": False},
+            name="var_kpis_trends_not_include_last",
+        ),
+        cop(var_kpi_new_direction, "var_kpis_trends_not_include_last"),
+        cop(trigger_kpi_trend_new_direction, var_kpi_new_direction),
     ],
 )

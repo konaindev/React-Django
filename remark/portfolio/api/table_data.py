@@ -22,7 +22,8 @@ def generate_computed_properties(item, kpis):
         KPI.lowest_monthly_rent,
         KPI.occupiable_units_start,
         KPI.leased_units_end,
-        KPI.leased_units_start
+        KPI.leased_units_start,
+        KPI.total_units,
     )
     base_kpis_for_target = item.get("base_kpis_for_target", base_kpis)
     for field in fields_to_copy:
@@ -100,9 +101,8 @@ def get_table_structure(user, start, end, kpis, show_averages):
         print(f"Project: {project['base_kpis']}")
         if project["base_kpis"] is not None:
             portfolio_average.append(project["base_kpis"])
-        if project["base_targets"] is not None:
-            portfolio_average_targets.append(project["base_targets"])
         if project["base_kpis"] is not None and project["base_targets"] is not None:
+            portfolio_average_targets.append(project["base_targets"])
             portfolio_average_for_targets.append(project["base_kpis"])
 
     # Next we need to combine the Group properties

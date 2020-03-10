@@ -11,7 +11,7 @@ def trigger_is_active_campaign(
         or target_leased_rate is None
     ):
         return False
-    return project.baseline_end <= start
+    return project.get_baseline_end() <= start
 
 
 def trigger_campaign_health_status_off_track(health_status):
@@ -19,7 +19,14 @@ def trigger_campaign_health_status_off_track(health_status):
 
 
 def trigger_health_status_is_changed(health_status, prev_health_status):
-    return prev_health_status != health_status and health_status != HEALTH_STATUS["PENDING"]
+    return prev_health_status != health_status
+
+
+def trigger_healths_is_not_pending(health_status, prev_health_status):
+    return (
+        prev_health_status != HEALTH_STATUS["PENDING"]
+        and health_status != HEALTH_STATUS["PENDING"]
+    )
 
 
 def trigger_usv_exe_off_track(health_status):
@@ -73,3 +80,7 @@ def trigger_usvs_on_track(weeks):
 
 def trigger_kpi_trend(predicting_health, var_kpi_trend):
     return predicting_health is None and var_kpi_trend is not None
+
+
+def trigger_kpi_trend_new_direction(kpi_new_direction):
+    return kpi_new_direction is not None

@@ -1,3 +1,5 @@
+from enum import Enum
+
 PROPERTY_TYPE = (
     (1, "Multifamily - Standard"),
     (2, "Multifamily - Micro"),
@@ -79,4 +81,16 @@ PROPERTY_STYLES = (
     (5, "Tower-Block"),
     (6, "Garden"),
     (7, "Other"),
+)
+
+CAMPAIGN_OBJECTIVES = (
+    (0, "Pre-Lease"),
+    (1, "Lease Up"),
+    (2, "Phased Delivery / 2+ Buildings"),
+    (3, "Maintain Stabilization"),
+    (4, "Manage Occupancy"),
+    (5, "Improve Performance"),
+    (6, "Reintroduce Asset"),
+    (7, "Dual Strategy"),
+    (8, "Other"),
 )

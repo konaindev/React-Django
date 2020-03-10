@@ -23,8 +23,9 @@ ACQUISITION_VOLUMES = "acquisition_volumes"
 ACQUISITION_CONVERSION = "acquisition_conversion"
 ACQUISITION_COST = "acquisition_cost"
 
+AVERAGE_ONLY_KPIS = [LEASING_PERFORMANCE, ACQUISITION_CONVERSION, ACQUISITION_COST]
 
-KPI_BUNDLES = {
+AVERAGE_KPI_BUNDLES = {
     LEASING_PERFORMANCE: {
         "title": "Leasing Performance",
         "kpis": [
@@ -83,6 +84,10 @@ KPI_BUNDLES = {
     }
 }
 
+TOTAL_KPI_BUNDLES = AVERAGE_KPI_BUNDLES.copy()
+for k in AVERAGE_ONLY_KPIS:
+    TOTAL_KPI_BUNDLES.pop(k)
+
 PERIOD_GROUP = (
     "last_week",
     "last_two_weeks",
@@ -122,7 +127,14 @@ class PortfolioTableView(APIView):
         else:
             bundle = LEASING_PERFORMANCE
 
-        if bundle not in KPI_BUNDLES:
+        if "a" in request.GET:
+            show_averages = request.GET["a"] == "1"
+        else:
+            show_averages = True
+
+        kpi_bundles = AVERAGE_KPI_BUNDLES if show_averages else TOTAL_KPI_BUNDLES
+
+        if bundle not in kpi_bundles:
             raise Exception("Could not find KPI Bundle")
 
         if "p" in request.GET:
@@ -133,18 +145,13 @@ class PortfolioTableView(APIView):
         if period_group not in PERIOD_GROUP:
             raise Exception("Period group is not a valid value")
 
-        if "a" in request.GET:
-            show_averages = request.GET["a"] == "1"
-        else:
-            show_averages = True
-
         start, end = self.get_start_and_end(
             period_group,
             request.GET['s'] if 's' in request.GET else None,
             request.GET['e'] if 'e' in request.GET else None,
         )
 
-        kpis_to_include = KPI_BUNDLES[bundle]["kpis"]
+        kpis_to_include = kpi_bundles[bundle]["kpis"]
         table_data, portfolio_average = get_table_structure(
             request.user,
             start,
@@ -157,14 +164,15 @@ class PortfolioTableView(APIView):
             raise Exception("Table data cannot be None")
 
         response_data = {
-            "kpi_bundles": self.kpi_bundle_list(),
+            "kpi_bundles": self.kpi_bundle_list(kpi_bundles),
             "selected_kpi_bundle": bundle,
-            "kpi_order": self.kpi_ordering(bundle),
+            "kpi_order": self.kpi_ordering(bundle, kpi_bundles),
             "date_selection": self.get_date_selection(period_group, start, end),
             "user": request.user.get_menu_dict(),
             "table_data": table_data,
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
-            "display_average": "1" if show_averages else "0"
+            "display_average": "1" if show_averages else "0",
+            "average_only_kpi": bundle in AVERAGE_ONLY_KPIS
         }
         return Response(response_data)
 
@@ -235,18 +243,17 @@ class PortfolioTableView(APIView):
             })
         return result
 
-
-    def kpi_bundle_list(self):
+    def kpi_bundle_list(self, kpi_bundles):
         result = []
-        for item in KPI_BUNDLES:
+        for item in kpi_bundles:
             result.append({
-                "name": KPI_BUNDLES[item]["title"],
+                "name": kpi_bundles[item]["title"],
                 "value": item
             })
         return result
 
-    def kpi_ordering(self, bundle):
-        bundle_data = KPI_BUNDLES[bundle]
+    def kpi_ordering(self, bundle, kpi_bundles):
+        bundle_data = kpi_bundles[bundle]
         result = []
         for kpi in bundle_data["kpis"]:
             result.append({
