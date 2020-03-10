@@ -405,7 +405,21 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
+      - airflow-setup:
+          filters:
+            branches:
+              ignore:
+                - staging
+                - master
+      - airflow-deploy:
+          requires:
+            - airflow-setup
           filters:
             branches:
               ignore:
