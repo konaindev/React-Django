@@ -791,7 +791,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["OFF_TRACK"],
             "var_retention_rate_health_weeks": 2,
-            "var_retention_rate_trend": Trend.flat,
+            "var_retention_rate_trend": str(Trend.flat),
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
@@ -828,7 +828,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["OFF_TRACK"],
             "var_retention_rate_health_weeks": 1,
-            "var_retention_rate_trend": Trend.down,
+            "var_retention_rate_trend": str(Trend.down),
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
@@ -865,7 +865,7 @@ class RetentionRateInsightTestCase(TestCase):
             "project": self.project,
             "var_retention_rate_health": HEALTH_STATUS["AT_RISK"],
             "var_retention_rate_health_weeks": 1,
-            "var_retention_rate_trend": Trend.up,
+            "var_retention_rate_trend": str(Trend.up),
             "trigger_retention_rate_health": True,
         }
         self.assertEqual(
