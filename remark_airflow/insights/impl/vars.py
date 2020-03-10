@@ -213,7 +213,8 @@ def var_prev_retention_rate(project, start):
 
 
 def var_retention_rate_trend(retention_rate, prev_retention_rate):
-    return get_trend(prev_retention_rate, retention_rate)
+    trend = get_trend(prev_retention_rate, retention_rate)
+    return str(trend)
 
 
 def var_top_usv_referral(project, start, end):
