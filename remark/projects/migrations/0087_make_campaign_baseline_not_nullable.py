@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='campaign',
             name='baseline_end',
-            field=models.DateField(default=datetime.date.today, help_text='The final date, exclusive, for the baseline period.'),
+            field=models.DateField(blank=True, null=True, help_text='The final date, exclusive, for the baseline period.'),
         ),
         migrations.AlterField(
             model_name='campaign',
             name='baseline_start',
-            field=models.DateField(default=datetime.date.today, help_text='The first date, inclusive, for the baseline period.'),
+            field=models.DateField(blank=True, null=True, help_text='The first date, inclusive, for the baseline period.'),
         ),
     ]

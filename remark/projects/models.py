@@ -1374,11 +1374,13 @@ class Campaign(models.Model):
     )
     baseline_start = models.DateField(
         help_text="The first date, inclusive, for the baseline period.",
-        default=date.today
+        null=True,
+        blank=True
     )
     baseline_end = models.DateField(
         help_text="The final date, exclusive, for the baseline period.",
-        default=date.today
+        null=True,
+        blank=True
     )
 
     def save(self, *args, **kwargs):
