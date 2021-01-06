@@ -90,7 +90,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.9",
     "@sentry/browser": "^5.11.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "core-js": "2",
     "date-fns": "^1.30.1",
